@@ -1,5 +1,11 @@
 #include <Arduino.h>
 
+#include <Debug.h>
+#include <Defines.h>
+#include <Pins.h>
+
+#include <MotorController.h>
+
 void setup() {
     // put your setup code here, to run once:
 }

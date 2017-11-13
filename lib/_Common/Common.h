@@ -10,4 +10,6 @@
 double toDegrees(double rad);
 double toRadians(double deg);
 
+int mod(int n, int modulo);
+
 #endif

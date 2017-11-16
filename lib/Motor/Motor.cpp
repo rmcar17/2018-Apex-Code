@@ -1,6 +1,6 @@
 #include "Motor.h"
 
-Motor::Motor(int pwm, int inOne, int inTwo, int motorAngle,int standby) {
+Motor::Motor(int pwm, int inOne, int inTwo) {
   pwmPin = pwm;
   inOnePin = inOne;
   inTwoPin = inTwo;

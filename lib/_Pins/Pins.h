@@ -16,4 +16,8 @@
 #define MOTORBL_IN1 8
 #define MOTORBL_IN2 9
 
+#define MOTOR1_PWM 13
+#define MOTOR1_IN1 12
+#define MOTOR1_IN2 11
+
 #endif

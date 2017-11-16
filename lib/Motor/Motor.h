@@ -8,7 +8,7 @@ class Motor {
   public:
     Motor(){}
     Motor(int pwm, int inOne, int inTwo);
-    void MotorSetup();
+    void motorSetup();
     void move(int speed);
   private:
     int pwmPin, inOnePin, inTwoPin;

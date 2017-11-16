@@ -6,7 +6,7 @@ Motor::Motor(int pwm, int inOne, int inTwo, int motorAngle,int standby) {
   inTwoPin = inTwo;
 }
 
-void Motor::MotorSetup()
+void Motor::motorSetup()
 {
   pinMode(pwmPin, OUTPUT);
   pinMode(inOnePin, OUTPUT);

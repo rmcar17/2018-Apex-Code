@@ -4,11 +4,15 @@
 #include <Motor.h>
 #include <Defines.h>
 #include <Common.h>
+#include <Pins.h>
 
 class MotorController {
   public:
     MotorController();
 
-    void MoveDirection(int angle, int speed, int rotation);
+    void motorSetup();
+    void moveDirection(int angle, int speed, int rotation);
+  private:
+    Motor motorFR, motorBR, motorBL, motorFL;
 };
 #endif

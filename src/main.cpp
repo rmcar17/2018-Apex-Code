@@ -7,14 +7,13 @@
 #include <MotorController.h>
 #include <Motor.h>
 
-Motor motor1;
+MotorController motors;
 
 void setup() {
-  motor1 = Motor(MOTOR1_PWM,MOTOR1_IN1,MOTOR1_IN2);
-    // put your setup code here, to run once:
+  Serial.begin(9600);
+  motors.motorSetup();
 }
 
 void loop() {
-  motor1.move(255);
-    // put your main code here, to run repeatedly:
+  motors.moveDirection(230, 255, 0);
 }

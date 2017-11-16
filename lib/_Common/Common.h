@@ -14,6 +14,6 @@ double toRadians(double deg);
 
 int mod(int n, int modulo);
 
-int max(int x, int y);
+//int max(int x, int y);
 
 #endif

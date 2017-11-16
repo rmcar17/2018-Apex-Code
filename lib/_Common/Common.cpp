@@ -13,6 +13,7 @@ int mod(int n, int modulo){
   return r < 0 ? r + modulo : r;
 }
 
-int max(int x,int y){
+/*int max(int x,int y){
   return x > y ? x : y;
 }
+*/

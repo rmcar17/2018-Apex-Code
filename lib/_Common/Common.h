@@ -13,7 +13,14 @@ double toDegrees(double rad);
 double toRadians(double deg);
 
 int mod(int n, int modulo);
+double doubleMod(double value, double maxValue);
 
 //int max(int x, int y);
+
+struct Vector3D {
+  double x;
+  double y;
+  double z;
+};
 
 #endif

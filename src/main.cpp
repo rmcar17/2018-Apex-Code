@@ -7,6 +7,8 @@
 #include <MotorController.h>
 #include <Motor.h>
 
+#include <Compass.h>
+
 MotorController motors;
 
 void setup() {

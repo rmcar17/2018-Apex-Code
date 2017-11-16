@@ -1,6 +1,9 @@
 #ifndef PINS_H_
 #define PINS_H_
 
+
+//MOTORS
+
 #define MOTOR1_PWM 4
 #define MOTOR1_IN1 3
 #define MOTOR1_IN2 2

@@ -14,7 +14,6 @@ Compass comp;
 MotorController motors;
 
 int compassCorrect(){
-  Serial.println(comp.heading);
   int correction = 360-comp.heading;
 
   correction = correction<180 ? -correction:360-correction;
@@ -24,8 +23,6 @@ int compassCorrect(){
 }
 
 void setup() {
-  Serial.begin(9600);
-
   Wire.begin();
   comp.compassSetup();
 

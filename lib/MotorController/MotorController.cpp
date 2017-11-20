@@ -16,36 +16,49 @@ void MotorController::motorSetup(){
 }
 
 void MotorController::moveDirection(int angle, int speed, int rotation){
-  double multiplier;
+  int frontRightSpeed;
+  int backRightSpeed;
+  int backLeftSpeed;
+  int frontLeftSpeed;
 
-  double newAngle = toRadians(mod(45-angle,360));
-
-  double b = angle > 135 && angle < 315 ? -speed : speed;
-  double a = round(b * tan(newAngle));
-
-  Serial.println(speed/a,8);
-
-  if(abs(a)>speed){
-    multiplier = abs(speed/a);
-    b = b*multiplier;
-    a = a*multiplier;
+  if(angle == -1)
+  {
+    frontRightSpeed = rotation;
+    backRightSpeed = rotation;
+    backLeftSpeed = rotation;
+    frontLeftSpeed = rotation;
   }
-  int frontRightSpeed = ((int) a) + rotation;
-  int backRightSpeed = -((int) b) + rotation;
-  int backLeftSpeed = -((int) a) + rotation;
-  int frontLeftSpeed = ((int) b) + rotation;
+  else
+  {
+    double multiplier;
 
+    double newAngle = toRadians(mod(45-angle, 360));
 
+    double b = angle > 135 && angle < 315 ? -speed : speed;
+    double a = round(b * tan(newAngle));
 
-  multiplier = speed/max(abs(frontRightSpeed),max(abs(backRightSpeed),max(abs(backLeftSpeed),abs(frontLeftSpeed))));
+    if(abs(a) > speed)
+    {
+      multiplier = abs(speed / a);
+      b = b * multiplier;
+      a = a * multiplier;
+    }
 
-  frontRightSpeed = round(frontRightSpeed*multiplier);
-  backRightSpeed = round(backRightSpeed*multiplier);
-  backLeftSpeed = round(backLeftSpeed*multiplier);
-  frontLeftSpeed = round(frontLeftSpeed*multiplier);
+    int frontRightSpeed = ((int) a) + rotation;
+    int backRightSpeed = -((int) b) + rotation;
+    int backLeftSpeed = -((int) a) + rotation;
+    int frontLeftSpeed = ((int) b) + rotation;
 
-  motorFR.move(frontRightSpeed);
-  motorBR.move(backRightSpeed);
-  motorBL.move(backLeftSpeed);
-  motorFL.move(frontLeftSpeed);
+    multiplier = speed / max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed))));
+
+    frontRightSpeed = round(frontRightSpeed * multiplier);
+    backRightSpeed = round(backRightSpeed * multiplier);
+    backLeftSpeed = round(backLeftSpeed * multiplier);
+    frontLeftSpeed = round(frontLeftSpeed * multiplier);
+  }
+
+  motorFR.move(constrain(frontRightSpeed, -255, 255));
+  motorBR.move(constrain(backRightSpeed, -255, 255));
+  motorBL.move(constrain(backLeftSpeed, -255, 255));
+  motorFL.move(constrain(frontLeftSpeed, -255, 255));
 }

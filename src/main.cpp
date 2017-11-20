@@ -12,10 +12,9 @@
 MotorController motors;
 
 void setup() {
-  Serial.begin(9600);
   motors.motorSetup();
 }
 
 void loop() {
-  motors.moveDirection(230, 255, 0);
+  motors.moveDirection(315, 255, 0);
 }

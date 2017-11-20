@@ -20,7 +20,7 @@ public:
     long double calibration = COMPASS_CALIBRATION;
 
     Compass() {};
-    void CompassSetup();
+    void compassSetup();
 
     Vector3D readGyroscope();
 

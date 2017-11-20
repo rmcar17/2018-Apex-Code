@@ -1,6 +1,6 @@
 #include "Compass.h"
 
-void Compass::CompassSetup() {
+void Compass::compassSetup() {
     I2CwriteByte(MPU9250_ADDRESS, 29, 0x06);
     I2CwriteByte(MPU9250_ADDRESS, 26, 0x06);
     I2CwriteByte(MPU9250_ADDRESS, 27, GYRO_FULL_SCALE_500_DPS);

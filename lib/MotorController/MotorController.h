@@ -13,6 +13,8 @@ class MotorController {
     void motorSetup();
 
     void moveDirection(int angle, int speed, int rotation);
+    void rotate(int rotation);
+    void move(int FR, int BR, int BL, int FL);
     void brake();
 
   private:

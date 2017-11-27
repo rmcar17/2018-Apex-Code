@@ -27,7 +27,8 @@ void setup() {
   comp.compassSetup();
 
   motors.motorSetup();
-
+  motors.brake();
+  
   comp.calibrate();
 }
 

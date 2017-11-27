@@ -62,3 +62,10 @@ void MotorController::moveDirection(int angle, int speed, int rotation){
   motorBL.move(constrain(backLeftSpeed, -255, 255));
   motorFL.move(constrain(frontLeftSpeed, -255, 255));
 }
+
+void MotorController::brake(){
+  motorFR.move(0);
+  motorBR.move(0);
+  motorBL.move(0);
+  motorFL.move(0);
+}

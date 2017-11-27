@@ -10,10 +10,14 @@
 #include <PixyI2C.h>
 #include <Compass.h>
 
+#include <PID.h>
+
 PixyI2C pixy;
 Compass comp;
 
 MotorController motors;
+
+PID compCorrect = PID(COMPASS_KP, COMPASS_KI, COMPASS_KD);
 
 int compassCorrect();
 
@@ -30,7 +34,7 @@ void setup() {
 void loop() {
   comp.updateGyro();
 
-  motors.rotate(compassCorrect());
+  motors.rotate(compCorrect.update(comp.heading < 180 ? comp.heading : -(360-comp.heading)));
 }
 
 int compassCorrect(){

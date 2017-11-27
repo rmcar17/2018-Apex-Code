@@ -11,7 +11,10 @@ class MotorController {
     MotorController();
 
     void motorSetup();
+
     void moveDirection(int angle, int speed, int rotation);
+    void brake();
+
   private:
     Motor motorFR, motorBR, motorBL, motorFL;
 };

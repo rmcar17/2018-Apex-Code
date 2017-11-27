@@ -7,8 +7,10 @@
 #include <MotorController.h>
 #include <Motor.h>
 
+#include <PixyI2C.h>
 #include <Compass.h>
 
+PixyI2C pixy;
 Compass comp;
 
 MotorController motors;
@@ -27,6 +29,7 @@ void setup() {
   comp.compassSetup();
 
   motors.motorSetup();
+  motors.brake();
 
   comp.calibrate();
 }

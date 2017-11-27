@@ -10,6 +10,7 @@
 #include <PixyI2C.h>
 #include <Compass.h>
 
+PixyI2C pixy;
 Compass comp;
 
 MotorController motors;

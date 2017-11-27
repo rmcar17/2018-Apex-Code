@@ -31,8 +31,8 @@ void Compass::updateGyro() {
 
 	previousTime = currentTime;
 
-  #if DEBUG_IMU
-    Serial.print("GYRO Heading: ");
+  #if DEBUG_COMPASS
+    Serial.print("HEADING: ");
     Serial.println(heading,5);
   #endif
 }

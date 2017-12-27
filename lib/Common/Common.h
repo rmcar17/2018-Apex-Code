@@ -1,7 +1,7 @@
-#include <Arduino.h>
-
 #ifndef COMMON_H_
 #define COMMON_H_
+
+#include <Arduino.h>
 
 #define PI 3.14159265358979323846264338327950
 

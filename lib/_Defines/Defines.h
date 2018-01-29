@@ -1,5 +1,5 @@
-#ifndef DEFINES_H_
-#define DEFINES_H_
+#ifndef DEFINES_H
+#define DEFINES_H
 
 //Compass
 #define IMU_CALIBRATION_COUNT 100

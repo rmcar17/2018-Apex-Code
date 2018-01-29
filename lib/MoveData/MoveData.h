@@ -1,5 +1,5 @@
-#ifndef MOVEDATA_H_
-#define MOVEDATA_H_
+#ifndef MOVEDATA_H
+#define MOVEDATA_H
 
 struct MoveData {
   int angle;

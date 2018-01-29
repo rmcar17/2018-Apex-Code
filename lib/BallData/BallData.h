@@ -1,5 +1,5 @@
-#ifndef BALLDATA_H_
-#define BALLDATA_H_
+#ifndef BALLDATA_H
+#define BALLDATA_H
 
 struct BallData {
   int angle;

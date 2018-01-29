@@ -1,5 +1,5 @@
-#ifndef PINS_H_
-#define PINS_H_
+#ifndef PINS_H
+#define PINS_H
 
 
 //MOTORS

@@ -1,5 +1,5 @@
-#ifndef MOTORCONTROLLER_H_
-#define MOTORCONTROLLER_H_
+#ifndef MOTORCONTROLLER_H
+#define MOTORCONTROLLER_H
 
 #include <Motor.h>
 #include <Defines.h>

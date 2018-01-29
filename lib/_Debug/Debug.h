@@ -1,5 +1,5 @@
-#ifndef DEBUG_H_
-#define DEBUG_H_
+#ifndef DEBUG_H
+#define DEBUG_H
 
 #define DEBUG_MOTOR 0
 #define DEBUG_COMPASS 0

@@ -1,5 +1,5 @@
-#ifndef COMPASS_H_
-#define COMPASS_H_
+#ifndef COMPASS_H
+#define COMPASS_H
 
 #include <I2C.h>
 #include <Defines.h>

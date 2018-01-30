@@ -20,7 +20,7 @@ void MotorController::moveDirection(int angle, int speed, int rotation){
   Serial.print("MOVE ANGLE: ");
   Serial.println(angle);
   #endif
-  
+
   int frontRightSpeed;
   int backRightSpeed;
   int backLeftSpeed;
@@ -87,3 +87,14 @@ void MotorController::brake(){
   motorBL.move(0);
   motorFL.move(0);
 }
+=======
+#include "MotorController.h"
+
+MotorController::MotorController(){
+
+}
+
+void MotorController::MoveDirection(int angle, int speed){
+
+}
+>>>>>>> before discard

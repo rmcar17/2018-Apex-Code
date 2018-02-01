@@ -97,4 +97,3 @@ MotorController::MotorController(){
 void MotorController::MoveDirection(int angle, int speed){
 
 }
->>>>>>> before discard

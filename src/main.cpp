@@ -9,6 +9,7 @@
 
 #include <PixyI2C.h>
 #include <Compass.h>
+#include <TSOPController.h>
 
 #include <PID.h>
 

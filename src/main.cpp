@@ -23,6 +23,10 @@ PID compCorrect = PID(COMPASS_KP, COMPASS_KI, COMPASS_KD);
 int compassCorrect();
 
 void setup() {
+  if(DEBUG_ANY){
+    Serial.begin(9600);
+  }
+
   Wire.begin();
   comp.compassSetup();
 

@@ -2,8 +2,10 @@
 #define COMPASS_H
 
 #include <I2C.h>
-#include <Defines.h>
 #include <Common.h>
+
+#include <Defines.h>
+#include <Debug.h>
 
 #define MPU9250_ADDRESS 0x68
 #define MAG_ADDRESS 0x0C

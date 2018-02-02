@@ -1,14 +1,14 @@
 #include <Arduino.h>
+#include <MotorController.h>
+#include <Motor.h>
+#include <TSOPController.h>
+#include <Compass.h>
+#include <PixyI2C.h>
+#include <Orbit.h>
+#include <PID.h>
 #include <Debug.h>
 #include <Defines.h>
 #include <Pins.h>
-#include <Orbit.h>
-#include <MotorController.h>
-#include <Motor.h>
-#include <PixyI2C.h>
-#include <Compass.h>
-#include <TSOPController.h>
-#include <PID.h>
 
 PixyI2C pixy;
 Compass comp;

@@ -21,7 +21,7 @@ class Orbit{
 
     MoveData Movement = {-1, 0, 0};
 
-    int distance, direction;
+    int distance, angle;
 };
 
 #endif

@@ -14,6 +14,15 @@
 #define MOTOR3_ANG 225
 #define MOTOR4_ANG 315
 
+//ORBIT
+#define CLOSE_ORBIT 150
+#define FAR_ORBIT 130
+
+#define BIG_ORBIT 30
+#define SMALL_ORBIT 20
+
+#define SPEED 255
+
 //TSOPS
 
 #define TSOP_NUM 12

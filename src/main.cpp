@@ -6,6 +6,9 @@
 #include <PixyI2C.h>
 #include <Orbit.h>
 #include <PID.h>
+#include <Common.h>
+#include <BallData.h>
+#include <MoveData.h>
 #include <Debug.h>
 #include <Defines.h>
 #include <Pins.h>

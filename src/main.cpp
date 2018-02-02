@@ -4,6 +4,8 @@
 #include <Defines.h>
 #include <Pins.h>
 
+#include <Orbit.h>
+
 #include <MotorController.h>
 #include <Motor.h>
 

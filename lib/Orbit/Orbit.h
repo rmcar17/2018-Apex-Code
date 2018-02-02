@@ -1,10 +1,9 @@
 #ifndef ORBIT_H
 #define ORBIT_H
 
+#include <Defines.h>
 #include <BallData.h>
 #include <MoveData.h>
-
-#include <Defines.h>
 
 class Orbit{
   public:

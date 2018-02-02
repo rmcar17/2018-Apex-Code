@@ -3,11 +3,10 @@
 
 #include <Arduino.h>
 #include <Common.h>
-#include <BallData.h>
-
-#include <Pins.h>
-#include <Defines.h>
 #include <Debug.h>
+#include <Defines.h>
+#include <Pins.h>
+#include <BallData.h>
 
 class TSOPController{
 public:

@@ -2,8 +2,8 @@
 #define MOTORCONTROLLER_H
 
 #include <Motor.h>
-#include <Defines.h>
 #include <Common.h>
+#include <Defines.h>
 #include <Pins.h>
 
 class MotorController {

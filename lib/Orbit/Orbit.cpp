@@ -5,7 +5,8 @@ Orbit::Orbit(){
 }
 
 void Orbit::calculateMoveData(BallData ballData){
-
+  distance = ballData.distance;
+  direction = ballData.angle;
 }
 
 MoveData Orbit::getMoveData(){

@@ -4,6 +4,8 @@
 #include <BallData.h>
 #include <MoveData.h>
 
+#include <Defines.h>
+
 class Orbit{
   public:
     Orbit();

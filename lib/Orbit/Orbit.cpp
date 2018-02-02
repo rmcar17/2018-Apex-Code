@@ -4,10 +4,14 @@ Orbit::Orbit(){
 
 }
 
+void Orbit::calculateMoveData(BallData ballData){
+
+}
+
 MoveData Orbit::getMoveData(){
   return Movement;
 }
 
-void Orbit::resetMoveData(int direction = -1, int speed = 0, int rotation = 0){
-  Movement = {direction, speed, rotation};
+void Orbit::resetMoveData(int dir = -1, int speed = 0, int rot = 0){
+  Movement = {dir, speed, rot};
 }

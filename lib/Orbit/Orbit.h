@@ -17,7 +17,7 @@ class Orbit{
     MoveData getMediumOrbit();
     MoveData getFarOrbit();
 
-    MoveData Movement;
+    MoveData Movement = {-1, 0, 0};
 };
 
 #endif

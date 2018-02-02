@@ -20,21 +20,19 @@
 #define MOTORFL_IN1 12
 #define MOTORFL_IN2 11
 
-//TSOPS
-
+// TSOPS
 #define TSOP_POWER 1
-
-#define TSOP_1 1
-#define TSOP_2 1
-#define TSOP_3 1
-#define TSOP_4 1
-#define TSOP_5 1
-#define TSOP_6 1
-#define TSOP_7 1
-#define TSOP_8 1
-#define TSOP_9 1
-#define TSOP_10 1
-#define TSOP_11 1
-#define TSOP_12 1
+#define TSOP_0 50
+#define TSOP_1 48
+#define TSOP_2 46
+#define TSOP_3 44
+#define TSOP_4 42
+#define TSOP_5 40
+#define TSOP_6 38
+#define TSOP_7 36
+#define TSOP_8 34
+#define TSOP_9 32
+#define TSOP_10 30
+#define TSOP_11 28
 
 #endif

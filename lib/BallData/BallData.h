@@ -2,7 +2,7 @@
 #define BALLDATA_H
 
 struct BallData {
-  int strength;
+  int distance;
   int angle;
 };
 

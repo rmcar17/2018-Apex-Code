@@ -3,9 +3,8 @@
 
 #include <I2C.h>
 #include <Common.h>
-
-#include <Defines.h>
 #include <Debug.h>
+#include <Defines.h>
 
 #define MPU9250_ADDRESS 0x68
 #define MAG_ADDRESS 0x0C

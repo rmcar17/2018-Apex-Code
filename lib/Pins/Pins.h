@@ -22,17 +22,17 @@
 
 // TSOPS
 #define TSOP_POWER 1
-#define TSOP_0 50
-#define TSOP_1 48
-#define TSOP_2 46
-#define TSOP_3 44
-#define TSOP_4 42
-#define TSOP_5 40
-#define TSOP_6 38
-#define TSOP_7 36
-#define TSOP_8 34
-#define TSOP_9 32
-#define TSOP_10 30
-#define TSOP_11 28
+#define TSOP_1 50
+#define TSOP_2 48
+#define TSOP_3 46
+#define TSOP_4 44
+#define TSOP_5 42
+#define TSOP_6 40
+#define TSOP_7 38
+#define TSOP_8 36
+#define TSOP_9 34
+#define TSOP_10 32
+#define TSOP_11 30
+#define TSOP_12 28
 
 #endif

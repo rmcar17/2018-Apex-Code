@@ -11,13 +11,15 @@ class Orbit{
     void calculateMoveData(BallData ballData);
     void avoidLine();
     void setRotation(int rotation);
-    void resetMoveData(int direction = -1, int speed = 0, int rotation = 0);
+    void resetMoveData(int dir = -1, int speed = 0, int rot = 0);
   private:
-    MoveData getCloseOrbit(int direction);
-    MoveData getMediumOrbit(int direction, int distance);
-    MoveData getFarOrbit(int direction);
+    MoveData getCloseOrbit();
+    MoveData getMediumOrbit();
+    MoveData getFarOrbit();
 
     MoveData Movement = {-1, 0, 0};
+
+    int distance, direction;
 };
 
 #endif

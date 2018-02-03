@@ -15,6 +15,9 @@ class Orbit{
     void setRotation(int rotation);
     void resetMoveData(int dir = -1, int speed = 0, int rot = 0);
   private:
+    void calcSmallOrbit();
+    void calcBigOrbit();
+
     void calcCloseOrbit();
     void calcMediumOrbit();
     void calcFarOrbit();

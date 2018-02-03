@@ -73,6 +73,6 @@ void Orbit::calcFarOrbit(){
   Movement.angle = angle;
 }
 
-void Orbit::resetMoveData(int dir = -1, int speed = 0, int rot = 0){
+void Orbit::resetMoveData(int dir, int speed, int rot){
   Movement = {dir, speed, rot};
 }

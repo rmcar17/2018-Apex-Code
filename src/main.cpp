@@ -18,8 +18,6 @@ Compass comp;
 
 MotorController motors;
 
-PID compCorrect = PID(COMPASS_KP, COMPASS_KI, COMPASS_KD);
-
 void setup() {
   if(DEBUG_ANY){
     Serial.begin(9600);
@@ -37,5 +35,5 @@ void setup() {
 void loop() {
   comp.updateGyro();
 
-  motors.rotate(compCorrect.update(comp.heading < 180 ? comp.heading : -(360-comp.heading)));
+  //motors.rotate(compCorrect.update(comp.heading < 180 ? comp.heading : -(360-comp.heading)));
 }

@@ -15,6 +15,8 @@ double toRadians(double deg);
 int mod(int n, int modulo);
 double doubleMod(double value, double maxValue);
 
+bool isAngleBetween(int angle, int rightAngle, int leftAngle);
+
 //int max(int x, int y);
 
 struct Vector3D {

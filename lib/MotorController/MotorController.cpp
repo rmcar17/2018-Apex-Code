@@ -15,7 +15,11 @@ void MotorController::motorSetup(){
   motorFL.motorSetup();
 }
 
-void MotorController::moveDirection(int angle, int speed, int rotation){
+void MotorController::moveDirection(MoveData movement){
+  int angle = movement.angle;
+  int speed = movement.speed;
+  int rotation = movement.rotation;
+
   #if DEBUG_MOTOR
   Serial.print("MOVE ANGLE: ");
   Serial.println(angle);

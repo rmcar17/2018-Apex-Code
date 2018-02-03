@@ -9,13 +9,13 @@ void Orbit::calculateMoveData(BallData ballData){
   angle = ballData.angle;
 
   if(distance > CLOSE_ORBIT){
-    getCloseOrbit();
+    calcCloseOrbit();
   }
   else if(distance < FAR_ORBIT){
-    getMediumOrbit();
+    calcMediumOrbit();
   }
   else{
-    getFarOrbit();
+    calcFarOrbit();
   }
 }
 
@@ -23,12 +23,12 @@ MoveData Orbit::getMoveData(){
   return Movement;
 }
 
-void Orbit::getCloseOrbit(){
+void Orbit::calcCloseOrbit(){
   Movement.speed = MAX_SPEED;
   Movement.angle = angle < 180 ? angle + 90 : angle - 90;
 }
 
-void Orbit::getMediumOrbit(){
+void Orbit::calcMediumOrbit(){
   double closeness = (double) (distance - FAR_ORBIT) / (double) (CLOSE_ORBIT - FAR_ORBIT);
   int angleBuffer = round(closeness * 90);
 
@@ -36,7 +36,7 @@ void Orbit::getMediumOrbit(){
   Movement.angle = angle + (angle < 180 ? angleBuffer : -angleBuffer);
 }
 
-void Orbit::getFarOrbit(){
+void Orbit::calcFarOrbit(){
   Movement.speed = MAX_SPEED;
   Movement.angle = angle;
 }

@@ -8,17 +8,19 @@ void Orbit::calculateMoveData(BallData ballData){
   distance = ballData.distance;
   angle = ballData.angle;
 
-  if(angle < SMALL_ORBIT || angle > 360 - SMALL_ORBIT){
-    calcSmallOrbit();
-  }
-  else if(angle < BIG_ORBIT || angle > 360 - BIG_ORBIT){
-    calcBigOrbit();
-  }
-  else if(distance > CLOSE_ORBIT){
-    calcCloseOrbit();
-  }
-  else if(distance < FAR_ORBIT){
-    calcMediumOrbit();
+  if(distance < FAR_ORBIT){
+    if((angle < SMALL_ORBIT || angle > 360 - SMALL_ORBIT)){
+      calcSmallOrbit();
+    }
+    else if(angle < BIG_ORBIT || angle > 360 - BIG_ORBIT){
+      calcBigOrbit();
+    }
+    else if(distance > CLOSE_ORBIT){
+      calcCloseOrbit();
+    }
+    else if(distance < FAR_ORBIT){
+      calcMediumOrbit();
+    }
   }
   else{
     calcFarOrbit();

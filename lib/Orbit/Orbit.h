@@ -25,7 +25,7 @@ class Orbit{
 
     MoveData Movement = {-1, 0, 0};
 
-    PID compCorrect = PID(COMPASS_KP, COMPASS_KI, COMPASS_KD);
+    PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
     int distance, angle;
 };
 

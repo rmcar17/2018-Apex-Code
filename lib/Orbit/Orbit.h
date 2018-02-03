@@ -23,7 +23,7 @@ class Orbit{
     void calcMediumOrbit();
     void calcFarOrbit();
 
-    MoveData Movement = {-1, 0, 0};
+    MoveData movement = {-1, 0, 0};
 
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
     int distance, angle;

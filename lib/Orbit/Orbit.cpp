@@ -39,16 +39,16 @@ void Orbit::calculateRotation(int compAngle, int goalAngle){
   else{
     rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - goalAngle));
   }
-  Movement.rotation = rotate;
+  movement.rotation = rotate;
 }
 
 MoveData Orbit::getMoveData(){
-  return Movement;
+  return movement;
 }
 
 void Orbit::calcSmallOrbit(){
-  Movement.speed = MAX_SPEED;
-  Movement.angle = round(angle < 180 ? angle * ORBIT_FORWARD_ANGLE_TIGHTENER : 360 - (360 - angle) * ORBIT_FORWARD_ANGLE_TIGHTENER);
+  movement.speed = MAX_SPEED;
+  movement.angle = round(angle < 180 ? angle * ORBIT_FORWARD_ANGLE_TIGHTENER : 360 - (360 - angle) * ORBIT_FORWARD_ANGLE_TIGHTENER);
 }
 
 void Orbit::calcBigOrbit(){
@@ -66,28 +66,28 @@ void Orbit::calcBigOrbit(){
     finalAngle = mod(round(360 - ((360 - angle) * ORBIT_FORWARD_ANGLE_TIGHTENER + angleBuffer + (360 - angle) * (1 - ORBIT_FORWARD_ANGLE_TIGHTENER) * closeness)), 360);
   }
 
-  Movement.speed = MAX_SPEED;
-  Movement.angle = finalAngle;
+  movement.speed = MAX_SPEED;
+  movement.angle = finalAngle;
 }
 
 void Orbit::calcCloseOrbit(){
-  Movement.speed = MAX_SPEED;
-  Movement.angle = angle < 180 ? angle + 90 : angle - 90;
+  movement.speed = MAX_SPEED;
+  movement.angle = angle < 180 ? angle + 90 : angle - 90;
 }
 
 void Orbit::calcMediumOrbit(){
   double closeness = (double) (distance - FAR_ORBIT) / (double) (CLOSE_ORBIT - FAR_ORBIT);
   int angleBuffer = round(closeness * 90);
 
-  Movement.speed = MAX_SPEED;
-  Movement.angle = angle + (angle < 180 ? angleBuffer : -angleBuffer);
+  movement.speed = MAX_SPEED;
+  movement.angle = angle + (angle < 180 ? angleBuffer : -angleBuffer);
 }
 
 void Orbit::calcFarOrbit(){
-  Movement.speed = MAX_SPEED;
-  Movement.angle = angle;
+  movement.speed = MAX_SPEED;
+  movement.angle = angle;
 }
 
 void Orbit::resetMoveData(int dir, int speed, int rot){
-  Movement = {dir, speed, rot};
+  movement = {dir, speed, rot};
 }

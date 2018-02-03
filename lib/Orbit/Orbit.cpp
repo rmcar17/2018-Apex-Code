@@ -27,6 +27,21 @@ void Orbit::calculateMoveData(BallData ballData){
   }
 }
 
+void Orbit::calculateRotation(int compAngle, int goalAngle){
+  //This section will change when a
+  //goalData object is created, or
+  //when programming the defender.
+  //More methods will likely be created.
+
+  if(goalAngle != -1){
+    rotate = rotation.update(goalAngle < 180 ? goalAngle : -(360 - goalAngle));
+  }
+  else{
+    rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - goalAngle));
+  }
+  Movement.rotation = rotate;
+}
+
 MoveData Orbit::getMoveData(){
   return Movement;
 }

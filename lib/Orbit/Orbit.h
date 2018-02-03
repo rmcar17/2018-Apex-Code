@@ -27,6 +27,7 @@ class Orbit{
 
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
     int distance, angle;
+    int rotate;
 };
 
 #endif

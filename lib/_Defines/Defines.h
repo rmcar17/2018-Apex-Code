@@ -21,7 +21,7 @@
 #define BIG_ORBIT 30
 #define SMALL_ORBIT 20
 
-#define SPEED 255
+#define MAX_SPEED 255
 
 //TSOPS
 

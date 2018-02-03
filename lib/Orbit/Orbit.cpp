@@ -15,7 +15,7 @@ void Orbit::calculateMoveData(BallData ballData){
 
   }
   else{
-
+    getFarOrbit();
   }
 }
 
@@ -24,8 +24,13 @@ MoveData Orbit::getMoveData(){
 }
 
 void Orbit::getCloseOrbit(){
-  Movement.speed = SPEED;
+  Movement.speed = MAX_SPEED;
   Movement.angle = angle < 180 ? angle + 90 : angle - 90;
+}
+
+void Orbit::getFarOrbit(){
+  Movement.speed = MAX_SPEED;
+  Movement.angle = angle;
 }
 
 void Orbit::resetMoveData(int dir = -1, int speed = 0, int rot = 0){

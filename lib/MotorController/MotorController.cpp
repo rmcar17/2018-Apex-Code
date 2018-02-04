@@ -20,11 +20,6 @@ void MotorController::moveDirection(MoveData movement){
   int speed = movement.speed;
   int rotation = movement.rotation;
 
-  #if DEBUG_MOTOR
-  Serial.print("MOVE ANGLE: ");
-  Serial.println(angle);
-  #endif
-
   int frontRightSpeed;
   int backRightSpeed;
   int backLeftSpeed;

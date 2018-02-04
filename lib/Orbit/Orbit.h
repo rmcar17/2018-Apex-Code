@@ -3,6 +3,7 @@
 
 #include <Common.h>
 #include <Pid.h>
+#include <Debug.h>
 #include <Defines.h>
 #include <PlayMode.h>
 #include <BallData.h>

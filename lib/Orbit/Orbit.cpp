@@ -31,6 +31,12 @@ void Orbit::calculateMoveData(){
   else{
     calcDefender();
   }
+  #if DEBUG_ORBIT
+    Serial.print("BALL ANGLE: ");
+    Serial.println(ball.angle);
+    Serial.print("MOVE ANGLE: ");
+    Serial.println(movement.angle);
+  #endif
 }
 
 void Orbit::calculateRotation(){

@@ -36,6 +36,7 @@ class Orbit{
     void calcFarOrbit();
 
     void centre();
+    void moveToBall();
 
     PlayMode role = PlayMode::undecided;
 

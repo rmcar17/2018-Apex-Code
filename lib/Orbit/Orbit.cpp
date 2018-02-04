@@ -84,8 +84,12 @@ void Orbit::calcAttacker(){
 void Orbit::calcDefender(){
   if(ball.visible){
     if(goal.visible){
-      if(true){
-
+      if(isAngleBetween(ball.angle, 270, 90)){
+        moveToBall();
+      }
+      else{
+        //Orbit around the ball normally
+        calcAttacker();
       }
     }
     else {
@@ -148,6 +152,16 @@ void Orbit::centre(){
 
   double correctedVerticalDistance = goal.distance * cos(goalAngle) + (role == PlayMode::attacker ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE);
   double correctedHorizontalDistance = goal.distance * sin(goalAngle);
+
+  movement.speed = MAX_SPEED;
+  movement.angle = mod(round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);
+}
+
+void Orbit::moveToBall(){
+  //Won't work when comparing
+  //TSOPs to camera
+  double correctedVerticalDistance = goal.distance * cos(toRadians(compAngle + goal.angle)) + CENTRE_DEFENDER_DISTANCE;
+  double correctedHorizontalDistance = isAngleBetween(ball.angle, 360 - DEFEND_SMALL_ANGLE, DEFEND_SMALL_ANGLE) ? 0 : ball.distance * sin((double)toRadians(ball.angle + compAngle));
 
   movement.speed = MAX_SPEED;
   movement.angle = mod(round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);

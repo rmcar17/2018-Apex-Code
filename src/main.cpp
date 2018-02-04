@@ -7,6 +7,7 @@
 #include <Orbit.h>
 #include <PID.h>
 #include <Common.h>
+#include <PlayMode.h>
 #include <BallData.h>
 #include <GoalData.h>
 #include <MoveData.h>
@@ -20,6 +21,8 @@ Compass comp;
 MotorController motors;
 
 Orbit orbit;
+
+PlayMode role;
 
 BallData ball;
 GoalData goal;
@@ -48,6 +51,8 @@ void setup() {
 
   comp.calibrate();
 
+  role = PlayMode::attacker;
+
   mockBallAngle = 0;
   mockBallDistance = 160;
   mockBallVisible = true;
@@ -68,6 +73,15 @@ void setup() {
 void loop() {
   comp.updateGyro();
 
+  //Create another class which fetches
+  //goal data which takes an input of
+  //the robot's current role
+
+  //Create another class which checks
+  //whether the robots should switch
+  //roles
+
+  orbit.setRole(role);
   orbit.setGoalData(goal);
   orbit.setBallData(ball);
   orbit.setCompAngle(comp.getHeading());

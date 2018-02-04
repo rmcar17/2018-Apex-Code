@@ -34,7 +34,7 @@ class Orbit{
     GoalData goal = {-1, 0, false};
     MoveData movement = {-1, 0, 0};
 
-    double compAngle;
+    double compAngle = 0;
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
 };
 

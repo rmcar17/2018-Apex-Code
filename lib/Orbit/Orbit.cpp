@@ -104,4 +104,5 @@ void Orbit::resetAllData(){
   ball = {-1, 0, false};
   goal = {-1, 0, false};
   movement = {-1, 0, 0};
+  compAngle = 0;
 }

@@ -14,7 +14,7 @@ double toRadians(double deg);
 int mod(int n, int modulo);
 double doubleMod(double value, double maxValue);
 
-bool isAngleBetween(int angle, int rightAngle, int leftAngle);
+bool isAngleBetween(int angle, int leftAngle, int rightAngle);
 
 //int max(int x, int y);
 

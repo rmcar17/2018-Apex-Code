@@ -32,6 +32,9 @@ class Orbit{
     void calcMediumOrbit();
     void calcFarOrbit();
 
+    void centreAttacker();
+    void centreDefender();
+
     PlayMode role = PlayMode::undecided;
 
     BallData ball = {-1, 0, false};

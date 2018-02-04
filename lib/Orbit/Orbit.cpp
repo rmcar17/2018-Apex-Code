@@ -76,6 +76,8 @@ void Orbit::calcAttacker(){
     if(goal.visible){
       centre();
     }
+    //If can't see goal or ball, the robot
+    //can't do anything so just compass correct
   }
 }
 
@@ -87,6 +89,8 @@ void Orbit::calcDefender(){
     if(goal.visible){
       centre();
     }
+    //If can't see goal or ball, the robot
+    //can't do anything so just compass correct
   }
 }
 

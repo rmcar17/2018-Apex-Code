@@ -69,8 +69,9 @@ void loop() {
   comp.updateGyro();
 
   orbit.setGoalData(goal);
+  orbit.setBallData(ball);
 
-  orbit.calculateMoveData(ball);
+  orbit.calculateMoveData();
   orbit.calculateRotation(comp.heading);
 
   move = orbit.getMoveData();

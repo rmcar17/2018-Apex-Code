@@ -55,10 +55,10 @@ void Orbit::calculateRotation(){
 void Orbit::calcAttacker(){
   if(ball.visible){
     if(ball.distance < FAR_ORBIT){
-      if(isAngleBetween(ball.angle, SMALL_ORBIT, 360 - SMALL_ORBIT)){
+      if(isAngleBetween(ball.angle, 360 - SMALL_ORBIT, SMALL_ORBIT)){
         calcSmallOrbit();
       }
-      else if(isAngleBetween(ball.angle, BIG_ORBIT, 360 - BIG_ORBIT)){
+      else if(isAngleBetween(ball.angle, 360 - BIG_ORBIT, BIG_ORBIT)){
         calcBigOrbit();
       }
       else if(ball.distance > CLOSE_ORBIT){
@@ -83,7 +83,14 @@ void Orbit::calcAttacker(){
 
 void Orbit::calcDefender(){
   if(ball.visible){
+    if(goal.visible){
+      if(true){
 
+      }
+    }
+    else {
+
+    }
   }
   else{
     if(goal.visible){

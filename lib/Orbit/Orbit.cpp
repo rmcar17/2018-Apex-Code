@@ -93,6 +93,8 @@ void Orbit::setBallData(BallData ballData){
   ball = ballData;
 }
 
-void Orbit::resetMoveData(int dir, int speed, int rot){
-  movement = {dir, speed, rot};
+void Orbit::resetAllData(){
+  ball = {-1, 0, false};
+  goal = {-1, 0, false};
+  movement = {-1, 0, 0};
 }

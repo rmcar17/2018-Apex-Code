@@ -78,5 +78,5 @@ void loop() {
 
   motors.moveDirection(move);
 
-  orbit.resetMoveData();
+  orbit.resetAllData();
 }

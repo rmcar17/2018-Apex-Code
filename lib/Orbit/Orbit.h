@@ -13,14 +13,14 @@ class Orbit{
     Orbit();
     MoveData getMoveData();
 
-    void setGoalData(GoalData goalData);
     void setBallData(BallData ballData);
+    void setGoalData(GoalData goalData);
 
     void calculateMoveData();
     void calculateRotation(int compAngle);
     void avoidLine();
 
-    void resetMoveData(int dir = -1, int speed = 0, int rot = 0);
+    void resetAllData();
   private:
     void calcSmallOrbit();
     void calcBigOrbit();
@@ -29,8 +29,8 @@ class Orbit{
     void calcMediumOrbit();
     void calcFarOrbit();
 
-    GoalData goal;
-    BallData ball;
+    BallData ball = {-1, 0, false};
+    GoalData goal = {-1, 0, false};
     MoveData movement = {-1, 0, 0};
 
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);

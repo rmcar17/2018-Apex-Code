@@ -32,8 +32,7 @@ class Orbit{
     void calcMediumOrbit();
     void calcFarOrbit();
 
-    void centreAttacker();
-    void centreDefender();
+    void centre();
 
     PlayMode role = PlayMode::undecided;
 

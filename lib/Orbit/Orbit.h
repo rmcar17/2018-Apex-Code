@@ -12,9 +12,12 @@ class Orbit{
   public:
     Orbit();
     MoveData getMoveData();
+
     void calculateMoveData(BallData ballData);
-    void calculateRotation(int compAngle, int goalAngle);
+    void calculateRotation(int compAngle);
     void avoidLine();
+
+    void setGoalData(GoalData goalData);
     void resetMoveData(int dir = -1, int speed = 0, int rot = 0);
   private:
     void calcSmallOrbit();
@@ -24,6 +27,7 @@ class Orbit{
     void calcMediumOrbit();
     void calcFarOrbit();
 
+    GoalData goal;
     MoveData movement = {-1, 0, 0};
 
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);

@@ -22,11 +22,16 @@ MotorController motors;
 Orbit orbit;
 
 BallData ball;
+GoalData goal;
 MoveData move;
 
-int mockAngle;
-int mockDistance;
-int mockRotation;
+int mockBallAngle;
+int mockBallDistance;
+bool mockBallVisible;
+
+int mockGoalAngle;
+int mockGoalDistance;
+bool mockGoalVisible;
 
 void setup() {
   if(DEBUG_ANY){
@@ -43,19 +48,30 @@ void setup() {
 
   comp.calibrate();
 
-  mockAngle = 0;
-  mockDistance = 160;
-  mockRotation = -1;
+  mockBallAngle = 0;
+  mockBallDistance = 160;
+  mockBallVisible = true;
 
-  ball.angle = mockAngle;
-  ball.distance = mockDistance;
+  mockGoalAngle = 0;
+  mockGoalDistance = 10;
+  mockGoalVisible = false;
+
+  ball.angle = mockBallAngle;
+  ball.distance = mockBallDistance;
+  ball.visible = mockBallVisible;
+
+  goal.angle = mockGoalAngle;
+  goal.distance = mockGoalDistance;
+  goal.visible = mockGoalVisible;
 }
 
 void loop() {
   comp.updateGyro();
 
+  orbit.setGoalData(goal);
+
   orbit.calculateMoveData(ball);
-  orbit.calculateRotation(comp.heading, mockRotation);
+  orbit.calculateRotation(comp.heading);
 
   move = orbit.getMoveData();
 

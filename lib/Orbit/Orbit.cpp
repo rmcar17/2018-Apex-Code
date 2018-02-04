@@ -32,17 +32,17 @@ void Orbit::calculateMoveData(BallData ballData){
   }
 }
 
-void Orbit::calculateRotation(int compAngle, int goalAngle){
+void Orbit::calculateRotation(int compAngle){
   //This section will change when a
   //goalData object is created, or
   //when programming the defender.
   //More methods will likely be created.
 
-  if(goalAngle != -1){
-    rotate = rotation.update(goalAngle < 180 ? goalAngle : -(360 - goalAngle));
+  if(goal.visible){
+    rotate = rotation.update(goal.angle < 180 ? goal.angle : -(360 - goal.angle));
   }
   else{
-    rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - goalAngle));
+    rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
   }
   movement.rotation = rotate;
 }
@@ -91,6 +91,10 @@ void Orbit::calcMediumOrbit(){
 void Orbit::calcFarOrbit(){
   movement.speed = MAX_SPEED;
   movement.angle = angle;
+}
+
+void Orbit::setGoalData(GoalData goalData){
+  goal = goalData;
 }
 
 void Orbit::resetMoveData(int dir, int speed, int rot){

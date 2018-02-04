@@ -46,11 +46,20 @@ void Orbit::calculateMoveData(){
       }
     }
     else{
-
+      if(goal.visible){
+        centreAttacker();
+      }
     }
   }
   else{
-    //Defender Logic
+    if(ball.visible){
+
+    }
+    else{
+      if(goal.visible){
+        centreDefender();
+      }
+    }
   }
 }
 
@@ -113,6 +122,20 @@ void Orbit::calcMediumOrbit(){
 void Orbit::calcFarOrbit(){
   movement.speed = MAX_SPEED;
   movement.angle = ball.angle;
+}
+
+void Orbit::centreAttacker(){
+  double goalAngle = doubleMod(360 + compAngle +  goal.angle, 360);
+
+  double correctedVerticalDistance = goal.distance * cos(goalAngle) - CENTRE_ATTACKER_DISTANCE;
+  double correctedHorizontalDistance = goal.distance * sin(goalAngle);
+
+  movement.speed = MAX_SPEED;
+  movement.angle = mod(360 + round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance))),360);
+}
+
+void Orbit::centreDefender(){
+
 }
 
 void Orbit::resetAllData(){

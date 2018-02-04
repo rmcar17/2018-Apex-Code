@@ -8,6 +8,7 @@
 #include <PID.h>
 #include <Common.h>
 #include <BallData.h>
+#include <GoalData.h>
 #include <MoveData.h>
 #include <Debug.h>
 #include <Defines.h>

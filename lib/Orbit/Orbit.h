@@ -5,6 +5,7 @@
 #include <Pid.h>
 #include <Defines.h>
 #include <BallData.h>
+#include <GoalData.h>
 #include <MoveData.h>
 
 class Orbit{

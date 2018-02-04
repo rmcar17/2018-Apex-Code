@@ -4,6 +4,7 @@
 struct BallData {
   int distance;
   int angle;
+  bool visible;
 };
 
 #endif

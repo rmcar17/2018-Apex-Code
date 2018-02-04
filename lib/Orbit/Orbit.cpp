@@ -4,6 +4,10 @@ Orbit::Orbit(){
 
 }
 
+void Orbit::setRole(PlayMode playMode){
+  role = playMode;
+}
+
 void Orbit::setBallData(BallData ballData){
   ball = ballData;
 }
@@ -21,27 +25,32 @@ MoveData Orbit::getMoveData(){
 }
 
 void Orbit::calculateMoveData(){
-  if(ball.visible){
-    if(ball.distance < FAR_ORBIT){
-      if(isAngleBetween(ball.angle, SMALL_ORBIT, 360 - SMALL_ORBIT)){
-        calcSmallOrbit();
+  if(role == PlayMode::attacker){
+    if(ball.visible){
+      if(ball.distance < FAR_ORBIT){
+        if(isAngleBetween(ball.angle, SMALL_ORBIT, 360 - SMALL_ORBIT)){
+          calcSmallOrbit();
+        }
+        else if(isAngleBetween(ball.angle, BIG_ORBIT, 360 - BIG_ORBIT)){
+          calcBigOrbit();
+        }
+        else if(ball.distance > CLOSE_ORBIT){
+          calcCloseOrbit();
+        }
+        else if(ball.distance < FAR_ORBIT){
+          calcMediumOrbit();
+        }
       }
-      else if(isAngleBetween(ball.angle, BIG_ORBIT, 360 - BIG_ORBIT)){
-        calcBigOrbit();
-      }
-      else if(ball.distance > CLOSE_ORBIT){
-        calcCloseOrbit();
-      }
-      else if(ball.distance < FAR_ORBIT){
-        calcMediumOrbit();
+      else{
+        calcFarOrbit();
       }
     }
     else{
-      calcFarOrbit();
+
     }
   }
   else{
-
+    //Defender Logic
   }
 }
 
@@ -49,7 +58,13 @@ void Orbit::calculateRotation(){
   double rotate;
 
   if(goal.visible){
+    if(role == PlayMode::attacker){
     rotate = rotation.update(goal.angle < 180 ? goal.angle : -(360 - goal.angle));
+    }
+    else{
+      double oppositeAngle = mod(goal.angle + 180, 360);
+      rotate = rotation.update(oppositeAngle < 180 ? oppositeAngle : -(360 - oppositeAngle));
+    }
   }
   else{
     rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
@@ -101,6 +116,7 @@ void Orbit::calcFarOrbit(){
 }
 
 void Orbit::resetAllData(){
+  role = PlayMode::undecided;
   ball = {-1, 0, false};
   goal = {-1, 0, false};
   movement = {-1, 0, 0};

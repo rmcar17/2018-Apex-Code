@@ -4,6 +4,7 @@
 #include <Common.h>
 #include <Pid.h>
 #include <Defines.h>
+#include <PlayMode.h>
 #include <BallData.h>
 #include <GoalData.h>
 #include <MoveData.h>
@@ -12,6 +13,7 @@ class Orbit{
   public:
     Orbit();
 
+    void setRole(PlayMode playMode);
     void setBallData(BallData ballData);
     void setGoalData(GoalData goalData);
     void setCompAngle(int heading);
@@ -29,6 +31,8 @@ class Orbit{
     void calcCloseOrbit();
     void calcMediumOrbit();
     void calcFarOrbit();
+
+    PlayMode role = PlayMode::undecided;
 
     BallData ball = {-1, 0, false};
     GoalData goal = {-1, 0, false};

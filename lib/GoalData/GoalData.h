@@ -2,8 +2,8 @@
 #define GOALDATA_H
 
 struct GoalData {
-  int distance;
   int angle;
+  int distance;
   bool visible;
 };
 

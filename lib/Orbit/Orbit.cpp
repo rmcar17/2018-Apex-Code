@@ -125,13 +125,13 @@ void Orbit::calcFarOrbit(){
 }
 
 void Orbit::centreAttacker(){
-  double goalAngle = doubleMod(360 + compAngle +  goal.angle, 360);
+  double goalAngle = toRadians(compAngle + goal.angle);
 
   double correctedVerticalDistance = goal.distance * cos(goalAngle) - CENTRE_ATTACKER_DISTANCE;
   double correctedHorizontalDistance = goal.distance * sin(goalAngle);
 
   movement.speed = MAX_SPEED;
-  movement.angle = mod(360 + round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance))),360);
+  movement.angle = mod(round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);
 }
 
 void Orbit::centreDefender(){

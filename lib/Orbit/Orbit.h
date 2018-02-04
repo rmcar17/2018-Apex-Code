@@ -11,11 +11,11 @@
 class Orbit{
   public:
     Orbit();
-    MoveData getMoveData();
 
     void setBallData(BallData ballData);
     void setGoalData(GoalData goalData);
-
+    MoveData getMoveData();
+    
     void calculateMoveData();
     void calculateRotation(int compAngle);
     void avoidLine();

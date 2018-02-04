@@ -4,6 +4,18 @@ Orbit::Orbit(){
 
 }
 
+void Orbit::setBallData(BallData ballData){
+  ball = ballData;
+}
+
+void Orbit::setGoalData(GoalData goalData){
+  goal = goalData;
+}
+
+MoveData Orbit::getMoveData(){
+  return movement;
+}
+
 void Orbit::calculateMoveData(){
   if(ball.visible){
     if(ball.distance < FAR_ORBIT){
@@ -37,10 +49,6 @@ void Orbit::calculateRotation(int compAngle){
     rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
   }
   movement.rotation = rotate;
-}
-
-MoveData Orbit::getMoveData(){
-  return movement;
 }
 
 void Orbit::calcSmallOrbit(){
@@ -83,14 +91,6 @@ void Orbit::calcMediumOrbit(){
 void Orbit::calcFarOrbit(){
   movement.speed = MAX_SPEED;
   movement.angle = ball.angle;
-}
-
-void Orbit::setGoalData(GoalData goalData){
-  goal = goalData;
-}
-
-void Orbit::setBallData(BallData ballData){
-  ball = ballData;
 }
 
 void Orbit::resetAllData(){

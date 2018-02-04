@@ -37,6 +37,10 @@ void Compass::updateGyro() {
   #endif
 }
 
+double Compass::getHeading(){
+  return heading;
+}
+
 void Compass::calibrate() {
   calibration = 0;
   for(int cal=0;cal<IMU_CALIBRATION_COUNT;cal++){

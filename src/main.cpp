@@ -70,7 +70,7 @@ void loop() {
 
   orbit.setGoalData(goal);
   orbit.setBallData(ball);
-  orbit.setCompAngle(comp.heading);
+  orbit.setCompAngle(comp.getHeading());
 
   orbit.calculateMoveData();
   orbit.calculateRotation();

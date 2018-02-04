@@ -16,10 +16,7 @@
 #define COMPASS_CALIBRATION 1.3
 
 class Compass {
-public:
-    double heading;
-    long double calibration = COMPASS_CALIBRATION;
-
+  public:
     Compass() {};
     void compassSetup();
 
@@ -28,19 +25,17 @@ public:
     void updateGyro();
     void calibrate();
 
-private:
+    double getHeading();
+  private:
+    double heading;
+    long double calibration = COMPASS_CALIBRATION;
+
     long previousTime;
 
     double convertRawGyro(int raw) {
-        // Since we are using 500 degrees/seconds range
-        // -500 maps to a raw value of -32768
-        // +500 maps to a raw value of 32767
-
         double g = (raw * 500.0) / 32768.0;
         return g;
     }
 };
-
-// extern Compass compass;
 
 #endif

@@ -14,10 +14,11 @@ class Orbit{
 
     void setBallData(BallData ballData);
     void setGoalData(GoalData goalData);
+    void setCompAngle(int heading);
     MoveData getMoveData();
-    
+
     void calculateMoveData();
-    void calculateRotation(int compAngle);
+    void calculateRotation();
     void avoidLine();
 
     void resetAllData();
@@ -33,8 +34,8 @@ class Orbit{
     GoalData goal = {-1, 0, false};
     MoveData movement = {-1, 0, 0};
 
+    double compAngle;
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
-    int rotate;
 };
 
 #endif

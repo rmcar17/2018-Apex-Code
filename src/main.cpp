@@ -44,7 +44,7 @@ void setup() {
   motors.motorSetup();
   motors.brake();
 
-  orbit.resetMoveData();
+  orbit.resetAllData();
 
   comp.calibrate();
 
@@ -70,9 +70,10 @@ void loop() {
 
   orbit.setGoalData(goal);
   orbit.setBallData(ball);
+  orbit.setCompAngle(comp.heading);
 
   orbit.calculateMoveData();
-  orbit.calculateRotation(comp.heading);
+  orbit.calculateRotation();
 
   move = orbit.getMoveData();
 

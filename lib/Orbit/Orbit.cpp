@@ -12,6 +12,10 @@ void Orbit::setGoalData(GoalData goalData){
   goal = goalData;
 }
 
+void Orbit::setCompAngle(int heading){
+  compAngle = heading;
+}
+
 MoveData Orbit::getMoveData(){
   return movement;
 }
@@ -41,14 +45,17 @@ void Orbit::calculateMoveData(){
   }
 }
 
-void Orbit::calculateRotation(int compAngle){
+void Orbit::calculateRotation(){
+  double rotate;
+
   if(goal.visible){
     rotate = rotation.update(goal.angle < 180 ? goal.angle : -(360 - goal.angle));
   }
   else{
     rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
   }
-  movement.rotation = rotate;
+
+  movement.rotation = round(rotate);
 }
 
 void Orbit::calcSmallOrbit(){

@@ -2,8 +2,8 @@
 #define BALLDATA_H
 
 struct BallData {
-  int distance;
   int angle;
+  int distance;
   bool visible;
 };
 

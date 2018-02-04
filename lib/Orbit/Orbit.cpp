@@ -26,40 +26,10 @@ MoveData Orbit::getMoveData(){
 
 void Orbit::calculateMoveData(){
   if(role == PlayMode::attacker){
-    if(ball.visible){
-      if(ball.distance < FAR_ORBIT){
-        if(isAngleBetween(ball.angle, SMALL_ORBIT, 360 - SMALL_ORBIT)){
-          calcSmallOrbit();
-        }
-        else if(isAngleBetween(ball.angle, BIG_ORBIT, 360 - BIG_ORBIT)){
-          calcBigOrbit();
-        }
-        else if(ball.distance > CLOSE_ORBIT){
-          calcCloseOrbit();
-        }
-        else if(ball.distance < FAR_ORBIT){
-          calcMediumOrbit();
-        }
-      }
-      else{
-        calcFarOrbit();
-      }
-    }
-    else{
-      if(goal.visible){
-        centre();
-      }
-    }
+    calcAttacker();
   }
   else{
-    if(ball.visible){
-
-    }
-    else{
-      if(goal.visible){
-        centre();
-      }
-    }
+    calcDefender();
   }
 }
 
@@ -80,6 +50,44 @@ void Orbit::calculateRotation(){
   }
 
   movement.rotation = round(rotate);
+}
+
+void Orbit::calcAttacker(){
+  if(ball.visible){
+    if(ball.distance < FAR_ORBIT){
+      if(isAngleBetween(ball.angle, SMALL_ORBIT, 360 - SMALL_ORBIT)){
+        calcSmallOrbit();
+      }
+      else if(isAngleBetween(ball.angle, BIG_ORBIT, 360 - BIG_ORBIT)){
+        calcBigOrbit();
+      }
+      else if(ball.distance > CLOSE_ORBIT){
+        calcCloseOrbit();
+      }
+      else if(ball.distance < FAR_ORBIT){
+        calcMediumOrbit();
+      }
+    }
+    else{
+      calcFarOrbit();
+    }
+  }
+  else{
+    if(goal.visible){
+      centre();
+    }
+  }
+}
+
+void Orbit::calcDefender(){
+  if(ball.visible){
+
+  }
+  else{
+    if(goal.visible){
+      centre();
+    }
+  }
 }
 
 void Orbit::calcSmallOrbit(){

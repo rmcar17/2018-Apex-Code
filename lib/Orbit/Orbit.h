@@ -25,6 +25,9 @@ class Orbit{
 
     void resetAllData();
   private:
+    void calcAttacker();
+    void calcDefender();
+
     void calcSmallOrbit();
     void calcBigOrbit();
 

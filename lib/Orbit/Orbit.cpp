@@ -33,8 +33,8 @@ void Orbit::calculateMoveData(){
   }
   #if DEBUG_ORBIT
     Serial.print("BALL ANGLE: ");
-    Serial.println(ball.angle);
-    Serial.print("MOVE ANGLE: ");
+    Serial.print(ball.angle);
+    Serial.print("  MOVE ANGLE: ");
     Serial.println(movement.angle);
   #endif
 }
@@ -60,7 +60,7 @@ void Orbit::calculateRotation(){
 
 void Orbit::calcAttacker(){
   if(ball.visible){
-    if(ball.distance < FAR_ORBIT){
+    if(ball.distance > FAR_ORBIT){
       if(isAngleBetween(ball.angle, 360 - SMALL_ORBIT, SMALL_ORBIT)){
         calcSmallOrbit();
       }
@@ -70,7 +70,7 @@ void Orbit::calcAttacker(){
       else if(ball.distance > CLOSE_ORBIT){
         calcCloseOrbit();
       }
-      else if(ball.distance < FAR_ORBIT){
+      else if(ball.distance > FAR_ORBIT){
         calcMediumOrbit();
       }
     }

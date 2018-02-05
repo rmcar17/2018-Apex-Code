@@ -13,6 +13,6 @@ These are the instructions to set up this project up and running.
  - Git (optional)
 ### Installing
 Just search it on the browser and install all of the prerequisites
-##Acknowledgments
+## Acknowledgments
  - This should only be read among our team members, if you are reading this rn and you're not a part of our team. Please do not steal our code. Please.
  - Robbo is a monkey

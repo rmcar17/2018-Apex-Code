@@ -4,7 +4,8 @@ This project is for BBC Robotics in the 2018 competition. The team members are:
  - Riley Bowyer
  - Robert McArthur
  - Jason Wang
-Our goal is to get 1st place in both states and nationals.
+ 
+Our goal is to get 1st place at, states, nationals and then internationals.
 ## Getting Started
 These are the instructions to set up this project up and running.
 ### Prerequisites

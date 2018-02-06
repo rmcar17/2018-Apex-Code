@@ -32,8 +32,8 @@ void Orbit::calculateMoveData(){
     calcDefender();
   }
   #if DEBUG_ORBIT
-    //Serial.print("BALL ANGLE: ");
-    //Serial.print(ball.angle);
+    Serial.print("BALL ANGLE: ");
+    Serial.print(ball.angle);
     Serial.print("  MOVE ANGLE: ");
     Serial.println(movement.angle);
   #endif
@@ -62,30 +62,24 @@ void Orbit::calcAttacker(){
   if(ball.visible){
     if(ball.distance > FAR_ORBIT){
       if(isAngleBetween(ball.angle, 360 - SMALL_ORBIT, SMALL_ORBIT)){
-        Serial.println("Small Orbit");
         calcSmallOrbit();
       }
       else if(isAngleBetween(ball.angle, 360 - BIG_ORBIT, BIG_ORBIT)){
-        Serial.println("Big Orbit");
         calcBigOrbit();
       }
       else if(ball.distance > CLOSE_ORBIT){
-        Serial.println("Close Orbit");
         calcCloseOrbit();
       }
       else if(ball.distance > FAR_ORBIT){
-        Serial.println("Medium Orbit");
         calcMediumOrbit();
       }
     }
     else{
-      Serial.println("Far Orbit");
       calcFarOrbit();
     }
   }
   else{
     if(goal.visible){
-      Serial.println("Centring");
       centre();
     }
     //If can't see goal or ball, the robot

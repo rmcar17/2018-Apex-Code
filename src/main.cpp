@@ -53,13 +53,13 @@ void setup() {
 
   role = PlayMode::attacker;
 
-  mockBallAngle = 0;
-  mockBallDistance = 160;
-  mockBallVisible = true;
+  mockBallAngle = 360-SMALL_ORBIT+1;
+  mockBallDistance = CLOSE_ORBIT-10;
+  mockBallVisible = false;
 
   mockGoalAngle = 0;
-  mockGoalDistance = 10;
-  mockGoalVisible = false;
+  mockGoalDistance = 9;
+  mockGoalVisible = true;
 
   ball.angle = mockBallAngle;
   ball.distance = mockBallDistance;
@@ -84,7 +84,7 @@ void loop() {
   orbit.setRole(role);
   orbit.setGoalData(goal);
   orbit.setBallData(ball);
-  orbit.setCompAngle(comp.getHeading());
+  orbit.setCompAngle(0);//comp.getHeading());
 
   orbit.calculateMoveData();
   orbit.calculateRotation();
@@ -94,4 +94,8 @@ void loop() {
   motors.moveDirection(move);
 
   orbit.resetAllData();
+
+  #if DEBUG_ANY
+    delay(100);
+  #endif
 }

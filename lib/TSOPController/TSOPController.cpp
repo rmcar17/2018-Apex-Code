@@ -32,7 +32,6 @@ void TSOPController::read(){
       Serial.print(values[tsop]);
     }
     Serial.println();
-    delay(500);
   #endif
 }
 

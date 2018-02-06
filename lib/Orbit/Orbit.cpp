@@ -173,7 +173,7 @@ void Orbit::moveToBall(){
   //Won't work when comparing
   //TSOPs to camera
   double correctedVerticalDistance = goal.distance * cos(toRadians(compAngle + goal.angle)) + CENTRE_DEFENDER_DISTANCE;
-  double correctedHorizontalDistance = isAngleBetween(ball.angle, 360 - DEFEND_SMALL_ANGLE, DEFEND_SMALL_ANGLE) ? 0 : ball.distance * sin((double)toRadians(ball.angle + compAngle));
+  double correctedHorizontalDistance = isAngleBetween(ball.angle, 360 - DEFEND_SMALL_ANGLE, DEFEND_SMALL_ANGLE) ? 0 : ball.distance * sin(toRadians(ball.angle + compAngle));
 
   movement.speed = MAX_SPEED;
   movement.angle = mod(round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);

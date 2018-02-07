@@ -3,7 +3,6 @@
 #include <Motor.h>
 #include <TSOPController.h>
 #include <Compass.h>
-#include <PixyI2C.h>
 #include <Orbit.h>
 #include <PID.h>
 #include <Common.h>
@@ -13,7 +12,6 @@
 #include <Defines.h>
 #include <Pins.h>
 
-PixyI2C pixy;
 Compass comp;
 
 MotorController motors;

@@ -17,6 +17,7 @@
 
 PixyI2C pixy;
 Compass comp;
+TSOPController tsops;
 
 MotorController motors;
 
@@ -34,14 +35,16 @@ void setup() {
   #endif
 
   Wire.begin();
-  comp.compassSetup();
-
   motors.motorSetup();
   motors.brake();
 
+  comp.compassSetup();
+  comp.calibrate();
+
+  tsops.TSOPSetup();
+
   orbit.resetAllData();
 
-  comp.calibrate();
 
   role = PlayMode::attacker;
 
@@ -60,6 +63,7 @@ void loop() {
   //Create another class which checks
   //whether the robots should switch
   //roles
+  ball = tsops.getBallData();
 
   orbit.setRole(role);
   orbit.setGoalData(goal);

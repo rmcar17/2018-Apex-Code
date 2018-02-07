@@ -28,14 +28,6 @@ BallData ball;
 GoalData goal;
 MoveData move;
 
-int mockBallAngle;
-int mockBallDistance;
-bool mockBallVisible;
-
-int mockGoalAngle;
-int mockGoalDistance;
-bool mockGoalVisible;
-
 void setup() {
   #if DEBUG_ANY
     Serial.begin(9600);
@@ -53,21 +45,9 @@ void setup() {
 
   role = PlayMode::attacker;
 
-  mockBallAngle = 360-SMALL_ORBIT+1;
-  mockBallDistance = CLOSE_ORBIT-10;
-  mockBallVisible = false;
-
-  mockGoalAngle = 0;
-  mockGoalDistance = 9;
-  mockGoalVisible = true;
-
-  ball.angle = mockBallAngle;
-  ball.distance = mockBallDistance;
-  ball.visible = mockBallVisible;
-
-  goal.angle = mockGoalAngle;
-  goal.distance = mockGoalDistance;
-  goal.visible = mockGoalVisible;
+  goal.angle = -1;
+  goal.distance = 0;
+  goal.visible = false;
 }
 
 void loop() {

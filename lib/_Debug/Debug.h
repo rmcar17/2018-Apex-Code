@@ -1,9 +1,9 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#define DEBUG_ORBIT 1
+#define DEBUG_ORBIT 0
 #define DEBUG_COMPASS 0
-#define DEBUG_TSOPS 0
+#define DEBUG_BALL 1
 
 #define DEBUG_ANY DEBUG_ORBIT || DEBUG_COMPASS || DEBUG_TSOPS
 

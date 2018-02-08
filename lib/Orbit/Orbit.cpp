@@ -99,7 +99,7 @@ void Orbit::calcDefender(){
       }
     }
     else {
-
+      calcAttacker(); //Might try out some better logic here later
     }
   }
   else{

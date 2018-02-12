@@ -20,7 +20,6 @@ private:
   void filterValues();
   void errorCorrect();
   void sortValues();
-  void reset();
   BallData getStrAng(int best_n);
   int getStr(int Str_n);
   int sensors[TSOP_NUM] = {TSOP_1, TSOP_2, TSOP_3, TSOP_4, TSOP_5, TSOP_6, TSOP_7, TSOP_8, TSOP_9, TSOP_10, TSOP_11, TSOP_12}; //0,30,60,90,120,150,180,210,240,270,300,330

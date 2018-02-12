@@ -102,6 +102,8 @@ int TSOPController::getStr(int Str_n){
 BallData TSOPController::getStrAng(int best_n){
   int returnAngle = 0;
   int returnStrength = 0;
+  bool visible = true;
+
   double i=0,j=0;
   for(int n=0;n<best_n;n++){
     i += (double)finalValues[n]*sin(toRadians((double)finalAngles[n]));
@@ -110,6 +112,7 @@ BallData TSOPController::getStrAng(int best_n){
   if(i==0){
       if(j==0){
         returnAngle = -1;
+        visible = false;
       }
       else if(j>0){
         returnAngle = 0;
@@ -122,5 +125,5 @@ BallData TSOPController::getStrAng(int best_n){
     returnAngle = (int)mod(270+(int)round(toDegrees(atan2(j,i))),360);
   }
   returnStrength = getStr(TSOP_S);
-  return {returnAngle,returnStrength};
+  return {returnAngle,returnStrength,visible};
 }

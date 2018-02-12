@@ -30,16 +30,17 @@ GoalData goal;
 MoveData move;
 
 void setup() {
-  #if DEBUG_ANY
-    Serial.begin(9600);
-  #endif
+  //#if DEBUG_ANY
+  Serial.begin(9600);
+//  #endif
 
   Wire.begin();
+  comp.compassSetup();
+  comp.calibrate();
+
   motors.motorSetup();
   motors.brake();
 
-  comp.compassSetup();
-  comp.calibrate();
 
   tsops.TSOPSetup();
 
@@ -68,7 +69,7 @@ void loop() {
   orbit.setRole(role);
   orbit.setGoalData(goal);
   orbit.setBallData(ball);
-  orbit.setCompAngle(0);//comp.getHeading());
+  orbit.setCompAngle(comp.getHeading());
 
   orbit.calculateMoveData();
   orbit.calculateRotation();
@@ -78,8 +79,4 @@ void loop() {
   motors.moveDirection(move);
 
   orbit.resetAllData();
-
-  #if DEBUG_ANY
-    delay(100);
-  #endif
 }

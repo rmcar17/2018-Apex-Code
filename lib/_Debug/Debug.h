@@ -1,11 +1,10 @@
 #ifndef DEBUG_H
 #define DEBUG_H
 
-#define DEBUG_MOTOR 0
-#define DEBUG_COMPASS 1
-#define DEBUG_PIXY 0
+#define DEBUG_ORBIT 0
+#define DEBUG_COMPASS 0
 #define DEBUG_TSOPS 0
 
-const bool DEBUG_ANY = DEBUG_MOTOR || DEBUG_COMPASS || DEBUG_PIXY;
+#define DEBUG_ANY DEBUG_ORBIT || DEBUG_COMPASS || DEBUG_TSOPS
 
 #endif

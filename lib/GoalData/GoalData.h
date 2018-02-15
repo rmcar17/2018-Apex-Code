@@ -1,7 +1,7 @@
-#ifndef BALLDATA_H
-#define BALLDATA_H
+#ifndef GOALDATA_H
+#define GOALDATA_H
 
-struct BallData {
+struct GoalData {
   int angle;
   int distance;
   bool visible;

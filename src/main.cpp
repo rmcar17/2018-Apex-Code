@@ -7,8 +7,7 @@
 #include <PID.h>
 #include <Common.h>
 #include <PlayMode.h>
-#include <BallData.h>
-#include <GoalData.h>
+#include <EntityData.h>
 #include <MoveData.h>
 #include <Debug.h>
 #include <Defines.h>
@@ -23,8 +22,8 @@ Orbit orbit;
 
 PlayMode role;
 
-BallData ball;
-GoalData goal;
+EntityData ball;
+EntityData goal;
 MoveData move;
 
 void setup() {

@@ -41,7 +41,7 @@ void TSOPController::refresh(){
   digitalWrite(TSOP_POWER, HIGH);
 }
 
-BallData TSOPController::getBallData(){
+EntityData TSOPController::getBallData(){
   refresh();
   read();
   filterValues();
@@ -99,7 +99,7 @@ int TSOPController::getStr(int Str_n){
   return returnStrength;
 }
 
-BallData TSOPController::getStrAng(int best_n){
+EntityData TSOPController::getStrAng(int best_n){
   int returnAngle = 0;
   int returnStrength = 0;
   bool visible = true;

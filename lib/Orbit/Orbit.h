@@ -6,8 +6,7 @@
 #include <Debug.h>
 #include <Defines.h>
 #include <PlayMode.h>
-#include <BallData.h>
-#include <GoalData.h>
+#include <EntityData.h>
 #include <MoveData.h>
 
 class Orbit{
@@ -15,8 +14,8 @@ class Orbit{
     Orbit();
 
     void setRole(PlayMode playMode);
-    void setBallData(BallData ballData);
-    void setGoalData(GoalData goalData);
+    void setBallData(EntityData ballData);
+    void setGoalData(EntityData goalData);
     void setCompAngle(int heading);
     MoveData getMoveData();
 
@@ -41,8 +40,8 @@ class Orbit{
 
     PlayMode role = PlayMode::undecided;
 
-    BallData ball = {-1, 0, false};
-    GoalData goal = {-1, 0, false};
+    EntityData ball = {-1, 0, false};
+    EntityData goal = {-1, 0, false};
     MoveData movement = {-1, 0, 0};
 
     double compAngle = 0;

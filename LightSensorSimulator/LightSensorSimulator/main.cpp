@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "LightSensor.h"
+#include "LightSensor.cpp"
 using namespace std;
 
 Robot robot;

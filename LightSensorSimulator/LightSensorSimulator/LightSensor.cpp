@@ -8,8 +8,11 @@
 
 #include <stdio.h>
 #include <string>
+#include <math.h>
 #include "LightSensor.h"
 using namespace std;
+
+#define PI 3.1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019385211055596446229489549303819644288109756659334461284756482337867831652712019091456485669234603
 
 void Robot::setCenter(int x, int y){
     center[0] = x;
@@ -48,66 +51,83 @@ void Robot::setCenter(int x, int y){
 
 void Robot::updateOnWhite(){
     any = false;
+    double vectorX = 0, vectorY = 0;
     for(int i = 0; i < sizeof(onWhite); i++){
         if(map[light[i][0]][light[i][1]]){
             onWhite[i] = true;
             any = true;
+            vectorX += sin((450-i*30)*PI/180);
+            vectorY += cos((450-i*30)*PI/180);
         }
         else{
             onWhite[i] = false;
         }
     }
+    if(any){
+        vectorAngle = correctRange((atan2(vectorY,vectorX)*180/PI),0,360);
+    }
+    else{
+        vectorAngle = -1;
+    }
 }
 
 void Robot::update(){
     if(any){
-        if(danger==0){
-            for(int i = 0; i < 12; i++){
-                if(onWhite[i]){
-                    initLight = i;
-                    setDangers(initLight);
-                    danger = 1;
-                }
+        if(danger == 0){
+            // First time touching the line (when in bound)
+            initAngle = vectorAngle;
+            prevAngle = vectorAngle;
+            danger = 1;
+        }
+        if(danger >= 1 && danger <= 4){
+            // Still in bound, reset initAngle
+            if(inRange(vectorAngle,prevAngle,90)){
+                initAngle = vectorAngle;
+            } else{
+                danger = 5;
+            }
+        } else if(danger >= 5 && danger <= 7){
+            if(inRange(vectorAngle,initAngle,90)){
+                vectorAngle = initAngle;
+                danger = 1;
+            }else{
+                vectorAngle = initAngle;
             }
         }
-        if(danger!=0){
-            maxDanger = 0;
-            for(int i = 0; i < 12; i++){
-                if(onWhite[i]){
-                    if(maxDanger<dangers[i]){
-                        maxDanger = dangers[i];
-                    }
-                }
-            }
-            danger = maxDanger;
-            if(danger<=3){
-                angle = initLight*30;
-            }
-            else if(danger>=4){
-                angle = correctRange((initLight*30)+180, 360);
-            }
-        }
-        
     }
     else{
-        if(danger<=3){
-            angle = -1;
-            clearDangers();
+        if(danger<=4){
+            initAngle = -1;
+            vectorAngle = -1;
             danger = 0;
         }
-        else if(danger>=4){
-            angle = correctRange((initLight*30)+180, 360);
+        else{
+            vectorAngle = initAngle;
         }
     }
+    prevAngle = initAngle;
+}
+
+bool Robot::inRange(double value, double target, int range){
+    double offset = value;
+    value = 0;
+    target = correctRange(target-offset, 0, 360);
+    if(target <= range || target >= 360-range){
+        return true;
+    }
+    else{
+        return false;
+    }
+
 }
 
 void Robot::setDangers(int init){
     dangers[init] = 1;
     for(int i = 0; i < 5; i++){
-        dangers[correctRange(init+i+1, 0, 11)] = i + 2;
-        dangers[correctRange(init-i-1, 0, 11)] = i + 2;
+        dangers[correctAngleRange(init+i+1, 0, 11)] = i + 2;
+        dangers[correctAngleRange(init-i-1, 0, 11)] = i + 2;
     }
-    dangers[correctRange(init+6, 0 , 11)] = 7;
+    dangers[correctAngleRange(init+6, 0 , 11)] = 7;
     for(int i = 0; i < 12; i++){
         printf("%d ",dangers[i]);
     }
@@ -130,6 +150,20 @@ int Robot::correctRange(int value, int max){
 }
 
 int Robot::correctRange(int value, int min, int max){
+    if(value > max){
+        while(value > max){
+            value -= max;
+        }
+    }
+    if(value < min){
+        while(value < min){
+            value += max;
+        }
+    }
+    return value;
+}
+
+int Robot::correctAngleRange(int value, int min, int max){
     if(value > max){
         while(value > max){
             value -= max+1;
@@ -163,7 +197,7 @@ void Robot::pMap(){
         }
         printf("\n");
     }
-    printf("Init: %d\nAngle: %d\nDanger: %d",initLight,angle,danger);
+    printf("Init: %0.2lf\nAngle: %d\nDanger: %d\nvectorAngle: %0.2lf",initAngle,angle,danger,vectorAngle);
     printf("\n");
 }
 

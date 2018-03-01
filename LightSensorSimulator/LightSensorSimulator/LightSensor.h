@@ -74,6 +74,8 @@ public:
     void update();
     int correctRange(int value, int max);
     int correctRange(int value, int min, int max);
+    int correctAngleRange(int value, int min, int max);
+    bool inRange(double value, double target, int range);
     void setDangers(int init);
     void clearDangers();
 private:
@@ -84,6 +86,9 @@ private:
     bool any;
     int angle = 0;
     int maxDanger;
+    double vectorAngle;
+    double initAngle;
+    double prevAngle;
     string dangerLevel;
 };
 

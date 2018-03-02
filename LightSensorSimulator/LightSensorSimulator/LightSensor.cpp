@@ -77,35 +77,43 @@ void Robot::update(){
             // First time touching the line (when in bound)
             initAngle = vectorAngle;
             prevAngle = vectorAngle;
+            lineAngle = vectorAngle;
             danger = 1;
         }
         if(danger >= 1 && danger <= 4){
             // Still in bound, reset initAngle
             if(inRange(vectorAngle,prevAngle,90)){
                 initAngle = vectorAngle;
+                lineAngle = vectorAngle;
             } else{
                 danger = 5;
             }
         } else if(danger >= 5 && danger <= 7){
+            // Half out the line
             if(inRange(vectorAngle,initAngle,90)){
-                vectorAngle = initAngle;
+                lineAngle = initAngle;
                 danger = 1;
             }else{
-                vectorAngle = initAngle;
+                initAngle = correctRange(vectorAngle+180,0,360);
+                lineAngle = initAngle;
             }
         }
     }
     else{
         if(danger<=4){
+            // We're back in the bound
             initAngle = -1;
             vectorAngle = -1;
+            lineAngle = -1;
             danger = 0;
         }
         else{
-            vectorAngle = initAngle;
+            // We're out
+            lineAngle = initAngle;
+            vectorAngle = -1;
         }
     }
-    prevAngle = initAngle;
+    prevAngle = vectorAngle;
 }
 
 bool Robot::inRange(double value, double target, int range){
@@ -197,7 +205,7 @@ void Robot::pMap(){
         }
         printf("\n");
     }
-    printf("Init: %0.2lf\nAngle: %d\nDanger: %d\nvectorAngle: %0.2lf",initAngle,angle,danger,vectorAngle);
+    printf("Init: %0.2lf\nlineAngle: %.02lf\nDanger: %d\nvectorAngle: %0.2lf",initAngle,lineAngle,danger,vectorAngle);
     printf("\n");
 }
 

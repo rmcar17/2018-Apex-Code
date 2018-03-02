@@ -84,11 +84,11 @@ private:
     int danger = 0;
     int dangers[12] = {0};
     bool any;
-    int angle = 0;
     int maxDanger;
     double vectorAngle;
     double initAngle;
     double prevAngle;
+    double lineAngle;
     string dangerLevel;
 };
 

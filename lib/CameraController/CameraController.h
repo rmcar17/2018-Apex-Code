@@ -11,13 +11,13 @@ class CameraController {
     void setDefendGoal(int x, int y, int pixels);
     void setBall(int x, int y, int pixels);
 
-    int calculateAngle(int x, int y);
-    int calculateDistance(int pixels);
-
     EntityData getAttackGoal();
     EntityData getDefendGoal();
     EntityData getBall();
   private:
+    int calculateAngle(int x, int y);
+    int calculateDistance(int pixels);
+    
     EntityData aGoal; //attacking goal
     EntityData dGoal; //defending goal
     EntityData ball;

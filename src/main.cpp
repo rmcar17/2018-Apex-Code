@@ -4,6 +4,7 @@
 #include <TSOPController.h>
 #include <Compass.h>
 #include <Orbit.h>
+#include <CameraController.h>
 #include <PID.h>
 #include <Common.h>
 #include <PlayMode.h>

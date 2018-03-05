@@ -11,6 +11,10 @@ class CameraController {
     void setDefendGoal(int x, int y, int pixels);
     void setBall(int x, int y, int pixels);
 
+  private:
+    EntityData aGoal; //attacking goal
+    EntityData dGoal; //defending goal
+    EntityData ball;
 };
 
 #endif

@@ -19,8 +19,8 @@ class CameraController {
     int calculateGoalDistance(int pixels);
     int calculateBallDistance(int pixels);
 
-    EntityData aGoal; //attacking goal
-    EntityData dGoal; //defending goal
+    EntityData attackGoal; //attacking goal
+    EntityData defendGoal; //defending goal
     EntityData ball;
 };
 

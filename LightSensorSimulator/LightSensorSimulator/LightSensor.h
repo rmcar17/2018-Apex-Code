@@ -90,6 +90,7 @@ private:
     double prevAngle;
     double lineAngle;
     string dangerLevel;
+    string sMap;
 };
 
 

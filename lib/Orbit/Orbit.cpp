@@ -5,6 +5,11 @@ Orbit::Orbit(){
 }
 
 void Orbit::setRole(PlayMode playMode){
+  /*
+   * PlayMode Undecided = -1
+   * PlayMode Defender  = 0
+   * PlayMode Attacker  = 1
+   */
   role = playMode;
 }
 
@@ -25,7 +30,7 @@ MoveData Orbit::getMoveData(){
 }
 
 void Orbit::calculateMoveData(){
-  if(role == PlayMode::attacker){
+  if(role == attacker){
     calcAttacker();
   }
   else{
@@ -43,7 +48,7 @@ void Orbit::calculateRotation(){
   double rotate;
 
   if(goal.visible){
-    if(role == PlayMode::attacker){
+    if(role == attacker){
     rotate = rotation.update(goal.angle < 180 ? goal.angle : -(360 - goal.angle));
     }
     else{
@@ -156,7 +161,7 @@ void Orbit::calcFarOrbit(){
 void Orbit::centre(){
   double goalAngle = toRadians(compAngle + goal.angle);
 
-  double correctedVerticalDistance = goal.distance * cos(goalAngle) + (role == PlayMode::attacker ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE);
+  double correctedVerticalDistance = goal.distance * cos(goalAngle) + (role == attacker ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE);
   double correctedHorizontalDistance = goal.distance * sin(goalAngle);
 
   movement.speed = MAX_SPEED;
@@ -174,7 +179,7 @@ void Orbit::moveToBall(){
 }
 
 void Orbit::resetAllData(){
-  role = PlayMode::undecided;
+  role = undecided;
   ball = {-1, 0, false};
   goal = {-1, 0, false};
   movement = {-1, 0, 0};

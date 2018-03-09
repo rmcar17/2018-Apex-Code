@@ -5,9 +5,10 @@
 #include <Pid.h>
 #include <Debug.h>
 #include <Defines.h>
-#include <PlayMode.h>
 #include <EntityData.h>
 #include <MoveData.h>
+
+
 
 class Orbit{
   public:
@@ -37,8 +38,9 @@ class Orbit{
 
     void centre();
     void moveToBall();
+    enum PlayMode: int {attacker, defender, undecided};
 
-    PlayMode role = PlayMode::undecided;
+    PlayMode role = undecided;
 
     EntityData ball = {-1, 0, false};
     EntityData goal = {-1, 0, false};

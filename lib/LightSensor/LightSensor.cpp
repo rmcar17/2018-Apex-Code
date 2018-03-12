@@ -1,8 +1,12 @@
 #include "LightSensor.h"
 
+LightSensor::LightSensor(){
+
+}
+
 void LightSensor::setup(int inPin){
 	pin = inPin;
-	pinMode = (pin,INPUT);
+	pinMode(pin,INPUT);
 }
 
 void LightSensor::setThresh(int thresh){

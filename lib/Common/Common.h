@@ -23,11 +23,4 @@ struct Vector3D {
   double z;
 };
 
-struct Vector4D {
-	double r;
-	double g;
-	double b;
-	double a;
-}
-
 #endif

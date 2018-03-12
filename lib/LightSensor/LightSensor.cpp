@@ -13,10 +13,6 @@ void LightSensor::setThresh(int thresh){
 	threshold = thresh;
 }
 
-void LightSensor::setThresh(int low, int high){
-	threshold = ((low+high)/2);
-}
-
 int LightSensor::getVal(){
 	val = analogRead(pin);
 	return val;

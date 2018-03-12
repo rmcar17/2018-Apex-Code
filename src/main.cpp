@@ -3,6 +3,8 @@
 #include <Motor.h>
 #include <TSOPController.h>
 #include <Compass.h>
+#include <LightSensor.h>
+#include <LightSensorController.h>
 #include <Orbit.h>
 #include <PID.h>
 #include <Common.h>
@@ -18,6 +20,7 @@ TSOPController tsops;
 
 MotorController motors;
 
+LightSensorController lights;
 Orbit orbit;
 
 PlayMode role;
@@ -38,6 +41,7 @@ void setup() {
   motors.motorSetup();
   motors.brake();
 
+  lights.setup();
 
   tsops.TSOPSetup();
 

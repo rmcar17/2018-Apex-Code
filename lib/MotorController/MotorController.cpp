@@ -15,16 +15,15 @@ void MotorController::motorSetup(){
   motorFL.motorSetup();
 }
 
-void MotorController::moveDirection(int angle, int speed, int rotation){
-  #if DEBUG_MOTOR
-  Serial.print("MOVE ANGLE: ");
-  Serial.println(angle);
-  #endif
+void MotorController::moveDirection(MoveData movement){
+  int angle = movement.angle;
+  int speed = movement.speed;
+  int rotation = movement.rotation;
 
-  int frontRightSpeed;
-  int backRightSpeed;
-  int backLeftSpeed;
-  int frontLeftSpeed;
+  double frontRightSpeed;
+  double backRightSpeed;
+  double backLeftSpeed;
+  double frontLeftSpeed;
 
   if(angle == -1)
   {
@@ -49,10 +48,10 @@ void MotorController::moveDirection(int angle, int speed, int rotation){
       a = a * multiplier;
     }
 
-    frontRightSpeed = -((int) a) + rotation;
-    backRightSpeed = -((int) b) + rotation;
-    backLeftSpeed = ((int) a) + rotation;
-    frontLeftSpeed = ((int) b) + rotation;
+    frontRightSpeed = -a + rotation;
+    backRightSpeed = -b + rotation;
+    backLeftSpeed = a + rotation;
+    frontLeftSpeed = b + rotation;
 
     multiplier = speed / max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed))));
 

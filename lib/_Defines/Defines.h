@@ -4,9 +4,9 @@
 // Compass
 #define IMU_CALIBRATION_COUNT 100
 
-#define COMPASS_KP 5
-#define COMPASS_KI 0
-#define COMPASS_KD 0.8
+#define ROTATION_KP 5
+#define ROTATION_KI 0
+#define ROTATION_KD 0.8
 
 // MOTORS
 #define MOTOR1_ANG 45
@@ -14,14 +14,23 @@
 #define MOTOR3_ANG 225
 #define MOTOR4_ANG 315
 
-// ORBIT
-#define CLOSE_ORBIT 150
-#define FAR_ORBIT 130
 
-#define BIG_ORBIT 30
+// ORBIT
+
+#define CENTRE_ATTACKER_DISTANCE 10
+#define CENTRE_DEFENDER_DISTANCE 4
+
+#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.75
+
+#define CLOSE_ORBIT 155
+#define FAR_ORBIT 128
+
+#define BIG_ORBIT 50
 #define SMALL_ORBIT 20
 
-#define SPEED 255
+#define DEFEND_SMALL_ANGLE 10
+
+#define MAX_SPEED 255
 
 // LIGHT SENSORS
 

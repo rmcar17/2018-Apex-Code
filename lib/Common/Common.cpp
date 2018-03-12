@@ -17,6 +17,15 @@ double doubleMod(double value, double maxValue) {
     return fmod((value + maxValue), maxValue);
 }
 
+bool isAngleBetween(int angle, int leftAngle, int rightAngle){
+  if(rightAngle < leftAngle){
+    return angle < rightAngle || angle > leftAngle;
+  }
+  else{
+    return angle < rightAngle && angle > leftAngle;
+  }
+}
+
 /*int max(int x,int y){
   return x > y ? x : y;
 }

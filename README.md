@@ -4,15 +4,15 @@ This project is for BBC Robotics in the 2018 competition. The team members are:
  - Riley Bowyer
  - Robert McArthur
  - Jason Wang
-Our goal is to get 1st place in both states and nationals.
+
+Our goal is to place 1st at the Queensland states, Australia nationals and then the 2019 internationals hosted in Australia.
 ## Getting Started
-These are the instructions to set up this project up and running.
+Below are the prerequisites as well as installation instructions.
 ### Prerequisites
- - Platformio
- - Atom or Sublime (highly recommended to choose one)
+ - PlatformIO
+ - Atom or Sublime
  - Git (optional)
 ### Installing
-Just search it on the browser and install all of the prerequisites
+Simply search for the prerequisites online and follow install instructions.
 ## Acknowledgments
- - This should only be read among our team members, if you are reading this rn and you're not a part of our team. Please do not steal our code. Please.
- - Robbo is a monkey
+ - Most of this code was developed by Team-APEX (with the exceptions of I2C and Pixy libraries). After the code is made public, feel free to use it as a reference. However, please do not 'copy and paste' our code as a lot of time and effort was put into this project.

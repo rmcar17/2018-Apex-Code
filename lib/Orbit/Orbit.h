@@ -1,26 +1,51 @@
 #ifndef ORBIT_H
 #define ORBIT_H
 
+#include <Common.h>
+#include <Pid.h>
+#include <Debug.h>
 #include <Defines.h>
-#include <BallData.h>
+#include <PlayMode.h>
+#include <EntityData.h>
 #include <MoveData.h>
 
 class Orbit{
   public:
     Orbit();
+
+    void setRole(PlayMode playMode);
+    void setBallData(EntityData ballData);
+    void setGoalData(EntityData goalData);
+    void setCompAngle(int heading);
     MoveData getMoveData();
-    void calculateMoveData(BallData ballData);
+
+    void calculateMoveData();
+    void calculateRotation();
     void avoidLine();
-    void setRotation(int rotation);
-    void resetMoveData(int dir = -1, int speed = 0, int rot = 0);
+
+    void resetAllData();
   private:
-    void getCloseOrbit();
-    void getMediumOrbit();
-    void getFarOrbit();
+    void calcAttacker();
+    void calcDefender();
 
-    MoveData Movement = {-1, 0, 0};
+    void calcSmallOrbit();
+    void calcBigOrbit();
 
-    int distance, angle;
+    void calcCloseOrbit();
+    void calcMediumOrbit();
+    void calcFarOrbit();
+
+    void centre();
+    void moveToBall();
+
+    PlayMode role = PlayMode::undecided;
+
+    EntityData ball = {-1, 0, false};
+    EntityData goal = {-1, 0, false};
+    MoveData movement = {-1, 0, 0};
+
+    double compAngle = 0;
+    PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
 };
 
 #endif

@@ -8,7 +8,7 @@ void TSOPController::TSOPSetup(){
 
   for(int tsop=0;tsop<TSOP_NUM;tsop++)
   {
-    pinMode(sensors[tsop],INPUT_PULLUP);
+    pinMode(sensors[tsop],INPUT);
   }
 
   digitalWrite(TSOP_POWER, HIGH);
@@ -32,7 +32,6 @@ void TSOPController::read(){
       Serial.print(values[tsop]);
     }
     Serial.println();
-    delay(500);
   #endif
 }
 
@@ -42,7 +41,7 @@ void TSOPController::refresh(){
   digitalWrite(TSOP_POWER, HIGH);
 }
 
-BallData TSOPController::getBallData(){
+EntityData TSOPController::getBallData(){
   refresh();
   read();
   filterValues();
@@ -51,7 +50,6 @@ BallData TSOPController::getBallData(){
 
   strAng = getStrAng(TSOP_N);
 
-  reset();
   return strAng;
 }
 
@@ -92,12 +90,6 @@ void TSOPController::sortValues(){
   }
 }
 
-void TSOPController::reset(){
-  values[TSOP_NUM] = {0};
-  finalValues[TSOP_NUM] = {0};
-  finalAngles[TSOP_NUM] = {0};
-}
-
 int TSOPController::getStr(int Str_n){
   int returnStrength = 0;
   for(int i=0;i<Str_n;i++){
@@ -107,9 +99,11 @@ int TSOPController::getStr(int Str_n){
   return returnStrength;
 }
 
-BallData TSOPController::getStrAng(int best_n){
+EntityData TSOPController::getStrAng(int best_n){
   int returnAngle = 0;
   int returnStrength = 0;
+  bool visible = true;
+
   double i=0,j=0;
   for(int n=0;n<best_n;n++){
     i += (double)finalValues[n]*sin(toRadians((double)finalAngles[n]));
@@ -118,6 +112,7 @@ BallData TSOPController::getStrAng(int best_n){
   if(i==0){
       if(j==0){
         returnAngle = -1;
+        visible = false;
       }
       else if(j>0){
         returnAngle = 0;
@@ -127,8 +122,8 @@ BallData TSOPController::getStrAng(int best_n){
       }
   }
   else{
-    returnAngle = 360-(int)mod(270+(int)round(toDegrees(atan2(j,i))),360);
+    returnAngle = (int)mod(270+(int)round(toDegrees(atan2(j,i))),360);
   }
   returnStrength = getStr(TSOP_S);
-  return {returnStrength,returnAngle};
+  return {returnAngle,returnStrength,visible};
 }

@@ -9,7 +9,7 @@ public:
 	LightSensor();
 	void setup(int inPin);
 	void setThresh(int thresh);
-	int getVal();
+	int read();
 	bool onWhite();
 };
 

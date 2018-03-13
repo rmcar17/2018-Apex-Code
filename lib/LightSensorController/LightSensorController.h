@@ -16,7 +16,7 @@ class LightSensorController {
 
 		void setup();
 		void setThresh();
-		void getVal();
+		void read();
 };
 
 #endif

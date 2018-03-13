@@ -14,7 +14,7 @@ void LightSensorController::setThresh(){
 	for(int lCount = 0; lCount < LS_NUM; lCount++){
 		int total = 0;
 		for(int cCount = 0; cCount < CALI_NUM; cCount++){
-			total += lightArray[lCount].getVal();
+			total += lightArray[lCount].read();
 		}
 		int cali = round(total / CALI_NUM) + 20;
 
@@ -22,8 +22,8 @@ void LightSensorController::setThresh(){
 	}
 }
 
-void LightSensorController::getVal(){
+void LightSensorController::read(){
 	for(int i = 0; i < LS_NUM; i++){
-		lightValues[i] = lightArray[i].getVal();
+		lightValues[i] = lightArray[i].read();
 	}
 }

@@ -2,6 +2,7 @@
 #define CAMERACONTROLLER_H
 
 #include <EntityData.h>
+#include <Image.h>
 
 class CameraController {
   public:

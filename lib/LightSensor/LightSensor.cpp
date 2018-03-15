@@ -14,10 +14,10 @@ void LightSensor::setThresh(int thresh){
 }
 
 int LightSensor::read(){
-	val = analogRead(pin);
-	return val;
+	readVal = analogRead(pin);
+	return readVal;
 }
 
 bool LightSensor::onWhite(){
-	return val > threshold ? true : false;
+	return readVal > threshold ? true : false;
 }

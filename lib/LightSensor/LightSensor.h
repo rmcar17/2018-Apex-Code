@@ -13,7 +13,7 @@ class LightSensor {
 		bool onWhite();
 
 	private:
-		int threshold, pin, val;
+		int threshold, pin, readVal;
 };
 
 #endif

@@ -7,7 +7,7 @@ void LightSensorController::setup(){
 		Serial.print(lightPins[i]);
 		Serial.println("] is on");
 	}
-	setThresh();
+	calibrate();
 }
 
 void LightSensorController::calibrate(){

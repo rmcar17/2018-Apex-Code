@@ -10,7 +10,7 @@ void LightSensorController::setup(){
 	setThresh();
 }
 
-void LightSensorController::setThresh(){
+void LightSensorController::calibrate(){
 	for(int lCount = 0; lCount < LS_NUM; lCount++){
 		int total = 0;
 		for(int cCount = 0; cCount < CALI_NUM; cCount++){

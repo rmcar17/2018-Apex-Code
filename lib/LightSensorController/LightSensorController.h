@@ -15,7 +15,7 @@ class LightSensorController {
 
 
 		void setup();
-		void setThresh();
+		void calibrate();
 		void read();
 };
 

@@ -4,14 +4,16 @@
 #include <Arduino.h>
 
 class LightSensor {
-public:
-	int threshold, pin, val;
-	LightSensor();
-	void setup(int inPin);
-	void setThresh(int thresh);
-	void setThresh(int low, int high);
-	int getVal();
-	bool onWhite();
+	public:
+		LightSensor();
+
+		void setup(int inPin);
+		void setThresh(int thresh);
+		int read();
+		bool onWhite();
+
+	private:
+		int threshold, pin, readVal;
 };
 
 #endif

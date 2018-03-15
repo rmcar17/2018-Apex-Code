@@ -1,5 +1,9 @@
 #include "LightSensorController.h"
 
+LightSensorController::LightSensorController(){
+	
+}
+
 void LightSensorController::setup(){
 	for(int i = 0; i < LS_NUM; i++){
 		lightArray[i].setup(lightPins[i]);
@@ -7,23 +11,24 @@ void LightSensorController::setup(){
 		Serial.print(lightPins[i]);
 		Serial.println("] is on");
 	}
-	setThresh();
+	calibrate();
 }
 
-void LightSensorController::setThresh(){
-	for(int lCount = 0; lCount < LS_NUM; lCount++){
+void LightSensorController::calibrate(){
+	int calibration;
+	for(int ls = 0; ls < LS_NUM; ls++){
 		int total = 0;
-		for(int cCount = 0; cCount < CALI_NUM; cCount++){
-			total += lightArray[lCount].getVal();
+		for(int read_n = 0; read_n < LS_CALIBRATION_NUM; read_n++){
+			total += lightArray[ls].read();
 		}
-		int cali = round(total / CALI_NUM) + 20;
+		calibration = round(total / LS_CALIBRATION_NUM) + 20;
 
-		lightArray[lCount].setThresh(cali);
+		lightArray[ls].setThresh(calibration);
 	}
 }
 
-void LightSensorController::getVal(){
+void LightSensorController::read(){
 	for(int i = 0; i < LS_NUM; i++){
-		lightValues[i] = lightArray[i].getVal();
+		lightValues[i] = lightArray[i].read();
 	}
 }

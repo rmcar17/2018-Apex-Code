@@ -35,7 +35,7 @@
 // LIGHT SENSORS
 
 #define LS_NUM 4
-#define CALI_NUM 10
+#define LS_CALIBRATION_NUM 10
 
 // TSOPS
 

@@ -10,7 +10,7 @@ class CameraController {
 
     void setAttackGoal(Image aGoal);
     void setDefendGoal(Image dGoal);
-    void setBall(Image ballI);
+    void setBall(Image ballImage);
 
     EntityData getAttackGoal();
     EntityData getDefendGoal();

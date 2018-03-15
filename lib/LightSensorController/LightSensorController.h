@@ -9,14 +9,15 @@
 
 class LightSensorController {
 	public:
+		void setup();
+		void read();
+
+	private:
+		void calibrate();
+
 		int onWhite[LS_NUM];
 		int lightValues[LS_NUM] = {0};
-  		LightSensor lightArray[LS_NUM] = {LightSensor()};
-
-
-		void setup();
-		void calibrate();
-		void read();
+		LightSensor lightArray[LS_NUM] = {LightSensor()};
 };
 
 #endif

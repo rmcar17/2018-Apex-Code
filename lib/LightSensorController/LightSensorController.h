@@ -9,6 +9,8 @@
 
 class LightSensorController {
 	public:
+		LightSensorController();
+		
 		void setup();
 		void read();
 

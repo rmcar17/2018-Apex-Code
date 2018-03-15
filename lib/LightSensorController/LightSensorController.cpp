@@ -1,5 +1,9 @@
 #include "LightSensorController.h"
 
+LightSensorController::LightSensorController(){
+	
+}
+
 void LightSensorController::setup(){
 	for(int i = 0; i < LS_NUM; i++){
 		lightArray[i].setup(lightPins[i]);

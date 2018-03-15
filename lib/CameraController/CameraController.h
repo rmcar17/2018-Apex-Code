@@ -8,9 +8,9 @@ class CameraController {
   public:
     CameraController();
 
-    void setAttackGoal(int x, int y, int pixels);
-    void setDefendGoal(int x, int y, int pixels);
-    void setBall(int x, int y, int pixels);
+    void setAttackGoal(Image aGoal);
+    void setDefendGoal(Image dGoal);
+    void setBall(Image ballI);
 
     EntityData getAttackGoal();
     EntityData getDefendGoal();

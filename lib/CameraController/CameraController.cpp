@@ -4,16 +4,16 @@ CameraController::CameraController(){
 
 }
 
-void CameraController::setAttackGoal(int x, int y, int pixels){
+void CameraController::setAttackGoal(Image aGoal){
   //Image aGoal = Camera.getAttackGoal();
   //attackGoal.angle = calculateAngle(aGoal.x, aGoal.y);
 }
 
-void CameraController::setDefendGoal(int x, int y, int pixels){
+void CameraController::setDefendGoal(Image dGoal){
   //Image dGoal = Camera.getAttackGoal();
 }
 
-void CameraController::setBall(int x, int y, int pixels){
+void CameraController::setBall(Image ballImage){
   //Image ballImage = Camera.getBall();
 }
 

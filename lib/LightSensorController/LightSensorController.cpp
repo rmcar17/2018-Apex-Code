@@ -14,7 +14,7 @@ void LightSensorController::calibrate(){
 	int calibration;
 	for(int ls = 0; ls < LS_NUM; ls++){
 		int total = 0;
-		for(int read_n = 0; rean_n < CALI_NUM; read_n++){
+		for(int read_n = 0; read_n < CALI_NUM; read_n++){
 			total += lightArray[ls].read();
 		}
 		calibration = round(total / CALI_NUM) + 20;

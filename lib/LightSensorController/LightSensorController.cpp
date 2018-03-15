@@ -11,14 +11,15 @@ void LightSensorController::setup(){
 }
 
 void LightSensorController::calibrate(){
+	int calibration;
 	for(int lCount = 0; lCount < LS_NUM; lCount++){
 		int total = 0;
 		for(int cCount = 0; cCount < CALI_NUM; cCount++){
 			total += lightArray[lCount].read();
 		}
-		int cali = round(total / CALI_NUM) + 20;
+		calibration = round(total / CALI_NUM) + 20;
 
-		lightArray[lCount].setThresh(cali);
+		lightArray[lCount].setThresh(calibration);
 	}
 }
 

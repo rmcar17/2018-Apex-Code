@@ -36,6 +36,9 @@
 #define CAM_CENTRE_X 10
 #define CAM_CENTRE_Y 10
 
+#define GOAL_PIXELS 50 //Measured from centre of field
+#define BALL_PIXELS 10
+
 //TSOPS
 
 #define TSOP_NUM 12

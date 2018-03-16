@@ -23,7 +23,7 @@ int CameraController::calculateAngle(int x, int y){
   double X = CAM_CENTRE_X-x;
   double Y = CAM_CENTRE_Y-y;
 
-  int angle = mod(450 - round(toDegrees(atan2(Y,X)),360));
+  int angle = mod(450 - round(toDegrees(atan2(Y,X))),360);
   return angle;
 }
 

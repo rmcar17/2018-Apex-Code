@@ -20,7 +20,11 @@ void CameraController::setBall(Image ballImage){
 }
 
 int CameraController::calculateAngle(int x, int y){
-  return 0;
+  double X = CAM_CENTRE_X-x;
+  double Y = CAM_CENTRE_Y-y;
+
+  int angle = toDegrees(atan2(Y,X));
+  return angle;
 }
 
 int CameraController::calculateGoalDistance(int pixels){

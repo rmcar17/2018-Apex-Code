@@ -3,7 +3,7 @@
 
 struct EntityData {
   int angle;
-  int distance;
+  double distance;
   bool visible;
 };
 

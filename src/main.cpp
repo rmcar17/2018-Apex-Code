@@ -51,7 +51,7 @@ void setup() {
   role = PlayMode::attacker;
 
   goal.angle = -1;
-  goal.distance = 0;
+  goal.distance = 0.0;
   goal.visible = false;
 }
 

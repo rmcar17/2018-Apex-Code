@@ -175,8 +175,8 @@ void Orbit::moveToBall(){
 
 void Orbit::resetAllData(){
   role = PlayMode::undecided;
-  ball = {-1, 0, false};
-  goal = {-1, 0, false};
+  ball = {-1, 0.0, false};
+  goal = {-1, 0.0, false};
   movement = {-1, 0, 0};
   compAngle = 0;
 }

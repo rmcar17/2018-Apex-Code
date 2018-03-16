@@ -1,6 +1,7 @@
 #ifndef CAMERACONTROLLER_H
 #define CAMERACONTROLLER_H
 
+#include <Defines.h>
 #include <EntityData.h>
 #include <Image.h>
 

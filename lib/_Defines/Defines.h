@@ -31,6 +31,11 @@
 
 #define MAX_SPEED 255
 
+//Camera
+
+#define CAM_CENTRE_X 10
+#define CAM_CENTRE_Y 10
+
 //TSOPS
 
 #define TSOP_NUM 12

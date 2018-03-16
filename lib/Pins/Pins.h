@@ -1,8 +1,14 @@
 #ifndef PINS_H
 #define PINS_H
 
+#include <Defines.h>
+#include <Arduino.h>
 
-//MOTORS
+// Light Sensor
+
+const int lightPins[LS_NUM] = {A0, A1, A2, A3};
+
+// MOTORS
 
 #define MOTORFR_PWM 4
 #define MOTORFR_IN1 3

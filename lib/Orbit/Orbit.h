@@ -40,8 +40,8 @@ class Orbit{
 
     PlayMode role = PlayMode::undecided;
 
-    EntityData ball = {-1, 0, false};
-    EntityData goal = {-1, 0, false};
+    EntityData ball = {-1, 0.0, false};
+    EntityData goal = {-1, 0.0, false};
     MoveData movement = {-1, 0, 0};
 
     double compAngle = 0;

@@ -3,6 +3,8 @@
 #include <Motor.h>
 #include <TSOPController.h>
 #include <Compass.h>
+#include <LightSensor.h>
+#include <LightSensorController.h>
 #include <Orbit.h>
 #include <CameraController.h>
 #include <PID.h>
@@ -19,6 +21,7 @@ TSOPController tsops;
 
 MotorController motors;
 
+LightSensorController lights;
 Orbit orbit;
 
 PlayMode role;
@@ -39,6 +42,7 @@ void setup() {
   motors.motorSetup();
   motors.brake();
 
+  lights.setup();
 
   tsops.TSOPSetup();
 
@@ -48,7 +52,7 @@ void setup() {
   role = PlayMode::attacker;
 
   goal.angle = -1;
-  goal.distance = 0;
+  goal.distance = 0.0;
   goal.visible = false;
 }
 

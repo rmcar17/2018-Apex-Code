@@ -1,20 +1,21 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-//Compass
+// Compass
 #define IMU_CALIBRATION_COUNT 100
 
 #define ROTATION_KP 5
 #define ROTATION_KI 0
 #define ROTATION_KD 0.8
 
-//MOTORS
+// MOTORS
 #define MOTOR1_ANG 45
 #define MOTOR2_ANG 135
 #define MOTOR3_ANG 225
 #define MOTOR4_ANG 315
 
-//ORBIT
+
+// ORBIT
 
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
@@ -31,7 +32,7 @@
 
 #define MAX_SPEED 255
 
-//Camera
+// Camera 
 
 #define CAM_CENTRE_X 10
 #define CAM_CENTRE_Y 10
@@ -39,7 +40,10 @@
 #define GOAL_PIXELS 50 //Measured from centre of field
 #define BALL_PIXELS 10
 
-//TSOPS
+// LIGHT SENSORS
+
+#define LS_NUM 4
+#define LS_CALIBRATION_NUM 10
 
 #define TSOP_NUM 12
 #define TSOP_DELAY 2

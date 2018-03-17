@@ -6,17 +6,17 @@ CameraController::CameraController(){
 
 void CameraController::setAttackGoal(Image aGoal){
   attackGoal.angle = calculateAngle(aGoal.x, aGoal.y);
-  //attackGoal.distance = calculateGoalDistance(aGoal.pixels);
+  attackGoal.distance = calculateGoalDistance(aGoal.pixels);
 }
 
 void CameraController::setDefendGoal(Image dGoal){
   defendGoal.angle = calculateAngle(dGoal.x, dGoal.y);
-  //defendGoal.distance = calculateGoalDistance(dGoal.pixels);
+  defendGoal.distance = calculateGoalDistance(dGoal.pixels);
 }
 
 void CameraController::setBall(Image ballImage){
   ball.angle = calculateAngle(ballImage.x,ballImage.y);
-  //ball.distance = calculateDistance(ballImage.pixels);
+  ball.distance = calculateBallDistance(ballImage.pixels);
 }
 
 int CameraController::calculateAngle(int x, int y){

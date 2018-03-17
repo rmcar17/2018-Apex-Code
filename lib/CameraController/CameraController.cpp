@@ -27,11 +27,11 @@ int CameraController::calculateAngle(int x, int y){
   return angle;
 }
 
-int CameraController::calculateGoalDistance(int pixels){
+double CameraController::calculateGoalDistance(int pixels){
   return 0;
 }
 
-int CameraController::calculateBallDistance(int pixels){
+double CameraController::calculateBallDistance(int pixels){
   return 0;
 }
 

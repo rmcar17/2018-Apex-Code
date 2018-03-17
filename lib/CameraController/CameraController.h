@@ -19,8 +19,8 @@ class CameraController {
     EntityData getBall();
   private:
     int calculateAngle(int x, int y);
-    int calculateGoalDistance(int pixels);
-    int calculateBallDistance(int pixels);
+    double calculateGoalDistance(int pixels);
+    double calculateBallDistance(int pixels);
 
     EntityData attackGoal; //attacking goal
     EntityData defendGoal; //defending goal

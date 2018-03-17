@@ -10,9 +10,9 @@ class CameraController {
   public:
     CameraController();
 
-    void setAttackGoal(Image aGoal);
-    void setDefendGoal(Image dGoal);
-    void setBall(Image ballImage);
+    void calculateAttackGoal(Image aGoal);
+    void calculateDefendGoal(Image dGoal);
+    void calculateBall(Image ballImage);
 
     EntityData getAttackGoal();
     EntityData getDefendGoal();

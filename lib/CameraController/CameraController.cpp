@@ -4,6 +4,12 @@ CameraController::CameraController(){
 
 }
 
+void CameraController::calculateEntities(){
+  // calculateAttackGoal(Image aGoal);
+  // calculateDefendGoal(Image dGoal);
+  // calculateBall();
+}
+
 void CameraController::calculateAttackGoal(Image aGoal){
   attackGoal.angle = calculateAngle(aGoal.x, aGoal.y);
   attackGoal.distance = calculateGoalDistance(aGoal.pixels);

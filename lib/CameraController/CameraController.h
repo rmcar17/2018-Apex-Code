@@ -10,14 +10,14 @@ class CameraController {
   public:
     CameraController();
 
-    void calculateAttackGoal(Image aGoal);
-    void calculateDefendGoal(Image dGoal);
-    void calculateBall(Image ballImage);
-
     EntityData getAttackGoal();
     EntityData getDefendGoal();
     EntityData getBall();
   private:
+    void calculateAttackGoal(Image aGoal);
+    void calculateDefendGoal(Image dGoal);
+    void calculateBall(Image ballImage);
+
     int calculateAngle(int x, int y);
     double calculateGoalDistance(int pixels);
     double calculateBallDistance(int pixels);

@@ -10,6 +10,8 @@ class CameraController {
   public:
     CameraController();
 
+    void updateCamera();
+
     void calculateEntities();
 
     EntityData getAttackGoal();

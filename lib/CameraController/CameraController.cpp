@@ -4,6 +4,10 @@ CameraController::CameraController(){
 
 }
 
+void CameraController::updateCamera(){
+  
+}
+
 void CameraController::calculateEntities(){
   // calculateAttackGoal(Image aGoal);
   // calculateDefendGoal(Image dGoal);

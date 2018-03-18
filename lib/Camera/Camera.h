@@ -9,6 +9,10 @@ class Camera{
 
     void setup();
     void update();
+  private:
+    Image attackGoal;
+    Image defendGoal;
+    Image ball;
 };
 
 #endif

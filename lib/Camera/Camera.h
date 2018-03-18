@@ -4,6 +4,9 @@
 class Camera{
   public:
     Camera();
+
+    void setup();
+    void update();
 };
 
 #endif

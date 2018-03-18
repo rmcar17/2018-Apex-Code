@@ -5,7 +5,7 @@ CameraController::CameraController(){
 }
 
 void CameraController::updateCamera(){
-  
+  // camera.update()
 }
 
 void CameraController::calculateEntities(){

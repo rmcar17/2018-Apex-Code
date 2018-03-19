@@ -42,7 +42,7 @@ double CameraController::calculateGoalDistance(int pixels){
 }
 
 double CameraController::calculateBallDistance(int pixels){
-  return ((double) pixels) / GOAL_PIXELS;
+  return ((double) pixels) / BALL_PIXELS;
 }
 
 EntityData CameraController::getAttackGoal(){

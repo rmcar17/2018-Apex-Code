@@ -187,10 +187,8 @@ int Robot::correctAngleRange(int value, int min, int max){
 
 
 void Robot::pMap(){
-    string sMap;
-    sMap = '\n';
     for(int i = 0; i < 30; i++){
-        sMap += '\n';
+        printf("\n");
     }
     for(int x = 0; x < 40; x++){
         for(int y = 0; y < 40; y++){
@@ -203,12 +201,10 @@ void Robot::pMap(){
     tempMap[center[0]][center[1]] = 3;
     for(int x = 0; x < 40; x++){
         for(int y = 0; y < 40; y++){
-            sMap += (string)(tempMap[x][y]);
-            sMap += ' ';
+            printf("%d ",tempMap[x][y]);
         }
-        sMap += '\n';
+        printf("\n");
     }
-    cout << sMap;
     printf("Init: %0.2lf\nlineAngle: %.02lf\nDanger: %d\nvectorAngle: %0.2lf",initAngle,lineAngle,danger,vectorAngle);
     printf("\n");
 }

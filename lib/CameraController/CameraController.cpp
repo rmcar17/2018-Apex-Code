@@ -15,18 +15,18 @@ void CameraController::calculateEntities(){
 }
 
 void CameraController::calculateAttackGoal(Image aGoal){
-  attackGoal.distance = calculateGoalDistance(aGoal.pixels);
   attackGoal.angle = calculateAngle(aGoal.x, aGoal.y);
+  attackGoal.distance = calculateGoalDistance(aGoal.pixels);
 }
 
 void CameraController::calculateDefendGoal(Image dGoal){
-  defendGoal.distance = calculateGoalDistance(dGoal.pixels);
   defendGoal.angle = calculateAngle(dGoal.x, dGoal.y);
+  defendGoal.distance = calculateGoalDistance(dGoal.pixels);
 }
 
 void CameraController::calculateBall(Image ballImage){
-  ball.distance = calculateBallDistance(ballImage.pixels);
   ball.angle = calculateAngle(ballImage.x,ballImage.y);
+  ball.distance = calculateBallDistance(ballImage.pixels);
 }
 
 int CameraController::calculateAngle(int x, int y){

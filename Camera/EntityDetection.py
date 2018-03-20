@@ -17,7 +17,7 @@ clock = time.clock()
 while(True):
     clock.tick()
     img = sensor.snapshot()
-    for blob in img.find_blobs(thresholds, pixels_threshold=200, area_threshold=200):
+    for blob in img.find_blobs(thresholds):
         img.draw_rectangle(blob.rect())
         img.draw_cross(blob.cx(), blob.cy())
     print(clock.fps())

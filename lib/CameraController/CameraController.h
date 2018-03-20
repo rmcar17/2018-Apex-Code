@@ -23,8 +23,7 @@ class CameraController {
     void calculateBall(Image ballImage);
 
     int calculateAngle(int x, int y);
-    double calculateGoalDistance(int pixels);
-    double calculateBallDistance(int pixels);
+    double calculateDistance(int x, int y);
 
     // Camera camera;
 

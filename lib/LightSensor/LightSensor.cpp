@@ -19,5 +19,5 @@ int LightSensor::read(){
 }
 
 bool LightSensor::onWhite(){
-	return readVal > threshold ? true : false;
+	return readVal > 1000 ? true : false;
 }

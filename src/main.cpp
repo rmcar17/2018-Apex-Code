@@ -80,4 +80,10 @@ void loop() {
   motors.moveDirection(move);
 
   orbit.resetAllData();
+  lights.read();
+  for(int i = 0; i < LS_NUM; i++){
+    Serial.print(lights.lightValues[i]);
+    Serial.print(" ");
+  }
+  Serial.println();
 }

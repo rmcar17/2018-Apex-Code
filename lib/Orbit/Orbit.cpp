@@ -45,6 +45,7 @@ void Orbit::calculateRotation(){
   if(goal.visible){
     if(role == PlayMode::attacker){
     rotate = rotation.update(goal.angle < 180 ? goal.angle : -(360 - goal.angle));
+    Serial.println(rotate);
     }
     else{
       double oppositeAngle = mod(goal.angle + 180, 360);
@@ -56,6 +57,7 @@ void Orbit::calculateRotation(){
   }
 
   movement.rotation = round(rotate);
+
 }
 
 void Orbit::calcAttacker(){

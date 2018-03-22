@@ -159,7 +159,7 @@ void Orbit::centre(){
   double correctedVerticalDistance = goal.distance * cos(goalAngle) + (role == PlayMode::attacker ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE);
   double correctedHorizontalDistance = goal.distance * sin(goalAngle);
 
-  movement.speed = MAX_SPEED;
+  movement.speed = min(255,correctedHorizontalDistance*correctedHorizontalDistance+correctedVerticalDistance*correctedVerticalDistance);
   movement.angle = mod(round(450 - toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);
 }
 

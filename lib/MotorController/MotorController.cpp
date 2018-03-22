@@ -19,7 +19,7 @@ void MotorController::moveDirection(MoveData movement){
   int angle = movement.angle;
   int speed = movement.speed;
   int rotation = movement.rotation;
-
+  Serial.println(speed);
   double frontRightSpeed;
   double backRightSpeed;
   double backLeftSpeed;
@@ -53,7 +53,7 @@ void MotorController::moveDirection(MoveData movement){
     backLeftSpeed = a + rotation;
     frontLeftSpeed = b + rotation;
 
-    multiplier = speed / max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed))));
+    multiplier = MAX_SPEED / max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed))));
 
     frontRightSpeed = round(frontRightSpeed * multiplier);
     backRightSpeed = round(backRightSpeed * multiplier);

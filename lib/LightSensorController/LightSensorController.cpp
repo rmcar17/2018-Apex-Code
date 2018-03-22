@@ -21,7 +21,7 @@ void LightSensorController::calibrate(){
 		for(int read_n = 0; read_n < LS_CALIBRATION_NUM; read_n++){
 			total += lightArray[ls].read();
 		}
-		calibration = round(total / LS_CALIBRATION_NUM) + 20;
+		calibration = round(total / LS_CALIBRATION_NUM) + 100;
 
 		lightArray[ls].setThresh(calibration);
 	}
@@ -34,6 +34,7 @@ void LightSensorController::read(){
 }
 
 void LightSensorController::update(){
+	read();
 	updateOnWhite();
 	calcVectorAngle();
 	if(any){
@@ -79,7 +80,7 @@ void LightSensorController::update(){
 
 void LightSensorController::updateOnWhite(){
 	for(int i = 0; i < LS_NUM; i++){
-		onWhite[i] = lightArray[i].onWhite();
+		onWhite[i] = lightValues[i] > 1000;
 	}
 }
 

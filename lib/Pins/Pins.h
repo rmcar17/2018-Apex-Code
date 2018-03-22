@@ -6,7 +6,7 @@
 
 // Light Sensor
 
-const int lightPins[LS_NUM] = {20,21};
+const int lightPins[LS_NUM] = {17,18,19,20};
 
 // MOTORS
 

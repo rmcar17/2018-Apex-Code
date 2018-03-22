@@ -14,6 +14,7 @@ class LightSensorController {
 		void setup();
 		void read();
 		int lightValues[LS_NUM] = {0};
+		bool onWhite[LS_NUM] = {false};
 		void update();
 		void updateOnWhite();
 		bool inRange(double value, double target, int range);
@@ -24,7 +25,6 @@ class LightSensorController {
 		void calcVectorAngle();
 	private:
 		void calibrate();
-		int onWhite[LS_NUM];
 		LightSensor lightArray[LS_NUM] = {LightSensor()};
 		bool any;
 		double vectorX, vectorY;

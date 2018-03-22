@@ -19,7 +19,7 @@ void MotorController::moveDirection(MoveData movement){
   int angle = movement.angle;
   int speed = movement.speed;
   int rotation = movement.rotation;
-  Serial.println(speed);
+
   double frontRightSpeed;
   double backRightSpeed;
   double backLeftSpeed;

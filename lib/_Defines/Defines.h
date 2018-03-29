@@ -37,6 +37,7 @@
 #define CAM_CENTRE_X 10
 #define CAM_CENTRE_Y 10
 
+#define CAM_SWITCH_D 15
 // LIGHT SENSORS
 
 #define LS_NUM 4

@@ -16,17 +16,17 @@ void CameraController::calculateEntities(){
 
 void CameraController::calculateAttackGoal(Image aGoal){
   attackGoal.angle = calculateAngle(aGoal.x, aGoal.y);
-  attackGoal.distance = calculateGoalDistance(aGoal.pixels);
+  //attackGoal.distance = calculateGoalDistance(aGoal.pixels);
 }
 
 void CameraController::calculateDefendGoal(Image dGoal){
   defendGoal.angle = calculateAngle(dGoal.x, dGoal.y);
-  defendGoal.distance = calculateGoalDistance(dGoal.pixels);
+  //defendGoal.distance = calculateGoalDistance(dGoal.pixels);
 }
 
 void CameraController::calculateBall(Image ballImage){
   ball.angle = calculateAngle(ballImage.x,ballImage.y);
-  ball.distance = calculateBallDistance(ballImage.pixels);
+  //ball.distance = calculateBallDistance(ballImage.pixels);
 }
 
 int CameraController::calculateAngle(int x, int y){
@@ -38,11 +38,11 @@ int CameraController::calculateAngle(int x, int y){
 }
 
 double CameraController::calculateGoalDistance(int pixels){
-  return GOAL_PIXELS / ((double) pixels);
+  return 0;//GOAL_PIXELS / ((double) pixels);
 }
 
 double CameraController::calculateBallDistance(int pixels){
-  return  BALL_PIXELS / ((double) pixels);
+  return 0;//BALL_PIXELS / ((double) pixels);
 }
 
 EntityData CameraController::getAttackGoal(){

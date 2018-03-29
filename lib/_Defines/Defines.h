@@ -40,6 +40,7 @@
 #define CAM_SWITCH_D 15
 
 #define CAMERA_ORIGIN 96
+#define CIRCLE_RADIUS 32
 // LIGHT SENSORS
 
 #define LS_NUM 4

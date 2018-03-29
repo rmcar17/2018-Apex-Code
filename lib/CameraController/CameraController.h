@@ -23,7 +23,10 @@ class CameraController {
     void calculateBall(Image ballImage);
 
     int calculateAngle(int x, int y);
+
     double calculateDistance(int x, int y);
+    double calculateCircleDistance(double distance);
+    double calculateConeDistance(double distance);
     // Camera camera;
 
     EntityData attackGoal; //attacking goal

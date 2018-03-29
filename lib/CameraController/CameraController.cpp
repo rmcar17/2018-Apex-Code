@@ -45,12 +45,19 @@ int CameraController::calculateAngle(int x, int y){
 
 double CameraController::calculateDistance(int x, int y){
   double cameraDistance = sqrt(x*x+y*y);
-  
+
   return cameraDistance < CAM_SWITCH_D ? calculateCircleDistance(cameraDistance) : calculateConeDistance(cameraDistance);
 }
 
 double CameraController::calculateCircleDistance(double distance){
+  double mirrorHeight = CAMERA_ORIGIN-sqrt(pow(CAMERA_RADIUS,2)-pow(distance,2)
 
+  double tangentGrad = distance / sqrt(pow(CIRCLE_RADIUS,2) + pow(distance,2));
+  double tangentAngle = atan(tangentGrad);
+  double reflectionAngle = atan(mirrorHeight-CAMERA_HEIGHT) / distance)
+
+  double finalDistance = distance + mirrorHeight * tan(90 - reflectionAngle + 2 * tangentAngle)
+  return finalDistance;
 }
 
 double CameraController::calculateConeDistance(double distance){

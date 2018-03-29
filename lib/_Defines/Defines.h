@@ -32,13 +32,10 @@
 
 #define MAX_SPEED 255
 
-// Camera 
+// Camera
 
 #define CAM_CENTRE_X 10
 #define CAM_CENTRE_Y 10
-
-#define GOAL_PIXELS 50 //Measured from centre of field
-#define BALL_PIXELS 10
 
 // LIGHT SENSORS
 

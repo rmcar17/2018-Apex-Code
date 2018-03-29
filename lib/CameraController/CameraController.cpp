@@ -47,11 +47,11 @@ int CameraController::calculateAngle(int x, int y){
 }
 
 double CameraController::calculateGoalDistance(int pixels){
-  return GOAL_PIXELS / ((double) pixels);
+  return 0;//GOAL_PIXELS / ((double) pixels);
 }
 
 double CameraController::calculateBallDistance(int pixels){
-  return  BALL_PIXELS / ((double) pixels);
+  return 0;//BALL_PIXELS / ((double) pixels);
 }
 
 EntityData CameraController::getAttackGoal(){

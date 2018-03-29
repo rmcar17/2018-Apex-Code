@@ -6,6 +6,7 @@
 #include <LightSensor.h>
 #include <LightSensorController.h>
 #include <Orbit.h>
+#include <Camera.h>
 #include <CameraController.h>
 #include <PID.h>
 #include <Common.h>

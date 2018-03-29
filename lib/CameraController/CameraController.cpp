@@ -50,17 +50,17 @@ double CameraController::calculateDistance(int x, int y){
 }
 
 double CameraController::calculateCircleDistance(double distance){
-  double mirrorHeight = CAMERA_ORIGIN-sqrt(pow(CAMERA_RADIUS,2)-pow(distance,2)
+  double mirrorHeight = CAMERA_ORIGIN-sqrt(pow(CIRCLE_RADIUS,2)-pow(distance,2));
 
   double tangentAngle = atan(distance / sqrt(pow(CIRCLE_RADIUS,2) + pow(distance,2)));
-  double reflectionAngle = atan(mirrorHeight-CAMERA_HEIGHT) / distance)
+  double reflectionAngle = atan(mirrorHeight-CAMERA_HEIGHT) / distance;
 
-  double finalDistance = distance + mirrorHeight * tan(90 - reflectionAngle + 2 * tangentAngle)
+  double finalDistance = distance + mirrorHeight * tan(90 - reflectionAngle + 2 * tangentAngle);
   return finalDistance;
 }
 
 double CameraController::calculateConeDistance(double distance){
-
+  return 0;
 }
 
 EntityData CameraController::getAttackGoal(){

@@ -55,7 +55,7 @@ double CameraController::calculateCircleDistance(double distance){
   double tangentAngle = atan(distance / sqrt(pow(CIRCLE_RADIUS,2) + pow(distance,2)));
   double reflectionAngle = atan(mirrorHeight-CAMERA_HEIGHT) / distance;
 
-  double finalDistance = distance + mirrorHeight * abs(tan(90 - reflectionAngle + 2 * tangentAngle));
+  double finalDistance = distance + mirrorHeight * abs(tan(PI/2 - reflectionAngle + 2 * tangentAngle));
   return finalDistance;
 }
 

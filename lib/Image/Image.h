@@ -4,7 +4,6 @@
 struct Image {
   int x;
   int y;
-  int pixels;
   bool visible;
 };
 

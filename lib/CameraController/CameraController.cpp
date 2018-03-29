@@ -44,7 +44,17 @@ int CameraController::calculateAngle(int x, int y){
 }
 
 double CameraController::calculateDistance(int x, int y){
-  return 0;
+  double cameraDistance = sqrt(x*x+y*y);
+  
+  return cameraDistance < CAM_SWITCH_D ? calculateCircleDistance(cameraDistance) : calculateConeDistance(cameraDistance);
+}
+
+double CameraController::calculateCircleDistance(double distance){
+
+}
+
+double CameraController::calculateConeDistance(double distance){
+
 }
 
 EntityData CameraController::getAttackGoal(){

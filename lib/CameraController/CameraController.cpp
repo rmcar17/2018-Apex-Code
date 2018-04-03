@@ -60,7 +60,12 @@ double CameraController::calculateCircleDistance(double distance){
 }
 
 double CameraController::calculateConeDistance(double distance){
-  return 0;
+  double mirrorHeight = (sqrt(3) / 3) * distance + CAMERA_ORIGIN - sqrt(pow(32,2)+pow(CAM_SWITCH_D,2)) - (sqrt(3) / 3) * CAM_SWITCH_D;
+
+  double reflectionAngle = atan((mirrorHeight-CAMERA_HEIGHT) / distance);
+
+  double finalDistance = distance + mirrorHeight * tan(5*PI/6 - reflectionAngle);
+  return finalDistance;
 }
 
 EntityData CameraController::getAttackGoal(){

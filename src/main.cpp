@@ -57,6 +57,9 @@ void setup() {
 
 void loop() {
   comp.updateGyro();
+  lights.update();
+  
+  ball = tsops.getBallData();
 
   //Create another class which fetches
   //goal data which takes an input of
@@ -65,7 +68,6 @@ void loop() {
   //Create another class which checks
   //whether the robots should switch
   //roles
-  ball = tsops.getBallData();
 
   orbit.setRole(role);
   orbit.setGoalData(goal);
@@ -80,12 +82,4 @@ void loop() {
   motors.moveDirection(move);
 
   orbit.resetAllData();
-  lights.update();
-  for(int i = 0; i < LS_NUM; i++){
-    Serial.print(lights.lightValues[i]);
-    Serial.print(" ");
-    Serial.print(lights.onWhite[i]);
-    Serial.print(" ");
-  }
-  Serial.println();
 }

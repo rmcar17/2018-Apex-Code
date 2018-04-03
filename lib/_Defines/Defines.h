@@ -37,7 +37,7 @@
 #define CAM_CENTRE_X 10
 #define CAM_CENTRE_Y 10
 
-#define CAM_SWITCH_D 15
+#define CAM_SWITCH_D 16
 
 #define CAMERA_HEIGHT 32
 #define CAMERA_ORIGIN 96

@@ -32,6 +32,12 @@ void LightSensorController::calibrate(){
 void LightSensorController::read(){
 	for(int i = 0; i < LS_NUM; i++){
 		lightValues[i] = lightArray[i].read();
+		#if DEBUG_LIGHT
+			Serial.print("LS");
+			Serial.print(i);
+			Serial.print(": ");
+			Serial.print(lightValues[i]);
+		#endif
 	}
 }
 

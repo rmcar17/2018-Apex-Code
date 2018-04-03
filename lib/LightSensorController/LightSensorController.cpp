@@ -7,9 +7,11 @@ LightSensorController::LightSensorController(){
 void LightSensorController::setup(){
 	for(int i = 0; i < LS_NUM; i++){
 		lightArray[i].setup(lightPins[i]);
-		Serial.print("LightSensor[");
-		Serial.print(lightPins[i]);
-		Serial.println("] is on");
+		#if DEBUG_LIGHT
+			Serial.print("LightSensor[");
+			Serial.print(lightPins[i]);
+			Serial.println("] is on");
+		#endif
 	}
 	calibrate();
 }

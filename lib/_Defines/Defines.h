@@ -34,8 +34,8 @@
 
 // Camera
 
-#define CAM_CENTRE_X 10
-#define CAM_CENTRE_Y 10
+#define CAM_CENTRE_X 160
+#define CAM_CENTRE_Y 120
 
 #define CAM_SWITCH_D 16
 

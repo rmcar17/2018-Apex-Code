@@ -17,7 +17,7 @@ void CameraController::calculateEntities(){
 void CameraController::calculateAttackGoal(Image aGoal){
   if(aGoal.visible){
     attackGoal.angle = calculateAngle(aGoal.x, aGoal.y);
-    attackGoal.distance = calculateGoalDistance(aGoal.pixels);
+    //attackGoal.distance = calculateGoalDistance(aGoal.pixels);
   }
   attackGoal.visible = aGoal.visible;
 }
@@ -25,7 +25,7 @@ void CameraController::calculateAttackGoal(Image aGoal){
 void CameraController::calculateDefendGoal(Image dGoal){
   if(dGoal.visible){
     defendGoal.angle = calculateAngle(dGoal.x, dGoal.y);
-    defendGoal.distance = calculateGoalDistance(dGoal.pixels);
+    //defendGoal.distance = calculateGoalDistance(dGoal.pixels);
   }
   defendGoal.visible = dGoal.visible;
 }
@@ -33,7 +33,7 @@ void CameraController::calculateDefendGoal(Image dGoal){
 void CameraController::calculateBall(Image ballImage){
   if(ballImage.visible){
     ball.angle = calculateAngle(ballImage.x,ballImage.y);
-    ball.distance = calculateBallDistance(ballImage.pixels);
+    //ball.distance = calculateBallDistance(ballImage.pixels);
   }
   ball.visible = ballImage.visible;
 }

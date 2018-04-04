@@ -5,11 +5,11 @@ Camera::Camera(){
 }
 
 void Camera::setup(){
-  CAMERA_SERIAL.begin(9600);
+  cameraSerial.begin(9600);
 }
 
 void Camera::update(){
-  Serial.println(CAMERA_SERIAL.read())
+  Serial.println(cameraSerial.read());
 }
 
 Image Camera::getAttackGoal(){

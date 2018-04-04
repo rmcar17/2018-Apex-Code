@@ -5,7 +5,7 @@ Camera::Camera(){
 }
 
 void Camera::setup(){
-
+  CAMERA_SERIAL.begin(9600);
 }
 
 void Camera::update(){

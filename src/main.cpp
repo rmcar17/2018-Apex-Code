@@ -33,9 +33,9 @@ MoveData move;
 
 void setup() {
   #if DEBUG_ANY
-  Serial.begin(9600);
+  Serial.begin(38400);
   #endif
-
+Serial.print("const String &s");
   Wire.begin();
   comp.compassSetup();
   comp.calibrate();

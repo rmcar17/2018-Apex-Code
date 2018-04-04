@@ -9,7 +9,7 @@ void Camera::setup(){
 }
 
 void Camera::update(){
-  Serial.println(cameraSerial.read());
+  Serial.println("l");
 }
 
 Image Camera::getAttackGoal(){

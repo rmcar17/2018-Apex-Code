@@ -82,4 +82,10 @@ void loop() {
   motors.moveDirection(move);
 
   orbit.resetAllData();
+
+  lights.update();
+
+  for(int i = 0; i < LS_NUM; i++){
+    Serial.println(lights.lightValues[i]);
+  }
 }

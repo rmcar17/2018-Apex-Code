@@ -23,7 +23,7 @@ class LightSensorController {
 		int correctRange(int value, int min, int max);
 		int correctAngleRange(int value, int min, int max);
 		void calcVectorAngle();
-	private:
+	//private:
 		void calibrate();
 		LightSensor lightArray[LS_NUM] = {LightSensor()};
 		bool any;

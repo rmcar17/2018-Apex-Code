@@ -88,17 +88,19 @@ void LightSensorController::update(){
 
 void LightSensorController::updateOnWhite(){
 	for(int i = 0; i < LS_NUM; i++){
-		onWhite[i] = lightValues[i] > 1000;
+		onWhite[i] = lightArray[i].onWhite();
 	}
 }
 
 void LightSensorController::calcVectorAngle(){
 	any = false;
+	vectorX = 0;
+	vectorY = 0;
 	for(int i = 0; i < LS_NUM; i++){
 		if(onWhite[i]){
 			any = true;
-			vectorX += sin((450-i*30)*PI/180);
-      vectorY += cos((450-i*30)*PI/180);
+			vectorX += sin((450-i*(360/LS_NUM))*PI/180);
+      		vectorY += cos((450-i*(360/LS_NUM))*PI/180);
 		}
 	}
 	if(any){

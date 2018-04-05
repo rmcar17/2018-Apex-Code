@@ -9,8 +9,8 @@ void Vector::setStandard(double _i, double _j){
   j = _j;
 }
 
-void Vector::setPolar(double magnitude, double argument){
+void Vector::setPolar(double _mod, double _arg){
   // Convert to standard and set i and j
-  i = magnitude * cos(argument);
-  j = magnitude * sin(argument);
+  i = _mod * cos(_arg);
+  j = _mod * sin(_arg);
 }

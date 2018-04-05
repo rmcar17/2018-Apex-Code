@@ -8,13 +8,13 @@ class Vector {
     Vector();
 
     void setStandard(double _i, double _j);
-    void setPolar(double magnitude, double argument);
+    void setPolar(double _mod, double _arg);
 
     Vector operator+(Vector vector2);
     Vector operator-(Vector vector2);
 
     double i, j;
-    double magnitude, argument;
+    double mod, arg;
 };
 
 #endif

@@ -21,6 +21,12 @@ void Vector::setPolar(double _mod, double _arg){
   arg = _arg;
 }
 
+Vector Vector::operator+(Vector vector2){
+  Vector returnVector;
+  returnVector.setStandard(i + vector2.i, j + vector2.j);
+  return returnVector;
+}
+
 double Vector::calcI(double _mod, double _arg){
   return _mod * cos(_arg);
 }

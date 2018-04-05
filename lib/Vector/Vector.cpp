@@ -34,5 +34,5 @@ double Vector::calcMod(double _i, double _j){
 }
 
 double Vector::calcArg(double _i, double _j){
-  return atan2(_j, _i)
+  return atan2(_j, _i);
 }

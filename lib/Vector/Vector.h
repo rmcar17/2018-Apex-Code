@@ -14,6 +14,7 @@ class Vector {
     Vector operator-(Vector vector2);
 
     double i, j;
+    double magnitude, angle;
 };
 
 #endif

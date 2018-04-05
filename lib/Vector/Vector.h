@@ -15,6 +15,12 @@ class Vector {
 
     double i, j;
     double mod, arg;
+  private:
+    double calcI(double _mod, double _arg);
+    double calcJ(double _mod, double _arg);
+
+    double calcMod(double _i, double _j);
+    double calcArg(double _i, double _j);
 };
 
 #endif

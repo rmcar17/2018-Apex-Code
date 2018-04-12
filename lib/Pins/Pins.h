@@ -18,9 +18,9 @@ const int lightPins[LS_NUM] = {A0, A1, A2, A3};
 #define MOTORBR_DRV 6
 #define MOTORBR_BRK 5
 
-#define MOTORBL_PWM 10
-#define MOTORBL_DRV 8
-#define MOTORBL_BRK 9
+#define MOTORBL_PWM 23
+#define MOTORBL_DRV 52
+#define MOTORBL_BRK 51
 
 #define MOTORFL_PWM 6
 #define MOTORFL_DRV 49

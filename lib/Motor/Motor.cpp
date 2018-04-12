@@ -1,35 +1,35 @@
 #include "Motor.h"
 
-Motor::Motor(int pwm, int inOne, int inTwo) {
+Motor::Motor(int pwm, int drv, int brk) {
   pwmPin = pwm;
-  inOnePin = inOne;
-  inTwoPin = inTwo;
+  drvPin = drv;
+  brkPin = brk;
 }
 
 void Motor::motorSetup()
 {
   pinMode(pwmPin, OUTPUT);
-  pinMode(inOnePin, OUTPUT);
-  pinMode(inTwoPin, OUTPUT);
+  pinMode(drvPin, OUTPUT);
+  pinMode(brkPin, OUTPUT);
 }
 
 void Motor::move(int speed){
     if(speed>0)
     {
       analogWrite(pwmPin,constrain(speed,0,255));
-      digitalWrite(inOnePin,HIGH);
-      digitalWrite(inTwoPin,LOW);
+      digitalWrite(drvPin,HIGH);
+      digitalWrite(brkPin,LOW);
     }
     else if(speed<0)
     {
       analogWrite(pwmPin,constrain(abs(speed),0,255));
-      digitalWrite(inOnePin,LOW);
-      digitalWrite(inTwoPin,HIGH);
+      digitalWrite(drvPin,LOW);
+      digitalWrite(brkPin,HIGH);
     }
     else
     {
-      analogWrite(pwmPin, 255);
-      digitalWrite(inOnePin, LOW);
-      digitalWrite(inTwoPin, LOW);
+      analogWrite(pwmPin, 0);
+      digitalWrite(drvPin, LOW);
+      digitalWrite(brkPin, HIGH);
     }
 }

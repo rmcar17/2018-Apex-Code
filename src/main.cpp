@@ -18,7 +18,7 @@
 Compass comp;
 TSOPController tsops;
 
-MotorController motors;
+//MotorController motors;
 
 LightSensorController lights;
 Orbit orbit;
@@ -29,6 +29,8 @@ EntityData ball;
 EntityData goal;
 MoveData move;
 
+Motor motor = Motor(2, 56, 57);
+
 void setup() {
   #if DEBUG_ANY
   Serial.begin(9600);
@@ -38,8 +40,8 @@ void setup() {
   comp.compassSetup();
   comp.calibrate();
 
-  motors.motorSetup();
-  motors.brake();
+  //motors.motorSetup();
+  //motors.brake();
 
   lights.setup();
 
@@ -53,10 +55,12 @@ void setup() {
   goal.angle = -1;
   goal.distance = 0;
   goal.visible = false;
+
+  motor.motorSetup();
 }
 
 void loop() {
-  comp.updateGyro();
+  // comp.updateGyro();
 
   //Create another class which fetches
   //goal data which takes an input of
@@ -65,19 +69,20 @@ void loop() {
   //Create another class which checks
   //whether the robots should switch
   //roles
-  ball = tsops.getBallData();
-
-  orbit.setRole(role);
-  orbit.setGoalData(goal);
-  orbit.setBallData(ball);
-  orbit.setCompAngle(comp.getHeading());
-
-  orbit.calculateMoveData();
-  orbit.calculateRotation();
-
-  move = orbit.getMoveData();
-
-  motors.moveDirection(move);
-
-  orbit.resetAllData();
+  // ball = tsops.getBallData();
+  //
+  // orbit.setRole(role);
+  // orbit.setGoalData(goal);
+  // orbit.setBallData(ball);
+  // orbit.setCompAngle(comp.getHeading());
+  //
+  // orbit.calculateMoveData();
+  // orbit.calculateRotation();
+  //
+  // move = orbit.getMoveData();
+  //
+  // motors.moveDirection(move);
+  //
+  // orbit.resetAllData();
+  motor.move(255);
 }

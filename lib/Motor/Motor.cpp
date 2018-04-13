@@ -11,6 +11,7 @@ void Motor::motorSetup()
   pinMode(pwmPin, OUTPUT);
   pinMode(drvPin, OUTPUT);
   pinMode(brkPin, OUTPUT);
+  analogWriteFrequency(pwmPin, 19000);
 }
 
 void Motor::move(int speed){
@@ -24,7 +25,7 @@ void Motor::move(int speed){
     {
       analogWrite(pwmPin,constrain(abs(speed),0,255));
       digitalWrite(drvPin,LOW);
-      digitalWrite(brkPin,HIGH);
+      digitalWrite(brkPin,LOW);
     }
     else
     {

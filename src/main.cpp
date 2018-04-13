@@ -49,7 +49,7 @@ void setup() {
   ball.angle = 0;
   ball.distance = 10000;
   ball.visible = true;
-  
+
   goal.angle = -1;
   goal.distance = 0;
   goal.visible = false;
@@ -69,7 +69,7 @@ void loop() {
   orbit.setRole(role);
   orbit.setGoalData(goal);
   orbit.setBallData(ball);
-  orbit.setCompAngle(comp.getHeading());
+  orbit.setCompAngle(0);//comp.getHeading());
 
   orbit.calculateMoveData();
   orbit.calculateRotation();
@@ -79,5 +79,5 @@ void loop() {
   motors.moveDirection(move);
 
   orbit.resetAllData();
-  motors.move(255,255,255,255);
+  // motors.move(255,255,255,255);
 }

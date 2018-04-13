@@ -38,7 +38,7 @@ void MotorController::moveDirection(MoveData movement){
 
     double newAngle = toRadians(mod(45-angle, 360));
 
-    double b = angle > 135 && angle <= 315 ? -speed : speed;
+    double b = angle >= 135 && angle < 315 ? -speed : speed;
     double a = round(b * tan(newAngle));
 
     if(abs(a) > speed)

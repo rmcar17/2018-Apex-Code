@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <MotorController.h>
 #include <Motor.h>
-#include <TSOPController.h>
 #include <Compass.h>
 #include <LightSensor.h>
 #include <LightSensorController.h>
@@ -69,7 +68,7 @@ void loop() {
   orbit.setRole(role);
   orbit.setGoalData(goal);
   orbit.setBallData(ball);
-  orbit.setCompAngle(0);//comp.getHeading());
+  orbit.setCompAngle(comp.getHeading());
 
   orbit.calculateMoveData();
   orbit.calculateRotation();
@@ -79,5 +78,4 @@ void loop() {
   motors.moveDirection(move);
 
   orbit.resetAllData();
-  // motors.move(255,255,255,255);
 }

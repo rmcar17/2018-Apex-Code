@@ -30,19 +30,4 @@ const int lightPins[LS_NUM] = {A0, A1, A2, A3};
 #define MOTORFL_BRK 50
 #define MOTORFL_REV false
 
-// TSOPS
-#define TSOP_POWER 52
-#define TSOP_1 50
-#define TSOP_2 48
-#define TSOP_3 46
-#define TSOP_4 44
-#define TSOP_5 42
-#define TSOP_6 40
-#define TSOP_7 38
-#define TSOP_8 36
-#define TSOP_9 34
-#define TSOP_10 32
-#define TSOP_11 30
-#define TSOP_12 28
-
 #endif

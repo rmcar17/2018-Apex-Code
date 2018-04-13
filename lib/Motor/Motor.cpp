@@ -1,8 +1,8 @@
 #include "Motor.h"
 
-Motor::Motor(int pwm, int drv, int brk, bool rev) {
+Motor::Motor(int pwm, int dir, int brk, bool rev) {
   pwmPin = pwm;
-  drvPin = drv;
+  dirPin = dir;
   brkPin = brk;
   reversed = rev;
 }
@@ -10,7 +10,7 @@ Motor::Motor(int pwm, int drv, int brk, bool rev) {
 void Motor::motorSetup()
 {
   pinMode(pwmPin, OUTPUT);
-  pinMode(drvPin, OUTPUT);
+  pinMode(dirPin, OUTPUT);
   pinMode(brkPin, OUTPUT);
   analogWriteFrequency(pwmPin, 19000);
 }
@@ -19,19 +19,19 @@ void Motor::move(int speed){
     if(speed>0)
     {
       analogWrite(pwmPin, constrain(speed,0,255));
-      digitalWrite(drvPin, !reversed ? HIGH : LOW);
+      digitalWrite(dirPin, !reversed ? HIGH : LOW);
       digitalWrite(brkPin, LOW);
     }
     else if(speed<0)
     {
       analogWrite(pwmPin,constrain(abs(speed),0,255));
-      digitalWrite(drvPin, !reversed ? LOW : HIGH);
+      digitalWrite(dirPin, !reversed ? LOW : HIGH);
       digitalWrite(brkPin,LOW);
     }
     else
     {
       analogWrite(pwmPin, 0);
-      digitalWrite(drvPin, LOW);
+      digitalWrite(dirPin, LOW);
       digitalWrite(brkPin, HIGH);
     }
 }

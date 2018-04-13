@@ -7,11 +7,11 @@
 class Motor {
   public:
     Motor(){}
-    Motor(int pwm, int drv, int brk, bool rev);
+    Motor(int pwm, int dir, int brk, bool rev);
     void motorSetup();
     void move(int speed);
   private:
-    int pwmPin, drvPin, brkPin;
+    int pwmPin, dirPin, brkPin;
     bool reversed;
 };
 

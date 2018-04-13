@@ -46,7 +46,7 @@ void setup() {
 
   role = PlayMode::attacker;
   ball.angle = 0;
-  ball.distance = 10000;
+  ball.distance = 0;
   ball.visible = true;
 
   goal.angle = -1;
@@ -68,7 +68,7 @@ void loop() {
   orbit.setRole(role);
   orbit.setGoalData(goal);
   orbit.setBallData(ball);
-  orbit.setCompAngle(comp.getHeading());
+  orbit.setCompAngle(0);//comp.getHeading());
 
   orbit.calculateMoveData();
   orbit.calculateRotation();

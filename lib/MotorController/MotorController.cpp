@@ -5,10 +5,10 @@ MotorController::MotorController(){
 }
 
 void MotorController::motorSetup(){
-  motorFR = Motor(MOTORFR_PWM,MOTORFR_DRV,MOTORFR_BRK);
-  motorBR = Motor(MOTORBR_PWM,MOTORBR_DRV,MOTORBR_BRK);
-  motorBL = Motor(MOTORBL_PWM,MOTORBL_DRV,MOTORBL_BRK);
-  motorFL = Motor(MOTORFL_PWM,MOTORFL_DRV,MOTORFL_BRK);
+  motorFR = Motor(MOTORFR_PWM,MOTORFR_DRV,MOTORFR_BRK,MOTORFR_REV);
+  motorBR = Motor(MOTORBR_PWM,MOTORBR_DRV,MOTORBR_BRK,MOTORBR_REV);
+  motorBL = Motor(MOTORBL_PWM,MOTORBL_DRV,MOTORBL_BRK,MOTORBL_REV);
+  motorFL = Motor(MOTORFL_PWM,MOTORFL_DRV,MOTORFL_BRK,MOTORFL_REV);
   motorFR.motorSetup();
   motorBR.motorSetup();
   motorBL.motorSetup();

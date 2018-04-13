@@ -13,18 +13,22 @@ const int lightPins[LS_NUM] = {A0, A1, A2, A3};
 #define MOTORFR_PWM 2
 #define MOTORFR_DRV 56
 #define MOTORFR_BRK 57
+#define MOTORFR_REV false
 
-#define MOTORBR_PWM 22
-#define MOTORBR_DRV 21
-#define MOTORBR_BRK 20
+#define MOTORBR_PWM 23
+#define MOTORBR_DRV 52
+#define MOTORBR_BRK 51
+#define MOTORBR_REV false
 
-#define MOTORBL_PWM 23
-#define MOTORBL_DRV 52
-#define MOTORBL_BRK 51
+#define MOTORBL_PWM 22
+#define MOTORBL_DRV 21
+#define MOTORBL_BRK 20
+#define MOTORBL_REV true
 
 #define MOTORFL_PWM 6
 #define MOTORFL_DRV 49
 #define MOTORFL_BRK 50
+#define MOTORFL_REV false
 
 // TSOPS
 #define TSOP_POWER 52

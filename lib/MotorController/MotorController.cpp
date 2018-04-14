@@ -36,17 +36,14 @@ void MotorController::moveDirection(MoveData movement){
   {
     double multiplier;
 
-    double newAngle = toRadians(mod(45-angle, 360));
+    double newAngle = toRadians(mod(angle - 40, 360));
 
-    double b = angle >= 135 && angle < 315 ? -speed : speed;
-    double a = round(b * tan(newAngle));
+    double b = 1 / (cos(PI / 18) * tan(newAngle));
+    double a = 1 - b * sin(PI / 18);
 
-    if(abs(a) > speed)
-    {
-      multiplier = abs(speed / a);
-      b = b * multiplier;
-      a = a * multiplier;
-    }
+    multiplier = 255 / max(abs(a), abs(b));
+    a *= multiplier;
+    b *= multiplier;
 
     frontRightSpeed = -a + rotation;
     backRightSpeed = -b + rotation;

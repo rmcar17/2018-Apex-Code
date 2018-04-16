@@ -16,6 +16,7 @@ class Camera{
     Image getDefendGoal();
     Image getBall();
   private:
+    int camBuffer[CAM_BUFFER_NUM] = {0};
     Image attackGoal;
     Image defendGoal;
     Image ball;

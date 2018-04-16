@@ -33,6 +33,7 @@
 #define MAX_SPEED 255
 
 // Camera
+#define CAM_BUFFER_NUM 8
 
 #define CAM_CENTRE_X 10
 #define CAM_CENTRE_Y 10

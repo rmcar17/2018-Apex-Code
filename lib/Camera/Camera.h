@@ -4,6 +4,7 @@
 #include <Arduino.h>
 #include <Pins.h>
 #include <Image.h>
+#include <PlayMode.h>
 
 class Camera{
   public:
@@ -16,8 +17,8 @@ class Camera{
     Image getDefendGoal();
     Image getBall();
   private:
-    bool isBlueAttack();
-    bool blueAttack = true;
+    PlayMode isBlueAttack();
+    PlayMode blueAttack = PlayMode::undecided;
 
     int camBuffer[CAM_BUFFER_NUM] = {0};
     Image blueGoal;

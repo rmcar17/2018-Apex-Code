@@ -6,6 +6,8 @@ Camera::Camera(){
 
 void Camera::setup(){
   cameraSerial.begin(9600);
+  update();
+  blueAttack = isBlueAttack();
 }
 
 void Camera::update(){
@@ -23,6 +25,9 @@ void Camera::update(){
 
   yellowGoal.x = camBuffer[6] + camBuffer[7];
   yellowGoal.y = camBuffer[8];
+  if(blueAttack == PlayMode::undecided){
+    blueAttack = isBlueAttack();
+  }
 }
 
 Image Camera::getBall(){
@@ -35,4 +40,14 @@ Image Camera::getAttackGoal(){
 
 Image Camera::getDefendGoal(){
   return blueAttack == PlayMode::attack ? yellowGoal : blueGoal;
+}
+
+PlayMode Camera::isBlueAttack(){
+  if((blueGoal.visible && blueGoal.y < CAM_CENTRE_Y) || (yellowGoal.visible && yellowGoal.y > CAM_CENTRE_Y)){
+    return PlayMode::attack;
+  }
+  else if ((blueGoal.visible && blueGoal.y > CAM_CENTRE_Y) || (yellowGoal.visible && yellowGoal.y < CAM_CENTRE_Y)){
+    return PlayMode::defend;
+  }
+  return PlayMode::undecided;
 }

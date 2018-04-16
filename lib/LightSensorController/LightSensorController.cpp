@@ -7,9 +7,11 @@ LightSensorController::LightSensorController(){
 void LightSensorController::setup(){
 	for(int i = 0; i < LS_NUM; i++){
 		lightArray[i].setup(lightPins[i]);
-		Serial.print("LightSensor[");
-		Serial.print(lightPins[i]);
-		Serial.println("] is on");
+		#if DEBUG_LIGHT
+			Serial.print("LightSensor[");
+			Serial.print(lightPins[i]);
+			Serial.println("] is on");
+		#endif
 	}
 	calibrate();
 }
@@ -21,7 +23,7 @@ void LightSensorController::calibrate(){
 		for(int read_n = 0; read_n < LS_CALIBRATION_NUM; read_n++){
 			total += lightArray[ls].read();
 		}
-		calibration = round(total / LS_CALIBRATION_NUM) + 20;
+		calibration = round(total / LS_CALIBRATION_NUM) + 100;
 
 		lightArray[ls].setThresh(calibration);
 	}
@@ -30,10 +32,17 @@ void LightSensorController::calibrate(){
 void LightSensorController::read(){
 	for(int i = 0; i < LS_NUM; i++){
 		lightValues[i] = lightArray[i].read();
+		#if DEBUG_LIGHT
+			Serial.print("LS");
+			Serial.print(i);
+			Serial.print(": ");
+			Serial.print(lightValues[i]);
+		#endif
 	}
 }
 
 void LightSensorController::update(){
+	read();
 	updateOnWhite();
 	calcVectorAngle();
 	if(any){
@@ -85,11 +94,13 @@ void LightSensorController::updateOnWhite(){
 
 void LightSensorController::calcVectorAngle(){
 	any = false;
+	vectorX = 0;
+	vectorY = 0;
 	for(int i = 0; i < LS_NUM; i++){
 		if(onWhite[i]){
 			any = true;
-			vectorX += sin((450-i*30)*PI/180);
-      vectorY += cos((450-i*30)*PI/180);
+			vectorX += sin((450-i*(360/LS_NUM))*PI/180);
+      		vectorY += cos((450-i*(360/LS_NUM))*PI/180);
 		}
 	}
 	if(any){

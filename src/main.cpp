@@ -86,14 +86,8 @@ void loop() {
   lights.update();
 
   for(int i = 0; i < LS_NUM; i++){
-    Serial.print(lights.onWhite[i]);
+    Serial.print(lights.lightValues[i]);
     Serial.print(" ");
   }
-  Serial.print("Vector: ");
-  Serial.print(lights.vectorAngle);
-  Serial.print(" Line: ");
-  Serial.print(lights.lineAngle);
-  Serial.print(" Danger: ");
-  Serial.print(lights.danger);
   Serial.println();
 }

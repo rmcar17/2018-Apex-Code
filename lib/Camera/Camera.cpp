@@ -43,11 +43,15 @@ Image Camera::getDefendGoal(){
 }
 
 PlayMode Camera::isBlueAttack(){
-  if((blueGoal.visible && blueGoal.y < CAM_CENTRE_Y) || (yellowGoal.visible && yellowGoal.y > CAM_CENTRE_Y)){
-    return PlayMode::attack;
-  }
-  else if ((blueGoal.visible && blueGoal.y > CAM_CENTRE_Y) || (yellowGoal.visible && yellowGoal.y < CAM_CENTRE_Y)){
-    return PlayMode::defend;
-  }
-  return PlayMode::undecided;
+  #if ATTACK_GOAL_OVERIDE
+    return OVERIDE_BLUE ? PlayMode::attack : PlayMode::defend;
+  #else
+    if((blueGoal.visible && blueGoal.y < CAM_CENTRE_Y) || (yellowGoal.visible && yellowGoal.y > CAM_CENTRE_Y)){
+      return PlayMode::attack;
+    }
+    else if ((blueGoal.visible && blueGoal.y > CAM_CENTRE_Y) || (yellowGoal.visible && yellowGoal.y < CAM_CENTRE_Y)){
+      return PlayMode::defend;
+    }
+    return PlayMode::undecided;
+  #endif
 }

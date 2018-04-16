@@ -33,6 +33,9 @@
 #define MAX_SPEED 255
 
 // Camera
+#define ATTACK_GOAL_OVERIDE false
+#define OVERIDE_BLUE true
+
 #define CAM_BUFFER_NUM 8
 
 #define CAM_CENTRE_X 10

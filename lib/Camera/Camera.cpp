@@ -30,9 +30,9 @@ Image Camera::getBall(){
 }
 
 Image Camera::getAttackGoal(){
-  return attackGoal;
+  return blueAttack ? blueGoal : yellowGoal;
 }
 
 Image Camera::getDefendGoal(){
-  return defendGoal;
+  return blueAttack ? yellowGoal : blueGoal;
 }

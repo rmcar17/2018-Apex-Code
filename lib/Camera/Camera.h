@@ -16,9 +16,12 @@ class Camera{
     Image getDefendGoal();
     Image getBall();
   private:
+    bool isBlueAttack();
+    bool blueAttack = true;
+
     int camBuffer[CAM_BUFFER_NUM] = {0};
-    Image attackGoal;
-    Image defendGoal;
+    Image blueGoal;
+    Image yellowGoal;
     Image ball;
 };
 

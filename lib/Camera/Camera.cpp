@@ -17,6 +17,12 @@ void Camera::update(){
   }
   ball.x = camBuffer[0] + camBuffer[1];
   ball.y = camBuffer[2];
+
+  blueGoal.x = camBuffer[3] + camBuffer[4];
+  blueGoal.y = camBuffer[5];
+
+  yellowGoal.x = camBuffer[6] + camBuffer[7];
+  yellowGoal.y = camBuffer[8];
 }
 
 Image Camera::getBall(){

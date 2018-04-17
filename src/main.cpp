@@ -37,9 +37,8 @@ MoveData move;
 void setup() {
   camera.setup();
   #if DEBUG_ANY
-  Serial.begin(38400);
+    Serial.begin(38400);
   #endif
-Serial.print("const String &s");
   // Wire.begin();
   // comp.compassSetup();
   // comp.calibrate();

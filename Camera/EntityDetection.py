@@ -46,6 +46,10 @@ while(True):
         sendBuffer[8] = yellowBlob.x() % 255
         sendBuffer[9] = yellowBlob.y()
 
+    for i in range(1,len(sendBuffer)):
+        if sendBuffer[i] == 1:
+            sendBuffer[i] = 2
+
     LED(1).on()
     for i in sendBuffer:
         uart.writechar(i)

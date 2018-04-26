@@ -5,15 +5,23 @@ Camera::Camera(){
 }
 
 void Camera::setup(){
+  Serial.print("Test");
   cameraSerial.begin(9600);
   update();
   blueAttack = isBlueAttack();
 }
 
 void Camera::update(){
-  while(cameraSerial.read() != 1);
+  Serial.print("test");
+  while(cameraSerial.read() != 1){
+      // Serial.println("1");
+  }
   for(int i = 0; i < CAM_BUFFER_NUM; i++){
-    while(!cameraSerial.available());
+    while(!(cameraSerial.available() > 0)){
+      // Serial.print("available");
+      // Serial.println(cameraSerial.available());
+    }
+    // Serial.println(cameraSerial.read());
     camBuffer[i] = cameraSerial.read();
   }
   ball.x = camBuffer[0] + camBuffer[1];
@@ -38,7 +46,7 @@ void Camera::update(){
     Serial.print(yellowGoal.x);
     Serial.print(", ");
     Serial.print(yellowGoal.y);
-    Serial.println(")")
+    Serial.println(")");
   #endif
 
   if(blueAttack == PlayMode::undecided){

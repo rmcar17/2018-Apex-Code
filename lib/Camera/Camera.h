@@ -2,6 +2,7 @@
 #define CAMERA_H
 
 #include <Arduino.h>
+#include <Debug.h>
 #include <Pins.h>
 #include <Image.h>
 #include <PlayMode.h>

@@ -12,16 +12,9 @@ void Camera::setup(){
 }
 
 void Camera::update(){
-  Serial.print("test");
-  while(cameraSerial.read() != 1){
-      // Serial.println("1");
-  }
+  while(cameraSerial.read() != 1);
   for(int i = 0; i < CAM_BUFFER_NUM; i++){
-    while(!(cameraSerial.available() > 0)){
-      // Serial.print("available");
-      // Serial.println(cameraSerial.available());
-    }
-    // Serial.println(cameraSerial.read());
+    while(!(cameraSerial.available() > 0));
     camBuffer[i] = cameraSerial.read();
   }
   ball.x = camBuffer[0] + camBuffer[1];

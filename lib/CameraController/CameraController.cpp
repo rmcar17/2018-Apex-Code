@@ -13,9 +13,9 @@ void CameraController::updateCamera(){
 }
 
 void CameraController::calculateEntities(){
-  // calculateAttackGoal(camera.getAttackGoal());
-  // calculateDefendGoal(camera.getDefendGoal());
-  // calculateBall(camera.getBall());
+  calculateAttackGoal(camera.getAttackGoal());
+  calculateDefendGoal(camera.getDefendGoal());
+  calculateBall(camera.getBall());
 }
 
 void CameraController::calculateAttackGoal(Image aGoal){

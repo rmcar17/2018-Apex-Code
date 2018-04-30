@@ -10,6 +10,7 @@
 #include <CameraController.h>
 #include <PID.h>
 #include <Common.h>
+#include <Vector.h>
 #include <PlayMode.h>
 #include <EntityData.h>
 #include <MoveData.h>
@@ -33,9 +34,9 @@ MoveData move;
 
 void setup() {
   #if DEBUG_ANY
-  Serial.begin(9600);
+  Serial.begin(38400);
   #endif
-
+Serial.print("const String &s");
   Wire.begin();
   comp.compassSetup();
   comp.calibrate();

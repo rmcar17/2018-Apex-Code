@@ -4,8 +4,12 @@ CameraController::CameraController(){
 
 }
 
+void CameraController::cameraSetup(){
+  camera.setup();
+}
+
 void CameraController::updateCamera(){
-  // camera.update()
+  camera.update();
 }
 
 void CameraController::calculateEntities(){
@@ -27,6 +31,7 @@ void CameraController::calculateBall(Image ballImage){
   if(ballImage.visible){
     ball.angle = calculateAngle(ballImage.x,ballImage.y);
     //ball.distance = calculateBallDistance(ballImage.pixels);
+  }
 }
 
 int CameraController::calculateAngle(int x, int y){

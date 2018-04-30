@@ -1,6 +1,6 @@
 #ifndef CAMERACONTROLLER_H
 #define CAMERACONTROLLER_H
-
+#include <Camera.h>
 #include <Common.h>
 #include <Defines.h>
 #include <EntityData.h>
@@ -10,6 +10,7 @@ class CameraController {
   public:
     CameraController();
 
+    void cameraSetup();
     void updateCamera();
 
     void calculateEntities();
@@ -27,7 +28,7 @@ class CameraController {
     double calculateDistance(int x, int y);
     double calculateCircleDistance(double distance);
     double calculateConeDistance(double distance);
-    // Camera camera;
+    Camera camera = Camera();
 
     EntityData attackGoal; //attacking goal
     EntityData defendGoal; //defending goal

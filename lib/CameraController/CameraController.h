@@ -10,7 +10,7 @@ class CameraController {
   public:
     CameraController();
 
-    void cameraSetup();
+    void setup();
     void update();
 
     void calculateEntities();

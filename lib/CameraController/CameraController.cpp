@@ -4,7 +4,7 @@ CameraController::CameraController(){
 
 }
 
-void CameraController::cameraSetup(){
+void CameraController::setup(){
   camera.setup();
 }
 

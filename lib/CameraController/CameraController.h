@@ -11,7 +11,7 @@ class CameraController {
     CameraController();
 
     void cameraSetup();
-    void updateCamera();
+    void update();
 
     void calculateEntities();
 

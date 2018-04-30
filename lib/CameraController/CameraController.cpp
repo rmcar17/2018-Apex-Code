@@ -8,7 +8,7 @@ void CameraController::cameraSetup(){
   camera.setup();
 }
 
-void CameraController::updateCamera(){
+void CameraController::update(){
   camera.update();
 }
 

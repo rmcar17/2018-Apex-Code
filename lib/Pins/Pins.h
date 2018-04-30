@@ -1,8 +1,12 @@
 #ifndef PINS_H
 #define PINS_H
 
-#include <Defines.h>
 #include <Arduino.h>
+#include <Defines.h>
+
+// Camera
+
+#define cameraSerial Serial6
 
 // Light Sensor
 

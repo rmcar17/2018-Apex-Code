@@ -25,7 +25,7 @@ MoveData Orbit::getMoveData(){
 }
 
 void Orbit::calculateMoveData(){
-  if(role == PlayMode::attacker){
+  if(role == PlayMode::attack){
     calcAttacker();
   }
   else{
@@ -43,7 +43,7 @@ void Orbit::calculateRotation(){
   double rotate;
 
   if(goal.visible){
-    if(role == PlayMode::attacker){
+    if(role == PlayMode::attack){
     rotate = rotation.update(goal.angle < 180 ? goal.angle : -(360 - goal.angle));
     }
     else{
@@ -156,7 +156,7 @@ void Orbit::calcFarOrbit(){
 void Orbit::centre(){
   double goalAngle = toRadians(compAngle + goal.angle);
 
-  double correctedVerticalDistance = goal.distance * cos(goalAngle) + (role == PlayMode::attacker ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE);
+  double correctedVerticalDistance = goal.distance * cos(goalAngle) + (role == PlayMode::attack ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE);
   double correctedHorizontalDistance = goal.distance * sin(goalAngle);
 
   movement.speed = MAX_SPEED;

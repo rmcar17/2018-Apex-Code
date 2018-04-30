@@ -2,9 +2,10 @@
 #define CAMERA_H
 
 #include <Arduino.h>
+#include <Debug.h>
+#include <Pins.h>
 #include <Image.h>
-
-#define cameraSerial Serial1
+#include <PlayMode.h>
 
 class Camera{
   public:
@@ -17,8 +18,12 @@ class Camera{
     Image getDefendGoal();
     Image getBall();
   private:
-    Image attackGoal;
-    Image defendGoal;
+    PlayMode isBlueAttack();
+    PlayMode blueAttack = PlayMode::undecided;
+
+    int camBuffer[CAM_BUFFER_NUM] = {0};
+    Image blueGoal;
+    Image yellowGoal;
     Image ball;
 };
 

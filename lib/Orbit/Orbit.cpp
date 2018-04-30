@@ -12,8 +12,9 @@ void Orbit::setBallData(EntityData ballData){
   ball = ballData;
 }
 
-void Orbit::setGoalData(EntityData goalData){
-  goal = goalData;
+void Orbit::setGoalData(EntityData aGoal, EntityData dGoal){
+  attackGoal = aGoal;
+  defendGoal = dGoal;
 }
 
 void Orbit::setCompAngle(int heading){
@@ -42,12 +43,12 @@ void Orbit::calculateMoveData(){
 void Orbit::calculateRotation(){
   double rotate;
 
-  if(goal.visible){
+  if(attackGoal.visible){
     if(role == PlayMode::attack){
-    rotate = rotation.update(goal.angle < 180 ? goal.angle : -(360 - goal.angle));
+    rotate = rotation.update(attackGoal.angle < 180 ? attackGoal.angle : -(360 - attackGoal.angle));
     }
     else{
-      double oppositeAngle = mod(goal.angle + 180, 360);
+      double oppositeAngle = mod(attackGoal.angle + 180, 360);
       rotate = rotation.update(oppositeAngle < 180 ? oppositeAngle : -(360 - oppositeAngle));
     }
   }
@@ -79,7 +80,7 @@ void Orbit::calcAttacker(){
     }
   }
   else{
-    if(goal.visible){
+    if(attackGoal.visible){
       centre();
     }
     //If can't see goal or ball, the robot
@@ -89,7 +90,7 @@ void Orbit::calcAttacker(){
 
 void Orbit::calcDefender(){
   if(ball.visible){
-    if(goal.visible){
+    if(attackGoal.visible){
       if(isAngleBetween(ball.angle, 270, 90)){
         moveToBall();
       }
@@ -103,7 +104,7 @@ void Orbit::calcDefender(){
     }
   }
   else{
-    if(goal.visible){
+    if(attackGoal.visible){
       centre();
     }
     //If can't see goal or ball, the robot
@@ -154,10 +155,10 @@ void Orbit::calcFarOrbit(){
 }
 
 void Orbit::centre(){
-  double goalAngle = toRadians(compAngle + goal.angle);
+  double goalAngle = toRadians(compAngle + attackGoal.angle);
 
-  double correctedVerticalDistance = goal.distance * cos(goalAngle) + (role == PlayMode::attack ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE);
-  double correctedHorizontalDistance = goal.distance * sin(goalAngle);
+  double correctedVerticalDistance = attackGoal.distance * cos(goalAngle) + (role == PlayMode::attack ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE);
+  double correctedHorizontalDistance = attackGoal.distance * sin(goalAngle);
 
   movement.speed = MAX_SPEED;
   movement.angle = mod(round(450 - toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);
@@ -166,7 +167,7 @@ void Orbit::centre(){
 void Orbit::moveToBall(){
   //Won't work when comparing
   //TSOPs to camera
-  double correctedVerticalDistance = goal.distance * cos(toRadians(compAngle + goal.angle)) + CENTRE_DEFENDER_DISTANCE;
+  double correctedVerticalDistance = attackGoal.distance * cos(toRadians(compAngle + attackGoal.angle)) + CENTRE_DEFENDER_DISTANCE;
   double correctedHorizontalDistance = isAngleBetween(ball.angle, 360 - DEFEND_SMALL_ANGLE, DEFEND_SMALL_ANGLE) ? 0 : ball.distance * sin(toRadians(ball.angle + compAngle));
 
   movement.speed = MAX_SPEED;
@@ -176,7 +177,7 @@ void Orbit::moveToBall(){
 void Orbit::resetAllData(){
   role = PlayMode::undecided;
   ball = {-1, 0.0, false};
-  goal = {-1, 0.0, false};
+  attackGoal = {-1, 0.0, false};
   movement = {-1, 0, 0};
   compAngle = 0;
 }

@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <MotorController.h>
 #include <Motor.h>
-#include <TSOPController.h>
 #include <Compass.h>
 #include <LightSensor.h>
 #include <LightSensorController.h>
@@ -16,7 +15,6 @@
 #include <Pins.h>
 
 Compass comp;
-TSOPController tsops;
 
 MotorController motors;
 
@@ -43,16 +41,18 @@ void setup() {
 
   lights.setup();
 
-  tsops.TSOPSetup();
-
   orbit.resetAllData();
 
 
   role = PlayMode::attacker;
+  ball.angle = 0;
+  ball.distance = 0;
+  ball.visible = true;
 
   goal.angle = -1;
   goal.distance = 0;
   goal.visible = false;
+
 }
 
 void loop() {
@@ -65,12 +65,11 @@ void loop() {
   //Create another class which checks
   //whether the robots should switch
   //roles
-  ball = tsops.getBallData();
 
   orbit.setRole(role);
   orbit.setGoalData(goal);
   orbit.setBallData(ball);
-  orbit.setCompAngle(comp.getHeading());
+  orbit.setCompAngle(0);//comp.getHeading());
 
   orbit.calculateMoveData();
   orbit.calculateRotation();

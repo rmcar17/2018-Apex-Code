@@ -5,7 +5,7 @@
 
 class Vector {
   public:
-    Vector();
+    Vector(double val1, double val2, bool polar = true);
 
     void setStandard(double _i, double _j);
     void setPolar(double _mod, double _arg);

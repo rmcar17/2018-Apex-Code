@@ -54,32 +54,29 @@ void setup() {
   goal.visible = false;
 
 }
-int a = 22;
 
 void loop() {
-  motors.moveDirection({45,50,0});
+  comp.updateGyro();
 
-  // comp.updateGyro();
-  //
-  // //Create another class which fetches
-  // //goal data which takes an input of
-  // //the robot's current role
-  //
-  // //Create another class which checks
-  // //whether the robots should switch
-  // //roles
-  //
-  // orbit.setRole(role);
-  // orbit.setGoalData(goal);
-  // orbit.setBallData(ball);
-  // orbit.setCompAngle(0);//comp.getHeading());
-  //
-  // orbit.calculateMoveData();
-  // orbit.calculateRotation();
-  //
-  // move = orbit.getMoveData();
-  //
-  // motors.moveDirection(move);
-  //
-  // orbit.resetAllData();
+  //Create another class which fetches
+  //goal data which takes an input of
+  //the robot's current role
+
+  //Create another class which checks
+  //whether the robots should switch
+  //roles
+
+  orbit.setRole(role);
+  orbit.setGoalData(goal);
+  orbit.setBallData(ball);
+  orbit.setCompAngle(0);//comp.getHeading());
+
+  orbit.calculateMoveData();
+  orbit.calculateRotation();
+
+  move = orbit.getMoveData();
+
+  motors.moveDirection(move);
+
+  orbit.resetAllData();
 }

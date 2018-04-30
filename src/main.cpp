@@ -13,6 +13,7 @@
 #include <MoveData.h>
 #include <Debug.h>
 #include <Defines.h>
+#include <t3spi.h>
 #include <Pins.h>
 
 Compass comp;
@@ -24,6 +25,7 @@ LightSensorController lights;
 Orbit orbit;
 
 PlayMode role;
+T3SPI spi;
 
 EntityData ball;
 EntityData goal;
@@ -47,7 +49,12 @@ void setup() {
 
   orbit.resetAllData();
 
+  // SPI
+  spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_TSOP, CS_ActiveLOW);
+  spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
 
+  slaveLightSensor.init();
+  
   role = PlayMode::attacker;
 
   goal.angle = -1;

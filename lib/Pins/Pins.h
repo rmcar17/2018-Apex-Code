@@ -41,4 +41,23 @@ const int lightPins[LS_NUM] = {33,34,35,36,37,38,39,21,22,15,16,17,32,31,49,50,1
 #define TSOP_11 30
 #define TSOP_12 28
 
+// Communication
+
+#define MASTER_MOSI MOSI
+#define MASTER_MISO MISO
+#define MASTER_SCK ALT_SCK
+#define MASTER_CS_TSOP CS0
+#define MASTER_CS_LIGHT CS1
+#define MASTER_CS_PIXY CS2
+
+#define SLAVE_TSOP_MOSI MOSI
+#define SLAVE_TSOP_MISO MISO
+#define SLAVE_TSOP_SCK ALT_SCK
+#define SLAVE_TSOP_CS CS0
+
+#define SLAVE_LIGHT_MOSI MOSI
+#define SLAVE_LIGHT_MISO MISO
+#define SLAVE_LIGHT_SCK ALT_SCK
+#define SLAVE_LIGHT_CS CS0
+
 #endif

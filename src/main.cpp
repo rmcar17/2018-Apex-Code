@@ -21,7 +21,7 @@
 Compass comp;
 TSOPController tsops;
 
-Camera camera;
+CameraController camera;
 
 MotorController motors;
 
@@ -39,51 +39,43 @@ void setup() {
     Serial.begin(38400);
   #endif
   camera.setup();
-  // Wire.begin();
-  // comp.compassSetup();
-  // comp.calibrate();
-  //
-  // motors.motorSetup();
-  // motors.brake();
-  //
-  // lights.setup();
-  //
-  // tsops.TSOPSetup();
-  //
-  // orbit.resetAllData();
-  //
-  //
-  // role = PlayMode::attacker;
-  //
-  // goal.angle = -1;
-  // goal.distance = 0.0;
-  // goal.visible = false;
+
+  Wire.begin();
+  comp.compassSetup();
+  comp.calibrate();
+
+  motors.motorSetup();
+  motors.brake();
+
+  lights.setup();
+
+  tsops.TSOPSetup();
+
+  orbit.resetAllData();
+
+
+  role = PlayMode::attack;
 }
 
 void loop() {
+  comp.updateGyro();
+  //Create another class which checks
+  //whether the robots should switch
+  //roles
   camera.update();
-  // comp.updateGyro();
-  //
-  // //Create another class which fetches
-  // //goal data which takes an input of
-  // //the robot's current role
-  //
-  // //Create another class which checks
-  // //whether the robots should switch
-  // //roles
-  // ball = tsops.getBallData();
-  //
-  // orbit.setRole(role);
-  // orbit.setGoalData(goal);
-  // orbit.setBallData(ball);
-  // orbit.setCompAngle(comp.getHeading());
-  //
-  // orbit.calculateMoveData();
-  // orbit.calculateRotation();
-  //
-  // move = orbit.getMoveData();
-  //
-  // motors.moveDirection(move);
-  //
-  // orbit.resetAllData();
+  camera.calculateEntities();
+
+  orbit.setRole(role);
+  orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
+  orbit.setBallData(camera.getBall());
+  orbit.setCompAngle(comp.getHeading());
+
+  orbit.calculateMoveData();
+  orbit.calculateRotation();
+
+  move = orbit.getMoveData();
+
+  motors.moveDirection(move);
+
+  orbit.resetAllData();
 }

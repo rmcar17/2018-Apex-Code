@@ -5,7 +5,6 @@ Camera::Camera(){
 }
 
 void Camera::setup(){
-  Serial.print("Test");
   cameraSerial.begin(9600);
   update();
   blueAttack = isBlueAttack();

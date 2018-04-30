@@ -56,6 +56,7 @@ void Orbit::calculateRotation(){
   }
 
   movement.rotation = round(rotate);
+
 }
 
 void Orbit::calcAttacker(){
@@ -154,13 +155,13 @@ void Orbit::calcFarOrbit(){
 }
 
 void Orbit::centre(){
-  double goalAngle = toRadians(compAngle + goal.angle);
+  double goalAngle = toRadians(90 + compAngle + goal.angle);
 
-  double correctedVerticalDistance = goal.distance * cos(goalAngle) + (role == PlayMode::attacker ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE);
-  double correctedHorizontalDistance = goal.distance * sin(goalAngle);
+  double correctedVerticalDistance = CENTRE_MOVEMENT_BUFFER * (goal.distance * sin(goalAngle) + (role == PlayMode::attacker ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE));
+  double correctedHorizontalDistance = CENTRE_MOVEMENT_BUFFER * goal.distance * cos(goalAngle);
 
-  movement.speed = MAX_SPEED;
-  movement.angle = mod(round(450 - toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);
+  movement.speed = min(255,correctedHorizontalDistance*correctedHorizontalDistance+correctedVerticalDistance*correctedVerticalDistance);
+  movement.angle = movement.speed > CENTRE_MOVEMENT_CUTOFF ? mod(round(450 - toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance))),360) : -1;
 }
 
 void Orbit::moveToBall(){

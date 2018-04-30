@@ -38,9 +38,14 @@
 
 #define CAM_BUFFER_NUM 8
 
-#define CAM_CENTRE_X 10
-#define CAM_CENTRE_Y 10
+#define CAM_CENTRE_X 160
+#define CAM_CENTRE_Y 120
 
+#define CAM_SWITCH_D 16
+
+#define CAMERA_HEIGHT 32
+#define CAMERA_ORIGIN 96
+#define CIRCLE_RADIUS 32
 // LIGHT SENSORS
 
 #define LS_NUM 4

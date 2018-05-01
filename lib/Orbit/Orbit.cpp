@@ -25,24 +25,25 @@ MoveData Orbit::getMoveData(){
   return movement;
 }
 
-// void calculateCoordinates(){
-//   Vector actualAttackGoal = Vector(attackGoal.mag,attackGoal.arg + compAngle);
-//   if(!(attackGoal.exists() || defendGoal.exists())){
-//     robotPosition = Vector(0, 0);
-//     ballPosition = Vector(0, 0);
-//     return;
-//   }
-//   if(attackGoal.exists() && defendGoal.exists()){
-//     robotPosition = (ATTACK_GOAL - attackGoal + DEFEND_GOAL - defendGoal) / 2;
-//   }
-//   else if (attackGoal.exists()){
-//     robotPosition = ATTACK_GOAL - attackGoal;
-//   }
-//   else {
-//     robotPosition = DEFEND_GOAL - defendGoal;
-//   }
-//   ballPosition = robotPosition + ball;
-// }
+void Orbit::calculateCoordinates(){
+  Vector actualAttackGoal = Vector(attackGoal.mag, attackGoal.arg + compAngle);
+  Vector actualDefendGoal = Vector(defendGoal.mag, defendGoal.arg + compAngle);
+  if(!(attackGoal.exists() || defendGoal.exists())){
+    robotPosition = Vector(0, 0);
+    ballPosition = Vector(0, 0);
+    return;
+  }
+  if(attackGoal.exists() && defendGoal.exists()){
+    robotPosition = (ATTACK_GOAL - actualAttackGoal + DEFEND_GOAL - actualDefendGoal) / 2;
+  }
+  else if (attackGoal.exists()){
+    robotPosition = ATTACK_GOAL - actualAttackGoal;
+  }
+  else {
+    robotPosition = DEFEND_GOAL - actualDefendGoal;
+  }
+  ballPosition = robotPosition + ball;
+}
 
 void Orbit::calculateMoveData(){
   if(role == PlayMode::attack){

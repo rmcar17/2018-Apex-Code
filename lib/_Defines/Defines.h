@@ -29,8 +29,8 @@
 
 #define ORBIT_FORWARD_ANGLE_TIGHTENER 0.75
 
-#define CLOSE_ORBIT 155
-#define FAR_ORBIT 128
+#define CLOSE_ORBIT Vector(160, 0)
+#define FAR_ORBIT Vector(360, 0)
 
 #define BIG_ORBIT 50
 #define SMALL_ORBIT 20

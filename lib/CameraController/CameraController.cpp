@@ -34,8 +34,6 @@ void CameraController::calculateGoals(Image aGoal, Image dGoal){
     defendGoal.angle = -1;
     defendGoal.distance = -1;
   }
-  attackGoal.visible = aGoal.visible;
-  defendGoal.visible = dGoal.visible;
 }
 
 void CameraController::calculateBall(Image ballImage){
@@ -47,7 +45,6 @@ void CameraController::calculateBall(Image ballImage){
     ball.angle = -1;
     ball.distance = -1;
   }
-  ball.visible = ballImage.visible;
 }
 
 int CameraController::calculateAngle(int x, int y){
@@ -83,14 +80,14 @@ double CameraController::calculateConeDistance(double distance){
   return finalDistance;
 }
 
-EntityData CameraController::getAttackGoal(){
+Vector CameraController::getAttackGoal(){
   return attackGoal;
 }
 
-EntityData CameraController::getDefendGoal(){
+Vector CameraController::getDefendGoal(){
   return defendGoal;
 }
 
-EntityData CameraController::getBall(){
+Vector CameraController::getBall(){
   return ball;
 }

@@ -3,7 +3,7 @@
 #include <Camera.h>
 #include <Common.h>
 #include <Defines.h>
-#include <EntityData.h>
+#include <Vector.h>
 #include <Image.h>
 
 class CameraController {
@@ -15,9 +15,9 @@ class CameraController {
 
     void calculateEntities();
 
-    EntityData getAttackGoal();
-    EntityData getDefendGoal();
-    EntityData getBall();
+    Vector getAttackGoal();
+    Vector getDefendGoal();
+    Vector getBall();
   private:
     void calculateGoals(Image aGoal, Image dGoal);
     void calculateBall(Image ballImage);
@@ -29,9 +29,9 @@ class CameraController {
     double calculateConeDistance(double distance);
     Camera camera = Camera();
 
-    EntityData attackGoal; //attacking goal
-    EntityData defendGoal; //defending goal
-    EntityData ball;
+    Vector attackGoal; //attacking goal
+    Vector defendGoal; //defending goal
+    Vector ball;
 };
 
 #endif

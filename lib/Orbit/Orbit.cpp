@@ -24,7 +24,7 @@ void Orbit::setCompAngle(int heading){
 MoveData Orbit::getMoveData(){
   return movement;
 }
-
+/*
 void Orbit::calculateMoveData(){
   if(role == PlayMode::attack){
     calcAttacker();
@@ -172,7 +172,7 @@ void Orbit::moveToBall(){
 
   movement.speed = MAX_SPEED;
   movement.angle = mod(round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);
-}
+}*/
 
 void Orbit::resetAllData(){
   role = PlayMode::undecided;

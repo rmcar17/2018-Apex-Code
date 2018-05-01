@@ -1,7 +1,7 @@
 #include <Vector.h>
 
-Vector::Vector(){
-
+Vector::Vector(double val1, double val2, bool polar){
+ polar ? setPolar(val1, val2) : setStandard(val1, val2);
 }
 
 void Vector::setStandard(double _i, double _j){
@@ -22,15 +22,11 @@ void Vector::setPolar(double _mod, double _arg){
 }
 
 Vector Vector::operator+(Vector vector2){
-  Vector returnVector;
-  returnVector.setStandard(i + vector2.i, j + vector2.j);
-  return returnVector;
+  return Vector(i + vector2.i, j + vector2.j, false);
 }
 
 Vector Vector::operator-(Vector vector2){
-  Vector returnVector;
-  returnVector.setStandard(i - vector2.i, j - vector2.j);
-  return returnVector;
+  return Vector(i - vector2.i, j - vector2.j, false);
 }
 
 double Vector::calcI(double _mod, double _arg){

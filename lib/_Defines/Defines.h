@@ -1,6 +1,8 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
+#include <Vector.h>
+
 // Compass
 #define IMU_CALIBRATION_COUNT 100
 
@@ -14,7 +16,12 @@
 #define MOTOR3_ANG 225
 #define MOTOR4_ANG 315
 
+// Coordinates
+#define FIELD_WIDTH 1820
+#define FIELD_LENGTH 2430
 
+#define ATTACK_GOAL Vector(FIELD_WIDTH / 2, 300, false)
+#define DEFEND_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH - 300, false)
 // ORBIT
 
 #define CENTRE_ATTACKER_DISTANCE 10

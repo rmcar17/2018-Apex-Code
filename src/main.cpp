@@ -70,8 +70,8 @@ void loop() {
   orbit.setBallData(camera.getBall());
   orbit.setCompAngle(comp.getHeading());
 
-  orbit.calculateMoveData();
-  orbit.calculateRotation();
+  //orbit.calculateMoveData();
+  //orbit.calculateRotation();
 
   move = orbit.getMoveData();
 

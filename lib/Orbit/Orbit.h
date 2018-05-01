@@ -14,8 +14,8 @@ class Orbit{
     Orbit();
 
     void setRole(PlayMode playMode);
-    void setBallData(EntityData ballData);
-    void setGoalData(EntityData aGoal, EntityData dGoal);
+    void setBallData(Vector ballData);
+    void setGoalData(Vector aGoal, Vector dGoal);
     void setCompAngle(int heading);
     MoveData getMoveData();
 
@@ -40,9 +40,9 @@ class Orbit{
 
     PlayMode role = PlayMode::undecided;
 
-    EntityData ball = {-1, 0.0, false};
-    EntityData attackGoal = {-1, 0.0, false};
-    EntityData defendGoal = {-1, 0.0, false};
+    Vector ball = Vector(-1,-1);
+    Vector attackGoal = Vector(-1,-2);
+    Vector defendGoal = Vector(-1,-2);
     MoveData movement = {-1, 0, 0};
 
     double compAngle = 0;

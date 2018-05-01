@@ -8,11 +8,11 @@ void Orbit::setRole(PlayMode playMode){
   role = playMode;
 }
 
-void Orbit::setBallData(EntityData ballData){
+void Orbit::setBallData(Vector ballData){
   ball = ballData;
 }
 
-void Orbit::setGoalData(EntityData aGoal, EntityData dGoal){
+void Orbit::setGoalData(Vector aGoal, Vector dGoal){
   attackGoal = aGoal;
   defendGoal = dGoal;
 }

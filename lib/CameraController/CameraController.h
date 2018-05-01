@@ -29,9 +29,9 @@ class CameraController {
     double calculateConeDistance(double distance);
     Camera camera = Camera();
 
-    Vector attackGoal; //attacking goal
-    Vector defendGoal; //defending goal
-    Vector ball;
+    Vector attackGoal = Vector(0,0); //attacking goal
+    Vector defendGoal = Vector(0,0); //defending goal
+    Vector ball = Vector(0,0);
 };
 
 #endif

@@ -29,6 +29,14 @@ Vector Vector::operator-(Vector vector2){
   return Vector(i - vector2.i, j - vector2.j, false);
 }
 
+Vector Vector::operator*(double scalar){
+    return Vector(mag * scalar, arg);
+}
+
+Vector Vector::operator/(double scalar){
+  return Vector(mag / scalar, arg);
+}
+
 bool Vector::operator==(Vector vector2){
   return mag == vector2.mag;
 }

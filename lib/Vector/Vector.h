@@ -12,6 +12,8 @@ class Vector {
 
     Vector operator+(Vector vector2);
     Vector operator-(Vector vector2);
+    Vector operator*(double scalar);
+    Vector operator/(double scalar);
 
     bool operator==(Vector vector2);
     bool operator!=(Vector vector2);

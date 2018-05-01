@@ -18,7 +18,7 @@ void Orbit::setGoalData(Vector aGoal, Vector dGoal){
 }
 
 void Orbit::setCompAngle(int heading){
-  compAngle = Vector(0, heading);
+  compAngle = heading;
 }
 
 MoveData Orbit::getMoveData(){
@@ -198,6 +198,6 @@ void Orbit::resetAllData(){
   ball = Vector(0, 0);
   attackGoal = Vector(0, 0);
   defendGoal = Vector(0, 0);
-  compAngle = Vector(0, 0);
+  compAngle = -1;
   movement = {-1, 0, 0};
 }

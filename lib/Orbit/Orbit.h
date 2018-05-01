@@ -51,7 +51,7 @@ class Orbit{
 
     MoveData movement = {-1, 0, 0};
 
-    Vector compAngle = Vector(0, 0);
+    int compAngle = -1;
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
 };
 

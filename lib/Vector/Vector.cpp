@@ -53,6 +53,10 @@ bool Vector::operator>=(Vector vector2){
   return mag >= vector2.mag;
 }
 
+bool Vector::exists(){
+  return Vector(mag, arg) != Vector(0, 0);
+}
+
 double Vector::calcI(double _mag, double _arg){
   return _mag * cos(_arg);
 }

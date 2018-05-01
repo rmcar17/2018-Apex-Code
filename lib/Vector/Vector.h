@@ -20,6 +20,8 @@ class Vector {
     bool operator>(Vector vector2);
     bool operator>=(Vector vector2);
 
+    bool exists();
+
     double i, j;
     double mag, arg;
   private:

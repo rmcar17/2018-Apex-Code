@@ -22,13 +22,13 @@ void CameraController::calculateGoals(Image aGoal, Image dGoal){
     attackGoal = Vector(calculateDistance(aGoal.x, aGoal.y), calculateAngle(aGoal.x, aGoal.y));
   }
   else{
-    attackGoal = Vector(-1,-1);
+    attackGoal = Vector(0,0);
   }
   if(dGoal.visible){
     defendGoal = Vector(calculateDistance(dGoal.x, dGoal.y), calculateAngle(dGoal.x, dGoal.y));
   }
   else{
-    defendGoal = Vector(-1,-1);
+    defendGoal = Vector(0,0);
   }
 }
 
@@ -37,7 +37,7 @@ void CameraController::calculateBall(Image ballImage){
     ball = Vector(calculateDistance(ballImage.x, ballImage.y), calculateAngle(ballImage.x, ballImage.y));
   }
   else{
-    ball = Vector(-1,-1);
+    ball = Vector(0,0);
   }
 }
 

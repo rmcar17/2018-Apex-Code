@@ -40,9 +40,9 @@ class Orbit{
 
     PlayMode role = PlayMode::undecided;
 
-    Vector ball = Vector(-1,-1);
-    Vector attackGoal = Vector(-1,-2);
-    Vector defendGoal = Vector(-1,-2);
+    Vector ball = Vector(0, 0);
+    Vector attackGoal = Vector(0, 0);
+    Vector defendGoal = Vector(0, 0);
     MoveData movement = {-1, 0, 0};
 
     double compAngle = 0;

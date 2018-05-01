@@ -19,6 +19,8 @@ class Orbit{
     void setCompAngle(int heading);
     MoveData getMoveData();
 
+    void calculateCoordinates();
+
     void calculateMoveData();
     void calculateRotation();
     void avoidLine();
@@ -43,9 +45,13 @@ class Orbit{
     Vector ball = Vector(0, 0);
     Vector attackGoal = Vector(0, 0);
     Vector defendGoal = Vector(0, 0);
+
+    Vector robotPosition = Vector(0, 0);
+    Vector ballPosition = Vector(0, 0);
+
     MoveData movement = {-1, 0, 0};
 
-    double compAngle = 0;
+    Vector compAngle = Vector(0, 0);
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
 };
 

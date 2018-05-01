@@ -18,12 +18,31 @@ void Orbit::setGoalData(Vector aGoal, Vector dGoal){
 }
 
 void Orbit::setCompAngle(int heading){
-  compAngle = heading;
+  compAngle = Vector(0, heading);
 }
 
 MoveData Orbit::getMoveData(){
   return movement;
 }
+
+// void calculateCoordinates(){
+//   Vector actualAttackGoal = Vector(attackGoal.mag,attackGoal.arg + compAngle);
+//   if(!(attackGoal.exists() || defendGoal.exists())){
+//     robotPosition = Vector(0, 0);
+//     ballPosition = Vector(0, 0);
+//     return;
+//   }
+//   if(attackGoal.exists() && defendGoal.exists()){
+//     robotPosition = (ATTACK_GOAL - attackGoal + DEFEND_GOAL - defendGoal) / 2;
+//   }
+//   else if (attackGoal.exists()){
+//     robotPosition = ATTACK_GOAL - attackGoal;
+//   }
+//   else {
+//     robotPosition = DEFEND_GOAL - defendGoal;
+//   }
+//   ballPosition = robotPosition + ball;
+// }
 
 void Orbit::calculateMoveData(){
   if(role == PlayMode::attack){
@@ -176,8 +195,9 @@ void Orbit::calcFarOrbit(){
 
 void Orbit::resetAllData(){
   role = PlayMode::undecided;
-  ball = {-1, 0.0, false};
-  attackGoal = {-1, 0.0, false};
+  ball = Vector(0, 0);
+  attackGoal = Vector(0, 0);
+  defendGoal = Vector(0, 0);
+  compAngle = Vector(0, 0);
   movement = {-1, 0, 0};
-  compAngle = 0;
 }

@@ -100,8 +100,8 @@ void Orbit::calcAttacker(){
     }
   }
   else{
-    if(attackGoal.exists()){
-      //centre();
+    if(robotPosition.exists()){
+      centre();
     }
     //If can't see goal or ball, the robot
     //can't do anything so just compass correct
@@ -174,15 +174,12 @@ void Orbit::calcFarOrbit(){
   movement.angle = ball.arg;
 }
 
-// void Orbit::centre(){
-//   double goalAngle = toRadians(compAngle + attackGoal.angle);
-//
-//   double correctedVerticalDistance = attackGoal.distance * cos(goalAngle) + (role == PlayMode::attack ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE);
-//   double correctedHorizontalDistance = attackGoal.distance * sin(goalAngle);
-//
-//   movement.speed = MAX_SPEED;
-//   movement.angle = mod(round(450 - toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);
-// }
+void Orbit::centre(){
+  Vector centre = CENTRE - robotPosition;
+
+  movement.speed = MAX_SPEED; // Add PID for speed
+  movement.angle = mod(round(centre.arg-compAngle),360);
+}
 
 // void Orbit::moveToBall(){
 //   //Won't work when comparing

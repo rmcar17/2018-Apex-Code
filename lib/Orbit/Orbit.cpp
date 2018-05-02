@@ -194,8 +194,10 @@ void Orbit::centre(){
 void Orbit::resetAllData(){
   role = PlayMode::undecided;
   ball = Vector(0, 0);
+  ballPosition = Vector(0, 0);
   attackGoal = Vector(0, 0);
   defendGoal = Vector(0, 0);
+  robotPosition = Vector(0, 0);
   compAngle = -1;
   movement = {-1, 0, 0};
 }

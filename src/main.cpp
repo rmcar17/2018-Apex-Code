@@ -57,6 +57,7 @@ void setup() {
 
 void loop() {
   comp.updateGyro();
+  Serial.println(comp.heading);
 
   //Create another class which fetches
   //goal data which takes an input of

@@ -2,7 +2,7 @@
 #define PID_H_
 
 #include <Arduino.h>
-#include <defines.h>
+#include <Defines.h>
 
 class PID {
   public:

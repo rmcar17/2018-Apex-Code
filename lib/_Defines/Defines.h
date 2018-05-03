@@ -4,9 +4,9 @@
 // Compass
 #define IMU_CALIBRATION_COUNT 100
 
-#define ROTATION_KP 5
+#define ROTATION_KP 4
 #define ROTATION_KI 0
-#define ROTATION_KD 0.8
+#define ROTATION_KD 0.1
 
 // MOTORS
 #define MOTOR1_ANG 45

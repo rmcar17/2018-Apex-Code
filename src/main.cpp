@@ -29,7 +29,7 @@ MoveData move;
 
 void setup() {
   #if DEBUG_ANY
-  Serial.begin(9600);
+  Serial.begin(38400);
   #endif
 
   Wire.begin();
@@ -47,12 +47,11 @@ void setup() {
   role = PlayMode::attacker;
   ball.angle = 0;
   ball.distance = 0;
-  ball.visible = true;
+  ball.visible = false;
 
   goal.angle = -1;
   goal.distance = 0;
   goal.visible = false;
-
 }
 
 void loop() {
@@ -69,7 +68,7 @@ void loop() {
   orbit.setRole(role);
   orbit.setGoalData(goal);
   orbit.setBallData(ball);
-  orbit.setCompAngle(0);//comp.getHeading());
+  orbit.setCompAngle(comp.getHeading());
 
   orbit.calculateMoveData();
   orbit.calculateRotation();

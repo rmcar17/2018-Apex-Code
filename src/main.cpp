@@ -53,7 +53,7 @@ void setup() {
   spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_TSOP, CS_ActiveLOW);
   spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
 
-  slaveLightSensor.init();
+  // slaveLightSensor.init();
   
   role = PlayMode::attacker;
 

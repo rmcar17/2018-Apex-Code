@@ -28,9 +28,9 @@ class LightSensorController {
 		LightSensor lightArray[LS_NUM] = {LightSensor()};
 		bool any;
 		double vectorX, vectorY;
-		double vectorAngle;
 		double initAngle;
 		double prevAngle;
+		double vectorAngle;
 		double lineAngle;
 		int danger = 0;
 };

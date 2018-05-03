@@ -29,7 +29,7 @@ MoveData move;
 
 void setup() {
   #if DEBUG_ANY
-  Serial.begin(9600);
+  Serial.begin(38400);
   #endif
 
   Wire.begin();
@@ -52,7 +52,6 @@ void setup() {
   goal.angle = -1;
   goal.distance = 0;
   goal.visible = false;
-
 }
 
 void loop() {

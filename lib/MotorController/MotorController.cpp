@@ -28,8 +28,8 @@ void MotorController::moveDirection(MoveData movement){
   if(angle == -1)
   {
     frontRightSpeed = rotation;
-    backRightSpeed = rotation;
-    backLeftSpeed = rotation;
+    backRightSpeed = -rotation;
+    backLeftSpeed = -rotation;
     frontLeftSpeed = rotation;
   }
   else
@@ -50,8 +50,8 @@ void MotorController::moveDirection(MoveData movement){
     b *= multiplier;
 
     frontRightSpeed = -a + rotation;
-    backRightSpeed = b + rotation;
-    backLeftSpeed = a + rotation;
+    backRightSpeed = b - rotation;
+    backLeftSpeed = a - rotation;
     frontLeftSpeed = -b + rotation;
 
     multiplier = speed / max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed))));

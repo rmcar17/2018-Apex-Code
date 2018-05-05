@@ -2,8 +2,8 @@
 #define PLAYMODE_H
 
 enum PlayMode: int {
-  attacker,
-  defender,
+  attack,
+  defend,
   undecided
 };
 

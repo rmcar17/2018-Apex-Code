@@ -14,10 +14,12 @@ class Orbit{
     Orbit();
 
     void setRole(PlayMode playMode);
-    void setBallData(EntityData ballData);
-    void setGoalData(EntityData goalData);
+    void setBallData(Vector ballData);
+    void setGoalData(Vector aGoal, Vector dGoal);
     void setCompAngle(int heading);
     MoveData getMoveData();
+
+    void calculateCoordinates();
 
     void calculateMoveData();
     void calculateRotation();
@@ -40,11 +42,16 @@ class Orbit{
 
     PlayMode role = PlayMode::undecided;
 
-    EntityData ball = {-1, 0, false};
-    EntityData goal = {-1, 0, false};
+    Vector ball = Vector(0, 0);
+    Vector attackGoal = Vector(0, 0);
+    Vector defendGoal = Vector(0, 0);
+
+    Vector robotPosition = Vector(0, 0);
+    Vector ballPosition = Vector(0, 0);
+
     MoveData movement = {-1, 0, 0};
 
-    double compAngle = 0;
+    int compAngle = -1;
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
 };
 

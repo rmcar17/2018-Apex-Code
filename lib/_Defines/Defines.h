@@ -1,6 +1,8 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
+#include <Vector.h>
+
 // Compass
 #define IMU_CALIBRATION_COUNT 100
 
@@ -14,7 +16,14 @@
 #define MOTOR3_ANG 225
 #define MOTOR4_ANG 315
 
+// Coordinates
+#define FIELD_WIDTH 1820
+#define FIELD_LENGTH 2430
 
+#define ATTACK_GOAL Vector(FIELD_WIDTH / 2, 300, false)
+#define DEFEND_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH - 300, false)
+
+#define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
 // ORBIT
 
 #define CENTRE_ATTACKER_DISTANCE 10
@@ -22,8 +31,8 @@
 
 #define ORBIT_FORWARD_ANGLE_TIGHTENER 0.75
 
-#define CLOSE_ORBIT 155
-#define FAR_ORBIT 128
+#define CLOSE_ORBIT Vector(160, 0)
+#define FAR_ORBIT Vector(360, 0)
 
 #define BIG_ORBIT 50
 #define SMALL_ORBIT 20
@@ -32,12 +41,24 @@
 
 #define MAX_SPEED 255
 
+// Camera
+#define ATTACK_GOAL_OVERIDE false
+#define OVERIDE_BLUE true
+
+#define CAM_BUFFER_NUM 8
+
+#define CAM_CENTRE_X 160
+#define CAM_CENTRE_Y 120
+
+#define CAM_SWITCH_D 16
+
+#define CAMERA_HEIGHT 32
+#define CAMERA_ORIGIN 96
+#define CIRCLE_RADIUS 32
 // LIGHT SENSORS
 
 #define LS_NUM 4
 #define LS_CALIBRATION_NUM 10
-
-// TSOPS
 
 #define TSOP_NUM 12
 #define TSOP_DELAY 2

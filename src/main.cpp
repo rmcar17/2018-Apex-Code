@@ -5,8 +5,11 @@
 #include <LightSensor.h>
 #include <LightSensorController.h>
 #include <Orbit.h>
+#include <Camera.h>
+#include <CameraController.h>
 #include <PID.h>
 #include <Common.h>
+#include <Vector.h>
 #include <PlayMode.h>
 #include <EntityData.h>
 #include <MoveData.h>
@@ -15,6 +18,8 @@
 #include <Pins.h>
 
 Compass comp;
+
+CameraController camera;
 
 MotorController motors;
 
@@ -29,8 +34,9 @@ MoveData move;
 
 void setup() {
   #if DEBUG_ANY
-  Serial.begin(38400);
+    Serial.begin(38400);
   #endif
+  camera.setup();
 
   Wire.begin();
   comp.compassSetup();
@@ -43,35 +49,24 @@ void setup() {
 
   orbit.resetAllData();
 
-
-  role = PlayMode::attacker;
-  ball.angle = 0;
-  ball.distance = 0;
-  ball.visible = false;
-
-  goal.angle = -1;
-  goal.distance = 0;
-  goal.visible = false;
+  role = PlayMode::attack;
 }
 
 void loop() {
   comp.updateGyro();
-
-  //Create another class which fetches
-  //goal data which takes an input of
-  //the robot's current role
-
   //Create another class which checks
   //whether the robots should switch
   //roles
+  camera.update();
+  camera.calculateEntities();
 
   orbit.setRole(role);
-  orbit.setGoalData(goal);
-  orbit.setBallData(ball);
+  orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
+  orbit.setBallData(camera.getBall());
   orbit.setCompAngle(comp.getHeading());
 
-  orbit.calculateMoveData();
-  orbit.calculateRotation();
+  //orbit.calculateMoveData();
+  //orbit.calculateRotation();
 
   move = orbit.getMoveData();
 

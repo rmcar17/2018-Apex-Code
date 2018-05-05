@@ -22,6 +22,8 @@
 
 #define ATTACK_GOAL Vector(FIELD_WIDTH / 2, 300, false)
 #define DEFEND_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH - 300, false)
+
+#define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
 // ORBIT
 
 #define CENTRE_ATTACKER_DISTANCE 10
@@ -29,8 +31,8 @@
 
 #define ORBIT_FORWARD_ANGLE_TIGHTENER 0.75
 
-#define CLOSE_ORBIT 155
-#define FAR_ORBIT 128
+#define CLOSE_ORBIT Vector(160, 0)
+#define FAR_ORBIT Vector(360, 0)
 
 #define BIG_ORBIT 50
 #define SMALL_ORBIT 20

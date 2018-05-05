@@ -19,12 +19,7 @@ void CameraController::calculateEntities(){
 }
 
 void CameraController::calculateEntity(Vector *entity, Image image){
-  if(image.visible){
-    *entity = Vector(calculateDistance(image.x, image.y), calculateAngle(image.x, image.y));
-  }
-  else{
-    *entity = Vector(-1,-1);
-  }
+  *entity = image.visible ? Vector(calculateDistance(image.x, image.y), calculateAngle(image.x, image.y)) : Vector(0,0);
 }
 
 int CameraController::calculateAngle(int x, int y){

@@ -19,8 +19,7 @@ class CameraController {
     Vector getDefendGoal();
     Vector getBall();
   private:
-    void calculateGoals(Image aGoal, Image dGoal);
-    void calculateBall(Image ballImage);
+    void calculateEntity(Vector *entity, Image image);
 
     int calculateAngle(int x, int y);
 
@@ -29,9 +28,9 @@ class CameraController {
     double calculateConeDistance(double distance);
     Camera camera = Camera();
 
-    Vector attackGoal; //attacking goal
-    Vector defendGoal; //defending goal
-    Vector ball;
+    Vector attackGoal = Vector(0,0); //attacking goal
+    Vector defendGoal = Vector(0,0); //defending goal
+    Vector ball = Vector(0,0);
 };
 
 #endif

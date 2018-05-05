@@ -31,7 +31,6 @@ void Motor::move(int speed){
     else
     {
       analogWrite(pwmPin, 0);
-      digitalWrite(dirPin, LOW);
-      digitalWrite(brkPin, HIGH);
+      digitalWrite(brkPin, LOW);
     }
 }

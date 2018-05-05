@@ -11,7 +11,6 @@
 #include <Common.h>
 #include <Vector.h>
 #include <PlayMode.h>
-#include <EntityData.h>
 #include <MoveData.h>
 #include <Debug.h>
 #include <Defines.h>
@@ -28,8 +27,6 @@ Orbit orbit;
 
 PlayMode role;
 
-EntityData ball;
-EntityData goal;
 MoveData move;
 
 void setup() {

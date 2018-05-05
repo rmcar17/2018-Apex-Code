@@ -6,7 +6,6 @@
 #include <Debug.h>
 #include <Defines.h>
 #include <PlayMode.h>
-#include <EntityData.h>
 #include <MoveData.h>
 
 class Orbit{

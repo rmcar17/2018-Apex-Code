@@ -13,32 +13,13 @@ void CameraController::update(){
 }
 
 void CameraController::calculateEntities(){
-  calculateGoals(camera.getAttackGoal(), camera.getDefendGoal());
-  calculateBall(camera.getBall());
+  calculateEntity(&attackGoal, camera.getAttackGoal());
+  calculateEntity(&defendGoal, camera.getDefendGoal());
+  calculateEntity(&ball, camera.getBall());
 }
 
-void CameraController::calculateGoals(Image aGoal, Image dGoal){
-  if(aGoal.visible){
-    attackGoal = Vector(calculateDistance(aGoal.x, aGoal.y), calculateAngle(aGoal.x, aGoal.y));
-  }
-  else{
-    attackGoal = Vector(0,0);
-  }
-  if(dGoal.visible){
-    defendGoal = Vector(calculateDistance(dGoal.x, dGoal.y), calculateAngle(dGoal.x, dGoal.y));
-  }
-  else{
-    defendGoal = Vector(0,0);
-  }
-}
-
-void CameraController::calculateBall(Image ballImage){
-  if(ballImage.visible){
-    ball = Vector(calculateDistance(ballImage.x, ballImage.y), calculateAngle(ballImage.x, ballImage.y));
-  }
-  else{
-    ball = Vector(0,0);
-  }
+void CameraController::calculateEntity(Vector *entity, Image image){
+  *entity = image.visible ? Vector(calculateDistance(image.x, image.y), calculateAngle(image.x, image.y)) : Vector(0,0);
 }
 
 int CameraController::calculateAngle(int x, int y){

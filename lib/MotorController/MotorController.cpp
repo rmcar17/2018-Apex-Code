@@ -5,10 +5,10 @@ MotorController::MotorController(){
 }
 
 void MotorController::motorSetup(){
-  motorFR = Motor(MOTORFR_PWM,MOTORFR_IN1,MOTORFR_IN2);
-  motorBR = Motor(MOTORBR_PWM,MOTORBR_IN1,MOTORBR_IN2);
-  motorBL = Motor(MOTORBL_PWM,MOTORBL_IN1,MOTORBL_IN2);
-  motorFL = Motor(MOTORFL_PWM,MOTORFL_IN1,MOTORFL_IN2);
+  motorFR = Motor(MOTORFR_PWM,MOTORFR_DIR,MOTORFR_BRK,MOTORFR_REV);
+  motorBR = Motor(MOTORBR_PWM,MOTORBR_DIR,MOTORBR_BRK,MOTORBR_REV);
+  motorBL = Motor(MOTORBL_PWM,MOTORBL_DIR,MOTORBL_BRK,MOTORBL_REV);
+  motorFL = Motor(MOTORFL_PWM,MOTORFL_DIR,MOTORFL_BRK,MOTORFL_REV);
   motorFR.motorSetup();
   motorBR.motorSetup();
   motorBL.motorSetup();
@@ -28,30 +28,31 @@ void MotorController::moveDirection(MoveData movement){
   if(angle == -1)
   {
     frontRightSpeed = rotation;
-    backRightSpeed = rotation;
-    backLeftSpeed = rotation;
+    backRightSpeed = -rotation;
+    backLeftSpeed = -rotation;
     frontLeftSpeed = rotation;
   }
   else
   {
     double multiplier;
 
-    double newAngle = toRadians(mod(45-angle, 360));
+    double newAngle = toRadians(mod(320 + angle, 360));
 
-    double b = angle > 135 && angle <= 315 ? -speed : speed;
-    double a = round(b * tan(newAngle));
-
-    if(abs(a) > speed)
-    {
-      multiplier = abs(speed / a);
-      b = b * multiplier;
-      a = a * multiplier;
+    double b = 1 / (cos(PI / 18) * tan(newAngle));
+    double a = 1 - b * sin(PI / 18);
+    if(newAngle > 0 && newAngle < PI){
+      b *= -1;
+      a *= -1;
     }
 
+    multiplier = 255 / max(abs(a), abs(b));
+    a *= multiplier;
+    b *= multiplier;
+
     frontRightSpeed = -a + rotation;
-    backRightSpeed = -b + rotation;
-    backLeftSpeed = a + rotation;
-    frontLeftSpeed = b + rotation;
+    backRightSpeed = b - rotation;
+    backLeftSpeed = a - rotation;
+    frontLeftSpeed = -b + rotation;
 
     multiplier = speed / max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed))));
 

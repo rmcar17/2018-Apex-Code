@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include <MotorController.h>
 #include <Motor.h>
-#include <TSOPController.h>
 #include <Compass.h>
 #include <LightSensor.h>
 #include <LightSensorController.h>
@@ -19,7 +18,6 @@
 #include <Pins.h>
 
 Compass comp;
-TSOPController tsops;
 
 CameraController camera;
 
@@ -49,10 +47,7 @@ void setup() {
 
   lights.setup();
 
-  tsops.TSOPSetup();
-
   orbit.resetAllData();
-
 
   role = PlayMode::attack;
 }

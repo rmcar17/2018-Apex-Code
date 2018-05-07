@@ -62,7 +62,6 @@ void Orbit::calculateMoveData(){
 
 void Orbit::calculateRotation(){
   double rotate;
-  //
   // if(attackGoal.visible){
   //   if(role == PlayMode::attack){
   //   rotate = rotation.update(attackGoal.angle < 180 ? attackGoal.angle : -(360 - attackGoal.angle));

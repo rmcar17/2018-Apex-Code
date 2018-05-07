@@ -67,7 +67,7 @@ void loop() {
 
   move = orbit.getMoveData();
 
-  motors.moveDirection(move);
+  motors.moveDirection({-1,MAX_SPEED,move.rotation});
 
   orbit.resetAllData();
 }

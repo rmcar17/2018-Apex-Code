@@ -57,20 +57,20 @@ void loop() {
   //Create another class which checks
   //whether the robots should switch
   //roles
-  camera.update();
-  camera.calculateEntities();
+  // camera.update();
+  // camera.calculateEntities();
 
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
   orbit.setCompAngle(comp.getHeading());
 
-  //orbit.calculateMoveData();
-  //orbit.calculateRotation();
+  orbit.calculateMoveData();
+  orbit.calculateRotation();
 
   move = orbit.getMoveData();
 
-  motors.moveDirection(move);
+  motors.moveDirection({-1,MAX_SPEED,move.rotation});
 
   orbit.resetAllData();
 }

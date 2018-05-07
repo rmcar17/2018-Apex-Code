@@ -60,24 +60,24 @@ void Orbit::calculateMoveData(){
   #endif
 }
 
-// void Orbit::calculateRotation(){
-//   double rotate;
-//
-//   if(attackGoal.visible){
-//     if(role == PlayMode::attack){
-//     rotate = rotation.update(attackGoal.angle < 180 ? attackGoal.angle : -(360 - attackGoal.angle));
-//     }
-//     else{
-//       double oppositeAngle = mod(attackGoal.angle + 180, 360);
-//       rotate = rotation.update(oppositeAngle < 180 ? oppositeAngle : -(360 - oppositeAngle));
-//     }
-//   }
-//   else{
-//     rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
-//   }
-//
-//   movement.rotation = round(rotate);
-// }
+void Orbit::calculateRotation(){
+  double rotate;
+
+  // if(attackGoal.visible){
+  //   if(role == PlayMode::attack){
+  //   rotate = rotation.update(attackGoal.angle < 180 ? attackGoal.angle : -(360 - attackGoal.angle));
+  //   }
+  //   else{
+  //     double oppositeAngle = mod(attackGoal.angle + 180, 360);
+  //     rotate = rotation.update(oppositeAngle < 180 ? oppositeAngle : -(360 - oppositeAngle));
+  //   }
+  // }
+  // else{
+    rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
+  // }
+
+  movement.rotation = round(rotate);
+}
 
 void Orbit::calcAttacker(){
   if(ball.exists()){

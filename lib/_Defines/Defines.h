@@ -10,12 +10,6 @@
 #define ROTATION_KI 0
 #define ROTATION_KD 0.3
 
-// MOTORS
-#define MOTOR1_ANG 45
-#define MOTOR2_ANG 135
-#define MOTOR3_ANG 225
-#define MOTOR4_ANG 315
-
 // Coordinates
 #define FIELD_WIDTH 1820
 #define FIELD_LENGTH 2430
@@ -55,6 +49,7 @@
 #define CAMERA_HEIGHT 32
 #define CAMERA_ORIGIN 96
 #define CIRCLE_RADIUS 32
+#define PIXEL_TO_MM 50 / 227
 // LIGHT SENSORS
 
 #define LS_NUM 4

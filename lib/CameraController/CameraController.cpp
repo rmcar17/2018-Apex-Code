@@ -31,7 +31,7 @@ int CameraController::calculateAngle(int x, int y){
 }
 
 double CameraController::calculateDistance(int x, int y){
-  double cameraDistance = sqrt(x*x+y*y);
+  double cameraDistance = sqrt(x*x+y*y) * PIXEL_TO_MM;
 
   return cameraDistance < CAM_SWITCH_D ? calculateCircleDistance(cameraDistance) : calculateConeDistance(cameraDistance);
 }

@@ -46,7 +46,7 @@
 
 #define CAM_SWITCH_D 16
 
-#define CAMERA_HEIGHT 32
+#define CAMERA_HEIGHT 134
 #define CAMERA_ORIGIN 96
 #define CIRCLE_RADIUS 32
 #define PIXEL_TO_MM 50 / 227

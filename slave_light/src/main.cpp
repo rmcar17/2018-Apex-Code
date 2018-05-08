@@ -26,19 +26,19 @@ void spi0_isr(){
 	uint8_t command = (dataIn >> 10);
 	uint16_t data = (dataIn & 0x3FF);
 
-	uint16_t dataOut = (uint16_t)69;
+	uint16_t dataOut = 0;
 
-	// switch(command){
-	// case 0:
-	// 	dataOut = (uint16_t)100;//(uint16_t)lights.vectorAngle;
-	// 	break;
-	// case 1:
-	// 	dataOut = (uint16_t)200;//(uint16_t)lights.lineAngle;
-	// 	break;
-	// default:
-	// 	dataOut = (uint16_t)10;
-	// 	break;
-	// }
+	switch(command){
+	case 0:
+		dataOut = (uint16_t)lights.vectorAngle;//(uint16_t)lights.vectorAngle;
+		break;
+	case 1:
+		dataOut = (uint16_t)lights.lineAngle;//(uint16_t)lights.lineAngle;
+		break;
+	default:
+		dataOut = (uint16_t)69;
+		break;
+	}
 
 	SPI0_PUSHR_SLAVE = dataOut;
 	SPI0_SR |= SPI_SR_RFDF;

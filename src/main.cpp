@@ -11,7 +11,7 @@
 #include <PID.h>
 #include <Common.h>
 #include <Vector.h>
-#include <PlayMode.h>
+#include <Role.h>
 #include <MoveData.h>
 #include <Debug.h>
 #include <Defines.h>
@@ -26,7 +26,7 @@ MotorController motors;
 LightSensorController lights;
 Orbit orbit;
 
-PlayMode role;
+Role role;
 
 MoveData move;
 
@@ -47,12 +47,12 @@ void setup() {
 
   orbit.resetAllData();
 
-  role = PlayMode::attack;
+  role = Role::attack;
 }
 
 void loop() {
   comp.updateGyro();
-  
+
   // camera.update();
   // camera.calculateEntities();
 

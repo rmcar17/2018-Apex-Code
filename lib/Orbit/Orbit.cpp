@@ -4,8 +4,8 @@ Orbit::Orbit(){
 
 }
 
-void Orbit::setRole(PlayMode playMode){
-  role = playMode;
+void Orbit::setRole(Role _role){
+  role = _role;
 }
 
 void Orbit::setBallData(Vector ballData){
@@ -46,7 +46,7 @@ void Orbit::calculateCoordinates(){
 }
 
 void Orbit::calculateMoveData(){
-  if(role == PlayMode::attack){
+  if(role == Role::attack){
     calcAttacker();
   }
   else{
@@ -63,7 +63,7 @@ void Orbit::calculateMoveData(){
 void Orbit::calculateRotation(){
   double rotate;
   // if(attackGoal.visible){
-  //   if(role == PlayMode::attack){
+  //   if(role == Role::attack){
   //   rotate = rotation.update(attackGoal.angle < 180 ? attackGoal.angle : -(360 - attackGoal.angle));
   //   }
   //   else{
@@ -191,7 +191,7 @@ void Orbit::centre(){
 // }
 
 void Orbit::resetAllData(){
-  role = PlayMode::undecided;
+  role = Role::undecided;
   ball = Vector(0, 0);
   ballPosition = Vector(0, 0);
   attackGoal = Vector(0, 0);

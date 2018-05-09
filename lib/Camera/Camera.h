@@ -5,7 +5,7 @@
 #include <Debug.h>
 #include <Pins.h>
 #include <Image.h>
-#include <PlayMode.h>
+#include <Role.h>
 
 class Camera{
   public:
@@ -18,8 +18,8 @@ class Camera{
     Image getDefendGoal();
     Image getBall();
   private:
-    PlayMode isBlueAttack();
-    PlayMode blueAttack = PlayMode::undecided;
+    Role isBlueAttack();
+    Role blueAttack = Role::undecided;
 
     int camBuffer[CAM_BUFFER_NUM] = {0};
     Image blueGoal;

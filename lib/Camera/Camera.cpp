@@ -41,7 +41,7 @@ void Camera::update(){
     Serial.println(")");
   #endif
 
-  if(blueAttack == PlayMode::undecided){
+  if(blueAttack == Role::undecided){
     blueAttack = isBlueAttack();
   }
 }
@@ -51,23 +51,23 @@ Image Camera::getBall(){
 }
 
 Image Camera::getAttackGoal(){
-  return blueAttack == PlayMode::attack ? blueGoal : yellowGoal;
+  return blueAttack == Role::attack ? blueGoal : yellowGoal;
 }
 
 Image Camera::getDefendGoal(){
-  return blueAttack == PlayMode::attack ? yellowGoal : blueGoal;
+  return blueAttack == Role::attack ? yellowGoal : blueGoal;
 }
 
-PlayMode Camera::isBlueAttack(){
+Role Camera::isBlueAttack(){
   #if ATTACK_GOAL_OVERIDE
-    return OVERIDE_BLUE ? PlayMode::attack : PlayMode::defend;
+    return OVERIDE_BLUE ? Role::attack : Role::defend;
   #else
     if((blueGoal.visible && blueGoal.y < CAM_CENTRE_Y) || (yellowGoal.visible && yellowGoal.y > CAM_CENTRE_Y)){
-      return PlayMode::attack;
+      return Role::attack;
     }
     else if ((blueGoal.visible && blueGoal.y > CAM_CENTRE_Y) || (yellowGoal.visible && yellowGoal.y < CAM_CENTRE_Y)){
-      return PlayMode::defend;
+      return Role::defend;
     }
-    return PlayMode::undecided;
+    return Role::undecided;
   #endif
 }

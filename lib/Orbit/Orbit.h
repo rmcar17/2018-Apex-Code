@@ -5,14 +5,14 @@
 #include <Pid.h>
 #include <Debug.h>
 #include <Defines.h>
-#include <PlayMode.h>
+#include <Role.h>
 #include <MoveData.h>
 
 class Orbit{
   public:
     Orbit();
 
-    void setRole(PlayMode playMode);
+    void setRole(Role _role);
     void setBallData(Vector ballData);
     void setGoalData(Vector aGoal, Vector dGoal);
     void setCompAngle(int heading);
@@ -39,7 +39,7 @@ class Orbit{
     void centre();
     void moveToBall();
 
-    PlayMode role = PlayMode::undecided;
+    Role role = Role::undecided;
 
     Vector ball = Vector(0, 0);
     Vector attackGoal = Vector(0, 0);

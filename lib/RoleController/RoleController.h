@@ -1,0 +1,4 @@
+#ifndef ROLECONTROLLER_H
+#define ROLECONTROLLER_H
+
+#endif

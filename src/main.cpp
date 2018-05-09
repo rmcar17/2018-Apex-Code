@@ -7,6 +7,7 @@
 #include <Orbit.h>
 #include <Camera.h>
 #include <CameraController.h>
+#include <RoleController.h>
 #include <PID.h>
 #include <Common.h>
 #include <Vector.h>
@@ -51,9 +52,7 @@ void setup() {
 
 void loop() {
   comp.updateGyro();
-  //Create another class which checks
-  //whether the robots should switch
-  //roles
+  
   // camera.update();
   // camera.calculateEntities();
 

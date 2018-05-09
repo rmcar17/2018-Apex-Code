@@ -15,7 +15,7 @@ sensor.skip_frames(time = 1000)
 sensor.set_auto_gain(False)
 sensor.set_auto_whitebal(False)
 clock = time.clock()
-LED(1).on()
+#LED(1).on()
 def largestBlob(lBlob):
     if not lBlob:
         return None
@@ -30,8 +30,6 @@ while(True):
     sendBuffer = [1,0,0,0,0,0,0,0,0,0]
 
     img = sensor.snapshot()
-    img.draw_cross(160,120)
-    img.draw_cross(180,120)
     ballBlob = largestBlob(img.find_blobs(ball))
     blueBlob = largestBlob(img.find_blobs(blueGoal))
     yellowBlob = largestBlob(img.find_blobs(yellowGoal))
@@ -60,7 +58,7 @@ while(True):
     for i in range(1,len(sendBuffer)):
         if sendBuffer[i] == 1:
             sendBuffer[i] = 2
-    string = ""
+    #string = ""
     #LED(1).on()
     for i in sendBuffer:
         try:
@@ -70,7 +68,7 @@ while(True):
             #print(i)
         except Exception as E:
             print(E)
-        string += " "+str(i)
+        #string += " "+str(i)
     #print(string)
     #LED(1).off()
     #print(clock.fps())

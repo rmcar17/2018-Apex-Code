@@ -8,16 +8,21 @@
 LightSensorController lights;
 T3SPI spi;
 
+int ledPin = 13;
+
 
 void setup(){
+	Serial.begin(9600);
 	spi.begin_SLAVE(SLAVE_LIGHT_SCK, SLAVE_LIGHT_MOSI, SLAVE_LIGHT_MISO, SLAVE_LIGHT_CS);
 	spi.setCTAR_SLAVE(16, SPI_MODE0);
 	NVIC_ENABLE_IRQ(IRQ_SPI0);
 	lights.setup();
+	pinMode(ledPin,OUTPUT);
 }
 
 void loop(){
 	lights.update();
+	digitalWrite(ledPin,HIGH);
 }
 
 void spi0_isr(){
@@ -30,10 +35,10 @@ void spi0_isr(){
 
 	switch(command){
 	case 0:
-		dataOut = (uint16_t)lights.vectorAngle;//(uint16_t)lights.vectorAngle;
+		dataOut = (uint16_t)25;//lights.vectorAngle;//(uint16_t)lights.vectorAngle;
 		break;
 	case 1:
-		dataOut = (uint16_t)lights.lineAngle;//(uint16_t)lights.lineAngle;
+		dataOut = (uint16_t)50;//lights.lineAngle;//(uint16_t)lights.lineAngle;
 		break;
 	default:
 		dataOut = (uint16_t)69;

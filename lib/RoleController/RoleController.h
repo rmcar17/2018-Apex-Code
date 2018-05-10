@@ -4,7 +4,10 @@
 #include <Vector.h>
 
 class RoleController {
-  RoleController();
+  public:
+    RoleController();
+    void receiveData();
+    void decideRoles();
 };
 
 #endif

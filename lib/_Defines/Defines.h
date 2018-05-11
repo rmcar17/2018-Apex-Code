@@ -39,6 +39,8 @@
 #define ATTACK_GOAL_OVERIDE false
 #define OVERIDE_BLUE true
 
+#define CAMERA_UPDATE_TIME 0
+
 #define CAM_BUFFER_NUM 8
 
 #define CAM_CENTRE_X 160

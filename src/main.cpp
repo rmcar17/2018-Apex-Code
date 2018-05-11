@@ -8,6 +8,7 @@
 #include <Camera.h>
 #include <CameraController.h>
 #include <RoleController.h>
+#include <Timer.h>
 #include <PID.h>
 #include <Common.h>
 #include <Vector.h>

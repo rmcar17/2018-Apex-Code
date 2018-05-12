@@ -10,6 +10,7 @@ void CameraController::setup(){
 
 void CameraController::update(){
   camera.update();
+  calculateEntities();
 }
 
 void CameraController::calculateEntities(){

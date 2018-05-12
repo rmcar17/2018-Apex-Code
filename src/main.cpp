@@ -61,7 +61,6 @@ void loop() {
   // comp.updateGyro();
 
   camera.update();
-  camera.calculateEntities();
   //
   // orbit.setRole(role);
   // orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());

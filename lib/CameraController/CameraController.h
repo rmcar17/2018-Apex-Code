@@ -13,12 +13,12 @@ class CameraController {
     void setup();
     void update();
 
-    void calculateEntities();
 
     Vector getAttackGoal();
     Vector getDefendGoal();
     Vector getBall();
   private:
+    void calculateEntities();
     void calculateEntity(Vector *entity, Image image);
 
     int calculateAngle(int x, int y);

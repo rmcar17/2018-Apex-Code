@@ -34,4 +34,6 @@ const int lightPins[LS_NUM] = {A0, A1, A2, A3};
 #define MOTORFL_BRK 50
 #define MOTORFL_REV false
 
+// Teensy
+#define TEENSY_LED 13
 #endif

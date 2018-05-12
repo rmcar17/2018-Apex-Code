@@ -11,9 +11,6 @@ void Camera::setup(){
 }
 
 void Camera::update(){
-  if(!cameraTimer.hasTimePassed()){
-    return;
-  }
   while(cameraSerial.read() != 1);
   for(int i = 0; i < CAM_BUFFER_NUM; i++){
     while(!(cameraSerial.available() > 0));

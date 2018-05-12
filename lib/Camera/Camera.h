@@ -19,7 +19,6 @@ class Camera{
     Image getDefendGoal();
     Image getBall();
   private:
-    Timer cameraTimer = Timer(CAMERA_UPDATE_TIME);
     Role isBlueAttack();
     Role blueAttack = Role::undecided;
 

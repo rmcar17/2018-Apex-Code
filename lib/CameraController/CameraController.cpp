@@ -9,8 +9,10 @@ void CameraController::setup(){
 }
 
 void CameraController::update(){
+  if(cameraTimer.hasTimePassed()){
   camera.update();
   calculateEntities();
+  }
 }
 
 void CameraController::calculateEntities(){

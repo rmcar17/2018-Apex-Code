@@ -32,6 +32,8 @@ Role role;
 MoveData move;
 
 void setup() {
+  pinMode(TEENSY_LED, OUTPUT);
+
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
@@ -49,25 +51,29 @@ void setup() {
   orbit.resetAllData();
 
   role = Role::attack;
+
+  digitalWrite(TEENSY_LED, HIGH);
+  delay(250);
+  digitalWrite(TEENSY_LED, LOW);
 }
 
 void loop() {
-  comp.updateGyro();
+  // comp.updateGyro();
 
   camera.update();
   camera.calculateEntities();
-
-  orbit.setRole(role);
-  orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
-  orbit.setBallData(camera.getBall());
-  orbit.setCompAngle(comp.getHeading());
-
-  orbit.calculateMoveData();
-  orbit.calculateRotation();
-
-  move = orbit.getMoveData();
-
-  motors.moveDirection(move);
-
-  orbit.resetAllData();
+  //
+  // orbit.setRole(role);
+  // orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
+  // orbit.setBallData(camera.getBall());
+  // orbit.setCompAngle(comp.getHeading());
+  //
+  // orbit.calculateMoveData();
+  // orbit.calculateRotation();
+  //
+  // move = orbit.getMoveData();
+  //
+  // motors.moveDirection(move);
+  //
+  // orbit.resetAllData();
 }

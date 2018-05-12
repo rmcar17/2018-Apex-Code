@@ -42,8 +42,7 @@ while(True):
     yellowBlob = largestBlob(img.find_blobs(yellowGoal,roi=(27,0,252,240),x_stride=8,y_stride=4))
 
     if ballBlob:
-        img.draw_cross(ballBlob.cx(), ballBlob.cy())
-        print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5)*50/237)
+        #img.draw_cross(ballBlob.cx(), ballBlob.cy())
         if ballBlob.cx() >= 255:
             sendBuffer[1] = 255
         sendBuffer[2] = ballBlob.cx() % 255

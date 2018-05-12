@@ -13,9 +13,16 @@ void CameraController::update(){
 }
 
 void CameraController::calculateEntities(){
+  calculateEntity(&ball, camera.getBall());
   calculateEntity(&attackGoal, camera.getAttackGoal());
   calculateEntity(&defendGoal, camera.getDefendGoal());
-  calculateEntity(&ball, camera.getBall());
+
+  #if DEBUG_CAMERA
+    Serial.print("BALL: ");
+    Serial.print(ball.arg);
+    Serial.print(" ");
+    Serial.println(ball.mag);
+  #endif
 }
 
 void CameraController::calculateEntity(Vector *entity, Image image){
@@ -26,13 +33,15 @@ int CameraController::calculateAngle(int x, int y){
   double X = CAM_CENTRE_X-x;
   double Y = CAM_CENTRE_Y-y;
 
-  int angle = mod(450 - round(toDegrees(atan2(Y,X))),360);
+  int angle = mod(630 - round(toDegrees(atan2(Y,X))),360);
   return angle;
 }
 
 double CameraController::calculateDistance(int x, int y){
-  double cameraDistance = sqrt(x*x+y*y) * PIXEL_TO_MM;
+  double X = CAM_CENTRE_X-x;
+  double Y = CAM_CENTRE_Y-y;
 
+  double cameraDistance = sqrt(X*X+Y*Y) * PIXEL_TO_MM;
   return cameraDistance < CAM_SWITCH_D ? calculateCircleDistance(cameraDistance) : calculateConeDistance(cameraDistance);
 }
 

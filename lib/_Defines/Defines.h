@@ -33,7 +33,7 @@
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define MAX_SPEED 255
+#define MAX_SPEED 100
 
 // Camera
 #define ATTACK_GOAL_OVERIDE false

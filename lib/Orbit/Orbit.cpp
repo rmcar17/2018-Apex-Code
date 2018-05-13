@@ -54,7 +54,7 @@ void Orbit::calculateMoveData(){
   }
   #if DEBUG_ORBIT
     Serial.print("BALL ANGLE: ");
-    Serial.print(ball.angle);
+    Serial.print(ball.arg);
     Serial.print("  MOVE ANGLE: ");
     Serial.println(movement.angle);
   #endif
@@ -100,7 +100,7 @@ void Orbit::calcAttacker(){
   }
   else{
     if(robotPosition.exists()){
-      centre();
+      //centre();
     }
     //If can't see goal or ball, the robot
     //can't do anything so just compass correct

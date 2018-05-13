@@ -58,21 +58,21 @@ void setup() {
 }
 
 void loop() {
-  // comp.updateGyro();
+  comp.updateGyro();
 
   camera.update();
-  //
-  // orbit.setRole(role);
-  // orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
-  // orbit.setBallData(camera.getBall());
-  // orbit.setCompAngle(comp.getHeading());
-  //
-  // orbit.calculateMoveData();
-  // orbit.calculateRotation();
-  //
-  // move = orbit.getMoveData();
-  //
-  // motors.moveDirection(move);
-  //
-  // orbit.resetAllData();
+
+  orbit.setRole(role);
+  orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
+  orbit.setBallData(camera.getBall());
+  orbit.setCompAngle(comp.getHeading());
+
+  orbit.calculateMoveData();
+  orbit.calculateRotation();
+
+  move = orbit.getMoveData();
+
+  motors.moveDirection(move);
+
+  orbit.resetAllData();
 }

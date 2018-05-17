@@ -14,7 +14,7 @@ class LightSensorController {
 		void setup();
 		void read();
 		int lightValues[LS_NUM] = {0};
-		bool onWhite[LS_NUM] = {false};
+		bool onWhite[LS_NUM] = {0};
 		void update();
 		void updateOnWhite();
 		bool inRange(double value, double target, int range);

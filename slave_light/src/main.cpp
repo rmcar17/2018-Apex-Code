@@ -33,15 +33,21 @@ void spi0_isr(){
 
 	uint16_t dataOut = 0;
 
+	uint16_t lightVector;
+
+	if(lights.vectorAngle<0){
+		lightVector = (uint16_t)69;
+	}else{
+		lightVector = (uint16_t)((int)lights.vectorAngle);
+	}
+
+	
+	
+	uint16_t lightLine = (int)lights.lineAngle;
+
 	switch(command){
 	case 0:
-		dataOut = (uint16_t)25;//lights.vectorAngle;//(uint16_t)lights.vectorAngle;
-		break;
-	case 1:
-		dataOut = (uint16_t)50;//lights.lineAngle;//(uint16_t)lights.lineAngle;
-		break;
-	case 2:
-		dataOut = (uint16_t)lights.lightValues[0];
+		dataOut = lightVector;
 		break;
 	default:
 		dataOut = (uint16_t)69;

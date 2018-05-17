@@ -25,7 +25,7 @@ void LightSensorController::calibrate(){
 		}
 		calibration = round(total / LS_CALIBRATION_NUM) + 100;
 
-		lightArray[ls].setThresh(calibration);
+		lightArray[ls].setThresh(1000);
 	}
 }
 

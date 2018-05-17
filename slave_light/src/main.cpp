@@ -40,6 +40,9 @@ void spi0_isr(){
 	case 1:
 		dataOut = (uint16_t)50;//lights.lineAngle;//(uint16_t)lights.lineAngle;
 		break;
+	case 2:
+		dataOut = (uint16_t)lights.lightValues[0];
+		break;
 	default:
 		dataOut = (uint16_t)69;
 		break;

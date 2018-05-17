@@ -79,8 +79,8 @@ void loop() {
   lights.update();
   
   ball = tsops.getBallData();
-  ballVector = transaction((((uint8_t) 0)));
-  ballLine = transaction((((uint8_t) 1)));
+  ballVector = transaction(0);
+  ballLine = transaction(1);
 
   //Create another class which fetches
   //goal data which takes an input of

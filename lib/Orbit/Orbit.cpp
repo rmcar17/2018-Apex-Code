@@ -62,12 +62,13 @@ void Orbit::calculateMoveData(){
 
 void Orbit::calculateRotation(){
   double rotate;
-  // if(attackGoal.visible){
+  // if(attackGoal.exists()){
+  //   Serial.println(attackGoal.arg);
   //   if(role == Role::attack){
-  //   rotate = rotation.update(attackGoal.angle < 180 ? attackGoal.angle : -(360 - attackGoal.angle));
+  //   rotate = rotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
   //   }
   //   else{
-  //     double oppositeAngle = mod(attackGoal.angle + 180, 360);
+  //     double oppositeAngle = mod(attackGoal.arg + 180, 360);
   //     rotate = rotation.update(oppositeAngle < 180 ? oppositeAngle : -(360 - oppositeAngle));
   //   }
   // }

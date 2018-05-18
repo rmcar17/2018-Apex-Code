@@ -36,7 +36,7 @@
 #define MAX_SPEED 100
 
 // Camera
-#define ATTACK_GOAL_OVERIDE false
+#define ATTACK_GOAL_OVERIDE true
 #define OVERIDE_BLUE true
 
 #define CAMERA_UPDATE_TIME 47000

@@ -2,7 +2,7 @@ import sensor, image, time
 from pyb import UART, LED
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
-ball = [(51, 60, 25, 69, 3, 35)]
+ball = [(54,72,37,65,-3,25)]
 blueGoal = [(41, 50,-8,-4,-22,-15)]
 yellowGoal = [(61,70,-3,10,15,32)]
 

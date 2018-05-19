@@ -25,7 +25,7 @@ void LightSensorController::calibrate(){
 		}
 		calibration = round(total / LS_CALIBRATION_NUM) + 100;
 
-		lightArray[ls].setThresh(1000);
+		lightArray[ls].setThresh(1020);
 	}
 }
 
@@ -39,6 +39,15 @@ void LightSensorController::read(){
 			Serial.print(lightValues[i]);
 		#endif
 	}
+}
+
+double LightSensorController::getVectorAngle(){
+	return vectorAngle;
+}
+
+
+double LightSensorController::getLineAngle(){
+	return lineAngle;
 }
 
 void LightSensorController::update(){
@@ -62,7 +71,7 @@ void LightSensorController::update(){
 		}
 		else if(danger >= 5 && danger <= 7){
 			if(inRange(vectorAngle, initAngle, 90)){
-				lineAngle= initAngle;
+				lineAngle = initAngle;
 				danger = 1;
 			}
 			else{
@@ -97,14 +106,17 @@ void LightSensorController::calcVectorAngle(){
 	vectorX = 0;
 	vectorY = 0;
 	for(int i = 0; i < LS_NUM; i++){
-		if(onWhite[i]){
-			any = true;
-			vectorX += sin((450-i*(360/LS_NUM))*PI/180);
-      		vectorY += cos((450-i*(360/LS_NUM))*PI/180);
+		bool exists = std::find(std::begin(brokenPins), std::end(brokenPins), i) != std::end(brokenPins);
+		if(!exists){
+			if(onWhite[i]){
+				any = true;
+				vectorX += sin((450-i*(360/LS_NUM))*PI/180);
+	      		vectorY += cos((450-i*(360/LS_NUM))*PI/180);
+			}
 		}
 	}
 	if(any){
-		vectorAngle = correctRange((atan2(vectorY,vectorX)*180/PI),0,360);
+		vectorAngle = correctRange(360-(atan2(vectorY,vectorX)*180/PI),0,360);
 	}
 	else{
 		vectorAngle = -1;

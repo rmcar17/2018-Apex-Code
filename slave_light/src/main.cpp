@@ -23,6 +23,18 @@ void setup(){
 void loop(){
 	lights.update();
 	digitalWrite(ledPin,HIGH);
+	if(false){ 	// DELETE THIS CODE AFTER DEBUG
+		for(int i = 0; i < 24; i++){
+			Serial.print(lights.lightValues[i]);
+			Serial.print(" ");
+		}
+		Serial.println();
+	}
+	Serial.print(lights.getVectorAngle());
+	Serial.print("\t");
+	Serial.print(lights.getLineAngle());
+	Serial.print("\t");
+	Serial.println(lights.danger);
 }
 
 void spi0_isr(){
@@ -35,15 +47,11 @@ void spi0_isr(){
 
 	uint16_t lightVector;
 
-	if(lights.vectorAngle<0){
-		lightVector = (uint16_t)69;
-	}else{
-		lightVector = (uint16_t)((int)lights.vectorAngle);
-	}
+	lightVector = (uint16_t)((int)lights.getVectorAngle());
 
 	
 	
-	uint16_t lightLine = (int)lights.lineAngle;
+	uint16_t lightLine = (uint16_t)((int)lights.getLineAngle());
 
 	switch(command){
 	case 0:

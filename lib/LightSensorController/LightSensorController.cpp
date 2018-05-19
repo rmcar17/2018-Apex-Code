@@ -116,7 +116,7 @@ void LightSensorController::calcVectorAngle(){
 		}
 	}
 	if(any){
-		vectorAngle = correctRange(360-(atan2(vectorY,vectorX)*180/PI),0,360);
+		vectorAngle = correctRange(360-(180+(atan2(vectorY,vectorX)*180/PI)),0,360);
 	}
 	else{
 		vectorAngle = -1;

@@ -20,15 +20,14 @@ class CameraController {
   private:
     Camera camera = Camera();
     Timer cameraTimer = Timer(CAMERA_UPDATE_TIME);
-    
+
     void calculateEntities();
-    void calculateEntity(Vector *entity, Image image);
+    void calculateBall(Image ballImage);
 
     int calculateAngle(int x, int y);
 
-    double calculateDistance(int x, int y);
-    double calculateCircleDistance(double distance);
-    double calculateConeDistance(double distance);
+    double getDistance(Image image);
+    double calculateBallDistance(double distance);
 
     Vector attackGoal = Vector(0,0); //attacking goal
     Vector defendGoal = Vector(0,0); //defending goal

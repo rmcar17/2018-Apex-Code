@@ -16,9 +16,9 @@ void CameraController::update(){
 }
 
 void CameraController::calculateEntities(){
-  calculateEntity(&ball, camera.getBall());
-  calculateEntity(&attackGoal, camera.getAttackGoal());
-  calculateEntity(&defendGoal, camera.getDefendGoal());
+  calculateBall(camera.getBall());
+  // calculateEntity(&attackGoal, camera.getAttackGoal());
+  // calculateEntity(&defendGoal, camera.getDefendGoal());
 
   #if DEBUG_CAMERA
     Serial.print("BALL: ");
@@ -28,8 +28,8 @@ void CameraController::calculateEntities(){
   #endif
 }
 
-void CameraController::calculateEntity(Vector *entity, Image image){
-  *entity = image.visible ? Vector(calculateDistance(image.x, image.y), calculateAngle(image.x, image.y)) : Vector(0,0);
+void CameraController::calculateBall(Image ballImage){
+  ball = ballImage.visible ? Vector(calculateBallDistance(getDistance(ballImage)), calculateAngle(ballImage.x, ballImage.y)) : Vector(0,0);
 }
 
 int CameraController::calculateAngle(int x, int y){
@@ -40,31 +40,14 @@ int CameraController::calculateAngle(int x, int y){
   return angle;
 }
 
-double CameraController::calculateDistance(int x, int y){
-  double X = CAM_CENTRE_X-x;
-  double Y = CAM_CENTRE_Y-y;
-
-  double cameraDistance = sqrt(X*X+Y*Y) * PIXEL_TO_MM;
-  return cameraDistance < CAM_SWITCH_D ? calculateCircleDistance(cameraDistance) : calculateConeDistance(cameraDistance);
+double CameraController::getDistance(Image image){
+  int x = image.x - CAM_CENTRE_X;
+  int y = image.y - CAM_CENTRE_Y;
+  return sqrt(x * x + y * y);
 }
 
-double CameraController::calculateCircleDistance(double distance){
-  double mirrorHeight = CAMERA_ORIGIN-sqrt(pow(CIRCLE_RADIUS,2)-pow(distance,2));
-
-  double tangentAngle = atan(distance / sqrt(pow(CIRCLE_RADIUS,2) - pow(distance,2)));
-  double reflectionAngle = atan((mirrorHeight-CAMERA_HEIGHT) / distance);
-
-  double finalDistance = distance + mirrorHeight * abs(tan(PI/2 - reflectionAngle + 2 * tangentAngle));
-  return finalDistance;
-}
-
-double CameraController::calculateConeDistance(double distance){
-  double mirrorHeight = (sqrt(3) / 3) * distance + CAMERA_ORIGIN - sqrt(pow(32,2)+pow(CAM_SWITCH_D,2)) - (sqrt(3) / 3) * CAM_SWITCH_D;
-
-  double reflectionAngle = atan((mirrorHeight-CAMERA_HEIGHT) / distance);
-
-  double finalDistance = distance + mirrorHeight * tan(5*PI/6 - reflectionAngle);
-  return finalDistance;
+double CameraController::calculateBallDistance(double distance){
+  return 0.8872 * exp(0.0618 * distance) + 100;
 }
 
 Vector CameraController::getAttackGoal(){

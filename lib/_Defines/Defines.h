@@ -18,26 +18,28 @@
 #define DEFEND_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH - 300, false)
 
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
+
 // ORBIT
+#define GOAL_TRACK false
 
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
 
-#define ORBIT_FORWARD_ANGLE_TIGHTENER 1
+#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.8
 
-#define CLOSE_ORBIT Vector(280, 0)
-#define FAR_ORBIT Vector(330, 0)
+#define CLOSE_ORBIT Vector(250, 0)
+#define FAR_ORBIT Vector(300, 0)
 
-#define BIG_ORBIT 20
-#define SMALL_ORBIT 10
+#define BIG_ORBIT 30
+#define SMALL_ORBIT 20
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define MAX_SPEED 100
+#define MAX_SPEED 40
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true
-#define OVERIDE_BLUE true
+#define OVERIDE_BLUE false
 
 #define CAMERA_UPDATE_TIME 47000
 

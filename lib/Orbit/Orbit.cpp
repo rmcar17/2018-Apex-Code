@@ -63,21 +63,27 @@ void Orbit::calculateMoveData(){
 }
 
 void Orbit::calculateRotation(){
-  double rotate;
-  // if(attackGoal.exists()){
-  //   Serial.println(attackGoal.arg);
-  //   if(role == Role::attack){
-  //   rotate = rotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
-  //   }
-  //   else{
-  //     double oppositeAngle = mod(attackGoal.arg + 180, 360);
-  //     rotate = rotation.update(oppositeAngle < 180 ? oppositeAngle : -(360 - oppositeAngle));
-  //   }
-  // }
-  // else{
+  double rotate = 0;
+  #if GOAL_TRACK
+  if(role == Role::attack && attackGoal.exists()){
+    Serial.println(attackGoal.arg);
+    if(!isAngleBetween(attackGoal.arg,345,15) && isAngleBetween(compAngle,320,40) && isAngleBetween(attackGoal.arg,330,30)){
+      attackGoal.arg = 360-attackGoal.arg;
+      rotate = rotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
+    }
+  }
+  else if(role == Role::defend && defendGoal.exists() && isAngleBetween(compAngle,320,40)){
+    if(!isAngleBetween(defendGoal.arg,165,195)){
+      double oppositeAngle = 360 - mod(defendGoal.arg + 180, 360);
+      rotate = rotation.update(oppositeAngle < 180 ? oppositeAngle : -(360 - oppositeAngle));
+    }
+  }
+  else{
     rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
-  // }
-
+  }
+  #else
+      rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
+  #endif
   movement.rotation = round(rotate);
 }
 
@@ -86,19 +92,24 @@ void Orbit::calcAttacker(){
     if(ball < FAR_ORBIT){
       if(isAngleBetween(ball.arg, 360 - SMALL_ORBIT, SMALL_ORBIT)){
         calcSmallOrbit();
+        Serial.println("SMALL");
       }
       else if(isAngleBetween(ball.arg, 360 - BIG_ORBIT, BIG_ORBIT)){
         calcBigOrbit();
+        Serial.println("BIG");
       }
       else if(ball < CLOSE_ORBIT){
         calcCloseOrbit();
+        Serial.println("CLOSE");
       }
       else if(ball < FAR_ORBIT){
         calcMediumOrbit();
+        Serial.println("MEDIUM");
       }
     }
     else{
       calcFarOrbit();
+      Serial.println("FAR");
     }
   }
   else{

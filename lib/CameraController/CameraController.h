@@ -23,6 +23,7 @@ class CameraController {
 
     void calculateEntities();
     void calculateBall(Image ballImage);
+    void calculateGoal(Vector *goal, Image goalImage);
 
     int calculateAngle(int x, int y);
 

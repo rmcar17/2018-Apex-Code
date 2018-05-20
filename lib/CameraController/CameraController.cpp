@@ -18,8 +18,7 @@ void CameraController::update(){
 void CameraController::calculateEntities(){
   calculateBall(camera.getBall());
   calculateGoal(&attackGoal, camera.getAttackGoal());
-  // calculateEntity(&attackGoal, camera.getAttackGoal());
-  // calculateEntity(&defendGoal, camera.getDefendGoal());
+  calculateGoal(&defendGoal, camera.getDefendGoal());
 
   #if DEBUG_CAMERA
     Serial.print("BALL: ");

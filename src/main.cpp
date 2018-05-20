@@ -33,7 +33,7 @@ MoveData move;
 
 void setup() {
   pinMode(TEENSY_LED, OUTPUT);
-  
+
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif

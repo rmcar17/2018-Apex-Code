@@ -55,6 +55,8 @@ void Orbit::calculateMoveData(){
   #if DEBUG_ORBIT
     Serial.print("BALL ANGLE: ");
     Serial.print(ball.arg);
+    Serial.print(" BALL DISTANCE ");
+    Serial.print(ball.mag);
     Serial.print("  MOVE ANGLE: ");
     Serial.println(movement.angle);
   #endif

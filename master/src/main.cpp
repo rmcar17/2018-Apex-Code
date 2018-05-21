@@ -17,6 +17,7 @@
 #include <Debug.h>
 #include <Defines.h>
 #include <Pins.h>
+#include <t3spi.h>
 
 Compass comp;
 

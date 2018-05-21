@@ -3,7 +3,7 @@
 void Compass::compassSetup() {
     I2CwriteByte(MPU9250_ADDRESS, 29, 0x06);
     I2CwriteByte(MPU9250_ADDRESS, 26, 0x06);
-    I2CwriteByte(MPU9250_ADDRESS, 27, GYRO_FULL_SCALE_500_DPS);
+    I2CwriteByte(MPU9250_ADDRESS, 27, GYRO_FULL_SCALE_2000_DPS);
     I2CwriteByte(MPU9250_ADDRESS, 28, ACC_FULL_SCALE_2_G);
     I2CwriteByte(MPU9250_ADDRESS, 0x37, 0x02);
     I2CwriteByte(MAG_ADDRESS, 0x0A, 0x16);

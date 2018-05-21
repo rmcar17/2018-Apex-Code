@@ -5,19 +5,20 @@
 #include <PID.h>
 #include <Debug.h>
 #include <Defines.h>
-#include <PlayMode.h>
-#include <EntityData.h>
+#include <Role.h>
 #include <MoveData.h>
 
 class Orbit{
   public:
     Orbit();
 
-    void setRole(PlayMode playMode);
-    void setBallData(EntityData ballData);
-    void setGoalData(EntityData goalData);
+    void setRole(Role _role);
+    void setBallData(Vector ballData);
+    void setGoalData(Vector aGoal, Vector dGoal);
     void setCompAngle(int heading);
     MoveData getMoveData();
+
+    void calculateCoordinates();
 
     void calculateMoveData();
     void calculateRotation();
@@ -38,13 +39,18 @@ class Orbit{
     void centre();
     void moveToBall();
 
-    PlayMode role = PlayMode::undecided;
+    Role role = Role::undecided;
 
-    EntityData ball = {-1, 0, false};
-    EntityData goal = {-1, 0, false};
+    Vector ball = Vector(0, 0);
+    Vector attackGoal = Vector(0, 0);
+    Vector defendGoal = Vector(0, 0);
+
+    Vector robotPosition = Vector(0, 0);
+    Vector ballPosition = Vector(0, 0);
+
     MoveData movement = {-1, 0, 0};
 
-    double compAngle = 0;
+    int compAngle = -1;
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
 };
 

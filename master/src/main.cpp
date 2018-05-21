@@ -32,6 +32,8 @@ Role role;
 
 MoveData move;
 
+T3SPI spi;
+
 int lightVector, lightLine;
 volatile uint16_t dataOut[1], dataIn[1];
 
@@ -44,43 +46,31 @@ uint16_t transaction(uint8_t command, uint16_t data = 0){
   return dataIn[0];
 }
 
-T3SPI spi;
 
 void setup() {
-  pinMode(TEENSY_LED, OUTPUT);
-
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
-  camera.setup();
-
-  Wire.begin();
-  comp.compassSetup();
-  comp.calibrate();
-
-  motors.motorSetup();
-  motors.brake();
 
   lights.setup();
 
-  orbit.resetAllData();
-
-  role = Role::attack;
+  motors.motorSetup();
 
   // SPI
   spi = T3SPI();
   spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
   spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
   spi.enableCS(CS0, CS_ActiveLOW);
-
-  digitalWrite(TEENSY_LED, HIGH);
-  delay(250);
-  digitalWrite(TEENSY_LED, LOW);
 }
 
 void loop() {
-  lightVector = transaction(((uint8_t)0));
-
-  Serial.println(lightVector);
+  lightVector = (int)transaction(((uint8_t)0));
+  // motors.moveDirection({int angle,int speed=255,int rotation})
+  if(lightVector!=65535){
+    motors.moveDirection({lightVector+180,100,0});
+  }else{
+    motors.brake();
+  }
+  // motors.moveDirection({90,50,0});
 }
 

@@ -18,17 +18,17 @@ const int brokenPins[] = {4,5,6};
 #define MOTORFR_PWM 2
 #define MOTORFR_DIR 56
 #define MOTORFR_BRK 57
-#define MOTORFR_REV true
+#define MOTORFR_REV false
 
 #define MOTORBR_PWM 23
 #define MOTORBR_DIR 52
 #define MOTORBR_BRK 51
-#define MOTORBR_REV false
+#define MOTORBR_REV true
 
 #define MOTORBL_PWM 22
 #define MOTORBL_DIR 21
 #define MOTORBL_BRK 20
-#define MOTORBL_REV false
+#define MOTORBL_REV true
 
 #define MOTORFL_PWM 6
 #define MOTORFL_DIR 49

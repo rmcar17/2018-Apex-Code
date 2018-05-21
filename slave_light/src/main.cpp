@@ -23,18 +23,6 @@ void setup(){
 void loop(){
 	lights.update();
 	digitalWrite(ledPin,HIGH);
-	if(false){ 	// DELETE THIS CODE AFTER DEBUG
-		for(int i = 0; i < 24; i++){
-			Serial.print(lights.lightValues[i]);
-			Serial.print(" ");
-		}
-		Serial.println();
-	}
-	Serial.print(lights.getVectorAngle());
-	Serial.print("\t");
-	Serial.print(lights.getLineAngle());
-	Serial.print("\t");
-	Serial.println(lights.danger);
 }
 
 void spi0_isr(){

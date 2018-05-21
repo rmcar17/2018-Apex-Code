@@ -56,7 +56,7 @@
 #define PIXEL_TO_MM 50 / 227
 // LIGHT SENSORS
 
-#define LS_NUM 4
-#define LS_CALIBRATION_NUM 10
+#define LS_NUM 24
+#define LS_CALIBRATION_NUM 100
 
 #endif

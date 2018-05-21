@@ -31,6 +31,20 @@ Role role;
 
 MoveData move;
 
+int lightVector, lightLine;
+volatile uint16_t dataOut[1], dataIn[1];
+
+uint16_t transaction(uint8_t command, uint16_t data = 0){
+  dataOut[0] = (command << 10) | (data & 0x3FF);
+
+  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT); 
+  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT); 
+
+  return dataIn[0];
+}
+
+T3SPI spi;
+
 void setup() {
   pinMode(TEENSY_LED, OUTPUT);
 
@@ -52,27 +66,20 @@ void setup() {
 
   role = Role::attack;
 
+  // SPI
+  spi = T3SPI();
+  spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
+  spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
+  spi.enableCS(CS0, CS_ActiveLOW);
+
   digitalWrite(TEENSY_LED, HIGH);
   delay(250);
   digitalWrite(TEENSY_LED, LOW);
 }
 
 void loop() {
-  comp.updateGyro();
+  lightVector = transaction(((uint8_t)0));
 
-  camera.update();
-
-  orbit.setRole(role);
-  orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
-  orbit.setBallData(camera.getBall());
-  orbit.setCompAngle(comp.getHeading());
-
-  orbit.calculateMoveData();
-  orbit.calculateRotation();
-
-  move = orbit.getMoveData();
-
-  motors.moveDirection(move);
-
-  orbit.resetAllData();
+  Serial.println(lightVector);
 }
+

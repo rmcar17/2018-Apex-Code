@@ -2,7 +2,7 @@ import sensor, image, time
 from pyb import UART, LED
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
-ball = [(44,72,24,65,-3,32)]
+ball = [(46,62,31,71,-1,34)]
 blueGoal = [(40, 60,-12,9,-32,-17)]
 yellowGoal = [(57,74,-3,15,28,48)]
 
@@ -36,13 +36,14 @@ while(True):
     sendBuffer = [1,0,0,0,0,0,0,0,0,0]
 
     img = sensor.snapshot()
+    #img.draw_cross(160,120)
 
     ballBlob = largestBlob(img.find_blobs(ball,roi=(27,0,252,240),x_stride=3,y_stride=3))
     blueBlob = largestBlob(img.find_blobs(blueGoal,roi=(27,0,252,240),x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
     yellowBlob = largestBlob(img.find_blobs(yellowGoal,roi=(27,0,252,240),x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
 
     if ballBlob:
-        #img.draw_line((160, 120, ballBlob.cx(), ballBlob.cy()))
+        img.draw_line((160, 120, ballBlob.cx(), ballBlob.cy()))
         #print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5))
         if ballBlob.cx() >= 255:
             sendBuffer[1] = 255

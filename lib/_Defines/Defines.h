@@ -30,12 +30,12 @@
 #define CLOSE_ORBIT Vector(250, 0)
 #define FAR_ORBIT Vector(300, 0)
 
-#define BIG_ORBIT 30
+#define BIG_ORBIT 0
 #define SMALL_ORBIT 20
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define MAX_SPEED 40
+#define MAX_SPEED 180
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true

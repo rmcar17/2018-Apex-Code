@@ -9,15 +9,17 @@ void CameraController::setup(){
 }
 
 void CameraController::update(){
-  if(cameraTimer.hasTimePassed()){
-  camera.update();
-  calculateEntities();
+  if(camera.isAvailable()){
+    camera.update();
+    calculateEntities();
+    cameraTimer.update();
   }
 }
 
 void CameraController::calculateEntities(){
   calculateBall(camera.getBall());
   calculateGoal(&attackGoal, camera.getAttackGoal());
+  // Serial.println(attackGoal.arg);
   calculateGoal(&defendGoal, camera.getDefendGoal());
 
   #if DEBUG_CAMERA

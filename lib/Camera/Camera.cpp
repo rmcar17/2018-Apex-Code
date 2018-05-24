@@ -49,6 +49,10 @@ void Camera::update(){
   }
 }
 
+bool Camera::isAvailable(){
+  return cameraSerial.available() >= 32;
+}
+
 Image Camera::getBall(){
   return ball;
 }

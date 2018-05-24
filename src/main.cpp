@@ -39,6 +39,8 @@ void setup() {
   #endif
   camera.setup();
 
+  digitalWrite(TEENSY_LED, HIGH);
+
   Wire.begin();
   comp.compassSetup();
   comp.calibrate();
@@ -46,14 +48,10 @@ void setup() {
   motors.motorSetup();
   motors.brake();
 
-  lights.setup();
-
   orbit.resetAllData();
 
   role = Role::attack;
 
-  digitalWrite(TEENSY_LED, HIGH);
-  delay(250);
   digitalWrite(TEENSY_LED, LOW);
 }
 

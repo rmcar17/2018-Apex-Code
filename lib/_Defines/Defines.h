@@ -4,7 +4,7 @@
 #include <Vector.h>
 
 // Compass
-#define IMU_CALIBRATION_COUNT 100
+#define IMU_CALIBRATION_COUNT 500
 
 #define ROTATION_KP 13
 #define ROTATION_KI 0
@@ -20,28 +20,28 @@
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
 
 // ORBIT
-#define GOAL_TRACK false
+#define GOAL_TRACK true
 
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
 
-#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.8
+#define ORBIT_FORWARD_ANGLE_TIGHTENER 1.2
 
 #define CLOSE_ORBIT Vector(250, 0)
-#define FAR_ORBIT Vector(300, 0)
+#define FAR_ORBIT Vector(350, 0)
 
-#define BIG_ORBIT 0
+#define BIG_ORBIT 30
 #define SMALL_ORBIT 20
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define MAX_SPEED 180
+#define MAX_SPEED 200
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true
-#define OVERIDE_BLUE false
+#define OVERIDE_BLUE true
 
-#define CAMERA_UPDATE_TIME 47000
+#define CAMERA_UPDATE_TIME 46000
 
 #define CAM_BUFFER_NUM 8
 

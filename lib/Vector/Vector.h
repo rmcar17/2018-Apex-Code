@@ -30,7 +30,7 @@ class Vector {
     double calcI(double _mag, double _arg);
     double calcJ(double _mag, double _arg);
 
-    double calcmag(double _i, double _j);
+    double calcMag(double _i, double _j);
     double calcArg(double _i, double _j);
 };
 

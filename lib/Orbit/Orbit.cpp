@@ -123,7 +123,7 @@ void Orbit::calcAttacker(){
 
 // void Orbit::calcDefender(){
 //   if(ball.visible){
-//     if(attackGoal.visible){
+//     if(defendGoal.visible){
 //       if(isAngleBetween(ball.angle, 270, 90)){
 //         moveToBall();
 //       }
@@ -137,8 +137,8 @@ void Orbit::calcAttacker(){
 //     }
 //   }
 //   else{
-//     if(attackGoal.visible){
-//       centre();
+//     if(defendGoal.visible){
+//       centreGoal();
 //     }
 //     //If can't see goal or ball, the robot
 //     //can't do anything so just compass correct

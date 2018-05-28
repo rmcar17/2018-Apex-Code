@@ -65,12 +65,10 @@ void setup() {
 
 void loop() {
   lightLine = (int)transaction(((uint8_t)0));
-  // motors.moveDirection({int angle,int speed=255,int rotation})
   if(lightLine!=65535){
     motors.moveDirection({lightLine+180,100,0});
   }else{
     motors.brake();
   }
-  // motors.moveDirection({90,50,0});
 }
 

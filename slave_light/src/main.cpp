@@ -43,7 +43,7 @@ void spi0_isr(){
 
 	switch(command){
 	case 0:
-		dataOut = lightVector;
+		dataOut = lightLine;
 		break;
 	default:
 		dataOut = (uint16_t)69;

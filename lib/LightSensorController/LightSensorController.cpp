@@ -61,27 +61,26 @@ void LightSensorController::update(){
 			lineAngle = vectorAngle;
 			danger = 1;
 		}
-		if(danger >= 1 && danger <= 4){
-			if(inRange(vectorAngle,prevAngle,90)){
+		if(danger == 1){
+			if(inRange(vectorAngle,prevAngle,45)){
 				initAngle = vectorAngle;
 				lineAngle = vectorAngle;
 			} else{
-				danger = 5;
+				danger = 2;
 			}
 		}
-		else if(danger >= 5 && danger <= 7){
-			if(inRange(vectorAngle, initAngle, 90)){
+		else if(danger == 2){
+			if(inRange(vectorAngle, initAngle,45)){
 				lineAngle = initAngle;
 				danger = 1;
 			}
 			else{
-				initAngle = correctRange(vectorAngle+180,0,360);
 				lineAngle = initAngle;
 			}
 		}
 	}
 	else{
-		if(danger<=4){
+		if(danger<=1){
 			initAngle = -1;
 			vectorAngle = -1;
 			lineAngle = -1;

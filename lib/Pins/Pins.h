@@ -11,7 +11,7 @@
 // Light Sensor
 
 const int lightPins[LS_NUM] = {33,34,35,36,37,38,39,21,22,15,16,17,32,31,49,50,18,19,20,21,22,23,A11,A10};
-const int brokenPins[] = {4,5,6};
+const int brokenPins[] = {4,5,22};
 
 // MOTORS
 

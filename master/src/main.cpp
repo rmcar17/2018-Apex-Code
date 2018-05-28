@@ -56,6 +56,10 @@ void setup() {
 
   motors.motorSetup();
 
+  Wire.begin();
+  comp.compassSetup();
+  comp.calibrate();
+
   // SPI
   spi = T3SPI();
   spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
@@ -64,9 +68,31 @@ void setup() {
 }
 
 void loop() {
-  lightLine = (int)transaction(((uint8_t)0));
-  if(lightLine!=65535){
-    motors.moveDirection({lightLine+180,100,0});
+  comp.updateGyro();
+  int heading = comp.getHeading();
+  lightVector = (int)transaction(((uint8_t)0));
+  if(lightVector==65535.00){
+    lightVector = -1;
+  }
+  lights.setComp(heading);
+  lights.setVector(lightVector);
+  // if(lights.getVectorAngle()!=-1){
+  //   Serial.print(lights.getVectorAngle());
+  // }else{
+  //   Serial.print(-1);
+  // }
+  // Serial.print("\t");
+  // Serial.print(lights.prevAngle);
+  // Serial.print("\t");
+  // Serial.print(lights.getLineAngle());
+  // Serial.print("\t");
+  // Serial.print(lights.danger);
+  // Serial.print("\t");
+  // Serial.println(lights.a);
+
+  lights.updateWithComp();
+  if(lights.getLineAngle()!=-1){
+    motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
   }else{
     motors.brake();
   }

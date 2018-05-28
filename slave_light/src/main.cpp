@@ -17,12 +17,15 @@ void setup(){
 	spi.setCTAR_SLAVE(16, SPI_MODE0);
 	NVIC_ENABLE_IRQ(IRQ_SPI0);
 	lights.setup();
-	pinMode(ledPin,OUTPUT);
 }
 
 void loop(){
 	lights.update();
-	digitalWrite(ledPin,HIGH);
+	// Serial.print(lights.vectorAngle);
+	// Serial.print("\t");
+	// Serial.print(lights.lineAngle);
+	// Serial.print("\t");
+	// Serial.println(lights.initAngle);
 }
 
 void spi0_isr(){
@@ -43,7 +46,7 @@ void spi0_isr(){
 
 	switch(command){
 	case 0:
-		dataOut = lightLine;
+		dataOut = lightVector;
 		break;
 	default:
 		dataOut = (uint16_t)69;

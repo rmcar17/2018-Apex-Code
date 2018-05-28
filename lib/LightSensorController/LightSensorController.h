@@ -14,8 +14,11 @@ class LightSensorController {
 		LightSensorController();
 		void setup();
 		void update();
+		void updateWithComp();
 		double getVectorAngle();
 		double getLineAngle();
+		void setComp(int tempHeading);
+		void setVector(int tempVector);
 		int lightValues[LS_NUM] = {0};
 		int onWhite[LS_NUM] = {0};
 	//private:
@@ -36,6 +39,8 @@ class LightSensorController {
 		double vectorAngle;
 		double lineAngle;
 		int danger = 0;
+		int heading = 0;
+		bool a;
 };
 
 #endif

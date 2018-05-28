@@ -42,12 +42,30 @@ void LightSensorController::read(){
 }
 
 double LightSensorController::getVectorAngle(){
-	return vectorAngle;
+	if(vectorAngle==-1){
+		return -1;
+	}
+	return mod(vectorAngle,360);
 }
 
 
 double LightSensorController::getLineAngle(){
-	return lineAngle;
+	if(lineAngle==-1){
+		return -1;
+	}
+	return mod(lineAngle,360);
+}
+
+void LightSensorController::setComp(int tempHeading){
+	heading = mod(tempHeading,360);
+}
+
+void LightSensorController::setVector(int tempVector){
+	if(tempVector==-1){
+		vectorAngle = -1.00;
+	} else{
+		vectorAngle = (double)mod(tempVector+heading,360);
+	}
 }
 
 void LightSensorController::update(){
@@ -63,6 +81,48 @@ void LightSensorController::update(){
 		}
 		if(danger == 1){
 			if(inRange(vectorAngle,prevAngle,45)){
+				initAngle = vectorAngle;
+				lineAngle = vectorAngle;
+			} else{
+				danger = 2;
+			}
+		}
+		else if(danger == 2){
+			if(inRange(vectorAngle, initAngle,45)){
+				lineAngle = initAngle;
+				danger = 1;
+			}
+			else{
+				lineAngle = initAngle;
+			}
+		}
+	}
+	else{
+		if(danger<=1){
+			initAngle = -1;
+			vectorAngle = -1;
+			lineAngle = -1;
+			danger = 0;
+		}
+		else{
+			lineAngle = initAngle;
+			vectorAngle = -1;
+		}
+	}
+	prevAngle = vectorAngle;
+}
+
+void LightSensorController::updateWithComp(){
+	if(vectorAngle!=-1.00){
+		if(danger==0){
+			initAngle = vectorAngle;
+			prevAngle = vectorAngle;
+			lineAngle = vectorAngle;
+			danger = 1;
+		}
+		if(danger == 1){
+			a = inRange(vectorAngle,prevAngle,45);
+			if(a){
 				initAngle = vectorAngle;
 				lineAngle = vectorAngle;
 			} else{

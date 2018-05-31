@@ -2,7 +2,7 @@ import sensor, image, time
 from pyb import UART, LED
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
-ball = [(44,70,36,77,8,52)]
+ball = [(54,63,51,76,40,68)]
 blueGoal = [(18, 49,-15,1,-31,-6)]
 yellowGoal = [(57,74,-3,15,28,48)]
 
@@ -14,6 +14,9 @@ sensor.set_framesize(sensor.QVGA)
 sensor.skip_frames(time = 200)
 sensor.set_auto_gain(False)
 sensor.set_auto_whitebal(False)
+sensor.set_windowing((45,0,230,225))
+sensor.set_saturation(3)
+sensor.set_contrast(3)
 
 LED(1).on()
 time.sleep(200)
@@ -34,14 +37,15 @@ while(True):
     sendBuffer = [1,0,0,0,0,0,0,0,0,0]
 
     img = sensor.snapshot()
+
     #img.draw_cross(160,120)
 
-    ballBlob = largestBlob(img.find_blobs(ball,roi=(27,0,252,240),x_stride=3,y_stride=3))
+    ballBlob = largestBlob(img.find_blobs(ball,x_stride=3,y_stride=3))
     blueBlob = largestBlob(img.find_blobs(blueGoal,roi=(27,0,252,240),x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
     yellowBlob = largestBlob(img.find_blobs(yellowGoal,roi=(27,0,252,240),x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
 
     if ballBlob:
-        #img.draw_line((160, 120, ballBlob.cx(), ballBlob.cy()))
+        img.draw_line((115, 113, ballBlob.cx(), ballBlob.cy()))
         #print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5))
         if ballBlob.cx() >= 255:
             sendBuffer[1] = 255

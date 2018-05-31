@@ -65,18 +65,11 @@ void Orbit::calculateMoveData(){
 void Orbit::calculateRotation(){
   double rotate = 0;
   #if GOAL_TRACK
-    if(role == Role::attack && attackGoal.exists()){
-      Serial.println(attackGoal.arg);
-      if(isAngleBetween(attackGoal.arg,320,40) && isAngleBetween(compAngle,320,40)){
-        attackGoal.arg = 360-attackGoal.arg;
-        rotate = rotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
-      }
+    if(role == Role::attack && attackGoal.exists() && isAngleBetween(compAngle+)){
+      if(isAngleBetween(attackGoal.arg, 310, 50))
     }
-    else if(role == Role::defend && defendGoal.exists() && isAngleBetween(compAngle,320,40)){
-      if(!isAngleBetween(defendGoal.arg,165,195)){
-        double oppositeAngle = 360 - mod(defendGoal.arg + 180, 360);
-        rotate = rotation.update(oppositeAngle < 180 ? oppositeAngle : -(360 - oppositeAngle));
-      }
+    else if(role == Role::defend && defendGoal.exists()){
+
     }
     else{
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));

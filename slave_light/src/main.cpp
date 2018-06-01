@@ -1,58 +1,26 @@
 #include <Arduino.h>
-#include <Defines.h>
-#include <t3spi.h>
-#include <LightSensor.h>
-#include <LightSensorController.h>
+const int lightPins[24] = {33,34,35,36,37,38,39,21,22,15,16,17,32,31,49,50,18,19,20,21,22,23,A11,A10};
 
-
-LightSensorController lights;
-T3SPI spi;
-
-int ledPin = 13;
-
-
-void setup(){
-	Serial.begin(9600);
-	spi.begin_SLAVE(SLAVE_LIGHT_SCK, SLAVE_LIGHT_MOSI, SLAVE_LIGHT_MISO, SLAVE_LIGHT_CS);
-	spi.setCTAR_SLAVE(16, SPI_MODE0);
-	NVIC_ENABLE_IRQ(IRQ_SPI0);
-	lights.setup();
+void LightSetup(int inPin){
+  int pin = inPin;
+  pinMode(pin,INPUT);
 }
 
-void loop(){
-	lights.update();
-	// Serial.print(lights.vectorAngle);
-	// Serial.print("\t");
-	// Serial.print(lights.lineAngle);
-	// Serial.print("\t");
-	// Serial.println(lights.initAngle);
+int LightRead(int inPin){
+  int pin = inPin;
+  int readVal = analogRead(pin);
+}
+void setup() {
+  Serial.begin(9600);
+  for(int i = 0; i < 24; i++){
+    LightSetup(lightPins[i]);
+  }
 }
 
-void spi0_isr(){
-	uint16_t dataIn = SPI0_POPR;
-
-	uint8_t command = (dataIn >> 10);
-	uint16_t data = (dataIn & 0x3FF);
-
-	uint16_t dataOut = 0;
-
-	uint16_t lightVector;
-
-	lightVector = (uint16_t)((int)lights.getVectorAngle());
-
-	
-	
-	uint16_t lightLine = (uint16_t)((int)lights.getLineAngle());
-
-	switch(command){
-	case 0:
-		dataOut = lightVector;
-		break;
-	default:
-		dataOut = (uint16_t)69;
-		break;
-	}
-
-	SPI0_PUSHR_SLAVE = dataOut;
-	SPI0_SR |= SPI_SR_RFDF;
+void loop() {
+  for(int i = 0; i < 24; i++){
+    Serial.print(LightRead(lightPins[i]));
+    Serial.print(" ");
+  }
+  Serial.println();
 }

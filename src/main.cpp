@@ -56,6 +56,7 @@ void setup() {
 }
 
 void loop() {
+  // motors.moveDirection({0,100,0});
   comp.updateGyro();
 
   camera.update();

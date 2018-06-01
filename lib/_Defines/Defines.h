@@ -20,7 +20,7 @@
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
 
 // ORBIT
-#define GOAL_TRACK true
+#define GOAL_TRACK false
 
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4

@@ -20,7 +20,7 @@
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
 
 // ORBIT
-#define GOAL_TRACK false
+#define GOAL_TRACK true
 
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
@@ -43,7 +43,7 @@
 
 #define CAMERA_UPDATE_TIME 46000
 
-#define CAM_BUFFER_NUM 8
+#define CAM_BUFFER_NUM 6
 
 #define CAM_CENTRE_X 105
 #define CAM_CENTRE_Y 105

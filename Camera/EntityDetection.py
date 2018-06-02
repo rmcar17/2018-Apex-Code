@@ -14,6 +14,7 @@ sensor.set_framesize(sensor.QVGA)
 sensor.skip_frames(time = 2000)
 sensor.set_auto_gain(False)
 sensor.set_auto_whitebal(False)
+sensor.set_windowing((55,15,210,210))
 
 LED(1).on()
 time.sleep(200)
@@ -36,10 +37,10 @@ while(True):
     sendBuffer = [1,0,0,0,0,0,0,0,0,0]
 
     img = sensor.snapshot()
-    img.draw_cross(160,120)
-    ballBlob = largestBlob(img.find_blobs(ball,roi=(27,0,252,240)))
-    blueBlob = largestBlob(img.find_blobs(blueGoal,roi=(27,0,252,240),x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
-    yellowBlob = largestBlob(img.find_blobs(yellowGoal,roi=(27,0,252,240),x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
+    img.draw_cross(105,105)
+    ballBlob = largestBlob(img.find_blobs(ball))
+    blueBlob = largestBlob(img.find_blobs(blueGoal,x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
+    yellowBlob = largestBlob(img.find_blobs(yellowGoal,x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
 
     if ballBlob:
         #img.draw_line((160, 120, ballBlob.cx(), ballBlob.cy()))

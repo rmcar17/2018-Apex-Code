@@ -65,8 +65,9 @@ void Orbit::calculateMoveData(){
 void Orbit::calculateRotation(){
   double rotate = 0;
   #if GOAL_TRACK
-    if(role == Role::attack && attackGoal.exists() && isAngleBetween(compAngle+)){
-      if(isAngleBetween(attackGoal.arg, 310, 50))
+    if(role == Role::attack){// && attackGoal.exists() && isAngleBetween(mod(compAngle+attackGoal.arg,360),315,45)){
+      attackGoal.arg = 360 - attackGoal.arg;
+      rotate = rotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
     }
     else if(role == Role::defend && defendGoal.exists()){
 

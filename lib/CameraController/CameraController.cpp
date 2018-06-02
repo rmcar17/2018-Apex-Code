@@ -53,7 +53,7 @@ double CameraController::getDistance(Image image){
 }
 
 double CameraController::calculateBallDistance(double distance){
-  return 0.8872 * exp(0.0618 * distance) + 100;
+  return 1.5432 * exp(0.0646 * distance) + 100;
 }
 
 Vector CameraController::getAttackGoal(){

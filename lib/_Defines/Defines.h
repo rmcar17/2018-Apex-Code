@@ -39,7 +39,7 @@
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true
-#define OVERIDE_BLUE true
+#define OVERIDE_BLUE false
 
 #define CAMERA_UPDATE_TIME 46000
 

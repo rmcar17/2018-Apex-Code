@@ -8,24 +8,26 @@ void Camera::setup(){
   cameraSerial.begin(9600);
   update();
   blueAttack = isBlueAttack();
+  Serial.println(blueAttack==Role::attack);
 }
 
 void Camera::update(){
-  while(cameraSerial.read() != 1);
+  while(cameraSerial.read() != 255);
   for(int i = 0; i < CAM_BUFFER_NUM; i++){
     while(!(cameraSerial.available() > 0));
     camBuffer[i] = cameraSerial.read();
+    Serial.println(camBuffer[i]);
   }
-  ball.x = camBuffer[0] + camBuffer[1];
-  ball.y = camBuffer[2];
+  ball.x = camBuffer[0];
+  ball.y = camBuffer[1];
   ball.visible = !(ball.x == 0 && ball.y == 0);
 
-  blueGoal.x = camBuffer[3] + camBuffer[4];
-  blueGoal.y = camBuffer[5];
+  blueGoal.x = camBuffer[2];
+  blueGoal.y = camBuffer[3];
   blueGoal.visible = !(blueGoal.x == 0 && blueGoal.y == 0);
 
-  yellowGoal.x = camBuffer[6] + camBuffer[7];
-  yellowGoal.y = camBuffer[8];
+  yellowGoal.x = camBuffer[4];
+  yellowGoal.y = camBuffer[5];
   yellowGoal.visible = !(yellowGoal.x == 0 && yellowGoal.y == 0);
 
   #if DEBUG_CAMERA_RAW

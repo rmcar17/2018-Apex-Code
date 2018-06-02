@@ -151,12 +151,12 @@ void Orbit::calcBigOrbit(){
   if(ball.arg < 180){
     closeness = (double) (ball.arg - SMALL_ORBIT) / (double) (BIG_ORBIT - SMALL_ORBIT);
     angleBuffer = closeness * 90;
-    finalAngle = round(ball.arg * ORBIT_FORWARD_ANGLE_TIGHTENER + angleBuffer + ball.arg * (1 - ORBIT_FORWARD_ANGLE_TIGHTENER) * closeness);
+    finalAngle = round(ball.arg + angleBuffer + ball.arg * closeness);
   }
   else{
     closeness = (double) ((360 - ball.arg) - SMALL_ORBIT) / (double) (BIG_ORBIT - SMALL_ORBIT);
     angleBuffer = closeness * 90;
-    finalAngle = mod(round(360 - ((360 - ball.arg) * ORBIT_FORWARD_ANGLE_TIGHTENER + angleBuffer + (360 - ball.arg) * (1 - ORBIT_FORWARD_ANGLE_TIGHTENER) * closeness)), 360);
+    finalAngle = mod(round(360 - ((360 - ball.arg) + angleBuffer + (360 - ball.arg) * closeness)), 360);
   }
 
   movement.speed = MAX_SPEED;

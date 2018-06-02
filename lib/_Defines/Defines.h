@@ -25,13 +25,13 @@
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
 
-#define ORBIT_FORWARD_ANGLE_TIGHTENER 1.2
+#define ORBIT_FORWARD_ANGLE_TIGHTENER 1.6
 
-#define CLOSE_ORBIT Vector(250, 0)
-#define FAR_ORBIT Vector(350, 0)
+#define CLOSE_ORBIT Vector(320, 0)
+#define FAR_ORBIT Vector(340, 0)
 
-#define BIG_ORBIT 30
-#define SMALL_ORBIT 20
+#define BIG_ORBIT 23
+#define SMALL_ORBIT 17
 
 #define DEFEND_SMALL_ANGLE 10
 
@@ -45,8 +45,8 @@
 
 #define CAM_BUFFER_NUM 8
 
-#define CAM_CENTRE_X 160
-#define CAM_CENTRE_Y 120
+#define CAM_CENTRE_X 105
+#define CAM_CENTRE_Y 105
 
 #define CAM_SWITCH_D 16
 

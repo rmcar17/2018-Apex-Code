@@ -1,4 +1,4 @@
-t# 2018 BBC Robotics Team-APEX
+# 2018 BBC Robotics Team-APEX
 This project is for BBC Robotics in the 2018 competition. The team members are:
  - Josh Barclay
  - Riley Bowyer

@@ -57,6 +57,6 @@
 // LIGHT SENSORS
 
 #define LS_NUM 24
-#define LS_CALIBRATION_NUM 100
+#define LS_CALIBRATION_NUM 50
 
 #endif

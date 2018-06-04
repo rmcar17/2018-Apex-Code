@@ -21,11 +21,11 @@ void setup(){
 
 void loop(){
 	lights.update();
-	// Serial.print(lights.vectorAngle);
-	// Serial.print("\t");
-	// Serial.print(lights.lineAngle);
-	// Serial.print("\t");
-	// Serial.println(lights.initAngle);
+	// for(int i = 0; i < LS_NUM; i++){
+	// 	Serial.print(lights.lightValues[i]);
+	// 	Serial.print("\t");
+	// }
+	// Serial.println();
 }
 
 void spi0_isr(){

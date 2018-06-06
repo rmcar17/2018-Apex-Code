@@ -4,7 +4,6 @@
 #include <Compass.h>
 #include <LightSensor.h>
 #include <LightSensorController.h>
-#include <Orbit.h>
 #include <Camera.h>
 #include <CameraController.h>
 #include <RoleController.h>
@@ -18,6 +17,7 @@
 #include <Defines.h>
 #include <Pins.h>
 #include <t3spi.h>
+#include <Lidar.h>
 
 Compass comp;
 
@@ -26,13 +26,14 @@ CameraController camera;
 MotorController motors;
 
 LightSensorController lights;
-Orbit orbit;
 
 Role role;
 
 MoveData move;
 
 T3SPI spi;
+
+LIDAR lidar;
 
 int lightVector, lightLine;
 volatile uint16_t dataOut[1], dataIn[1];
@@ -65,24 +66,30 @@ void setup() {
   spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
   spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
   spi.enableCS(CS0, CS_ActiveLOW);
+  lidar.init();
 }
 
 void loop() {
-  comp.updateGyro();
-  int heading = comp.getHeading();
-  lightVector = (int)transaction(((uint8_t)0));
-  if(lightVector==65535.00){
-    lightVector = -1;
+  lidar.read();
+  for(int i; i < 4; i++){
+    Serial.print(lidar.lidarVal[i]);
+    Serial.print("\t");
   }
-  lights.setComp(heading);
-  lights.setVector(lightVector);
+  Serial.println();
+  // comp.updateGyro();
+  // int heading = comp.getHeading();
+  // lightVector = (int)transaction(((uint8_t)0));
+  // if(lightVector==65535.00){
+  //   lightVector = -1;
+  // }
+  // lights.setComp(heading);
+  // lights.setVector(lightVector);
 
-  lights.updateWithComp();
-  if(lights.getLineAngle()!=-1){
-    motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
-  }else{
-    motors.brake();
-  }
-
+  // lights.updateWithComp();
+  // if(lights.getLineAngle()!=-1){
+  //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
+  // }else{
+  //   motors.brake();
+  // }
 }
 

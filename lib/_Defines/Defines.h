@@ -26,7 +26,6 @@
 #define CENTRE_DEFENDER_DISTANCE 4
 
 #define ORBIT_FORWARD_ANGLE_TIGHTENER 0.8
-
 #define CLOSE_ORBIT Vector(250, 0)
 #define FAR_ORBIT Vector(300, 0)
 

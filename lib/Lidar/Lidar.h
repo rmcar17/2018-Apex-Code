@@ -11,6 +11,7 @@ public:
 	uint16_t lidarVal[4];
 private:
 	uint8_t sensorData[4];
-}
+};
+
 
 #endif

@@ -1,6 +1,5 @@
 #include <Lidar.h>
 
-LIDAR lidar = LIDAR()
 
 LIDAR::LIDAR(){
 
@@ -51,54 +50,50 @@ void LIDAR::init(){
 
 void LIDAR::read(){
   while(Serial1.available() > 8){
-   	int sync0 = Serial1.read();
-   	int sync1 = Serial1.peek();
-   	if (sync0 == 89 && sync1 == 89){
-  		Serial1.read();
-  		for (int i = 0; i < 4; i++){
-  			sensorData[i] = Serial1.read();
-  		}
-  	int val1 = sensorData[1] << 8 | sensorData[0];
-  	}
+    int sync0 = Serial1.read();
+    int sync1 = Serial1.peek();
+    if (sync0 == 89 && sync1 == 89){
+      Serial1.read();
+      for (int i = 0; i < 4; i++){
+        sensorData[i] = Serial1.read();
+      }
+      lidarVal[0] = sensorData[1] << 8 | sensorData[0]; 
+    }
 	}
-	lidarVal[0] = val1;
 
-	while(Serial3.available() > 8){
-   	int sync0 = Serial1.read();
-   	int sync1 = Serial1.peek();
-   	if (sync0 == 89 && sync1 == 89){
-  		Serial1.read();
-  		for (int i = 0; i < 4; i++){
-  			sensorData[i] = Serial1.read();
-  		}
-  	int val3 = sensorData[1] << 8 | sensorData[0];
-  	}
-	}
-	lidarVal[0] = val3;
+  while(Serial3.available() > 8){
+    int sync0 = Serial3.read();
+    int sync1 = Serial3.peek();
+    if (sync0 == 89 && sync1 == 89){
+      Serial3.read();
+      for (int i = 0; i < 4; i++){
+        sensorData[i] = Serial3.read();
+      }
+      lidarVal[1] = sensorData[1] << 8 | sensorData[0]; 
+    }
+  }
 
-	while(Serial2.available() > 8){
-   	int sync0 = Serial1.read();
-   	int sync1 = Serial1.peek();
-   	if (sync0 == 89 && sync1 == 89){
-  		Serial1.read();
-  		for (int i = 0; i < 4; i++){
-  			sensorData[i] = Serial1.read();
-  		}
-  	int val2 = sensorData[1] << 8 | sensorData[0];
-  	}
-	}
-	lidarVal[0] = val2;
+  while(Serial2.available() > 8){
+    int sync0 = Serial2.read();
+    int sync1 = Serial2.peek();
+    if (sync0 == 89 && sync1 == 89){
+      Serial2.read();
+      for (int i = 0; i < 4; i++){
+        sensorData[i] = Serial2.read();
+      }
+      lidarVal[2] = sensorData[1] << 8 | sensorData[0]; 
+    }
+  }
 
-	while(Serial4.available() > 8){
-   	int sync0 = Serial1.read();
-   	int sync1 = Serial1.peek();
-   	if (sync0 == 89 && sync1 == 89){
-  		Serial4.read();
-  		for (int i = 0; i < 4; i++){
-  			sensorData[i] = Serial1.read();
-  		}
-  	int val4 = sensorData[1] << 8 | sensorData[0];
-  	}
-	}
-	lidarVal[0] = val4;
+  while(Serial4.available() > 8){
+    int sync0 = Serial4.read();
+    int sync1 = Serial4.peek();
+    if (sync0 == 89 && sync1 == 89){
+      Serial4.read();
+      for (int i = 0; i < 4; i++){
+        sensorData[i] = Serial4.read();
+      }
+      lidarVal[3] = sensorData[1] << 8 | sensorData[0]; 
+    }
+  }
 }

@@ -76,17 +76,6 @@ void loop() {
   }
   lights.setComp(heading);
   lights.setVector(lightVector);
-  // Serial.print(lights.getVectorAngle());
-  // Serial.print("\t");
-  // Serial.print(lights.prevAngle);
-  // Serial.print("\t");
-  // Serial.print(lights.getLineAngle());
-  // Serial.print("\t");
-  // Serial.print(lights.danger);
-  // Serial.print("\t");
-  // Serial.print(lights.a);
-  // Serial.print("\t");
-  // Serial.println(lights.b);
 
   lights.updateWithComp();
   if(lights.getLineAngle()!=-1){

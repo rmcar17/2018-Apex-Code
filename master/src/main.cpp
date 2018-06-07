@@ -4,7 +4,6 @@
 #include <Compass.h>
 #include <LightSensor.h>
 #include <LightSensorController.h>
-#include <Orbit.h>
 #include <Camera.h>
 #include <CameraController.h>
 #include <RoleController.h>
@@ -18,34 +17,9 @@
 #include <Defines.h>
 #include <Pins.h>
 #include <t3spi.h>
+#include <Lidar.h>
 
-Compass comp;
-
-CameraController camera;
-
-MotorController motors;
-
-LightSensorController lights;
-Orbit orbit;
-
-Role role;
-
-MoveData move;
-
-T3SPI spi;
-
-int lightVector, lightLine;
-volatile uint16_t dataOut[1], dataIn[1];
-
-uint16_t transaction(uint8_t command, uint16_t data = 0){
-  dataOut[0] = (command << 10) | (data & 0x3FF);
-
-  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT); 
-  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT); 
-
-  return dataIn[0];
-}
-
+LIDAR lidar = LIDAR();
 
 void setup() {
   pinMode(TEENSY_LED, OUTPUT);
@@ -76,6 +50,8 @@ void setup() {
   spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
   spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
   spi.enableCS(CS0, CS_ActiveLOW);
+  
+  lidar.init();
 }
 
 void loop() {
@@ -99,7 +75,10 @@ void loop() {
   lights.setComp(heading);
   lights.setVector(lightVector);
   lights.updateWithComp();
-
+  
+  // LIDAR
+  lidar.read();
+  
   // Movement
   move = orbit.getMoveData();
   // move.angle = -1;
@@ -107,5 +86,6 @@ void loop() {
 
   // End Loop
   orbit.resetAllData();
+  
 }
 

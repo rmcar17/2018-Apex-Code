@@ -48,17 +48,28 @@ uint16_t transaction(uint8_t command, uint16_t data = 0){
 
 
 void setup() {
+  pinMode(TEENSY_LED, OUTPUT);
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
+  camera.setup();
 
-  lights.setup();
-
-  motors.motorSetup();
+  digitalWrite(TEENSY_LED, HIGH);
 
   Wire.begin();
   comp.compassSetup();
   comp.calibrate();
+
+  motors.motorSetup();
+  motors.brake();
+
+  orbit.resetAllData();
+
+  role = Role::attack;
+
+  digitalWrite(TEENSY_LED, LOW);
+
+  lights.setup();
 
   // SPI
   spi = T3SPI();
@@ -68,21 +79,33 @@ void setup() {
 }
 
 void loop() {
+  // Compass
   comp.updateGyro();
   int heading = comp.getHeading();
+
+  // Camera
+  camera.update();
+
+  // Orbit
+  orbit.setRole(role);
+  orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
+  orbit.setBallData(camera.getBall());
+  orbit.setCompAngle(comp.getHeading());
+  orbit.calculateMoveData();
+  orbit.calculateRotation();
+
+  // Light
   lightVector = (int)transaction(((uint8_t)0));
-  if(lightVector==65535.00){
-    lightVector = -1;
-  }
   lights.setComp(heading);
   lights.setVector(lightVector);
-
   lights.updateWithComp();
-  if(lights.getLineAngle()!=-1){
-    motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
-  }else{
-    motors.brake();
-  }
 
+  // Movement
+  move = orbit.getMoveData();
+  // move.angle = -1;
+  motors.moveDirection(move);
+
+  // End Loop
+  orbit.resetAllData();
 }
 

@@ -8,7 +8,7 @@ void Vector::setStandard(double _i, double _j){
   i = _i;
   j = _j;
 
-  mag = calcmag(_i, _j);
+  mag = calcMag(_i, _j);
   arg = calcArg(_i, _j);
 }
 
@@ -73,7 +73,7 @@ double Vector::calcJ(double _mag, double _arg){
   return _mag * sin(_arg);
 }
 
-double Vector::calcmag(double _i, double _j){
+double Vector::calcMag(double _i, double _j){
   return sqrt(_i * _i + _j * _j);
 }
 

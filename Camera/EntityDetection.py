@@ -2,9 +2,9 @@ import sensor, image, time
 from pyb import UART, LED
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
-ball = [(46,65,33,79,-1,52)]
-blueGoal = [(40, 60,-12,9,-32,-17)]
-yellowGoal = [(49,74,-3,15,18,48)]
+ball = [(50,67,24,62,0,40)]
+blueGoal = [(23,51,-18,1,-24,-8)]
+yellowGoal = [(60,74,-7,15,8,48)]
 
 uart = UART(3, 9600, timeout_char = 1000)
 
@@ -14,6 +14,7 @@ sensor.set_framesize(sensor.QVGA)
 sensor.skip_frames(time = 2000)
 sensor.set_auto_gain(False)
 sensor.set_auto_whitebal(False)
+sensor.set_windowing((55,15,210,210))
 
 LED(1).on()
 time.sleep(200)
@@ -33,23 +34,37 @@ def largestBlob(lBlob):
 
 while(True):
     #clock.tick()
-    sendBuffer = [1,0,0,0,0,0,0,0,0,0]
+    sendBuffer = [255,0,0,0,0,0,0]
 
     img = sensor.snapshot()
-
-    ballBlob = largestBlob(img.find_blobs(ball,roi=(27,0,252,240),x_stride=3,y_stride=3))
-    blueBlob = largestBlob(img.find_blobs(blueGoal,roi=(27,0,252,240),x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
-    yellowBlob = largestBlob(img.find_blobs(yellowGoal,roi=(27,0,252,240),x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
+    #img.draw_cross(105,105)
+    ballBlob = largestBlob(img.find_blobs(ball))
+    blueBlob = largestBlob(img.find_blobs(blueGoal,x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
+    yellowBlob = largestBlob(img.find_blobs(yellowGoal,x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
 
     if ballBlob:
+<<<<<<< HEAD
+        # Enable the line below upon calibration
+        #img.draw_line((105, 105, ballBlob.cx(), ballBlob.cy()))
+=======
         img.draw_line((160, 120, ballBlob.cx(), ballBlob.cy()))
+>>>>>>> master
         #print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5))
-        if ballBlob.cx() >= 255:
-            sendBuffer[1] = 255
-        sendBuffer[2] = ballBlob.cx() % 255
-        sendBuffer[3] = ballBlob.cy()
+        sendBuffer[1] = ballBlob.cx()
+        sendBuffer[2] = ballBlob.cy()
 
     if blueBlob:
+<<<<<<< HEAD
+        print((((blueBlob.cx()-105)**2+(blueBlob.cy()-105)**2)**0.5))
+        img.draw_line((105, 105, blueBlob.cx(), blueBlob.cy()))
+        sendBuffer[3] = blueBlob.cx()
+        sendBuffer[4] = blueBlob.cy()
+
+    if yellowBlob:
+        #img.draw_line((105, 105, yellowBlob.cx(), yellowBlob.cy()))
+        sendBuffer[5] = yellowBlob.cx()
+        sendBuffer[6] = yellowBlob.cy()
+=======
         img.draw_line((160, 120, blueBlob.cx(), blueBlob.cy()))
         if blueBlob.cx() >= 255:
             sendBuffer[4] = 255
@@ -62,10 +77,8 @@ while(True):
             sendBuffer[7] = 255
         sendBuffer[8] = yellowBlob.cx() % 255
         sendBuffer[9] = yellowBlob.cy()
+>>>>>>> master
 
-    for i in range(1,len(sendBuffer)):
-        if sendBuffer[i] == 1:
-            sendBuffer[i] = 2
     for i in sendBuffer:
         try:
             uart.writechar(i)

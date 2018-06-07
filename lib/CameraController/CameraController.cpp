@@ -9,15 +9,17 @@ void CameraController::setup(){
 }
 
 void CameraController::update(){
-  if(cameraTimer.hasTimePassed()){
-  camera.update();
-  calculateEntities();
+  if(camera.isAvailable()){
+    camera.update();
+    calculateEntities();
+    cameraTimer.update();
   }
 }
 
 void CameraController::calculateEntities(){
   calculateBall(camera.getBall());
   calculateGoal(&attackGoal, camera.getAttackGoal());
+  // Serial.println(attackGoal.arg);
   calculateGoal(&defendGoal, camera.getDefendGoal());
 
   #if DEBUG_CAMERA
@@ -51,7 +53,7 @@ double CameraController::getDistance(Image image){
 }
 
 double CameraController::calculateBallDistance(double distance){
-  return 0.8872 * exp(0.0618 * distance) + 100;
+  return 1.5432 * exp(0.0646 * distance) + 100;
 }
 
 Vector CameraController::getAttackGoal(){

@@ -52,6 +52,7 @@ class Orbit{
 
     int compAngle = -1;
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
+    PID goalRotation = PID(GOAL_KP,GOAL_KI,GOAL_KD);
 };
 
 #endif

@@ -22,31 +22,70 @@
 LIDAR lidar = LIDAR();
 
 void setup() {
-  Serial.begin(38400);
+  pinMode(TEENSY_LED, OUTPUT);
+  #if DEBUG_ANY
+    Serial.begin(38400);
+  #endif
+  camera.setup();
+
+  digitalWrite(TEENSY_LED, HIGH);
+
+  Wire.begin();
+  comp.compassSetup();
+  comp.calibrate();
+
+  motors.motorSetup();
+  motors.brake();
+
+  orbit.resetAllData();
+
+  role = Role::attack;
+
+  digitalWrite(TEENSY_LED, LOW);
+
+  lights.setup();
+
+  // SPI
+  spi = T3SPI();
+  spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
+  spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
+  spi.enableCS(CS0, CS_ActiveLOW);
+  
   lidar.init();
 }
 
 void loop() {
-  lidar.read();
-  for(int i; i < 4; i++){
-    Serial.println(lidar.lidarVal[i]);
-    Serial.print("\t");
-  }
-  Serial.println();
-  // comp.updateGyro();
-  // int heading = comp.getHeading();
-  // lightVector = (int)transaction(((uint8_t)0));
-  // if(lightVector==65535.00){
-  //   lightVector = -1;
-  // }
-  // lights.setComp(heading);
-  // lights.setVector(lightVector);
+  // Compass
+  comp.updateGyro();
+  int heading = comp.getHeading();
 
-  // lights.updateWithComp();
-  // if(lights.getLineAngle()!=-1){
-  //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
-  // }else{
-  //   motors.brake();
-  // }
+  // Camera
+  camera.update();
+
+  // Orbit
+  orbit.setRole(role);
+  orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
+  orbit.setBallData(camera.getBall());
+  orbit.setCompAngle(comp.getHeading());
+  orbit.calculateMoveData();
+  orbit.calculateRotation();
+
+  // Light
+  lightVector = (int)transaction(((uint8_t)0));
+  lights.setComp(heading);
+  lights.setVector(lightVector);
+  lights.updateWithComp();
+  
+  // LIDAR
+  lidar.read();
+  
+  // Movement
+  move = orbit.getMoveData();
+  // move.angle = -1;
+  motors.moveDirection(move);
+
+  // End Loop
+  orbit.resetAllData();
+  
 }
 

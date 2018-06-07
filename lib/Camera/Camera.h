@@ -15,6 +15,8 @@ class Camera{
     void setup();
     void update();
 
+    bool isAvailable();
+
     Image getAttackGoal();
     Image getDefendGoal();
     Image getBall();

@@ -33,7 +33,7 @@ const int brokenPins[] = {6,23};
 #define MOTORFL_PWM 6
 #define MOTORFL_DIR 49
 #define MOTORFL_BRK 50
-#define MOTORFL_REV false
+#define MOTORFL_REV true
 
 
 // Teensy

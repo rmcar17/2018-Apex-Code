@@ -29,6 +29,7 @@ class CameraController {
 
     double getDistance(Image image);
     double calculateBallDistance(double distance);
+    double calculateGoalDistance(double distance);
 
     Vector attackGoal = Vector(0,0); //attacking goal
     Vector defendGoal = Vector(0,0); //defending goal

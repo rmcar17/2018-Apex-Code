@@ -33,7 +33,6 @@
 
 #define CLOSE_ORBIT Vector(370, 0)
 #define FAR_ORBIT Vector(390, 0)
-
 #define BIG_ORBIT 22
 #define SMALL_ORBIT 18
 
@@ -60,7 +59,7 @@
 #define PIXEL_TO_MM 50 / 227
 // LIGHT SENSORS
 
-#define LS_NUM 4
-#define LS_CALIBRATION_NUM 10
+#define LS_NUM 24
+#define LS_CALIBRATION_NUM 50
 
 #endif

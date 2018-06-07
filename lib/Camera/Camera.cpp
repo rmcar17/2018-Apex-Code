@@ -16,7 +16,6 @@ void Camera::update(){
   for(int i = 0; i < CAM_BUFFER_NUM; i++){
     while(!(cameraSerial.available() > 0));
     camBuffer[i] = cameraSerial.read();
-    Serial.println(camBuffer[i]);
   }
   ball.x = camBuffer[0];
   ball.y = camBuffer[1];

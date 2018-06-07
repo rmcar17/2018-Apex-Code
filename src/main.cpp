@@ -71,7 +71,6 @@ void loop() {
 
   move = orbit.getMoveData();
   // move.angle = -1;
-
   motors.moveDirection(move);
 
   orbit.resetAllData();

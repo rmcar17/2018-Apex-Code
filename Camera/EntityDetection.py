@@ -3,8 +3,8 @@ from pyb import UART, LED
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 ball = [(50,67,24,62,0,40)]
-blueGoal = [(37,51,-18,1,-24,-9)]
-yellowGoal = [(49,74,-7,15,8,48)]
+blueGoal = [(23,51,-18,1,-24,-8)]
+yellowGoal = [(60,74,-7,15,8,48)]
 
 uart = UART(3, 9600, timeout_char = 1000)
 
@@ -43,13 +43,15 @@ while(True):
     yellowBlob = largestBlob(img.find_blobs(yellowGoal,x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
 
     if ballBlob:
+        # Enable the line below upon calibration
         #img.draw_line((105, 105, ballBlob.cx(), ballBlob.cy()))
         #print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5))
         sendBuffer[1] = ballBlob.cx()
         sendBuffer[2] = ballBlob.cy()
 
     if blueBlob:
-        #img.draw_line((105, 105, blueBlob.cx(), blueBlob.cy()))
+        print((((blueBlob.cx()-105)**2+(blueBlob.cy()-105)**2)**0.5))
+        img.draw_line((105, 105, blueBlob.cx(), blueBlob.cy()))
         sendBuffer[3] = blueBlob.cx()
         sendBuffer[4] = blueBlob.cy()
 

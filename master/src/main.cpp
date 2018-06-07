@@ -18,8 +18,11 @@
 #include <Pins.h>
 #include <t3spi.h>
 #include <Lidar.h>
+#include <Bluetooth>
 
 LIDAR lidar = LIDAR();
+
+Bluetooth bt;
 
 void setup() {
   pinMode(TEENSY_LED, OUTPUT);
@@ -52,6 +55,7 @@ void setup() {
   spi.enableCS(CS0, CS_ActiveLOW);
   
   lidar.init();
+  bt.init();
 }
 
 void loop() {
@@ -78,6 +82,9 @@ void loop() {
   
   // LIDAR
   lidar.read();
+  
+  // Bluetooth
+  double btCMD = bt.receive();
   
   // Movement
   move = orbit.getMoveData();

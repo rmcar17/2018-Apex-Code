@@ -19,8 +19,8 @@ void CameraController::update(){
 void CameraController::calculateEntities(){
   calculateBall(camera.getBall());
   calculateGoal(&attackGoal, camera.getAttackGoal());
-  // Serial.println(attackGoal.arg);
   calculateGoal(&defendGoal, camera.getDefendGoal());
+  // Serial.println(attackGoal.arg);
 
   #if DEBUG_CAMERA
     Serial.print("BALL: ");
@@ -35,7 +35,7 @@ void CameraController::calculateBall(Image ballImage){
 }
 
 void CameraController::calculateGoal(Vector *goal, Image goalImage){
-  *goal = goalImage.visible ? Vector(calculateBallDistance(getDistance(goalImage)), calculateAngle(goalImage.x, goalImage.y)) : Vector(0,0);
+  *goal = goalImage.visible ? Vector(calculateGoalDistance(getDistance(goalImage)), calculateAngle(goalImage.x, goalImage.y)) : Vector(0,0);
 }
 
 int CameraController::calculateAngle(int x, int y){
@@ -54,6 +54,10 @@ double CameraController::getDistance(Image image){
 
 double CameraController::calculateBallDistance(double distance){
   return 1.5432 * exp(0.0646 * distance) + 100;
+}
+
+double CameraController::calculateGoalDistance(double distance){
+  return 1.5561 * exp(0.0629 * distance) + 100;
 }
 
 Vector CameraController::getAttackGoal(){

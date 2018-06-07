@@ -18,15 +18,20 @@
 #include <Pins.h>
 #include <t3spi.h>
 #include <Lidar.h>
+#include <Bluetooth>
 
 LIDAR lidar = LIDAR();
+
+Bluetooth bt;
 
 void setup() {
   Serial.begin(38400);
   lidar.init();
+  bt.init();
 }
 
 void loop() {
+  double btCMD = bt.receive();
   lidar.read();
   for(int i; i < 4; i++){
     Serial.println(lidar.lidarVal[i]);

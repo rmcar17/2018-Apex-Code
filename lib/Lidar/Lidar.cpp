@@ -1,10 +1,5 @@
 #include <Lidar.h>
 
-
-LIDAR::LIDAR(){
-
-}
-
 void LIDAR::init(){
 	Serial1.begin(115200);
 	Serial3.begin(115200);

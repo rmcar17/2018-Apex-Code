@@ -5,7 +5,6 @@
 
 class LIDAR {
 public:
-	LIDAR();
 	void init();
 	void read();
 	uint16_t lidarVal[4];

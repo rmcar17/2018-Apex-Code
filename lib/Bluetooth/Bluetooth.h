@@ -6,12 +6,13 @@
 
 SoftwareSerial blueSerial(7, 8);
 
-class Blutooth{
+class Bluetooth{
 public:
-	SoftwareSerial blueSerial(7,8);
 	void init();
 	void send(double cmd);
 	double receive();
 private:
 	double receiveCommand;
-}
+};
+
+#endif

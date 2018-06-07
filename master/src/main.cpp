@@ -7,6 +7,7 @@
 #include <Camera.h>
 #include <CameraController.h>
 #include <RoleController.h>
+#include <Orbit.h>
 #include <Timer.h>
 #include <PID.h>
 #include <Common.h>
@@ -18,11 +19,36 @@
 #include <Pins.h>
 #include <t3spi.h>
 #include <Lidar.h>
-#include <Bluetooth>
+#include <Bluetooth.h>
 
-LIDAR lidar = LIDAR();
+LIDAR lidar;
+
+Compass comp;
+
+CameraController camera;
+
+MotorController motors;
+
+LightSensorController lights;
+Orbit orbit;
+
+Role role;
+
+MoveData move;
 
 Bluetooth bt;
+
+int lightVector;
+volatile uint16_t dataOut[1], dataIn[1];
+
+uint16_t transaction(uint8_t command, uint16_t data = 0){
+  dataOut[0] = (command << 10) | (data & 0x3FF);
+
+  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT); 
+  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT); 
+
+  return dataIn[0];
+}
 
 void setup() {
   pinMode(TEENSY_LED, OUTPUT);

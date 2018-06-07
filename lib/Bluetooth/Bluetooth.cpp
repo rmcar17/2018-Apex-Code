@@ -10,7 +10,7 @@ void Bluetooth::send(double cmd){
 		blueSerial.write(cmd);
 	}
 }
-void Bluetooth::receive(){
+double Bluetooth::receive(){
 	if (blueSerial.available())
 	{
 		receiveCommand = blueSerial.read();

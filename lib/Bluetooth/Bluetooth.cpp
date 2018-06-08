@@ -5,10 +5,7 @@ void Bluetooth::init(){
 }
 
 void Bluetooth::send(double cmd){
-	if (Serial.available())
-	{
-		blueSerial.write(cmd);
-	}
+	blueSerial.write(cmd);
 }
 double Bluetooth::receive(){
 	if (blueSerial.available())

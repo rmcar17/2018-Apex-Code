@@ -21,6 +21,8 @@
 #include <Lidar.h>
 #include <Bluetooth.h>
 
+SoftwareSerial blueSerial(7,8);
+
 LIDAR lidar;
 
 Compass comp;
@@ -37,6 +39,8 @@ Role role;
 MoveData move;
 
 Bluetooth bt;
+
+T3SPI spi;
 
 int lightVector;
 volatile uint16_t dataOut[1], dataIn[1];

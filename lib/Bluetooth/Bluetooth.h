@@ -4,8 +4,6 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 
-SoftwareSerial blueSerial(7, 8);
-
 class Bluetooth{
 public:
 	void init();
@@ -14,5 +12,7 @@ public:
 private:
 	double receiveCommand;
 };
+
+extern SoftwareSerial blueSerial;
 
 #endif

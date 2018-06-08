@@ -46,11 +46,12 @@ void Orbit::calculateCoordinates(){
 }
 
 void Orbit::calculateMoveData(){
+  calculateCoordinates();
   if(role == Role::attack){
     calcAttacker();
   }
   else{
-    //calcDefender();
+    calcDefender();
   }
   #if DEBUG_ORBIT
     Serial.print("BALL ANGLE: ");
@@ -65,11 +66,8 @@ void Orbit::calculateMoveData(){
 void Orbit::calculateRotation(){
   double rotate = 0;
   #if GOAL_TRACK
-    if(role == Role::attack){// && attackGoal.exists() && isAngleBetween(mod(compAngle+attackGoal.arg,360),315,45)){
+    if(role == Role::attack && attackGoal.exists() && isAngleBetween(compAngle, 310, 50)){
       attackGoal.arg = (360-attackGoal.arg);
-      Serial.print(attackGoal.arg);
-      Serial.print("\t");
-      Serial.println(compAngle);
       rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
     }
     else if(role == Role::defend && defendGoal.exists()){
@@ -118,29 +116,30 @@ void Orbit::calcAttacker(){
   }
 }
 
-// void Orbit::calcDefender(){
-//   if(ball.visible){
-//     if(defendGoal.visible){
-//       if(isAngleBetween(ball.angle, 270, 90)){
-//         moveToBall();
-//       }
-//       else{
-//         //Orbit around the ball normally
-//         calcAttacker();
-//       }
-//     }
-//     else {
-//       calcAttacker(); //Might try out some better logic here later
-//     }
-//   }
-//   else{
-//     if(defendGoal.visible){
-//       centreGoal();
-//     }
-//     //If can't see goal or ball, the robot
-//     //can't do anything so just compass correct
-//   }
-// }
+void Orbit::calcDefender(){
+  moveToPos(DEFEND_GOAL);
+  // if(ball.exists()){
+  //   if(defendGoal.exists()){
+  //     if(isAngleBetween(ball.angle, 270, 90)){
+  //       moveToBall();
+  //     }
+  //     else{
+  //       //Orbit around the ball normally
+  //       calcAttacker();
+  //     }
+  //   }
+  //   else {
+  //     calcAttacker(); //Might try out some better logic here later
+  //   }
+  // }
+  // else{
+  //   if(defendGoal.exists()){
+  //     centre();
+  //   }
+  //   //If can't see goal or ball, the robot
+  //   //can't do anything so just compass correct
+  // }
+}
 
 void Orbit::calcSmallOrbit(){
   movement.speed = MAX_SPEED;
@@ -184,22 +183,22 @@ void Orbit::calcFarOrbit(){
   movement.angle = ball.arg;
 }
 
-void Orbit::centre(){
-  Vector centre = CENTRE - robotPosition;
+void Orbit::moveToPos(Vector position){
+  Vector direction = position - robotPosition;
 
-  movement.speed = MAX_SPEED; // Add PID for speed
-  movement.angle = mod(round(centre.arg-compAngle),360);
+  movement.speed = MAX_SPEED;
+  movement.angle = mod(round(direction.arg-compAngle),360);
 }
 
-// void Orbit::moveToBall(){
-//   //Won't work when comparing
-//   //TSOPs to camera
-//   double correctedVerticalDistance = attackGoal.distance * cos(toRadians(compAngle + attackGoal.angle)) + CENTRE_DEFENDER_DISTANCE;
-//   double correctedHorizontalDistance = isAngleBetween(ball.angle, 360 - DEFEND_SMALL_ANGLE, DEFEND_SMALL_ANGLE) ? 0 : ball.distance * sin(toRadians(ball.angle + compAngle));
-//
-//   movement.speed = MAX_SPEED;
-//   movement.angle = mod(round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);
-// }
+void Orbit::moveToBall(){
+  //Won't work when comparing
+  //TSOPs to camera
+  double correctedVerticalDistance = attackGoal.mag * cos(toRadians(compAngle + attackGoal.arg)) + CENTRE_DEFENDER_DISTANCE;
+  double correctedHorizontalDistance = isAngleBetween(ball.arg, 360 - DEFEND_SMALL_ANGLE, DEFEND_SMALL_ANGLE) ? 0 : ball.mag * sin(toRadians(ball.arg + compAngle));
+
+  movement.speed = MAX_SPEED;
+  movement.angle = mod(round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);
+}
 
 void Orbit::resetAllData(){
   role = Role::undecided;

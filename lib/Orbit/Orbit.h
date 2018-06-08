@@ -36,7 +36,7 @@ class Orbit{
     void calcMediumOrbit();
     void calcFarOrbit();
 
-    void centre();
+    void moveToPos(Vector position);
     void moveToBall();
 
     Role role = Role::undecided;

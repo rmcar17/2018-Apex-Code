@@ -10,9 +10,9 @@
 #define ROTATION_KI 0
 #define ROTATION_KD 0.3
 
-#define GOAL_KP 1.5
+#define GOAL_KP 0.9
 #define GOAL_KI 0
-#define GOAL_KD 5
+#define GOAL_KD 3
 
 // Coordinates
 #define FIELD_WIDTH 1820
@@ -29,23 +29,21 @@
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
 
-#define ORBIT_FORWARD_ANGLE_TIGHTENER 2.6
+#define ORBIT_FORWARD_ANGLE_TIGHTENER 2
 
-#define CLOSE_ORBIT Vector(370, 0)
-#define FAR_ORBIT Vector(390, 0)
+#define CLOSE_ORBIT Vector(400, 0)
+#define FAR_ORBIT Vector(550, 0)
 
-#define BIG_ORBIT 22
-#define SMALL_ORBIT 18
+#define BIG_ORBIT 25
+#define SMALL_ORBIT 15
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define MAX_SPEED 100
+#define MAX_SPEED 200
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true
 #define OVERIDE_BLUE false
-
-#define CAMERA_UPDATE_TIME 46000
 
 #define CAM_BUFFER_NUM 6
 

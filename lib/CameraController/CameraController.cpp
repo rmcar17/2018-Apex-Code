@@ -12,7 +12,6 @@ void CameraController::update(){
   if(camera.isAvailable()){
     camera.update();
     calculateEntities();
-    cameraTimer.update();
   }
 }
 

@@ -19,7 +19,6 @@ class CameraController {
     Vector getBall();
   private:
     Camera camera = Camera();
-    Timer cameraTimer = Timer(CAMERA_UPDATE_TIME);
 
     void calculateEntities();
     void calculateBall(Image ballImage);

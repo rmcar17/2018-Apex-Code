@@ -26,22 +26,25 @@ MoveData Orbit::getMoveData(){
 }
 
 void Orbit::calculateCoordinates(){
-  Vector actualAttackGoal = Vector(attackGoal.mag, attackGoal.arg + compAngle);
-  Vector actualDefendGoal = Vector(defendGoal.mag, defendGoal.arg + compAngle);
-  if(!(attackGoal.exists() || defendGoal.exists())){
-    robotPosition = Vector(0, 0);
-    ballPosition = Vector(0, 0);
-    return;
-  }
-  if(attackGoal.exists() && defendGoal.exists()){
-    robotPosition = (ATTACK_GOAL - actualAttackGoal + DEFEND_GOAL - actualDefendGoal) / 2;
-  }
-  else if (attackGoal.exists()){
+  Vector actualAttackGoal = Vector(attackGoal.mag, mod(90 + (360 - (attackGoal.arg+compAngle)),360));
+  Vector actualDefendGoal = Vector(defendGoal.mag, mod(90 + (360 - (defendGoal.arg+compAngle)),360));
+  // if(!(attackGoal.exists() || defendGoal.exists())){
+  //   robotPosition = Vector(0, 0);
+  //   ballPosition = Vector(0, 0);
+  //   return;
+  // }
+  // if(attackGoal.exists() && defendGoal.exists()){
+  //   robotPosition = (ATTACK_GOAL - actualAttackGoal + DEFEND_GOAL - actualDefendGoal) / 2;
+  // }
+  if(attackGoal.exists()){
     robotPosition = ATTACK_GOAL - actualAttackGoal;
   }
-  else {
-    robotPosition = DEFEND_GOAL - actualDefendGoal;
-  }
+  // else {
+  //   robotPosition = DEFEND_GOAL - actualDefendGoal;
+  // }
+  // Serial.print(robotPosition.i);
+  // Serial.print("\t");
+  // Serial.println(robotPosition.j);
   ballPosition = robotPosition + ball;
 }
 
@@ -83,6 +86,7 @@ void Orbit::calculateRotation(){
 }
 
 void Orbit::calcAttacker(){
+  // moveToPos(CENTRE);
   if(ball.exists()){
     if(isAngleBetween(ball.arg, 360 - SMALL_ORBIT, SMALL_ORBIT)){
       calcSmallOrbit();
@@ -109,7 +113,7 @@ void Orbit::calcAttacker(){
   }
   else{
     if(robotPosition.exists()){
-      //centre();
+      // centre();
     }
     //If can't see goal or ball, the robot
     //can't do anything so just compass correct
@@ -142,7 +146,7 @@ void Orbit::calcDefender(){
 }
 
 void Orbit::calcSmallOrbit(){
-  movement.speed = MAX_SPEED;
+  movement.speed = round((1-(SMALL_ORBIT-(ball.arg < 180 ? ball.arg : 360 - ball.arg))/SMALL_ORBIT)*(MAX_SPEED-NORMAL_SPEED)+NORMAL_SPEED);
   movement.angle = round(ball.arg < 180 ? ball.arg * ORBIT_FORWARD_ANGLE_TIGHTENER : 360 - (360 - ball.arg) * ORBIT_FORWARD_ANGLE_TIGHTENER);
 }
 
@@ -161,12 +165,12 @@ void Orbit::calcBigOrbit(){
     finalAngle = mod(round(360 - ((360 - ball.arg) * ORBIT_FORWARD_ANGLE_TIGHTENER + angleBuffer + (360 - ball.arg) * (1 - ORBIT_FORWARD_ANGLE_TIGHTENER) * closeness)), 360);
   }
 
-  movement.speed = MAX_SPEED;
+  movement.speed = NORMAL_SPEED;
   movement.angle = finalAngle;
 }
 
 void Orbit::calcCloseOrbit(){
-  movement.speed = MAX_SPEED;
+  movement.speed = NORMAL_SPEED;
   movement.angle = ball.arg < 180 ? ball.arg + 90 : ball.arg - 90;
 }
 
@@ -174,20 +178,20 @@ void Orbit::calcMediumOrbit(){
   double closeness = (FAR_ORBIT - ball).mag / (FAR_ORBIT - CLOSE_ORBIT).mag;
   int angleBuffer = round(closeness * 90);
 
-  movement.speed = MAX_SPEED;
+  movement.speed = NORMAL_SPEED;
   movement.angle = ball.arg + (ball.arg < 180 ? angleBuffer : -angleBuffer);
 }
 
 void Orbit::calcFarOrbit(){
-  movement.speed = MAX_SPEED;
+  movement.speed = NORMAL_SPEED;
   movement.angle = ball.arg;
 }
 
 void Orbit::moveToPos(Vector position){
   Vector direction = position - robotPosition;
 
-  movement.speed = MAX_SPEED;
-  movement.angle = mod(round(direction.arg-compAngle),360);
+  movement.speed = NORMAL_SPEED;
+  movement.angle = mod(round(toDegrees(direction.arg)-compAngle-90),360);
 }
 
 void Orbit::moveToBall(){
@@ -196,7 +200,7 @@ void Orbit::moveToBall(){
   double correctedVerticalDistance = attackGoal.mag * cos(toRadians(compAngle + attackGoal.arg)) + CENTRE_DEFENDER_DISTANCE;
   double correctedHorizontalDistance = isAngleBetween(ball.arg, 360 - DEFEND_SMALL_ANGLE, DEFEND_SMALL_ANGLE) ? 0 : ball.mag * sin(toRadians(ball.arg + compAngle));
 
-  movement.speed = MAX_SPEED;
+  movement.speed = NORMAL_SPEED;
   movement.angle = mod(round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);
 }
 

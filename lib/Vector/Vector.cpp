@@ -14,8 +14,8 @@ void Vector::setStandard(double _i, double _j){
 
 void Vector::setPolar(double _mag, double _arg){
   // Convert to standard and set i and j
-  i = calcI(_mag, _arg);
-  j = calcJ(_mag, _arg);
+  i = calcI(_mag, toRadians(_arg));
+  j = calcJ(_mag, toRadians(_arg));
 
   mag = _mag;
   arg = _arg;

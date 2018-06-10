@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <Defines.h>
 
-#define ROBOT 2
+#define ROBOT 1
 
 // Camera
 

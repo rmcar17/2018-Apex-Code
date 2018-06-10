@@ -38,7 +38,7 @@ void Compass::updateGyro() {
 }
 
 double Compass::getHeading(){
-  return heading;
+  return mod(heading*4,360);
 }
 
 void Compass::calibrate() {

@@ -29,14 +29,7 @@
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
 
-<<<<<<< HEAD
 #define ORBIT_FORWARD_ANGLE_TIGHTENER 0.25
-=======
-#define CENTRE_MOVEMENT_BUFFER 3
-#define CENTRE_MOVEMENT_CUTOFF 50
-
-#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.75
->>>>>>> master
 
 #define CLOSE_ORBIT Vector(380, 0)
 #define FAR_ORBIT Vector(450, 0)
@@ -44,6 +37,13 @@
 #define SIDEWAYS_ORBIT 60
 #define BIG_ORBIT 45
 #define SMALL_ORBIT 10
+=======
+#define ORBIT_FORWARD_ANGLE_TIGHTENER 2.6
+
+#define CLOSE_ORBIT Vector(370, 0)
+#define FAR_ORBIT Vector(390, 0)
+#define BIG_ORBIT 22
+#define SMALL_ORBIT 18
 
 #define DEFEND_SMALL_ANGLE 10
 
@@ -67,7 +67,7 @@
 #define PIXEL_TO_MM 50 / 227
 // LIGHT SENSORS
 
-#define LS_NUM 4
-#define LS_CALIBRATION_NUM 10
+#define LS_NUM 24
+#define LS_CALIBRATION_NUM 50
 
 #endif

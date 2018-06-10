@@ -85,7 +85,6 @@ void Orbit::calculateRotation(){
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
   #endif
   movement.rotation = round(rotate);
-
 }
 
 void Orbit::calcAttacker(){

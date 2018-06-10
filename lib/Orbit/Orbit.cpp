@@ -85,6 +85,7 @@ void Orbit::calculateRotation(){
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
   #endif
   movement.rotation = round(rotate);
+
 }
 
 void Orbit::calcAttacker(){
@@ -191,11 +192,22 @@ void Orbit::calcFarOrbit(){
   movement.angle = ball.arg;
 }
 
+<<<<<<< HEAD
 void Orbit::moveToPos(Vector position){
   Vector direction = position - robotPosition;
 
   movement.speed = NORMAL_SPEED;
   movement.angle = mod(round(toDegrees(direction.arg)-compAngle-90),360);
+=======
+void Orbit::centre(){
+  double goalAngle = toRadians(90 + compAngle + goal.angle);
+
+  double correctedVerticalDistance = CENTRE_MOVEMENT_BUFFER * (goal.distance * sin(goalAngle) + (role == PlayMode::attacker ? -CENTRE_ATTACKER_DISTANCE : CENTRE_DEFENDER_DISTANCE));
+  double correctedHorizontalDistance = CENTRE_MOVEMENT_BUFFER * goal.distance * cos(goalAngle);
+
+  movement.speed = min(255,correctedHorizontalDistance*correctedHorizontalDistance+correctedVerticalDistance*correctedVerticalDistance);
+  movement.angle = movement.speed > CENTRE_MOVEMENT_CUTOFF ? mod(round(450 - toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance))),360) : -1;
+>>>>>>> master
 }
 
 void Orbit::moveToBall(){

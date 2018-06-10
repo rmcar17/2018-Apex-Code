@@ -65,12 +65,16 @@ bool Vector::exists(){
   return Vector(mag, arg) != Vector(0, 0);
 }
 
+bool Vector::between(double leftAngle, double rightAngle){
+  return isAngleBetween(arg, leftAngle, rightAngle);
+}
+
 double Vector::calcI(double _mag, double _arg){
-  return _mag * cos(_arg);
+  return _mag * cos(toRadians(_arg));
 }
 
 double Vector::calcJ(double _mag, double _arg){
-  return _mag * sin(_arg);
+  return _mag * sin(toRadians(_arg));
 }
 
 double Vector::calcMag(double _i, double _j){
@@ -78,5 +82,5 @@ double Vector::calcMag(double _i, double _j){
 }
 
 double Vector::calcArg(double _i, double _j){
-  return atan2(_j, _i);
+  return toDegrees(atan2(_j, _i));
 }

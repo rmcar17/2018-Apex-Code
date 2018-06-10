@@ -70,7 +70,7 @@ void Orbit::calculateRotation(){
   double rotate = 0;
   #if GOAL_TRACK
     if(role == Role::attack && attackGoal.exists()){
-      if(!isAngleBetween(attackGoal.arg,355,5)){
+      if(!attackGoal.arg.between(355,5)){
         attackGoal.arg = (360-attackGoal.arg);
         rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
       }
@@ -89,13 +89,13 @@ void Orbit::calculateRotation(){
 
 void Orbit::calcAttacker(){
   if(ball.exists()){
-    if(isAngleBetween(ball.arg, 360 - SMALL_ORBIT, SMALL_ORBIT)){
+    if(ball.between(360 - SMALL_ORBIT, SMALL_ORBIT)){
       calcSmallOrbit();
     }
-    else if(isAngleBetween(ball.arg, 360 - BIG_ORBIT, BIG_ORBIT)){
+    else if(ball.between(360 - BIG_ORBIT, BIG_ORBIT)){
       calcBigOrbit();
     }
-    else if(isAngleBetween(ball.arg, 360 - SIDEWAYS_ORBIT, SIDEWAYS_ORBIT)){
+    else if(ball.between(360 - SIDEWAYS_ORBIT, SIDEWAYS_ORBIT)){
       calcSideOrbit();
     }
     else if(ball < FAR_ORBIT){
@@ -202,7 +202,7 @@ void Orbit::moveToBall(){
   //Won't work when comparing
   //TSOPs to camera
   double correctedVerticalDistance = attackGoal.mag * cos(toRadians(compAngle + attackGoal.arg)) + CENTRE_DEFENDER_DISTANCE;
-  double correctedHorizontalDistance = isAngleBetween(ball.arg, 360 - DEFEND_SMALL_ANGLE, DEFEND_SMALL_ANGLE) ? 0 : ball.mag * sin(toRadians(ball.arg + compAngle));
+  double correctedHorizontalDistance = ball.between(s360 - DEFEND_SMALL_ANGLE, DEFEND_SMALL_ANGLE) ? 0 : ball.mag * sin(toRadians(ball.arg + compAngle));
 
   movement.speed = NORMAL_SPEED;
   movement.angle = mod(round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);

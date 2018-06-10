@@ -65,6 +65,10 @@ bool Vector::exists(){
   return Vector(mag, arg) != Vector(0, 0);
 }
 
+bool Vector::between(double leftAngle, double rightAngle){
+  return isAngleBetween(arg, leftAngle, rightAngle);
+}
+
 double Vector::calcI(double _mag, double _arg){
   return _mag * cos(toRadians(_arg));
 }

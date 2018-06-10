@@ -24,6 +24,7 @@ class Vector {
     bool operator>=(Vector vector2);
 
     bool exists();
+    bool between(double leftAngle, double rightAngle);
 
     double i, j;
     double mag, arg;

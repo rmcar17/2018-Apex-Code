@@ -66,11 +66,11 @@ bool Vector::exists(){
 }
 
 double Vector::calcI(double _mag, double _arg){
-  return _mag * cos(_arg);
+  return _mag * cos(toRadians(_arg));
 }
 
 double Vector::calcJ(double _mag, double _arg){
-  return _mag * sin(_arg);
+  return _mag * sin(toRadians(_arg));
 }
 
 double Vector::calcMag(double _i, double _j){
@@ -78,5 +78,5 @@ double Vector::calcMag(double _i, double _j){
 }
 
 double Vector::calcArg(double _i, double _j){
-  return atan2(_j, _i);
+  return toDegrees(atan2(_j, _i));
 }

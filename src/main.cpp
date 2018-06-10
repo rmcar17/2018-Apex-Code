@@ -5,10 +5,14 @@
 #include <LightSensor.h>
 #include <LightSensorController.h>
 #include <Orbit.h>
+#include <Camera.h>
+#include <CameraController.h>
+#include <RoleController.h>
+#include <Timer.h>
 #include <PID.h>
 #include <Common.h>
-#include <PlayMode.h>
-#include <EntityData.h>
+#include <Vector.h>
+#include <Role.h>
 #include <MoveData.h>
 #include <Debug.h>
 #include <Defines.h>
@@ -16,21 +20,26 @@
 
 Compass comp;
 
+CameraController camera;
+
 MotorController motors;
 
 LightSensorController lights;
 Orbit orbit;
 
-PlayMode role;
+Role role;
 
-EntityData ball;
-EntityData goal;
 MoveData move;
 
 void setup() {
+  pinMode(TEENSY_LED, OUTPUT);
+
   #if DEBUG_ANY
-  Serial.begin(9600);
+    Serial.begin(38400);
   #endif
+  camera.setup();
+
+  digitalWrite(TEENSY_LED, HIGH);
 
   Wire.begin();
   comp.compassSetup();
@@ -39,44 +48,30 @@ void setup() {
   motors.motorSetup();
   motors.brake();
 
-  lights.setup();
-
   orbit.resetAllData();
 
+  role = Role::attack;
 
-  role = PlayMode::attacker;
-  ball.angle = 0;
-  ball.distance = 0;
-  ball.visible = true;
-
-  goal.angle = -1;
-  goal.distance = 0;
-  goal.visible = false;
-
+  digitalWrite(TEENSY_LED, LOW);
 }
 
 void loop() {
+  // motors.moveDirection({0,100,0});
   comp.updateGyro();
 
-  //Create another class which fetches
-  //goal data which takes an input of
-  //the robot's current role
-
-  //Create another class which checks
-  //whether the robots should switch
-  //roles
+  camera.update();
 
   orbit.setRole(role);
-  orbit.setGoalData(goal);
-  orbit.setBallData(ball);
-  orbit.setCompAngle(0);//comp.getHeading());
+  orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
+  orbit.setBallData(camera.getBall());
+  orbit.setCompAngle(mod(4*comp.getHeading(),360));
 
   orbit.calculateMoveData();
   orbit.calculateRotation();
 
   move = orbit.getMoveData();
-
+  // move.angle = -1;
   motors.moveDirection(move);
-
+  // motors.moveDirection({0,100,0});
   orbit.resetAllData();
 }

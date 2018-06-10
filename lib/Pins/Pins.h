@@ -1,8 +1,12 @@
 #ifndef PINS_H
 #define PINS_H
 
-#include <Defines.h>
 #include <Arduino.h>
+#include <Defines.h>
+
+// Camera
+
+#define cameraSerial Serial6
 
 // Light Sensor
 
@@ -13,7 +17,7 @@ const int lightPins[LS_NUM] = {A0, A1, A2, A3};
 #define MOTORFR_PWM 2
 #define MOTORFR_DIR 56
 #define MOTORFR_BRK 57
-#define MOTORFR_REV false
+#define MOTORFR_REV true
 
 #define MOTORBR_PWM 23
 #define MOTORBR_DIR 52
@@ -30,4 +34,6 @@ const int lightPins[LS_NUM] = {A0, A1, A2, A3};
 #define MOTORFL_BRK 50
 #define MOTORFL_REV true
 
+// Teensy
+#define TEENSY_LED 13
 #endif

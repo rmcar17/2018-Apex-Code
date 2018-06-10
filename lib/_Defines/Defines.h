@@ -37,13 +37,6 @@
 #define SIDEWAYS_ORBIT 60
 #define BIG_ORBIT 45
 #define SMALL_ORBIT 10
-=======
-#define ORBIT_FORWARD_ANGLE_TIGHTENER 2.6
-
-#define CLOSE_ORBIT Vector(370, 0)
-#define FAR_ORBIT Vector(390, 0)
-#define BIG_ORBIT 22
-#define SMALL_ORBIT 18
 
 #define DEFEND_SMALL_ANGLE 10
 

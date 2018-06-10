@@ -12,7 +12,7 @@
 
 #define GOAL_KP 0.9
 #define GOAL_KI 0
-#define GOAL_KD 3
+#define GOAL_KD 0.5
 
 // Coordinates
 #define FIELD_WIDTH 1820
@@ -29,13 +29,14 @@
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
 
-#define ORBIT_FORWARD_ANGLE_TIGHTENER 1.75
+#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.25
 
-#define CLOSE_ORBIT Vector(450, 0)
-#define FAR_ORBIT Vector(530, 0)
+#define CLOSE_ORBIT Vector(380, 0)
+#define FAR_ORBIT Vector(450, 0)
 
-#define BIG_ORBIT 30
-#define SMALL_ORBIT 25
+#define SIDEWAYS_ORBIT 60
+#define BIG_ORBIT 45
+#define SMALL_ORBIT 10
 
 #define DEFEND_SMALL_ANGLE 10
 

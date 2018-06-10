@@ -69,9 +69,11 @@ void Orbit::calculateMoveData(){
 void Orbit::calculateRotation(){
   double rotate = 0;
   #if GOAL_TRACK
-    if(role == Role::attack && attackGoal.exists() && isAngleBetween(compAngle, 310, 50)){
-      attackGoal.arg = (360-attackGoal.arg);
-      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
+    if(role == Role::attack && attackGoal.exists()){
+      if(!isAngleBetween(attackGoal.arg,355,5)){
+        attackGoal.arg = (360-attackGoal.arg);
+        rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
+      }
     }
     else if(role == Role::defend && defendGoal.exists()){
 
@@ -86,29 +88,26 @@ void Orbit::calculateRotation(){
 }
 
 void Orbit::calcAttacker(){
-  // moveToPos(CENTRE);
   if(ball.exists()){
     if(isAngleBetween(ball.arg, 360 - SMALL_ORBIT, SMALL_ORBIT)){
       calcSmallOrbit();
-      // Serial.println("SMALL");
     }
     else if(isAngleBetween(ball.arg, 360 - BIG_ORBIT, BIG_ORBIT)){
       calcBigOrbit();
-      // Serial.println("BIG");
+    }
+    else if(isAngleBetween(ball.arg, 360 - SIDEWAYS_ORBIT, SIDEWAYS_ORBIT)){
+      calcSideOrbit();
     }
     else if(ball < FAR_ORBIT){
       if(ball < CLOSE_ORBIT){
         calcCloseOrbit();
-        // Serial.println("CLOSE");
       }
       else{
         calcMediumOrbit();
-        // Serial.println("MEDIUM");
       }
     }
     else{
       calcFarOrbit();
-      // Serial.println("FAR");
     }
   }
   else{
@@ -167,6 +166,11 @@ void Orbit::calcBigOrbit(){
 
   movement.speed = NORMAL_SPEED;
   movement.angle = finalAngle;
+}
+
+void Orbit::calcSideOrbit(){
+  movement.speed = NORMAL_SPEED;
+  movement.angle = ball.arg < 180 ? 90 : 270;
 }
 
 void Orbit::calcCloseOrbit(){

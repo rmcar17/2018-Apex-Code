@@ -31,6 +31,7 @@ class Orbit{
 
     void calcSmallOrbit();
     void calcBigOrbit();
+    void calcSideOrbit();
 
     void calcCloseOrbit();
     void calcMediumOrbit();

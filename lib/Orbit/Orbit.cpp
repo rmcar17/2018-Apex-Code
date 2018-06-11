@@ -26,26 +26,7 @@ MoveData Orbit::getMoveData(){
 }
 
 void Orbit::calculateCoordinates(){
-  Vector actualAttackGoal = Vector(attackGoal.mag, mod(90 + (360 - (attackGoal.arg+compAngle)),360));
-  Vector actualDefendGoal = Vector(defendGoal.mag, mod(90 + (360 - (defendGoal.arg+compAngle)),360));
-  // if(!(attackGoal.exists() || defendGoal.exists())){
-  //   robotPosition = Vector(0, 0);
-  //   ballPosition = Vector(0, 0);
-  //   return;
-  // }
-  // if(attackGoal.exists() && defendGoal.exists()){
-  //   robotPosition = (ATTACK_GOAL - actualAttackGoal + DEFEND_GOAL - actualDefendGoal) / 2;
-  // }
-  if(attackGoal.exists()){
-    robotPosition = ATTACK_GOAL - actualAttackGoal;
-  }
-  // else {
-  //   robotPosition = DEFEND_GOAL - actualDefendGoal;
-  // }
-  // Serial.print(robotPosition.i);
-  // Serial.print("\t");
-  // Serial.println(robotPosition.j);
-  ballPosition = robotPosition + ball;
+  
 }
 
 void Orbit::calculateMoveData(){
@@ -118,7 +99,7 @@ void Orbit::calcAttacker(){
 }
 
 void Orbit::calcDefender(){
-  moveToPos(DEFEND_GOAL);
+  moveToPos(CENTRE);
   // if(ball.exists()){
   //   if(defendGoal.exists()){
   //     if(isAngleBetween(ball.angle, 270, 90)){
@@ -193,7 +174,7 @@ void Orbit::moveToPos(Vector position){
   Vector direction = position - robotPosition;
 
   movement.speed = NORMAL_SPEED;
-  movement.angle = mod(round(toDegrees(direction.arg)-compAngle-90),360);
+  movement.angle = mod(round(direction.arg) - compAngle,360);
 }
 
 void Orbit::moveToBall(){

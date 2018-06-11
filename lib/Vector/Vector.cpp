@@ -14,8 +14,8 @@ void Vector::setStandard(double _i, double _j){
 
 void Vector::setPolar(double _mag, double _arg){
   // Convert to standard and set i and j
-  i = calcI(_mag, toRadians(_arg));
-  j = calcJ(_mag, toRadians(_arg));
+  i = calcI(_mag, _arg);
+  j = calcJ(_mag, _arg);
 
   mag = _mag;
   arg = _arg;
@@ -82,5 +82,5 @@ double Vector::calcMag(double _i, double _j){
 }
 
 double Vector::calcArg(double _i, double _j){
-  return toDegrees(atan2(_j, _i));
+  return mod(360 + toDegrees(atan2(_j, _i)),360);
 }

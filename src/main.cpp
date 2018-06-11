@@ -74,6 +74,7 @@ void loop() {
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
   orbit.setCompAngle(comp.getHeading());
+  orbit.setCoords(lidars.getCoords());
 
   orbit.calculateMoveData();
   orbit.calculateRotation();

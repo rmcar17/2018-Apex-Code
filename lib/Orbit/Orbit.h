@@ -16,9 +16,8 @@ class Orbit{
     void setBallData(Vector ballData);
     void setGoalData(Vector aGoal, Vector dGoal);
     void setCompAngle(int heading);
+    void setCoords(Vector coords);
     MoveData getMoveData();
-
-    void calculateCoordinates();
 
     void calculateMoveData();
     void calculateRotation();

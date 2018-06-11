@@ -21,16 +21,16 @@ void Orbit::setCompAngle(int heading){
   compAngle = heading;
 }
 
+void Orbit::setCoords(Vector coords){
+  robotPosition = coords;
+  ballPosition = coords + ball;
+}
+
 MoveData Orbit::getMoveData(){
   return movement;
 }
 
-void Orbit::calculateCoordinates(){
-
-}
-
 void Orbit::calculateMoveData(){
-  calculateCoordinates();
   if(role == Role::attack){
     calcAttacker();
   }
@@ -225,10 +225,10 @@ void Orbit::moveToBall(){
 void Orbit::resetAllData(){
   role = Role::undecided;
   ball = Vector(0, 0);
-  ballPosition = Vector(0, 0);
   attackGoal = Vector(0, 0);
   defendGoal = Vector(0, 0);
   robotPosition = Vector(0, 0);
+  ballPosition = Vector(0, 0);
   compAngle = -1;
   movement = {-1, 0, 0};
 }

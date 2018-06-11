@@ -3,13 +3,16 @@
 
 #include <Arduino.h>
 
-class LIDAR {
+class Lidar {
 public:
-	void init();
+	Lidar();
+
+	void setup(HardwareSerial serialPort);
 	void read();
-	uint16_t lidarVal[4];
+	int getDistance();
 private:
-	uint8_t sensorData[4];
+	int lidarVal;
+	HardwareSerial serialPin;
 };
 
 

@@ -6,9 +6,9 @@
 // Compass
 #define IMU_CALIBRATION_COUNT 500
 
-#define ROTATION_KP 13
+#define ROTATION_KP 5
 #define ROTATION_KI 0
-#define ROTATION_KD 0.3
+#define ROTATION_KD 0.2
 
 #define GOAL_KP 0.9
 #define GOAL_KI 0

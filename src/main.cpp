@@ -36,57 +36,50 @@ Role role;
 MoveData move;
 
 void setup() {
-  // pinMode(TEENSY_LED, OUTPUT);
-  //
-  // #if DEBUG_ANY
-  //   Serial.begin(38400);
-  // #endif
-  // // camera.setup();
-  //
-  // digitalWrite(TEENSY_LED, HIGH);
-  //
-  // Wire.begin();
-  // comp.compassSetup();
-  // comp.calibrate();
-  //
-  // motors.motorSetup();
-  // motors.brake();
-  //
-  // gate.setup();
-  //
-  // // orbit.setup();
-  // // orbit.resetAllData();
-  //
-  // role = Role::attack;
+  pinMode(TEENSY_LED, OUTPUT);
 
-  // digitalWrite(TEENSY_LED, LOW);
-  pinMode(53,OUTPUT);
-  digitalWrite(53,LOW);
-  delay(2000);
+  #if DEBUG_ANY
+    Serial.begin(38400);
+  #endif
+  // camera.setup();
+
+  digitalWrite(TEENSY_LED, HIGH);
+
+  Wire.begin();
+  comp.compassSetup();
+  comp.calibrate();
+
+  motors.motorSetup();
+  motors.brake();
+
+  gate.setup();
+
+  // orbit.setup();
+  // orbit.resetAllData();
+
+  role = Role::attack;
+
+  digitalWrite(TEENSY_LED, LOW);
 }
 void loop() {
-  digitalWrite(53,HIGH);
-  delay(50);
-  digitalWrite(53,LOW);
-  delay(5000);
-  // // motors.moveDirection({0,100,0});
-  // comp.updateGyro();
-  //
-  // // camera.update();
-  //
-  // orbit.setRole(role);
-  // orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
-  // orbit.setBallData(camera.getBall());
-  // orbit.setCompAngle(comp.getHeading());
-  // orbit.setLightGate(true);//gate.hasBall());
-  //
-  // orbit.calculateMoveData();
-  // orbit.calculateRotation();
-  // orbit.manageKicker();
-  //
-  // move = orbit.getMoveData();
-  // // move.angle = -1;
-  // // motors.moveDirection(move);
-  // // motors.moveDirection({0,100,0});
-  // orbit.resetAllData();
+  // motors.moveDirection({0,100,0});
+  comp.updateGyro();
+
+  // camera.update();
+
+  orbit.setRole(role);
+  orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
+  orbit.setBallData(camera.getBall());
+  orbit.setCompAngle(comp.getHeading());
+  orbit.setLightGate(true);//gate.hasBall());
+
+  orbit.calculateMoveData();
+  orbit.calculateRotation();
+  orbit.manageKicker();
+
+  move = orbit.getMoveData();
+  // move.angle = -1;
+  // motors.moveDirection(move);
+  // motors.moveDirection({0,100,0});
+  orbit.resetAllData();
 }

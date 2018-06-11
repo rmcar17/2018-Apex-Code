@@ -16,10 +16,10 @@
 
 // Coordinates
 #define FIELD_WIDTH 1820
-#define FIELD_LENGTH -2430
+#define FIELD_LENGTH 2430
 
-#define ATTACK_GOAL Vector(FIELD_WIDTH / 2, -300, false)
-#define DEFEND_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH + 300, false)
+#define ATTACK_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH-300, false)
+#define DEFEND_GOAL Vector(FIELD_WIDTH / 2, 300, false)
 
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
 

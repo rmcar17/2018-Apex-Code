@@ -4,14 +4,14 @@ from pyb import UART, LED
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 ball = [(45,70,30,66,16,50)]#[(49,67,28,74,-10,40)]
 blueGoal = [(37,61,-14,4,-46,-3)]#[(58,98,-15,8,12,52)]
-yellowGoal = [(67,83,-2,15,14,58)]#[(34,55,-18,11,-41,-7)]
+yellowGoal = [(62,83,-4,23,14,58)]#[(34,55,-18,11,-41,-7)]
 
 uart = UART(3, 9600, timeout_char = 1000)
 
 sensor.reset()
 sensor.set_pixformat(sensor.RGB565)
 sensor.set_framesize(sensor.QVGA)
-sensor.skip_frames(20)
+sensor.skip_frames(time = 2000)
 sensor.set_auto_gain(False)
 sensor.set_auto_whitebal(False)
 sensor.set_windowing((55,15,210,210))

@@ -119,7 +119,6 @@ void Orbit::calcAttacker(){
 
 void Orbit::calculateLine(){
   int moveAngle = movement.angle;
-  movement.speed = 100;
   if(danger==1){
     if(inRange(moveAngle,lineAngle,90)){
       if(mod(abs((lineAngle+90)-moveAngle),360)>mod(abs((lineAngle-90)-moveAngle),360)){
@@ -127,13 +126,21 @@ void Orbit::calculateLine(){
       } else{
         movement.angle = mod(abs((lineAngle+110)-moveAngle),360);
       }
+      movement.speed = 100;
     } else{
       // movement.angle stays the same
-      movement.angle = mod(lineAngle+180-compAngle,360);
     }
   } else if(danger==2){
     movement.angle = mod(lineAngle+180-compAngle,360);
+    movement.speed = 100;
   }
+  // Serial.print(danger);
+  // Serial.print("\t");
+  // Serial.print(moveAngle);
+  // Serial.print("\t");
+  // Serial.print(movement.angle);
+  // Serial.print("\t");
+  // Serial.println(lineAngle);
 }
 
 void Orbit::setLightValue(double angle, int tempDanger){

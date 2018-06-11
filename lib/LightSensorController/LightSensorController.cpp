@@ -21,11 +21,9 @@ void LightSensorController::calibrate(){
 	for(int ls = 0; ls < LS_NUM; ls++){
 		// int total = 0;
 		// for(int read_n = 0; read_n < LS_CALIBRATION_NUM; read_n++){
-		// 	if(!(read_n<=9||read_n>=(LS_CALIBRATION_NUM-11))){
-		// 		total += lightArray[ls].read();
-		// 	}
+		// 	total += lightArray[ls].read();
 		// }
-		calibration = 1020; //constrain(round(total / (LS_CALIBRATION_NUM-20)) + 100,0,1020);
+		calibration = 1020;// constrain(round(total / LS_CALIBRATION_NUM + 150),0,1020);
 		lightArray[ls].setThresh(calibration);
 	}
 }
@@ -162,7 +160,7 @@ void LightSensorController::updateOnWhite(){
 	for(int i = 0; i < LS_NUM; i++){
 		onWhite[i] = lightArray[i].onWhite();
 	}
-	for(int i = 0; i < 2; i++){
+	for(int i = 0; i < 1; i++){
 		if(onWhite[brokenPins[i-1]]||onWhite[brokenPins[i+1]]){
 			onWhite[brokenPins[i]] = 1;
 		}else{

@@ -59,7 +59,8 @@ void setup() {
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
-  // camera.setup();
+  camera.setup();
+  delay(500);
 
   digitalWrite(TEENSY_LED, HIGH);
 
@@ -92,7 +93,7 @@ void loop() {
   int heading = comp.getHeading();
 
   // // Camera
-  // camera.update();
+  camera.update();
 
   // Light
   lightVector = (int)transaction(((uint8_t)0));
@@ -112,7 +113,7 @@ void loop() {
   orbit.calculateRotation();
   orbit.setLightValue(lights.getLineAngle(),lights.danger);
   orbit.calculateLine();
-  
+
   // LIDAR
   lidar.read();
   
@@ -123,6 +124,7 @@ void loop() {
   move = orbit.getMoveData();
   // move.angle = -1;
   motors.moveDirection(move);
+  // motors.moveDirection({0,100,0});
 
   // End Loop
   orbit.resetAllData();

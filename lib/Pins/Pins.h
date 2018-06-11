@@ -12,11 +12,12 @@
 
 // Light Sensor
 
+// const int lightPins[LS_NUM] = {33,34,35,36,37,38,39,21,22,15,16,17,32,31,49,50,18,19,20,21,22,23,A11,A10};
 const int lightPins[LS_NUM] = {33,34,35,36,37,38,39,21,22,15,16,17,32,31,49,50,18,19,20,21,22,23,A11,A10};
 #if ROBOT == 1
-	const int brokenPins[] = {6,23};
+	const int brokenPins[] = {6,21};
 #else
-	const int brokenPins[] = {4,5};
+	const int brokenPins[] = {6,23};
 #endif
 // MOTORS
 #define MOTORFR_PWM 2
@@ -37,13 +38,13 @@ const int lightPins[LS_NUM] = {33,34,35,36,37,38,39,21,22,15,16,17,32,31,49,50,1
 
 #if ROBOT == 1
 	#define MOTORFR_REV true
-	#define MOTORBR_REV false
-	#define MOTORBL_REV false
+	#define MOTORBR_REV true
+	#define MOTORBL_REV true
 	#define MOTORFL_REV true
 #else
 	#define MOTORFR_REV true
-	#define MOTORBR_REV true
-	#define MOTORBL_REV true
+	#define MOTORBR_REV false
+	#define MOTORBL_REV false
 	#define MOTORFL_REV true
 #endif
 

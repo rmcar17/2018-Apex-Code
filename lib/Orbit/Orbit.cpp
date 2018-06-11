@@ -26,7 +26,7 @@ MoveData Orbit::getMoveData(){
 }
 
 void Orbit::calculateCoordinates(){
-  
+
 }
 
 void Orbit::calculateMoveData(){
@@ -135,7 +135,6 @@ bool Orbit::inRange(double value, double target, int range){
 }
 
 void Orbit::calcDefender(){
-  moveToPos(CENTRE);
   // if(ball.exists()){
   //   if(defendGoal.exists()){
   //     if(isAngleBetween(ball.angle, 270, 90)){

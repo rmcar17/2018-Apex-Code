@@ -6,6 +6,7 @@
 #include <LightSensorController.h>
 #include <Orbit.h>
 #include <Lidar.h>
+#include <LidarController.h>
 #include <Camera.h>
 #include <CameraController.h>
 #include <RoleController.h>

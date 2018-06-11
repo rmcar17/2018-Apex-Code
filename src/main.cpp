@@ -64,7 +64,7 @@ void loop() {
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
-  orbit.setCompAngle(mod(4*comp.getHeading(),360));
+  orbit.setCompAngle(comp.getHeading());
 
   orbit.calculateMoveData();
   orbit.calculateRotation();

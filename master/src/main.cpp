@@ -94,27 +94,24 @@ void loop() {
   // // Camera
   // camera.update();
 
-  // // Orbit
-  // orbit.setRole(role);
-  // orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
-  // orbit.setBallData(camera.getBall());
-  // orbit.setCompAngle(comp.getHeading());
-  // orbit.calculateMoveData();
-  // orbit.calculateRotation();
-
   // Light
   lightVector = (int)transaction(((uint8_t)0));
   if(lightVector==65535){
     lightVector = -1;
   }
-  lights.setComp(0);
+  lights.setComp(heading);
   lights.setVector(lightVector);
   lights.updateWithComp();
-  if(lightVector==-1){
-    motors.brake();
-  } else{
-    motors.moveDirection({lights.getLineAngle()+180,100,0});
-  }
+
+  // // Orbit
+  orbit.setRole(role);
+  orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
+  orbit.setBallData(camera.getBall());
+  orbit.setCompAngle(heading);
+  orbit.calculateMoveData();
+  orbit.calculateRotation();
+  orbit.setLightValue(lights.getLineAngle(),lights.danger);
+  orbit.calculateLine();
   
   // LIDAR
   lidar.read();
@@ -125,11 +122,9 @@ void loop() {
   // Movement
   move = orbit.getMoveData();
   // move.angle = -1;
-  // motors.moveDirection(move);
+  motors.moveDirection(move);
 
   // End Loop
   orbit.resetAllData();
-
-  // motors.moveDirection({0,100,0});
 }
 

@@ -22,7 +22,10 @@ class Orbit{
 
     void calculateMoveData();
     void calculateRotation();
+    void calculateLine();
     void avoidLine();
+
+    void setLightValue(double angle, int tempDanger);
 
     void resetAllData();
   private:
@@ -40,6 +43,8 @@ class Orbit{
     void moveToPos(Vector position);
     void moveToBall();
 
+    bool inRange(double value, double target, int range);
+
     Role role = Role::undecided;
 
     Vector ball = Vector(0, 0);
@@ -54,6 +59,10 @@ class Orbit{
     int compAngle = -1;
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
     PID goalRotation = PID(GOAL_KP,GOAL_KI,GOAL_KD);
+
+    double lineAngle = 0;
+    int danger = 0;
 };
+
 
 #endif

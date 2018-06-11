@@ -117,6 +117,42 @@ void Orbit::calcAttacker(){
   }
 }
 
+void Orbit::calculateLine(){
+  int moveAngle = movement.angle;
+  movement.speed = 100;
+  if(danger==1){
+    if(inRange(moveAngle,lineAngle,90)){
+      if(mod(abs((lineAngle+90)-moveAngle),360)>mod(abs((lineAngle-90)-moveAngle),360)){
+        movement.angle = mod(abs((lineAngle-110)-moveAngle),360);
+      } else{
+        movement.angle = mod(abs((lineAngle+110)-moveAngle),360);
+      }
+    } else{
+      // movement.angle stays the same
+      movement.angle = mod(lineAngle+180-compAngle,360);
+    }
+  } else if(danger==2){
+    movement.angle = mod(lineAngle+180-compAngle,360);
+  }
+}
+
+void Orbit::setLightValue(double angle, int tempDanger){
+  lineAngle = angle;
+  danger = tempDanger;
+}
+
+bool Orbit::inRange(double value, double target, int range){
+    double offset = value;
+    value = 0;
+    target = mod(target-offset, 360);
+    if(target <= range || target >= 360-range){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 void Orbit::calcDefender(){
   moveToPos(DEFEND_GOAL);
   // if(ball.exists()){

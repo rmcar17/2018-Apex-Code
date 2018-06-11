@@ -87,10 +87,8 @@ void Orbit::calcAttacker(){
   }
   else{
     if(robotPosition.exists()){
-      // centre();
+      moveToPos(CENTRE);
     }
-    //If can't see goal or ball, the robot
-    //can't do anything so just compass correct
   }
 }
 

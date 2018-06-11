@@ -26,6 +26,8 @@ CameraController camera;
 
 MotorController motors;
 
+LidarController lidars;
+
 LightSensorController lights;
 Orbit orbit;
 
@@ -47,6 +49,8 @@ void setup() {
   comp.compassSetup();
   comp.calibrate();
 
+  lidars.setup();
+
   motors.motorSetup();
   motors.brake();
 
@@ -60,6 +64,9 @@ void setup() {
 void loop() {
   // motors.moveDirection({0,100,0});
   comp.updateGyro();
+
+  lidars.readAll();
+  lidars.calculateCoords();
 
   camera.update();
 

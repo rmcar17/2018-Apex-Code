@@ -53,15 +53,11 @@ void Orbit::calculateRotation(){
     if(role == Role::attack && attackGoal.exists()){
       attackGoal.arg = (360-attackGoal.arg);
       rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
-    }
-    else if(role == Role::defend && defendGoal.exists()){
-
-    }
     else{
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
     }
   #else
-      rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
+    rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
   #endif
   movement.rotation = round(rotate);
 }

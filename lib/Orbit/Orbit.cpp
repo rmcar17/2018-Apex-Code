@@ -53,6 +53,7 @@ void Orbit::calculateRotation(){
     if(role == Role::attack && attackGoal.exists() && ball.exists()){
       attackGoal.arg = (360-attackGoal.arg);
       rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
+    }
     else{
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
     }
@@ -129,27 +130,20 @@ bool Orbit::inRange(double value, double target, int range){
 }
 
 void Orbit::calcDefender(){
-  // if(ball.exists()){
-  //   if(defendGoal.exists()){
-  //     if(isAngleBetween(ball.angle, 270, 90)){
-  //       moveToBall();
-  //     }
-  //     else{
-  //       //Orbit around the ball normally
-  //       calcAttacker();
-  //     }
-  //   }
-  //   else {
-  //     calcAttacker(); //Might try out some better logic here later
-  //   }
-  // }
-  // else{
-  //   if(defendGoal.exists()){
-  //     centre();
-  //   }
-  //   //If can't see goal or ball, the robot
-  //   //can't do anything so just compass correct
-  // }
+  if(ball.exists()){
+    if(isAngleBetween(ball.arg, 270, 90)){
+      moveToBall();
+    }
+    else{
+      //Orbit around the ball normally
+      calcAttacker();
+    }
+  }
+  else{
+    if(robotPosition.exists()){
+      moveToPos(GOALIE_POS);
+    }
+  }
 }
 
 void Orbit::calcSmallOrbit(){

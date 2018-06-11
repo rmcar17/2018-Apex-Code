@@ -68,5 +68,5 @@
 
 //KICKER
 #define KICK_INTERVAL 2000000
-#define KICK_HIGHT_TIME 5000
+#define KICK_HIGH_TIME 5000
 #endif

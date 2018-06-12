@@ -135,7 +135,6 @@ void Orbit::calcDefender(){
       moveToBall();
     }
     else{
-      //Orbit around the ball normally
       calcAttacker();
     }
   }
@@ -196,18 +195,19 @@ void Orbit::calcFarOrbit(){
 void Orbit::moveToPos(Vector position){
   Vector direction = position - robotPosition;
 
-  movement.speed = NORMAL_SPEED;
-  movement.angle = mod(round(direction.arg) - compAngle,360);
+  double horizontal = horizontalMovement.update(position.i);
+  double vertical = verticalMovement.update(position.j);
+
+  movement.speed = constrain(round(sqrt(horizontal*horizontal + vertical*vertical)), -255, 255);
+  movement.angle = mod(450 - toDegrees(atan2(vertical,horizontal)), 360);
 }
 
 void Orbit::moveToBall(){
-  //Won't work when comparing
-  //TSOPs to camera
-  double correctedVerticalDistance = attackGoal.mag * cos(toRadians(compAngle + attackGoal.arg)) + CENTRE_DEFENDER_DISTANCE;
-  double correctedHorizontalDistance = ball.between(360 - DEFEND_SMALL_ANGLE, DEFEND_SMALL_ANGLE) ? 0 : ball.mag * sin(toRadians(ball.arg + compAngle));
+  double horizontal = horizontalMovement.update(ball.i);
+  double vertical = verticalMovement.update((GOALIE_POS - robotPosition).j);
 
-  movement.speed = NORMAL_SPEED;
-  movement.angle = mod(round(toDegrees(atan2(correctedVerticalDistance,correctedHorizontalDistance)))-compAngle,360);
+  movement.speed = constrain(round(sqrt(horizontal*horizontal + vertical*vertical)), -255, 255);
+  movement.angle = mod(450 - toDegrees(atan2(vertical,horizontal)), 360);
 }
 
 void Orbit::resetAllData(){

@@ -131,7 +131,7 @@ bool Orbit::inRange(double value, double target, int range){
 
 void Orbit::calcDefender(){
   if(ball.exists()){
-    if(isAngleBetween(ball.arg, 270, 90)){
+    if(isAngleBetween(ball.arg, 270, 90) && (ball.mag > 500 || (robotPosition - GOALIE_POS).j < -500)){
       moveToBall();
     }
     else{

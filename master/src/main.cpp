@@ -6,6 +6,8 @@
 #include <LightSensorController.h>
 #include <Camera.h>
 #include <CameraController.h>
+#include <Kicker.h>
+#include <LightGate.h>
 #include <RoleController.h>
 #include <Orbit.h>
 #include <Timer.h>
@@ -32,6 +34,8 @@ CameraController camera;
 MotorController motors;
 
 LightSensorController lights;
+LightGate gate;
+
 Orbit orbit;
 
 Role role;
@@ -48,8 +52,8 @@ volatile uint16_t dataOut[1], dataIn[1];
 uint16_t transaction(uint8_t command, uint16_t data = 0){
   dataOut[0] = (command << 10) | (data & 0x3FF);
 
-  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT); 
-  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT); 
+  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT);
+  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT);
 
   return dataIn[0];
 }
@@ -60,7 +64,6 @@ void setup() {
     Serial.begin(38400);
   #endif
   camera.setup();
-  delay(500);
 
   digitalWrite(TEENSY_LED, HIGH);
 
@@ -71,6 +74,9 @@ void setup() {
   motors.motorSetup();
   motors.brake();
 
+  gate.setup();
+
+  orbit.setup();
   orbit.resetAllData();
 
   role = Role::attack;
@@ -82,7 +88,7 @@ void setup() {
   spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
   spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
   spi.enableCS(CS0, CS_ActiveLOW);
-  
+
   lidar.init();
   bt.init();
 }
@@ -100,6 +106,7 @@ void loop() {
   if(lightVector==65535){
     lightVector = -1;
   }
+
   lights.setComp(heading);
   lights.setVector(lightVector);
   lights.updateWithComp();
@@ -109,6 +116,7 @@ void loop() {
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
   orbit.setCompAngle(heading);
+  orbit.setLightGate(gate.hasBall());
   orbit.calculateMoveData();
   orbit.calculateRotation();
   orbit.setLightValue(lights.getLineAngle(),lights.danger);
@@ -116,10 +124,10 @@ void loop() {
 
   // LIDAR
   lidar.read();
-  
+
   // Bluetooth
   double btCMD = bt.receive();
-  
+
   // Movement
   move = orbit.getMoveData();
   // move.angle = -1;
@@ -134,4 +142,3 @@ void loop() {
   // End Loop
   orbit.resetAllData();
 }
-

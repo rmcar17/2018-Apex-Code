@@ -10,6 +10,7 @@ void LightGate::setup(){
 
 void LightGate::read(){
   readVal = analogRead(LIGHT_GATE_PIN);
+  Serial.println(readVal);
 }
 
 bool LightGate::hasBall(){

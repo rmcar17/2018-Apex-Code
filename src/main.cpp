@@ -54,8 +54,8 @@ void setup() {
 
   gate.setup();
 
-  // orbit.setup();
-  // orbit.resetAllData();
+  orbit.setup();
+  orbit.resetAllData();
 
   role = Role::attack;
 

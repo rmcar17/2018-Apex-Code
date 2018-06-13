@@ -21,11 +21,11 @@ void setup(){
 
 void loop(){
   lights.update();
-  // for(int i = 0; i < LS_NUM; i++){
-  //   Serial.print(lights.onWhite[i]);
-  //   Serial.print("\t");
-  // }
-  // Serial.println();
+  for(int i = 0; i < LS_NUM; i++){
+    Serial.print(lights.onWhite[i]);
+    Serial.print("\t");
+  }
+  Serial.println();
 }
 
 void spi0_isr(){

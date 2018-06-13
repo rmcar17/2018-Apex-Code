@@ -4,6 +4,10 @@ Orbit::Orbit(){
 
 }
 
+void Orbit::setup(){
+  kicker.setup();
+}
+
 void Orbit::setRole(Role _role){
   role = _role;
 }
@@ -19,6 +23,13 @@ void Orbit::setGoalData(Vector aGoal, Vector dGoal){
 
 void Orbit::setCompAngle(int heading){
   compAngle = heading;
+}
+
+void Orbit::setLightGate(bool gateVal){
+  hasBall = gateVal;
+  if(hasBall){
+    ball = Vector(10,0);
+  }
 }
 
 MoveData Orbit::getMoveData(){
@@ -98,6 +109,36 @@ void Orbit::calcAttacker(){
   }
 }
 
+void Orbit::calcDefender(){
+  // if(ball.exists()){
+  //   if(defendGoal.exists()){
+  //     if(isAngleBetween(ball.angle, 270, 90)){
+  //       moveToBall();
+  //     }
+  //     else{
+  //       //Orbit around the ball normally
+  //       calcAttacker();
+  //     }
+  //   }
+  //   else {
+  //     calcAttacker(); //Might try out some better logic here later
+  //   }
+  // }
+  // else{
+  //   if(defendGoal.exists()){
+  //     centre();
+  //   }
+  //   //If can't see goal or ball, the robot
+  //   //can't do anything so just compass correct
+  // }
+}
+
+void Orbit::manageKicker(){
+  if(hasBall){
+    kicker.kick();
+  }
+}
+
 void Orbit::calculateLine(){
   int moveAngle = movement.angle;
   // if(danger==1){
@@ -134,39 +175,15 @@ void Orbit::setLightValue(double angle, int tempDanger){
 }
 
 bool Orbit::inRange(double value, double target, int range){
-    double offset = value;
-    value = 0;
-    target = mod(target-offset, 360);
-    if(target <= range || target >= 360-range){
-        return true;
-    }
-    else{
-        return false;
-    }
-}
-
-void Orbit::calcDefender(){
-  // if(ball.exists()){
-  //   if(defendGoal.exists()){
-  //     if(isAngleBetween(ball.angle, 270, 90)){
-  //       moveToBall();
-  //     }
-  //     else{
-  //       //Orbit around the ball normally
-  //       calcAttacker();
-  //     }
-  //   }
-  //   else {
-  //     calcAttacker(); //Might try out some better logic here later
-  //   }
-  // }
-  // else{
-  //   if(defendGoal.exists()){
-  //     centre();
-  //   }
-  //   //If can't see goal or ball, the robot
-  //   //can't do anything so just compass correct
-  // }
+  double offset = value;
+  value = 0;
+  target = mod(target-offset, 360);
+  if(target <= range || target >= 360-range){
+    return true;
+  }
+  else{
+    return false;
+  }
 }
 
 void Orbit::calcSmallOrbit(){
@@ -234,6 +251,8 @@ void Orbit::moveToBall(){
 }
 
 void Orbit::resetAllData(){
+  kicker.resetKicker();
+
   role = Role::undecided;
   ball = Vector(0, 0);
   ballPosition = Vector(0, 0);

@@ -12,7 +12,8 @@
 
 // Light Sensor
 
-// const int lightPins[LS_NUM] = {33,34,35,36,37,38,39,21,22,15,16,17,32,31,49,50,18,19,20,21,22,23,A11,A10};
+#define LIGHT_GATE_PIN 39
+
 #if ROBOT == 1
 	const int brokenPins[] = {6,21};
 	const int lightPins[LS_NUM] = {33,34,35,36,22,37,39,21,38,15,16,17,32,31,49,50,18,19,20,21,22,23,A11,A10};
@@ -51,6 +52,8 @@
 	#define MOTORFL_REV true
 #endif
 
+// KICKER
+#define KICKER_PIN 53
 
 // Teensy
 #define TEENSY_LED 13

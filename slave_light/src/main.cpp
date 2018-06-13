@@ -12,7 +12,7 @@ int ledPin = 13;
 
 
 void setup(){
-  Serial.begin(9600);
+  Serial.begin(38400);
   spi.begin_SLAVE(SLAVE_LIGHT_SCK, SLAVE_LIGHT_MOSI, SLAVE_LIGHT_MISO, SLAVE_LIGHT_CS);
   spi.setCTAR_SLAVE(16, SPI_MODE0);
   NVIC_ENABLE_IRQ(IRQ_SPI0);
@@ -21,6 +21,11 @@ void setup(){
 
 void loop(){
   lights.update();
+  for(int i = 0; i < LS_NUM; i++){
+    Serial.print(lights.onWhite[i]);
+    Serial.print("\t");
+  }
+  Serial.println();
 }
 
 void spi0_isr(){

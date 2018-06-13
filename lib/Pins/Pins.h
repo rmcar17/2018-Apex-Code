@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <Defines.h>
 
-#define ROBOT 2
+#define ROBOT 1
 
 // Camera
 
@@ -12,16 +12,16 @@
 
 // Light Sensor
 
-const int lightPins[LS_NUM] = {33,34,35,36,37,38,39,21,22,15,16,17,32,31,49,50,18,19,20,21,22,23,A11,A10};
-
-// Light Gate
-
 #define LIGHT_GATE_PIN 39
 
 #if ROBOT == 1
-	const int brokenPins[] = {6,23};
+	const int brokenPins[] = {6,21};
+	const int lightPins[LS_NUM] = {33,34,35,36,22,37,39,21,38,15,16,17,32,31,49,50,18,19,20,21,22,23,A11,A10};
+	const int lightThresh[LS_NUM] = {870,860,920,920,750,960,100,460,860,890,900,820,900,780,730,730,600,600,300,460,750,100,650,920};
 #else
-	const int brokenPins[] = {4,5};
+	const int brokenPins[] = {23};
+	const int lightPins[LS_NUM] = {33,34,35,36,22,37,38,21,39,15,16,17,32,31,49,50,18,19,20,21,22,23,A11,A10};
+	const int lightThresh[LS_NUM] = {990,800,760,1010,770,850,750,770,800,750,700,700,910,940,950,840,570,570,920,760,740,820,900,100};
 #endif
 // MOTORS
 #define MOTORFR_PWM 2
@@ -42,13 +42,13 @@ const int lightPins[LS_NUM] = {33,34,35,36,37,38,39,21,22,15,16,17,32,31,49,50,1
 
 #if ROBOT == 1
 	#define MOTORFR_REV true
-	#define MOTORBR_REV false
-	#define MOTORBL_REV false
+	#define MOTORBR_REV true
+	#define MOTORBL_REV true
 	#define MOTORFL_REV true
 #else
 	#define MOTORFR_REV true
-	#define MOTORBR_REV true
-	#define MOTORBL_REV true
+	#define MOTORBR_REV false
+	#define MOTORBL_REV false
 	#define MOTORFL_REV true
 #endif
 

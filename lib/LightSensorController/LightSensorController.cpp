@@ -17,16 +17,19 @@ void LightSensorController::setup(){
 }
 
 void LightSensorController::calibrate(){
+	/*
 	int calibration = 0;
 	for(int ls = 0; ls < LS_NUM; ls++){
 		// int total = 0;
 		// for(int read_n = 0; read_n < LS_CALIBRATION_NUM; read_n++){
-		// 	if(!(read_n<=9||read_n>=(LS_CALIBRATION_NUM-11))){
-		// 		total += lightArray[ls].read();
-		// 	}
+		// 	total += lightArray[ls].read();
 		// }
-		calibration = 1020; //constrain(round(total / (LS_CALIBRATION_NUM-20)) + 100,0,1020);
+		calibration = 1020;// constrain(round(total / LS_CALIBRATION_NUM + 150),0,1020);
 		lightArray[ls].setThresh(calibration);
+	}
+	*/
+	for(int i = 0; i < LS_NUM; i++){
+		lightArray[i].setThresh(lightThresh[i]);
 	}
 }
 
@@ -162,11 +165,22 @@ void LightSensorController::updateOnWhite(){
 	for(int i = 0; i < LS_NUM; i++){
 		onWhite[i] = lightArray[i].onWhite();
 	}
-	for(int i = 0; i < 2; i++){
-		if(onWhite[brokenPins[i-1]]||onWhite[brokenPins[i+1]]){
-			onWhite[brokenPins[i]] = 1;
+	if(ROBOT==1){
+		if(onWhite[5]||onWhite[7]){
+			onWhite[6] = 1;
 		}else{
-			onWhite[brokenPins[i]] = 0;
+			onWhite[6] = 0;
+		}
+		if(onWhite[20]||onWhite[22]){
+			onWhite[21] = 1;
+		}else{
+			onWhite[21] = 0;
+		}
+	} else{
+		if(onWhite[22]||onWhite[0]){
+			onWhite[23] = 1;
+		}else{
+			onWhite[23] = 0;
 		}
 	}
 }

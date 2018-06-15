@@ -4,13 +4,13 @@ robot = 1
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 if robot == 1:
-    ball = [(49,62,45,75,9,48)]
-    blueGoal = [(34,61,-12,15,-56,-21)]
-    yellowGoal = [(57,77,-5,16,25,68)]
+    ball = [(44,61,42,73,11,63)]
+    blueGoal = [(0,0,0,0,0,0)]
+    yellowGoal = [(47,72,-20,-2,39,62)]
 else:
-    ball = [(55,65,39,73,4,47)]
-    blueGoal = [(45,54,-10,6,-34,-11)]
-    yellowGoal = [(57,73,-16,15,21,43)]
+    ball = [(43,55,40,78,2,55)]
+    blueGoal = [(0,0,0,0,0,0)]
+    yellowGoal = [(58,73,-10,10,6,53)]
 
 uart = UART(3, 9600, timeout_char = 1000)
 
@@ -25,9 +25,9 @@ sensor.set_windowing((55,15,210,210))
 LED(1).on()
 time.sleep(200)
 LED(1).off()
-sensor.set_saturation(2)
-sensor.set_brightness(0)
-sensor.set_contrast(2)
+sensor.set_saturation(3)
+sensor.set_brightness(3)
+sensor.set_contrast(0)
 
 #clock = time.clock()
 def largestBlob(lBlob):
@@ -73,3 +73,5 @@ while(True):
         except Exception as E:
             print(E)
     #print(clock.fps())
+
+

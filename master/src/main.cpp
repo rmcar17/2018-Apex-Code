@@ -89,7 +89,7 @@ void setup() {
   spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
   spi.enableCS(CS0, CS_ActiveLOW);
 
-  lidar.init();
+  lidar.setup();
   bt.init();
 }
 
@@ -123,7 +123,12 @@ void loop() {
   orbit.calculateLine();
 
   // LIDAR
-  lidar.read();
+  lidar.update();
+  Vector robotPos = lidar.getCoords();
+  // Serial.print(robotPos.i);
+  // Serial.print("\t");
+  // Serial.println(robotPos.j);
+  
 
   // Bluetooth
   double btCMD = bt.receive();

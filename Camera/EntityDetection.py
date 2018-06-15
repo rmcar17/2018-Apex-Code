@@ -73,5 +73,3 @@ while(True):
         except Exception as E:
             print(E)
     #print(clock.fps())
-
-

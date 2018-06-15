@@ -12,10 +12,11 @@ class LidarController {
     LidarController();
 
     void setup();
+    void update();
     void readAll();
     void calculateCoords();
     Vector getCoords();
-  private:
+  // private:
     int lidarVal[LIDAR_NUM] = {0};
     Lidar lidarFront, lidarRight, lidarBack, lidarLeft;
     Vector coords = Vector(0,0);

@@ -19,11 +19,12 @@
 #include <Pins.h>
 #include <t3spi.h>
 #include <Lidar.h>
+#include <LidarController.h>
 #include <Bluetooth.h>
 
 SoftwareSerial blueSerial(7,8);
 
-LIDAR lidar;
+LidarController lidar;
 
 Compass comp;
 
@@ -82,7 +83,7 @@ void setup() {
   spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
   spi.enableCS(CS0, CS_ActiveLOW);
   
-  lidar.init();
+  lidar.setup();
   bt.init();
 }
 
@@ -114,8 +115,14 @@ void loop() {
   orbit.calculateLine();
   
   // LIDAR
-  lidar.read();
-  
+  lidar.update();
+  Vector robotPos = lidar.getCoords(); 
+  for(int i = 0; i < LIDAR_NUM; i++){
+    Serial.print(lidar.lidarVal[i]);
+    Serial.print("\t");
+  }
+  Serial.println();
+
   // Bluetooth
   double btCMD = bt.receive();
   

@@ -15,7 +15,7 @@
 #define GOAL_KD 0.05
 
 // Coordinates
-#define LIDAR_NUM 4
+#define LIDAR_NUM 3
 
 #define FIELD_WIDTH 1820
 #define FIELD_LENGTH 2430

@@ -49,10 +49,9 @@ const int lightPins[LS_NUM] = {33,34,35,36,37,38,39,21,22,15,16,17,32,31,49,50,1
 
 // LIDAR
 
-#define LIDAR_FRONT_SERIAL Serial1
-#define LIDAR_RIGHT_SERIAL Serial3
+#define LIDAR_RIGHT_SERIAL Serial4
 #define LIDAR_BACK_SERIAL Serial2
-#define LIDAR_LEFT_SERIAL Serial4
+#define LIDAR_LEFT_SERIAL Serial1
 
 // Teensy
 #define TEENSY_LED 13

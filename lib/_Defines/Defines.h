@@ -24,6 +24,22 @@
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
 
 // ORBIT
+#define POS_HOR_KP 1
+#define POS_HOR_KI 0
+#define POS_HOR_KD 0
+
+#define POS_VER_KP 1
+#define POS_VER_KI 0
+#define POS_VER_KD 0
+
+#define GOAL_HOR_KP 0
+#define GOAL_HOR_KI 0
+#define GOAL_HOR_KD 0
+
+#define GOAL_VER_KP 0
+#define GOAL_VER_KI 0
+#define GOAL_VER_KD 0
+
 #define GOAL_TRACK true
 
 #define CENTRE_ATTACKER_DISTANCE 10

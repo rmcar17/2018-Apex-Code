@@ -2,6 +2,7 @@
 #define ORBIT_H
 
 #include <Common.h>
+#include <Kicker.h>
 #include <PID.h>
 #include <Debug.h>
 #include <Defines.h>
@@ -12,16 +13,21 @@ class Orbit{
   public:
     Orbit();
 
+    void setup();
+
     void setRole(Role _role);
     void setBallData(Vector ballData);
     void setGoalData(Vector aGoal, Vector dGoal);
     void setCompAngle(int heading);
+    void setLightGate(bool gateVal);
+
     MoveData getMoveData();
 
     void calculateCoordinates();
 
     void calculateMoveData();
     void calculateRotation();
+    void manageKicker();
     void calculateLine();
     void avoidLine();
 
@@ -45,6 +51,8 @@ class Orbit{
 
     bool inRange(double value, double target, int range);
 
+    Kicker kicker;
+
     Role role = Role::undecided;
 
     Vector ball = Vector(0, 0);
@@ -62,6 +70,8 @@ class Orbit{
 
     double lineAngle = 0;
     int danger = 0;
+
+    bool hasBall;
 };
 
 

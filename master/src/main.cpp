@@ -25,7 +25,7 @@
 
 SoftwareSerial blueSerial(7,8);
 
-LIDAR lidar;
+LIDAR lidars;
 
 Compass comp;
 
@@ -89,7 +89,7 @@ void setup() {
   spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
   spi.enableCS(CS0, CS_ActiveLOW);
 
-  lidar.setup();
+  lidars.setup();
   bt.init();
 }
 
@@ -98,7 +98,11 @@ void loop() {
   comp.updateGyro();
   int heading = comp.getHeading();
 
-  // // Camera
+  // LIDAR
+  lidars.setComp(comp.getHeading());
+  lidars.update();
+
+  // Camera
   camera.update();
 
   // Light
@@ -117,23 +121,11 @@ void loop() {
   orbit.setBallData(camera.getBall());
   orbit.setCompAngle(heading);
   orbit.setLightGate(gate.hasBall());
+  orbit.setCoords(lidars.getCoords());
   orbit.calculateMoveData();
   orbit.calculateRotation();
   orbit.setLightValue(lights.getLineAngle(),lights.danger);
   orbit.calculateLine();
-
-  // LIDAR
-  lidar.update();
-  lidar.setComp(heading);
-  Vector robotPos = lidar.getCoords();
-  // Serial.print(heading);
-  // Serial.print("\t");
-  // Serial.print(cos(toRadians(heading)));
-  // Serial.print("\t");
-  // Serial.print(robotPos.i);
-  // Serial.print("\t");
-  // Serial.println(robotPos.j);
-  
 
   // Bluetooth
   double btCMD = bt.receive();
@@ -143,11 +135,6 @@ void loop() {
   // move.angle = -1;
   motors.moveDirection(move);
   // motors.moveDirection({0,100,0});
-  // if(lights.getLineAngle()!=-1){
-  //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
-  // } else{
-  //   motors.brake();
-  // }
 
   // End Loop
   orbit.resetAllData();

@@ -3,10 +3,14 @@ from pyb import UART, LED
 robot = 1
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
-ball = [(45,70,30,66,16,50)]#[(49,67,28,74,-10,40)]
-blueGoal = [(43, 54, -17, 6, -48, -23)]#[(58,98,-15,8,12,52)]
-yellowGoal = [(62,83,-4,23,14,58)]#[(34,55,-18,11,-41,-7)]
-
+if robot == 1:
+    ball = [(44,61,42,73,11,63)]
+    blueGoal = [(0,0,0,0,0,0)]
+    yellowGoal = [(47,72,-20,-2,39,62)]
+else:
+    ball = [(43,55,40,78,2,55)]
+    blueGoal = [(0,0,0,0,0,0)]
+    yellowGoal = [(58,73,-10,10,6,53)]
 
 uart = UART(3, 9600, timeout_char = 1000)
 
@@ -21,9 +25,9 @@ sensor.set_windowing((55,15,210,210))
 LED(1).on()
 time.sleep(200)
 LED(1).off()
-sensor.set_saturation(2)
-sensor.set_brightness(0)
-sensor.set_contrast(2)
+sensor.set_saturation(3)
+sensor.set_brightness(3)
+sensor.set_contrast(0)
 
 #clock = time.clock()
 def largestBlob(lBlob):

@@ -1,8 +1,11 @@
 #include <Lidar.h>
 
-void LIDAR::init(){
+LIDAR::LIDAR(){
+
+}
+
+void LIDAR::setup(){
 	Serial1.begin(115200);
-	Serial3.begin(115200);
 	Serial2.begin(115200);
 	Serial4.begin(115200);
 
@@ -14,15 +17,6 @@ void LIDAR::init(){
   Serial1.write((uint8_t)0x00);
   Serial1.write((uint8_t)0x01);
   Serial1.write((uint8_t)0x06);
-
-  Serial3.write((uint8_t)0x42);
-  Serial3.write((uint8_t)0x57);
-  Serial3.write((uint8_t)0x02);
-  Serial3.write((uint8_t)0x00);
-  Serial3.write((uint8_t)0x00);
-  Serial3.write((uint8_t)0x00);
-  Serial3.write((uint8_t)0x01);
-  Serial3.write((uint8_t)0x06);
 
   Serial2.write((uint8_t)0x42);
   Serial2.write((uint8_t)0x57);
@@ -43,52 +37,48 @@ void LIDAR::init(){
   Serial4.write((uint8_t)0x06);
 }
 
+void LIDAR::update(){
+  read();
+  calculateCoords();
+}
+
 void LIDAR::read(){
   while(Serial1.available() > 8){
-    int sync0 = Serial1.read();
-    int sync1 = Serial1.peek();
-    if (sync0 == 89 && sync1 == 89){
+    if (Serial1.read() == 89 && Serial1.peek() == 89){
       Serial1.read();
       for (int i = 0; i < 4; i++){
         sensorData[i] = Serial1.read();
       }
-      lidarVal[0] = sensorData[1] << 8 | sensorData[0]; 
+      lidarLeft = (sensorData[1] << 8 | sensorData[0]) * 10; 
     }
 	}
 
-  while(Serial3.available() > 8){
-    int sync0 = Serial3.read();
-    int sync1 = Serial3.peek();
-    if (sync0 == 89 && sync1 == 89){
-      Serial3.read();
-      for (int i = 0; i < 4; i++){
-        sensorData[i] = Serial3.read();
-      }
-      lidarVal[1] = sensorData[1] << 8 | sensorData[0]; 
-    }
-  }
 
   while(Serial2.available() > 8){
-    int sync0 = Serial2.read();
-    int sync1 = Serial2.peek();
-    if (sync0 == 89 && sync1 == 89){
+    if (Serial2.read()  == 89 && Serial2.peek() == 89){
       Serial2.read();
       for (int i = 0; i < 4; i++){
         sensorData[i] = Serial2.read();
       }
-      lidarVal[2] = sensorData[1] << 8 | sensorData[0]; 
+      lidarBack = (sensorData[1] << 8 | sensorData[0]) * 10; 
     }
   }
 
   while(Serial4.available() > 8){
-    int sync0 = Serial4.read();
-    int sync1 = Serial4.peek();
-    if (sync0 == 89 && sync1 == 89){
+    if (Serial4.read() == 89 && Serial4.peek() == 89){
       Serial4.read();
       for (int i = 0; i < 4; i++){
         sensorData[i] = Serial4.read();
       }
-      lidarVal[3] = sensorData[1] << 8 | sensorData[0]; 
+      lidarRight = (sensorData[1] << 8 | sensorData[0]) * 10; 
     }
   }
+}
+
+void LIDAR::calculateCoords(){
+  coords = Vector((FIELD_WIDTH-lidarRight+lidarLeft)/2,lidarBack,false);
+}
+
+Vector LIDAR::getCoords(){
+  return coords;
 }

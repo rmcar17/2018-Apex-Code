@@ -124,7 +124,12 @@ void loop() {
 
   // LIDAR
   lidar.update();
+  lidar.setComp(heading);
   Vector robotPos = lidar.getCoords();
+  // Serial.print(heading);
+  // Serial.print("\t");
+  // Serial.print(cos(toRadians(heading)));
+  // Serial.print("\t");
   // Serial.print(robotPos.i);
   // Serial.print("\t");
   // Serial.println(robotPos.j);

@@ -76,9 +76,17 @@ void LIDAR::read(){
 }
 
 void LIDAR::calculateCoords(){
-  coords = Vector((FIELD_WIDTH-lidarRight+lidarLeft)/2,lidarBack,false);
+  double i, j;
+  i = ((FIELD_WIDTH-lidarRight*cos(toRadians(compAngle))+lidarLeft)*cos(toRadians(compAngle))/2);
+  j = lidarBack * cos(toRadians(compAngle));
+  coords = Vector(i,j,false);
 }
 
 Vector LIDAR::getCoords(){
   return coords;
 }
+
+void LIDAR::setComp(int compVal){
+  compAngle = compVal;
+}
+

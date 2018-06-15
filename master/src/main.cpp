@@ -79,10 +79,6 @@ void setup() {
   orbit.setup();
   orbit.resetAllData();
 
-  role = Role::attack;
-
-  digitalWrite(TEENSY_LED, LOW);
-
   // SPI
   spi = T3SPI();
   spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
@@ -91,6 +87,11 @@ void setup() {
 
   lidars.setup();
   bt.init();
+
+  role = Role::defend;
+
+  digitalWrite(TEENSY_LED, LOW);
+
 }
 
 void loop() {
@@ -124,8 +125,8 @@ void loop() {
   orbit.setCoords(lidars.getCoords());
   orbit.calculateMoveData();
   orbit.calculateRotation();
-  orbit.setLightValue(lights.getLineAngle(),lights.danger);
-  orbit.calculateLine();
+  // orbit.setLightValue(lights.getLineAngle(),lights.danger);
+  // orbit.calculateLine();
 
   // Bluetooth
   double btCMD = bt.receive();

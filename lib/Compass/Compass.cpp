@@ -33,7 +33,7 @@ void Compass::updateGyro() {
 
   #if DEBUG_COMPASS
     Serial.print("HEADING: ");
-    Serial.println(heading*4,5);
+    Serial.println(heading,5);
   #endif
 }
 

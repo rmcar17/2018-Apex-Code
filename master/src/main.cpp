@@ -25,7 +25,7 @@
 
 SoftwareSerial blueSerial(7,8);
 
-LIDAR lidars;
+LIDAR lidars = LIDAR();
 
 Compass comp;
 
@@ -58,6 +58,8 @@ uint16_t transaction(uint8_t command, uint16_t data = 0){
   return dataIn[0];
 }
 
+unsigned long int timeVar;
+
 void setup() {
   pinMode(TEENSY_LED, OUTPUT);
   #if DEBUG_ANY
@@ -67,9 +69,6 @@ void setup() {
 
   digitalWrite(TEENSY_LED, HIGH);
 
-  Wire.begin();
-  comp.compassSetup();
-  comp.calibrate();
 
   motors.motorSetup();
   motors.brake();
@@ -80,41 +79,47 @@ void setup() {
   orbit.resetAllData();
 
   // SPI
-  spi = T3SPI();
-  spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
-  spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
-  spi.enableCS(CS0, CS_ActiveLOW);
+  // spi = T3SPI();
+  // spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
+  // spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
+  // spi.enableCS(CS0, CS_ActiveLOW);
 
-  lidars.setup();
   bt.init();
 
   role = Role::defend;
 
-  digitalWrite(TEENSY_LED, LOW);
+  lidars.setup();
+  Wire.begin();
+  comp.compassSetup();
+  comp.calibrate();
 
+  timeVar = micros();
+
+  digitalWrite(TEENSY_LED, LOW);
 }
 
 void loop() {
   // Compass
+  timeVar = micros();
   comp.updateGyro();
+  Serial.println(micros()-timeVar);
   int heading = comp.getHeading();
 
   // LIDAR
   lidars.setComp(comp.getHeading());
   lidars.update();
-
   // Camera
   camera.update();
 
   // Light
-  lightVector = (int)transaction(((uint8_t)0));
-  if(lightVector==65535){
-    lightVector = -1;
-  }
+  // lightVector = (int)transaction(((uint8_t)0));
+  // if(lightVector==65535){
+  //   lightVector = -1;
+  // }
 
-  lights.setComp(heading);
-  lights.setVector(lightVector);
-  lights.updateWithComp();
+  // lights.setComp(heading);
+  // lights.setVector(lightVector);
+  // lights.updateWithComp();
 
   // // Orbit
   orbit.setRole(role);
@@ -133,6 +138,7 @@ void loop() {
 
   // Movement
   move = orbit.getMoveData();
+  // Serial.println(move.angle);
   // move.angle = -1;
   motors.moveDirection(move);
   // motors.moveDirection({0,100,0});

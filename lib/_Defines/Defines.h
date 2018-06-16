@@ -26,13 +26,13 @@
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
 
 // ORBIT
-#define POS_HOR_KP 1
+#define POS_HOR_KP 0//1
 #define POS_HOR_KI 0
 #define POS_HOR_KD 0
 
-#define POS_VER_KP 1
+#define POS_VER_KP 1.55
 #define POS_VER_KI 0
-#define POS_VER_KD 0
+#define POS_VER_KD 0.05
 
 #define GOAL_HOR_KP 0
 #define GOAL_HOR_KI 0
@@ -79,7 +79,7 @@
 // LIGHT SENSORS
 
 #define LS_NUM 24
-#define LS_CALIBRATION_NUM 50
+#define LS_CALIBRATION_NUM 100
 
 //LIGHT GATE
 #define LIGHT_GATE_THRESH 500

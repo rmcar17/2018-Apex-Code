@@ -12,7 +12,7 @@ T3SPI spi;
 Bluetooth bt;
 
 int ledPin = 13;
-uint16_t ballAngle, ballDistance;
+uint16_t balli, ballj;
 int pos = 0;
 
 
@@ -38,9 +38,9 @@ void loop(){
     pos = 2;
   } else{
     if(pos == 1){
-      ballAngle = var;
+      balli = var;
     } else if(pos == 2){
-      ballDistance = var;
+      ballj = var;
     }
   }
 
@@ -73,14 +73,16 @@ void spi0_isr(){
   case 0:
     dataOut = lightVector;
     break;
-  // case 1: 
-  //   bt.send((uint16_t(data)));
-  //   dataOut = (uint16_t)ballAngle;
-  //   break;
-  // case 2:
-  //   bt.send((uint16_t(data)));
-  //   dataOut = (uint16_t)ballDistance;
-  //   break;
+  case 1: 
+    bt.send((uint16_t)1);
+    bt.send((uint16_t(data)));
+    dataOut = (uint16_t)balli;
+    break;
+  case 2:
+    bt.send((uint16_t)2);
+    bt.send((uint16_t(data)));
+    dataOut = (uint16_t)ballj;
+    break;
   default:
     dataOut = (uint16_t)69;
     break;

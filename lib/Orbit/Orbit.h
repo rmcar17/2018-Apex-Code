@@ -23,6 +23,7 @@ class Orbit{
     void setLightGate(bool gateVal);
 
     MoveData getMoveData();
+    Vector getBallPos();
 
     void calculateCoordinates();
 
@@ -33,6 +34,8 @@ class Orbit{
     void avoidLine();
 
     void setLightValue(double angle, int tempDanger);
+
+    void setBall(Vector tempBall);
 
     void resetAllData();
   private:

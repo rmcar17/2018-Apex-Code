@@ -43,8 +43,6 @@ MoveData move;
 
 T3SPI spi;
 
-Lidar lidar;
-
 Vector vector = Vector(0,0);
 
 int lightVector;
@@ -63,7 +61,9 @@ void setup() {
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
+  Serial.println("Test1");
   // camera.setup();
+  Serial.println("Test2");
 
   digitalWrite(TEENSY_LED, HIGH);
 
@@ -78,6 +78,7 @@ void setup() {
 
   orbit.setup();
   orbit.resetAllData();
+  
 
   // SPI
   spi = T3SPI();
@@ -86,7 +87,6 @@ void setup() {
   spi.enableCS(CS0, CS_ActiveLOW);
 
   lidars.setup();
-  // bt.init();
 
   role = Role::attack;
 
@@ -98,15 +98,21 @@ void loop() {
   comp.updateGyro();
   int heading = comp.getHeading();
 
-  // RoleController
-  RC.update(camera.getBall());
-
+  // Camera
+  // camera.update();
+  Vector ball = camera.getBall();
+  // Serial.print(ball.arg);
+  // Serial.print("\t");
+  // Serial.print(ball.mag);
+  // Serial.print("\t");
   // LIDAR
   lidars.setComp(comp.getHeading());
-  lidars.update();
-
-  // Camera
-  camera.update();
+  lidars.update(); 
+  // Serial.print(lidars.lidarLeft);
+  // Serial.print("\t");
+  // Serial.print(lidars.lidarBack);
+  // Serial.print("\t");
+  // Serial.println(lidars.lidarRight);
 
   // Light
   lightVector = (int)transaction(((uint8_t)0));
@@ -125,15 +131,20 @@ void loop() {
   orbit.setCompAngle(heading);
   orbit.setLightGate(gate.hasBall());
   orbit.setCoords(lidars.getCoords());
+  Vector robotPos = lidars.getCoords();
+  Vector ballPos = orbit.getBallPos();
+
+  // RoleController
+  RC.update(ballPos);
+
+  // More Orbit
   orbit.calculateMoveData();
   orbit.calculateRotation();
   orbit.setLightValue(lights.getLineAngle(),lights.danger);
   orbit.calculateLine();
-
-  // LIDAR
-  lidar.setComp(heading);
-  lidar.update();
-  Vector robotPos = lidar.getCoords();
+  
+  
+  
   // Serial.print(heading);
   // Serial.print("\t");
   // Serial.print(cos(toRadians(heading)));
@@ -153,17 +164,17 @@ void loop() {
   move = orbit.getMoveData();
   // motors.moveDirection({0,100,0});
   // move.angle = -1;
-  if(lights.getLineAngle()!=-1){
-    motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
-  } else{
-    motors.brake();
-  }
+  // if(lights.getLineAngle()!=-1){
+  //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
+  // } else{
+  //   motors.brake();
+  // }
 
-  Serial.print(lights.getVectorAngle());
-  Serial.print("\t");
-  Serial.print(lights.getLineAngle());
-  Serial.print("\t");
-  Serial.println(lights.danger);
+  // Serial.print(lights.getVectorAngle());
+  // Serial.print("\t");
+  // Serial.print(lights.getLineAngle());
+  // Serial.print("\t");
+  // Serial.println(lights.danger);
 
   // motors.moveDirection(move);
   // motors.moveDirection({0,100,0});

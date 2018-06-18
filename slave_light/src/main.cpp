@@ -53,11 +53,11 @@ void loop(){
 
 
 
-  // for(int i = 0; i < LS_NUM; i++){
-  //   Serial.print(lights.onWhite[i]);
-  //   Serial.print("\t");
-  // }
-  // Serial.println();
+  for(int i = 0; i < LS_NUM; i++){
+    Serial.print(lights.lightValues[i]);
+    Serial.print("\t");
+  }
+  Serial.println();
 }
 
 void spi0_isr(){
@@ -65,9 +65,6 @@ void spi0_isr(){
 
   uint8_t command = (dataIn >> 14);
   uint16_t data = (dataIn & 0x3FFF);
-
-
-  Serial.println(command);
 
   uint16_t dataOut = 0;
 
@@ -79,16 +76,16 @@ void spi0_isr(){
   case 0:
     dataOut = lightVector;
     break;
-  case 1: 
-    bt.send((uint16_t)1);
-    bt.send((uint16_t(data)));
-    dataOut = (uint16_t)balli;
-    break;
-  case 2:
-    bt.send((uint16_t)2);
-    bt.send((uint16_t(data)));
-    dataOut = (uint16_t)ballj;
-    break;
+  // case 1: 
+  //   bt.send((uint16_t)1);
+  //   bt.send((uint16_t(data)));
+  //   dataOut = (uint16_t)balli;
+  //   break;
+  // case 2:
+  //   bt.send((uint16_t)2);
+  //   bt.send((uint16_t(data)));
+  //   dataOut = (uint16_t)ballj;
+  //   break;
   default:
     dataOut = (uint16_t)69;
     break;

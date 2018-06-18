@@ -94,7 +94,7 @@ void setup() {
 }
 
 void loop() {
-  // Serial.println("Test");
+
   // Compass
   comp.updateGyro();
   int heading = comp.getHeading();
@@ -102,17 +102,10 @@ void loop() {
   // Camera
   camera.update();
   Vector ball = camera.getBall();
-  // Serial.print(ball.arg);
-  // Serial.print("\t");
-  // Serial.println(ball.mag);
+
   // LIDAR
   lidars.setComp(comp.getHeading());
   lidars.update();
-  // Serial.print(lidars.lidarLeft);
-  // Serial.print("\t");
-  // Serial.print(lidars.lidarBack);
-  // Serial.print("\t");
-  // Serial.println(lidars.lidarRight);
 
   // Light
   lightVector = (int)transaction(((uint8_t)0));
@@ -140,15 +133,20 @@ void loop() {
   // More Orbit
   orbit.calculateMoveData();
   orbit.calculateRotation();
+<<<<<<< HEAD
   orbit.setLightValue(lights.getLineAngle(),lights.danger);
   orbit.calculateLine(); 
+=======
+  orbit.setLightValue(lightVector);
+  orbit.calculateLine();
+>>>>>>> 621eb5ad4f207fd97b99d85d55b2231c54f5807d
 
   // Bluetooth
   // double btCMD = bt.receive();
 
-
   // Movement
   move = orbit.getMoveData();
+<<<<<<< HEAD
   // motors.moveDirection({0,100,0});
   // move.angle = -1;
   // if(lights.getLineAngle()!=-1){
@@ -157,8 +155,9 @@ void loop() {
   //   motors.brake();
   // }
 
+=======
+>>>>>>> 621eb5ad4f207fd97b99d85d55b2231c54f5807d
   motors.moveDirection(move);
-  // motors.moveDirection({0,100,0});
 
   // End Loop
   orbit.resetAllData();

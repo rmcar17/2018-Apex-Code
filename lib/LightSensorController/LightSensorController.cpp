@@ -176,12 +176,21 @@ void LightSensorController::updateOnWhite(){
 		}
 	}
 	if(ROBOT==1){
-
-	} else{
-		if(onWhite[22]||onWhite[0]){
+		if(onWhite[5]||onWhite[7]){
+			onWhite[6] = 1;
+		}else{
+			onWhite[6] = 0;
+		}
+		if(onWhite[20]||onWhite[22]){
 			onWhite[21] = 1;
 		}else{
 			onWhite[21] = 0;
+		}
+	} else{
+		if(onWhite[22]||onWhite[0]){
+			onWhite[23] = 1;
+		}else{
+			onWhite[23] = 0;
 		}
 	}
 }

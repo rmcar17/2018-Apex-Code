@@ -116,7 +116,7 @@ void loop() {
   lights.setComp(heading);
   lights.setVector(lightVector);
   lights.updateWithComp();
-  Serial.println(camera.getAttackGoal().arg);
+  // Serial.println(camera.getAttackGoal().arg);
   // Orbit
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
@@ -126,13 +126,12 @@ void loop() {
   orbit.setCoords(lidars.getCoords());
   Vector robotPos = lidars.getCoords();
   Vector ballPos = orbit.getBallPos();
-
   // RoleController
   // RC.update(robotPos,ballPos);
 
   // More Orbit
-  orbit.calculateMoveData();
   orbit.calculateRotation();
+  orbit.calculateMoveData();
   orbit.setLightValue(lights.getLineAngle(),lights.danger);
   orbit.calculateLine();
 
@@ -142,7 +141,7 @@ void loop() {
   // Movement
   move = orbit.getMoveData();
   motors.moveDirection(move);
-
+  // motors.moveDirection({0,200,0});
   // End Loop
   orbit.resetAllData();
 }

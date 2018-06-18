@@ -33,7 +33,7 @@ class Orbit{
     void calculateLine();
     void avoidLine();
 
-    void setLightValue(double angle);
+    void setLightValue(double angle, int tempDanger);
 
     void setBall(Vector tempBall);
 

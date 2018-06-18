@@ -116,13 +116,13 @@ void loop() {
   lights.setComp(heading);
   lights.setVector(lightVector);
   lights.updateWithComp();
-
-  // // Orbit
+  Serial.println(camera.getAttackGoal().arg);
+  // Orbit
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
   orbit.setCompAngle(heading);
-  orbit.setLightGate(gate.hasBall());
+  // orbit.setLightGate(gate.hasBall());
   orbit.setCoords(lidars.getCoords());
   Vector robotPos = lidars.getCoords();
   Vector ballPos = orbit.getBallPos();
@@ -133,7 +133,7 @@ void loop() {
   // More Orbit
   orbit.calculateMoveData();
   orbit.calculateRotation();
-  orbit.setLightValue(lightVector);
+  orbit.setLightValue(lights.getLineAngle(),lights.danger);
   orbit.calculateLine();
 
   // Bluetooth

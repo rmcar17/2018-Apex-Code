@@ -115,16 +115,16 @@ void loop() {
   // Serial.println(lidars.lidarRight);
 
   // Light
-  // lightVector = (int)transaction(((uint8_t)0));
-  // if(lightVector==65535){
-  //   lightVector = -1;
-  // }
+  lightVector = (int)transaction(((uint8_t)0));
+  if(lightVector==65535){
+    lightVector = -1;
+  }
 
   lights.setComp(heading);
   lights.setVector(lightVector);
   lights.updateWithComp();
-
-  // // Orbit
+  Serial.println(camera.getAttackGoal().arg);
+  // Orbit
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
@@ -134,35 +134,14 @@ void loop() {
   Vector robotPos = lidars.getCoords();
   Vector ballPos = orbit.getBallPos();
 
-  // Serial.print(robotPos.i);
-  // Serial.print("\t");
-  // Serial.print(robotPos.j);
-  // Serial.print("\t");
-  // Serial.print(ballPos.i);
-  // Serial.print("\t");
-  // Serial.println(ballPos.j);
-
   // RoleController
   // RC.update(robotPos,ballPos);
 
   // More Orbit
   orbit.calculateMoveData();
   orbit.calculateRotation();
-  // orbit.setLightValue(lights.getLineAngle(),lights.danger);
-  // orbit.calculateLine();
-
-
-
-  // Serial.print(heading);
-  // Serial.print("\t");
-  // Serial.print(cos(toRadians(heading)));
-  // Serial.print("\t");
-  // Serial.print(robotPos.i);
-  // Serial.print("\t");
-  // Serial.println(robotPos.j);
-
-  // orbit.setLightValue(lights.getLineAngle(),lights.danger);
-  // orbit.calculateLine();
+  orbit.setLightValue(lights.getLineAngle(),lights.danger);
+  orbit.calculateLine(); 
 
   // Bluetooth
   // double btCMD = bt.receive();
@@ -177,12 +156,6 @@ void loop() {
   // } else{
   //   motors.brake();
   // }
-
-  // Serial.print(lights.getVectorAngle());
-  // Serial.print("\t");
-  // Serial.print(lights.getLineAngle());
-  // Serial.print("\t");
-  // Serial.println(lights.danger);
 
   motors.moveDirection(move);
   // motors.moveDirection({0,100,0});

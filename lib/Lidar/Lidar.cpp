@@ -49,7 +49,7 @@ void LIDAR::read(){
       for (int i = 0; i < 4; i++){
         sensorData[i] = Serial3.read();
       }
-      lidarLeft = (sensorData[1] << 8 | sensorData[0]) * 10;
+      lidarBack = (sensorData[1] << 8 | sensorData[0]) * 10;
     }
 	}
 
@@ -60,7 +60,7 @@ void LIDAR::read(){
       for (int i = 0; i < 4; i++){
         sensorData[i] = Serial2.read();
       }
-      lidarBack = (sensorData[1] << 8 | sensorData[0]) * 10;
+      lidarRight = (sensorData[1] << 8 | sensorData[0]) * 10;
     }
   }
 
@@ -70,7 +70,7 @@ void LIDAR::read(){
       for (int i = 0; i < 4; i++){
         sensorData[i] = Serial4.read();
       }
-      lidarRight = (sensorData[1] << 8 | sensorData[0]) * 10;
+      lidarLeft = (sensorData[1] << 8 | sensorData[0]) * 10;
     }
   }
 }

@@ -32,17 +32,19 @@ void loop(){
   // bt.send(2);
   // bt.send(123);
   double var = bt.receive();
-  if(var == 1){
-    pos = 1;
-  } else if (var == 2){
-    pos = 2;
-  } else{
-    if(pos == 1){
-      balli = var;
-    } else if(pos == 2){
-      ballj = var;
-    }
-  }
+  // if(var == 1){
+  //   pos = 1;
+  // } else if (var == 2){
+  //   pos = 2;
+  // } else{
+  //   if(pos == 1){
+  //     balli = var;
+  //   } else if(pos == 2){
+  //     ballj = var;
+  //   }
+  // }
+  balli = 69;
+  ballj = 169;
 
   // Serial.print(ballAngle);
   // Serial.print("\t");

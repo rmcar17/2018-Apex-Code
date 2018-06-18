@@ -177,7 +177,7 @@ void loop() {
   // Serial.println(lights.danger);
 
   // motors.moveDirection(move);
-  // motors.moveDirection({0,100,0});
+  motors.moveDirection({0,100,0});
 
   // End Loop
   orbit.resetAllData();

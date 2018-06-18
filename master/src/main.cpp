@@ -94,7 +94,7 @@ void setup() {
 }
 
 void loop() {
-  // Serial.println("Test");
+
   // Compass
   comp.updateGyro();
   int heading = comp.getHeading();
@@ -102,20 +102,13 @@ void loop() {
   // Camera
   camera.update();
   Vector ball = camera.getBall();
-  // Serial.print(ball.arg);
-  // Serial.print("\t");
-  // Serial.println(ball.mag);
+
   // LIDAR
   lidars.setComp(comp.getHeading());
   lidars.update();
-  // Serial.print(lidars.lidarLeft);
-  // Serial.print("\t");
-  // Serial.print(lidars.lidarBack);
-  // Serial.print("\t");
-  // Serial.println(lidars.lidarRight);
 
   // Light
-  lightVector = (int)transaction(((uint8_t)2));
+  lightVector = (int)transaction(((uint8_t)0));
   if(lightVector==65535){
     lightVector = -1;
   }
@@ -134,13 +127,6 @@ void loop() {
   Vector robotPos = lidars.getCoords();
   Vector ballPos = orbit.getBallPos();
 
-  // Serial.print(robotPos.i);
-  // Serial.print("\t");
-  // Serial.print(robotPos.j);
-  // Serial.print("\t");
-  // Serial.print(ballPos.i);
-  // Serial.print("\t");
-  // Serial.println(ballPos.j);
 
   // RoleController
   // RC.update(robotPos,ballPos);
@@ -151,41 +137,12 @@ void loop() {
   orbit.setLightValue(lights.getLineAngle(),lights.danger);
   orbit.calculateLine();
 
-
-
-  // Serial.print(heading);
-  // Serial.print("\t");
-  // Serial.print(cos(toRadians(heading)));
-  // Serial.print("\t");
-  // Serial.print(robotPos.i);
-  // Serial.print("\t");
-  // Serial.println(robotPos.j);
-
-  // orbit.setLightValue(lights.getLineAngle(),lights.danger);
-  // orbit.calculateLine();
-
   // Bluetooth
   // double btCMD = bt.receive();
 
-
   // Movement
   move = orbit.getMoveData();
-  // motors.moveDirection({0,100,0});
-  // move.angle = -1;
-  // if(lights.getLineAngle()!=-1){
-  //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
-  // } else{
-  //   motors.brake();
-  // }
-
-  // Serial.print(lights.getVectorAngle());
-  // Serial.print("\t");
-  // Serial.print(lights.getLineAngle());
-  // Serial.print("\t");
-  // Serial.println(lights.danger);
-
   motors.moveDirection(move);
-  // motors.moveDirection({0,100,0});
 
   // End Loop
   orbit.resetAllData();

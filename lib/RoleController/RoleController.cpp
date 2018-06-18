@@ -4,14 +4,22 @@ RoleController::RoleController(){
 
 }
 
-void RoleController::update(Vector ball){
+void RoleController::update(Vector robot, Vector ball){
   double balli = ball.i;
   double ballj = ball.j;
   myBall = Vector(balli,ballj,0);
-  
-  otherBalli = (double)transaction(((uint8_t)0),balli);
-  otherBallj = (double)transaction(((uint8_t)1),ballj);
+
+  otherBalli = (int)transaction(((uint8_t)0),balli);
+  otherBallj = (int)transaction(((uint8_t)1),ballj);
   otherBall = Vector(otherBalli,otherBallj,0);
+
+  Vector toBall = otherBall.operator-(robot);
+  ballArg = mod(toDegrees(atan2(toBall.i,toBall.j)),360);
+  ballMag = sqrt(pow(toBall.i,2)+pow(toBall.j,2));
+
+  // Serial.print(otherBalli);
+  // Serial.print("\t");
+  // Serial.println(otherBallj);
 
   Serial.print("My: ");
   Serial.print(balli);

@@ -32,19 +32,20 @@ void loop(){
   // bt.send(2);
   // bt.send(123);
   double var = bt.receive();
-  // if(var == 1){
-  //   pos = 1;
-  // } else if (var == 2){
-  //   pos = 2;
-  // } else{
-  //   if(pos == 1){
-  //     balli = var;
-  //   } else if(pos == 2){
-  //     ballj = var;
-  //   }
-  // }
-  balli = 69;
-  ballj = 169;
+  if(var == 1){
+    pos = 1;
+  } else if (var == 2){
+    pos = 2;
+  } else{
+    if(pos == 1){
+      balli = var;
+    } else if(pos == 2){
+      ballj = var;
+    }
+  }
+
+  // balli = 70;
+  // ballj = 170;
 
   // Serial.print(ballAngle);
   // Serial.print("\t");
@@ -52,11 +53,11 @@ void loop(){
 
 
 
-  for(int i = 0; i < LS_NUM; i++){
-    Serial.print(lights.onWhite[i]);
-    Serial.print("\t");
-  }
-  Serial.println();
+  // for(int i = 0; i < LS_NUM; i++){
+  //   Serial.print(lights.onWhite[i]);
+  //   Serial.print("\t");
+  // }
+  // Serial.println();
 }
 
 void spi0_isr(){
@@ -64,6 +65,9 @@ void spi0_isr(){
 
   uint8_t command = (dataIn >> 14);
   uint16_t data = (dataIn & 0x3FFF);
+
+
+  Serial.println(command);
 
   uint16_t dataOut = 0;
 

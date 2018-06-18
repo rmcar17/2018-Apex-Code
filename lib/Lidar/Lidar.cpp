@@ -5,9 +5,19 @@ LIDAR::LIDAR(){
 }
 
 void LIDAR::setup(){
+  Serial1.begin(115200);
 	Serial3.begin(115200);
 	Serial2.begin(115200);
 	Serial4.begin(115200);
+
+  Serial1.write((uint8_t)0x42);
+  Serial1.write((uint8_t)0x57);
+  Serial1.write((uint8_t)0x02);
+  Serial1.write((uint8_t)0x00);
+  Serial1.write((uint8_t)0x00);
+  Serial1.write((uint8_t)0x00);
+  Serial1.write((uint8_t)0x01);
+  Serial1.write((uint8_t)0x06);
 
 	Serial3.write((uint8_t)0x42);
   Serial3.write((uint8_t)0x57);
@@ -43,13 +53,23 @@ void LIDAR::update(){
 }
 
 void LIDAR::read(){
+  while(Serial1.available() > 8){
+    if (Serial1.read() == 89 && Serial1.peek() == 89){
+      Serial1.read();
+      for (int i = 0; i < 4; i++){
+        sensorData[i] = Serial1.read();
+      }
+      lidarValues[0] = (sensorData[1] << 8 | sensorData[0]) * 10;
+    }
+  }
+
   while(Serial3.available() > 8){
     if (Serial3.read() == 89 && Serial3.peek() == 89){
       Serial3.read();
       for (int i = 0; i < 4; i++){
         sensorData[i] = Serial3.read();
       }
-      lidarBack = (sensorData[1] << 8 | sensorData[0]) * 10;
+      lidarValues[1] = (sensorData[1] << 8 | sensorData[0]) * 10;
     }
 	}
 
@@ -60,7 +80,7 @@ void LIDAR::read(){
       for (int i = 0; i < 4; i++){
         sensorData[i] = Serial2.read();
       }
-      lidarRight = (sensorData[1] << 8 | sensorData[0]) * 10;
+      lidarValues[2] = (sensorData[1] << 8 | sensorData[0]) * 10;
     }
   }
 
@@ -70,8 +90,18 @@ void LIDAR::read(){
       for (int i = 0; i < 4; i++){
         sensorData[i] = Serial4.read();
       }
-      lidarLeft = (sensorData[1] << 8 | sensorData[0]) * 10;
+      lidarValues[3] = (sensorData[1] << 8 | sensorData[0]) * 10;
     }
+  }
+
+  if(ROBOT==1){
+    lidarBack = lidarValues[1];
+    lidarRight = lidarValues[2];
+    lidarLeft = lidarValues[3];
+  } else{
+    lidarLeft = lidarValues[0];
+    lidarBack = lidarValues[2];
+    lidarRight = lidarValues[3];
   }
 }
 

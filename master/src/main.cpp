@@ -62,7 +62,7 @@ void setup() {
     Serial.begin(38400);
   #endif
   Serial.println("Test1");
-  // camera.setup();
+  camera.setup();
   Serial.println("Test2");
 
   digitalWrite(TEENSY_LED, HIGH);
@@ -94,17 +94,17 @@ void setup() {
 }
 
 void loop() {
+  // Serial.println("Test");
   // Compass
   comp.updateGyro();
   int heading = comp.getHeading();
 
   // Camera
-  // camera.update();
+  camera.update();
   Vector ball = camera.getBall();
   // Serial.print(ball.arg);
   // Serial.print("\t");
-  // Serial.print(ball.mag);
-  // Serial.print("\t");
+  // Serial.println(ball.mag);
   // LIDAR
   lidars.setComp(comp.getHeading());
   lidars.update(); 
@@ -115,7 +115,7 @@ void loop() {
   // Serial.println(lidars.lidarRight);
 
   // Light
-  lightVector = (int)transaction(((uint8_t)0));
+  lightVector = (int)transaction(((uint8_t)2));
   if(lightVector==65535){
     lightVector = -1;
   }
@@ -134,8 +134,16 @@ void loop() {
   Vector robotPos = lidars.getCoords();
   Vector ballPos = orbit.getBallPos();
 
+  // Serial.print(robotPos.i);
+  // Serial.print("\t");
+  // Serial.print(robotPos.j);
+  // Serial.print("\t");
+  // Serial.print(ballPos.i);
+  // Serial.print("\t");
+  // Serial.println(ballPos.j);
+
   // RoleController
-  RC.update(ballPos);
+  RC.update(robotPos,ballPos);
 
   // More Orbit
   orbit.calculateMoveData();

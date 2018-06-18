@@ -5,6 +5,7 @@
 #include <Defines.h>
 #include <Vector.h>
 #include <Common.h>
+#include <Pins.h>
 
 class LIDAR {
 public:
@@ -14,6 +15,7 @@ public:
 	void setComp(int compVal);
 	Vector getCoords();
 	uint16_t lidarLeft, lidarBack, lidarRight;
+	uint16_t lidarValues[4] = {0};
 private:
 	void read();
 	void calculateCoords();

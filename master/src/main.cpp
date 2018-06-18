@@ -37,7 +37,7 @@ Orbit orbit;
 
 Role role;
 
-RoleController RC;
+// RoleController RC;
 
 MoveData move;
 
@@ -61,9 +61,9 @@ void setup() {
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
-  Serial.println("Test1");
+  // Serial.println("Test1");
   camera.setup();
-  Serial.println("Test2");
+  // Serial.println("Test2");
 
   digitalWrite(TEENSY_LED, HIGH);
 
@@ -78,7 +78,7 @@ void setup() {
 
   orbit.setup();
   orbit.resetAllData();
-  
+
 
   // SPI
   spi = T3SPI();
@@ -107,7 +107,7 @@ void loop() {
   // Serial.println(ball.mag);
   // LIDAR
   lidars.setComp(comp.getHeading());
-  lidars.update(); 
+  lidars.update();
   // Serial.print(lidars.lidarLeft);
   // Serial.print("\t");
   // Serial.print(lidars.lidarBack);
@@ -143,16 +143,16 @@ void loop() {
   // Serial.println(ballPos.j);
 
   // RoleController
-  RC.update(robotPos,ballPos);
+  // RC.update(robotPos,ballPos);
 
   // More Orbit
   orbit.calculateMoveData();
   orbit.calculateRotation();
   orbit.setLightValue(lights.getLineAngle(),lights.danger);
   orbit.calculateLine();
-  
-  
-  
+
+
+
   // Serial.print(heading);
   // Serial.print("\t");
   // Serial.print(cos(toRadians(heading)));

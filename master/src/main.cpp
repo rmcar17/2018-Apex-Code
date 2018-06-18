@@ -127,14 +127,13 @@ void loop() {
   Vector robotPos = lidars.getCoords();
   Vector ballPos = orbit.getBallPos();
 
-
   // RoleController
   // RC.update(robotPos,ballPos);
 
   // More Orbit
   orbit.calculateMoveData();
   orbit.calculateRotation();
-  orbit.setLightValue(lights.getLineAngle(),lights.danger);
+  orbit.setLightValue(lightVector);
   orbit.calculateLine();
 
   // Bluetooth

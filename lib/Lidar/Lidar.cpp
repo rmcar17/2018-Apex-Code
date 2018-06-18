@@ -115,9 +115,9 @@ void LIDAR::calculateCoords(){
   // Serial.print("\t");
   // Serial.println(lidarRight);
   coords = Vector(i,j,false);
-  Serial.print(coords.i);
-  Serial.print("\t");
-  Serial.println(coords.j);
+  // Serial.print(coords.i);
+  // Serial.print("\t");
+  // Serial.println(coords.j);
 }
 
 Vector LIDAR::getCoords(){

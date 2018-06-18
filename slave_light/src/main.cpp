@@ -66,9 +66,6 @@ void spi0_isr(){
   uint8_t command = (dataIn >> 14);
   uint16_t data = (dataIn & 0x3FFF);
 
-
-  Serial.println(command);
-
   uint16_t dataOut = 0;
 
   uint16_t lightVector;
@@ -79,16 +76,16 @@ void spi0_isr(){
   case 0:
     dataOut = lightVector;
     break;
-  case 1: 
-    bt.send((uint16_t)1);
-    bt.send((uint16_t(data)));
-    dataOut = (uint16_t)balli;
-    break;
-  case 2:
-    bt.send((uint16_t)2);
-    bt.send((uint16_t(data)));
-    dataOut = (uint16_t)ballj;
-    break;
+  // case 1: 
+  //   bt.send((uint16_t)1);
+  //   bt.send((uint16_t(data)));
+  //   dataOut = (uint16_t)balli;
+  //   break;
+  // case 2:
+  //   bt.send((uint16_t)2);
+  //   bt.send((uint16_t(data)));
+  //   dataOut = (uint16_t)ballj;
+  //   break;
   default:
     dataOut = (uint16_t)69;
     break;

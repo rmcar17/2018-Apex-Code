@@ -7,7 +7,7 @@
 class Bluetooth{
 public:
 	void init();
-	void send(double cmd);
+	void send(uint8_t cmd);
 	double receive();
 private:
 	double receiveCommand;

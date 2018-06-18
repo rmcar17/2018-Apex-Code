@@ -37,10 +37,17 @@ void Orbit::setCoords(Vector coords){
   ballPosition = coords + ball;
  }
 
+Vector Orbit::getBallPos(){
+  return ballPosition;
+}
+
 MoveData Orbit::getMoveData(){
   return movement;
 }
 
+void Orbit::setBall(Vector tempBall){
+  ball = tempBall;
+}
 
 void Orbit::calculateMoveData(){
   if(role == Role::attack){

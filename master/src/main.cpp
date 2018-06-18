@@ -21,9 +21,6 @@
 #include <Pins.h>
 #include <t3spi.h>
 #include <Lidar.h>
-#include <Bluetooth.h>
-
-SoftwareSerial blueSerial(7,8);
 
 LIDAR lidars;
 
@@ -40,19 +37,20 @@ Orbit orbit;
 
 Role role;
 
+RoleController RC;
+
 MoveData move;
 
-Bluetooth bt;
-
 T3SPI spi;
+
+Vector vector = Vector(0,0);
 
 int lightVector;
 volatile uint16_t dataOut[1], dataIn[1];
 
 uint16_t transaction(uint8_t command, uint16_t data = 0){
-  dataOut[0] = (command << 10) | (data & 0x3FF);
+  dataOut[0] = (command << 14) | (data & 0x3FFF);
 
-  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT);
   spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT);
 
   return dataIn[0];
@@ -63,7 +61,9 @@ void setup() {
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
-  camera.setup();
+  Serial.println("Test1");
+  // camera.setup();
+  Serial.println("Test2");
 
   digitalWrite(TEENSY_LED, HIGH);
 
@@ -78,6 +78,7 @@ void setup() {
 
   orbit.setup();
   orbit.resetAllData();
+  
 
   // SPI
   spi = T3SPI();
@@ -86,7 +87,6 @@ void setup() {
   spi.enableCS(CS0, CS_ActiveLOW);
 
   lidars.setup();
-  // bt.init();
 
   role = Role::attack;
 
@@ -98,12 +98,21 @@ void loop() {
   comp.updateGyro();
   int heading = comp.getHeading();
 
+  // Camera
+  // camera.update();
+  Vector ball = camera.getBall();
+  // Serial.print(ball.arg);
+  // Serial.print("\t");
+  // Serial.print(ball.mag);
+  // Serial.print("\t");
   // LIDAR
   lidars.setComp(comp.getHeading());
-  lidars.update();
-
-  // Camera
-  camera.update();
+  lidars.update(); 
+  // Serial.print(lidars.lidarLeft);
+  // Serial.print("\t");
+  // Serial.print(lidars.lidarBack);
+  // Serial.print("\t");
+  // Serial.println(lidars.lidarRight);
 
   // Light
   lightVector = (int)transaction(((uint8_t)0));
@@ -122,19 +131,53 @@ void loop() {
   orbit.setCompAngle(heading);
   orbit.setLightGate(gate.hasBall());
   orbit.setCoords(lidars.getCoords());
+  Vector robotPos = lidars.getCoords();
+  Vector ballPos = orbit.getBallPos();
+
+  // RoleController
+  RC.update(ballPos);
+
+  // More Orbit
   orbit.calculateMoveData();
   orbit.calculateRotation();
+  orbit.setLightValue(lights.getLineAngle(),lights.danger);
+  orbit.calculateLine();
+  
+  
+  
+  // Serial.print(heading);
+  // Serial.print("\t");
+  // Serial.print(cos(toRadians(heading)));
+  // Serial.print("\t");
+  // Serial.print(robotPos.i);
+  // Serial.print("\t");
+  // Serial.println(robotPos.j);
+
   // orbit.setLightValue(lights.getLineAngle(),lights.danger);
   // orbit.calculateLine();
 
   // Bluetooth
   // double btCMD = bt.receive();
 
+
   // Movement
   move = orbit.getMoveData();
-  // move.angle = -1;
-  motors.moveDirection(move);
   // motors.moveDirection({0,100,0});
+  // move.angle = -1;
+  // if(lights.getLineAngle()!=-1){
+  //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
+  // } else{
+  //   motors.brake();
+  // }
+
+  // Serial.print(lights.getVectorAngle());
+  // Serial.print("\t");
+  // Serial.print(lights.getLineAngle());
+  // Serial.print("\t");
+  // Serial.println(lights.danger);
+
+  // motors.moveDirection(move);
+  motors.moveDirection({0,100,0});
 
   // End Loop
   orbit.resetAllData();

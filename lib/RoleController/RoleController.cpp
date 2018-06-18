@@ -4,15 +4,52 @@ RoleController::RoleController(){
 
 }
 
+void RoleController::update(Vector ball){
+  double balli = ball.i;
+  double ballj = ball.j;
+  myBall = Vector(balli,ballj,0);
+  
+  otherBalli = (double)transaction(((uint8_t)0),balli);
+  otherBallj = (double)transaction(((uint8_t)1),ballj);
+  otherBall = Vector(otherBalli,otherBallj,0);
+
+  Serial.print("My: ");
+  Serial.print(balli);
+  Serial.print("\t");
+  Serial.print(ballj);
+  Serial.print("\tOther: ");
+
+  Serial.print(otherBalli);
+  Serial.print("\t");
+  Serial.println(otherBallj);
+
+  decideRoles();
+}
+
 void RoleController::decideRoles(){
+  if(!myBall.exists()){
+    orbit.setBall(otherBall);
+  }
+  // if(!vector.exists(myBall)){
+  //   Serial.print("I can't see");
+  // } else{
+  //   Serial.print("I can see");
+  // }
+  // Serial.print(" and ");
+  // if(!vector.exists(otherBall)){
+  //   Serial.print("Other can't see");
+  // } else{
+  //   Serial.print("Other can see");
+  // }
+  // Serial.println();
+
   /*
   Pseudocode
   Things to consider (by priority):
-  - angle to ball
+  - angle to ball (infront or behind)
   - distance to ball
-  - robot's position
   - robot's current role
-  - last update time
+  - last update time (wait for a time period till you can change again)
 
   How to achieve this?
   Have a "master" robot and a "slave" robot

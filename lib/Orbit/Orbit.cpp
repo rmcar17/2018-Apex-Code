@@ -100,26 +100,26 @@ void Orbit::calcAttacker(){
   }
   else{
     if(robotPosition.exists()){
-      moveToPos(CENTRE);
+      // moveToPos(CENTRE);
     }
   }
 }
 
 void Orbit::calcDefender(){
-  moveToPos(CENTRE);
-  // if(ball.exists()){
-  //   if(isAngleBetween(ball.arg, 270, 90) && (ball.mag > 500 || (robotPosition - GOALIE_POS).j < -500)){
-  //     moveToBall();
-  //   }
-  //   else{
-  //     calcAttacker();
-  //   }
-  // }
-  // else{
-  //   if(robotPosition.exists()){
-  //     moveToPos(GOALIE_POS);
-  //   }
-  // }
+  moveToBall();
+  if(ball.exists()){
+    if(isAngleBetween(ball.arg, 300, 60)){
+      moveToBall();
+    }
+    else{
+      calcAttacker();
+    }
+  }
+  else{
+    if(robotPosition.exists()){
+      // moveToPos(GOALIE_POS);
+    }
+  }
 }
 
 void Orbit::manageKicker(){
@@ -228,14 +228,15 @@ void Orbit::moveToPos(Vector position){
   double horizontal = horizontalMovement.update(direction.i);
   double vertical = verticalMovement.update(direction.j);
 
-  movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -255, 255);
+  movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -MAX_SPEED, MAX_SPEED);
   movement.angle = mod(round(450 - toDegrees(atan2(vertical,horizontal))), 360);
 }
 
 void Orbit::moveToBall(){
-  double horizontal = horizontalMovement.update(ball.i);
-  double vertical = verticalMovement.update((GOALIE_POS - robotPosition).j);
-
+  double horizontal = goalieHorizontal.update(ball.arg < 180 ? ball.arg : -(360 - ball.arg));
+  // double horizontal = abs(ball.i) < 200 ? ball.i : goalieHorizontal.update(ball.i);
+  double vertical = goalieVertical.update((GOALIE_POS - robotPosition).j);
+  Serial.println(vertical);
   movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -255, 255);
   movement.angle = mod(450 - toDegrees(atan2(vertical,horizontal)), 360);
 }

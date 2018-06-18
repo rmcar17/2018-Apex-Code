@@ -70,11 +70,11 @@ bool Vector::between(double leftAngle, double rightAngle){
 }
 
 double Vector::calcI(double _mag, double _arg){
-  return _mag * cos(toRadians(_arg));
+  return _mag * sin(toRadians(_arg));
 }
 
 double Vector::calcJ(double _mag, double _arg){
-  return _mag * sin(toRadians(_arg));
+  return _mag * cos(toRadians(_arg));
 }
 
 double Vector::calcMag(double _i, double _j){

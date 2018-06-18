@@ -16,12 +16,12 @@
 
 // Coordinates
 #define FIELD_WIDTH 1820
-#define FIELD_LENGTH 2430
+#define FIELD_LENGTH 2000
 
 #define ATTACK_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH-300, false)
 #define DEFEND_GOAL Vector(FIELD_WIDTH / 2, 300, false)
 
-#define GOALIE_POS DEFEND_GOAL + Vector(0, 400, false)
+#define GOALIE_POS DEFEND_GOAL + Vector(0, 150, false)
 
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
 
@@ -34,11 +34,11 @@
 #define POS_VER_KI 0
 #define POS_VER_KD 0
 
-#define GOAL_HOR_KP 0
+#define GOAL_HOR_KP 7
 #define GOAL_HOR_KI 0
 #define GOAL_HOR_KD 0
 
-#define GOAL_VER_KP 0
+#define GOAL_VER_KP 0.5
 #define GOAL_VER_KI 0
 #define GOAL_VER_KD 0
 
@@ -47,18 +47,18 @@
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
 
-#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.25
+#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.4
 
 #define CLOSE_ORBIT Vector(380, 0)
 #define FAR_ORBIT Vector(450, 0)
 
 #define SIDEWAYS_ORBIT 60
-#define BIG_ORBIT 45
-#define SMALL_ORBIT 10
+#define BIG_ORBIT 40
+#define SMALL_ORBIT 12
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define NORMAL_SPEED 150
+#define NORMAL_SPEED 180
 #define MAX_SPEED 220
 
 // Camera
@@ -67,8 +67,8 @@
 
 #define CAM_BUFFER_NUM 6
 
-#define CAM_CENTRE_X 105
-#define CAM_CENTRE_Y 105
+#define CAM_CENTRE_X 120
+#define CAM_CENTRE_Y 120
 
 #define CAM_SWITCH_D 16
 
@@ -82,7 +82,7 @@
 #define LS_CALIBRATION_NUM 50
 
 //LIGHT GATE
-#define LIGHT_GATE_THRESH 500
+#define LIGHT_GATE_THRESH 660
 
 //KICKER
 #define KICK_INTERVAL 2000000

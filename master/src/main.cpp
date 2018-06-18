@@ -86,12 +86,11 @@ void setup() {
   spi.enableCS(CS0, CS_ActiveLOW);
 
   lidars.setup();
-  bt.init();
+  // bt.init();
 
-  role = Role::defend;
+  role = Role::attack;
 
   digitalWrite(TEENSY_LED, LOW);
-
 }
 
 void loop() {
@@ -129,7 +128,7 @@ void loop() {
   // orbit.calculateLine();
 
   // Bluetooth
-  double btCMD = bt.receive();
+  // double btCMD = bt.receive();
 
   // Movement
   move = orbit.getMoveData();

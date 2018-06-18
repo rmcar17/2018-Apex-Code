@@ -40,6 +40,7 @@ class LightSensorController {
 		double lineAngle;
 		int danger = 0;
 		int heading = 0;
+		bool firstContact = true;
 		bool a,b;
 };
 

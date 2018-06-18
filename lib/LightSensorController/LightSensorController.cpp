@@ -117,33 +117,36 @@ void LightSensorController::update(){
 }
 
 void LightSensorController::updateWithComp(){
-	if(vectorAngle!=-1.00){
-		a = inRange(vectorAngle,prevAngle,60);
-		b = inRange(vectorAngle,initAngle,60);
+	if(vectorAngle!=-1.00){//actual
 		if(danger == 0){
-			initAngle = vectorAngle;
-			prevAngle = vectorAngle;
-			lineAngle = vectorAngle;
-			danger = 1;
+			initAngle = vectorAngle; 			// Initial angle
+			prevAngle = vectorAngle; 			// Previous iteration of vector angle
+			lineAngle = vectorAngle; 			// Opposite direction robot needs to move
+			danger = 1;							// We're touching from inside of the field
+			firstContact = true;
 		}
-		if(danger == 1){
-			if(a){
-				initAngle = vectorAngle;
-				lineAngle = vectorAngle;
-			} else{
-				danger = 2;
+		a = inRange(vectorAngle,prevAngle,60);	
+		b = inRange(vectorAngle,initAngle,60);	
+		if(danger == 1){						// If we are touching the line from inside field
+			if(firstContact){					// If in range of previous angle
+				initAngle = vectorAngle;		// Set initial angle to vector angle
+				lineAngle = vectorAngle;		// Set line angle to vector angle
+			} 
+			if(!a){					
+				danger = 2;						// We're touching the line from outside field
 			}
+			firstContact = false;
 		}
-		else if(danger == 2){
-			if(b){
-				lineAngle = initAngle;
-				danger = 1;
+		else if(danger == 2){					// If we're touching from outside field
+			if(b){								// If in range of initial angle
+				lineAngle = initAngle;			// Set line angle to inital angle
+				danger = 1;						// We're touching from the inside field
 			}
 			else{
-				lineAngle = initAngle;
+				lineAngle = initAngle;			// Set line angle to inital angle
 			}
 		}
-		prevAngle = vectorAngle;
+		prevAngle = vectorAngle;				// Set previous angle to vector angle
 	}
 	else{
 		if(danger<=1){
@@ -165,22 +168,20 @@ void LightSensorController::updateOnWhite(){
 	for(int i = 0; i < LS_NUM; i++){
 		onWhite[i] = lightArray[i].onWhite();
 	}
-	if(ROBOT==1){
-		if(onWhite[5]||onWhite[7]){
-			onWhite[6] = 1;
+	for(int i = 0; i < (sizeof(brokenPins)/sizeof(brokenPins[0])); i++){
+		if(onWhite[brokenPins[correctAngleRange(i-1,0,23)]]||onWhite[brokenPins[correctAngleRange(i+1,0,23)]]){
+			onWhite[brokenPins[i]] = 1;
 		}else{
-			onWhite[6] = 0;
+			onWhite[brokenPins[i]] = 0;
 		}
-		if(onWhite[20]||onWhite[22]){
+	}
+	if(ROBOT==1){
+
+	} else{
+		if(onWhite[22]||onWhite[0]){
 			onWhite[21] = 1;
 		}else{
 			onWhite[21] = 0;
-		}
-	} else{
-		if(onWhite[22]||onWhite[0]){
-			onWhite[23] = 1;
-		}else{
-			onWhite[23] = 0;
 		}
 	}
 }
@@ -190,14 +191,11 @@ void LightSensorController::calcVectorAngle(){
 	vectorX = 0;
 	vectorY = 0;
 	for(int i = 0; i < LS_NUM; i++){
-		// bool exists = std::find(std::begin(brokenPins), std::end(brokenPins), i) != std::end(brokenPins);
-		// if(!exists){
 		if(onWhite[i]){
 			any = true;
 			vectorX += sin((450-i*(360/LS_NUM))*PI/180);
       		vectorY += cos((450-i*(360/LS_NUM))*PI/180);
 		}
-		// }
 	}
 	if(any){
 		vectorAngle = correctRange(360-(180+(atan2(vectorY,vectorX)*180/PI)),0,360);

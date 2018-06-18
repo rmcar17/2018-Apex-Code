@@ -21,9 +21,6 @@
 #include <Pins.h>
 #include <t3spi.h>
 #include <Lidar.h>
-#include <Bluetooth.h>
-
-SoftwareSerial blueSerial(7,8);
 
 LIDAR lidar;
 
@@ -40,19 +37,20 @@ Orbit orbit;
 
 Role role;
 
+RoleController RC;
+
 MoveData move;
 
-Bluetooth bt;
-
 T3SPI spi;
+
+Vector vector = Vector(0,0);
 
 int lightVector;
 volatile uint16_t dataOut[1], dataIn[1];
 
 uint16_t transaction(uint8_t command, uint16_t data = 0){
-  dataOut[0] = (command << 10) | (data & 0x3FF);
+  dataOut[0] = (command << 14) | (data & 0x3FFF);
 
-  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT);
   spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT);
 
   return dataIn[0];
@@ -63,7 +61,7 @@ void setup() {
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
-  camera.setup();
+  // camera.setup();
 
   digitalWrite(TEENSY_LED, HIGH);
 
@@ -89,9 +87,7 @@ void setup() {
   spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
   spi.enableCS(CS0, CS_ActiveLOW);
 
-  lidar.setup();
-  bt.init();
-}
+  lidar.setup();}
 
 void loop() {
   // Compass
@@ -99,7 +95,10 @@ void loop() {
   int heading = comp.getHeading();
 
   // // Camera
-  camera.update();
+  // camera.update();
+
+  // RoleController
+  RC.update(camera.getBall());
 
   // Light
   lightVector = (int)transaction(((uint8_t)0));
@@ -123,8 +122,8 @@ void loop() {
   orbit.calculateLine();
 
   // LIDAR
-  lidar.update();
   lidar.setComp(heading);
+  lidar.update();
   Vector robotPos = lidar.getCoords();
   // Serial.print(heading);
   // Serial.print("\t");
@@ -133,15 +132,24 @@ void loop() {
   // Serial.print(robotPos.i);
   // Serial.print("\t");
   // Serial.println(robotPos.j);
-  
-
-  // Bluetooth
-  double btCMD = bt.receive();
 
   // Movement
   move = orbit.getMoveData();
+  // motors.moveDirection({0,100,0});
   // move.angle = -1;
-  motors.moveDirection(move);
+  if(lights.getLineAngle()!=-1){
+    motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
+  } else{
+    motors.brake();
+  }
+
+  Serial.print(lights.getVectorAngle());
+  Serial.print("\t");
+  Serial.print(lights.getLineAngle());
+  Serial.print("\t");
+  Serial.println(lights.danger);
+
+  // motors.moveDirection(move);
   // motors.moveDirection({0,100,0});
   // if(lights.getLineAngle()!=-1){
   //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});

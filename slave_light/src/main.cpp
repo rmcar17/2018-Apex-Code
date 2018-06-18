@@ -3,12 +3,17 @@
 #include <t3spi.h>
 #include <LightSensor.h>
 #include <LightSensorController.h>
+#include <Bluetooth.h>
 
+SoftwareSerial blueSerial(7,8);
 
 LightSensorController lights;
 T3SPI spi;
+Bluetooth bt;
 
 int ledPin = 13;
+uint16_t ballAngle, ballDistance;
+int pos = 0;
 
 
 void setup(){
@@ -17,22 +22,46 @@ void setup(){
   spi.setCTAR_SLAVE(16, SPI_MODE0);
   NVIC_ENABLE_IRQ(IRQ_SPI0);
   lights.setup();
+  bt.init();
 }
 
 void loop(){
   lights.update();
-  // for(int i = 0; i < LS_NUM; i++){
-  //   Serial.print(lights.onWhite[i]);
-  //   Serial.print("\t");
-  // }
-  // Serial.println();
+  // bt.send(1);
+  // bt.send(250);
+  // bt.send(2);
+  // bt.send(123);
+  double var = bt.receive();
+  if(var == 1){
+    pos = 1;
+  } else if (var == 2){
+    pos = 2;
+  } else{
+    if(pos == 1){
+      ballAngle = var;
+    } else if(pos == 2){
+      ballDistance = var;
+    }
+  }
+
+  // Serial.print(ballAngle);
+  // Serial.print("\t");
+  // Serial.println(ballDistance);
+
+
+
+  for(int i = 0; i < LS_NUM; i++){
+    Serial.print(lights.onWhite[i]);
+    Serial.print("\t");
+  }
+  Serial.println();
 }
 
 void spi0_isr(){
   uint16_t dataIn = SPI0_POPR;
 
-  uint8_t command = (dataIn >> 10);
-  uint16_t data = (dataIn & 0x3FF);
+  uint8_t command = (dataIn >> 14);
+  uint16_t data = (dataIn & 0x3FFF);
 
   uint16_t dataOut = 0;
 
@@ -40,14 +69,18 @@ void spi0_isr(){
 
   lightVector = (uint16_t)((int)lights.getVectorAngle());
 
-  
-  
-  uint16_t lightLine = (uint16_t)((int)lights.getLineAngle());
-
   switch(command){
   case 0:
     dataOut = lightVector;
     break;
+  // case 1: 
+  //   bt.send((uint16_t(data)));
+  //   dataOut = (uint16_t)ballAngle;
+  //   break;
+  // case 2:
+  //   bt.send((uint16_t(data)));
+  //   dataOut = (uint16_t)ballDistance;
+  //   break;
   default:
     dataOut = (uint16_t)69;
     break;

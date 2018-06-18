@@ -49,11 +49,11 @@
 
 #define ORBIT_FORWARD_ANGLE_TIGHTENER 0.4
 
-#define CLOSE_ORBIT Vector(380, 0)
-#define FAR_ORBIT Vector(450, 0)
+#define CLOSE_ORBIT Vector(320, 0)
+#define FAR_ORBIT Vector(420, 0)
 
 #define SIDEWAYS_ORBIT 60
-#define BIG_ORBIT 40
+#define BIG_ORBIT 45
 #define SMALL_ORBIT 12
 
 #define DEFEND_SMALL_ANGLE 10
@@ -63,7 +63,7 @@
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true
-#define OVERIDE_BLUE false
+#define OVERIDE_BLUE true
 
 #define CAM_BUFFER_NUM 6
 

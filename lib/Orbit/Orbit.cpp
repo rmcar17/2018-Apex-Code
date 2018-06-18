@@ -113,20 +113,21 @@ void Orbit::calcAttacker(){
 }
 
 void Orbit::calcDefender(){
-  moveToBall();
-  if(ball.exists()){
-    if(isAngleBetween(ball.arg, 300, 60)){
-      moveToBall();
-    }
-    else{
-      calcAttacker();
-    }
-  }
-  else{
-    if(robotPosition.exists()){
-      // moveToPos(GOALIE_POS);
-    }
-  }
+  moveToPos(GOALIE_POS);
+  // moveToBall();
+  // if(ball.exists()){
+  //   if(isAngleBetween(ball.arg, 300, 60)){
+  //     moveToBall();
+  //   }
+  //   else{
+  //     calcAttacker();
+  //   }
+  // }
+  // else{
+  //   if(robotPosition.exists()){
+  //     moveToPos(GOALIE_POS);
+  //   }
+  // }
 }
 
 void Orbit::manageKicker(){

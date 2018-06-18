@@ -115,10 +115,10 @@ void loop() {
   // Serial.println(lidars.lidarRight);
 
   // Light
-  lightVector = (int)transaction(((uint8_t)2));
-  if(lightVector==65535){
-    lightVector = -1;
-  }
+  // lightVector = (int)transaction(((uint8_t)0));
+  // if(lightVector==65535){
+  //   lightVector = -1;
+  // }
 
   lights.setComp(heading);
   lights.setVector(lightVector);
@@ -129,7 +129,7 @@ void loop() {
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
   orbit.setCompAngle(heading);
-  orbit.setLightGate(gate.hasBall());
+  // orbit.setLightGate(gate.hasBall());
   orbit.setCoords(lidars.getCoords());
   Vector robotPos = lidars.getCoords();
   Vector ballPos = orbit.getBallPos();
@@ -148,8 +148,8 @@ void loop() {
   // More Orbit
   orbit.calculateMoveData();
   orbit.calculateRotation();
-  orbit.setLightValue(lights.getLineAngle(),lights.danger);
-  orbit.calculateLine();
+  // orbit.setLightValue(lights.getLineAngle(),lights.danger);
+  // orbit.calculateLine();
 
 
 

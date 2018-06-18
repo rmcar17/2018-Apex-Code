@@ -133,30 +133,14 @@ void loop() {
   // More Orbit
   orbit.calculateMoveData();
   orbit.calculateRotation();
-<<<<<<< HEAD
   orbit.setLightValue(lights.getLineAngle(),lights.danger);
-  orbit.calculateLine(); 
-=======
-  orbit.setLightValue(lightVector);
   orbit.calculateLine();
->>>>>>> 621eb5ad4f207fd97b99d85d55b2231c54f5807d
 
   // Bluetooth
   // double btCMD = bt.receive();
 
   // Movement
   move = orbit.getMoveData();
-<<<<<<< HEAD
-  // motors.moveDirection({0,100,0});
-  // move.angle = -1;
-  // if(lights.getLineAngle()!=-1){
-  //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
-  // } else{
-  //   motors.brake();
-  // }
-
-=======
->>>>>>> 621eb5ad4f207fd97b99d85d55b2231c54f5807d
   motors.moveDirection(move);
 
   // End Loop

@@ -54,7 +54,7 @@ void loop(){
 
 
   for(int i = 0; i < LS_NUM; i++){
-    Serial.print(lights.lightValues[i]);
+    Serial.print(lights.onWhite[i]);
     Serial.print("\t");
   }
   Serial.println();
@@ -76,7 +76,7 @@ void spi0_isr(){
   case 0:
     dataOut = lightVector;
     break;
-  // case 1: 
+  // case 1:
   //   bt.send((uint16_t)1);
   //   bt.send((uint16_t(data)));
   //   dataOut = (uint16_t)balli;

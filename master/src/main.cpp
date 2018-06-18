@@ -43,6 +43,8 @@ MoveData move;
 
 T3SPI spi;
 
+Lidar lidar;
+
 Vector vector = Vector(0,0);
 
 int lightVector;

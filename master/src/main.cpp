@@ -22,7 +22,7 @@
 #include <t3spi.h>
 #include <Lidar.h>
 
-LIDAR lidar;
+LIDAR lidars;
 
 Compass comp;
 
@@ -77,28 +77,34 @@ void setup() {
   orbit.setup();
   orbit.resetAllData();
 
-  role = Role::attack;
-
-  digitalWrite(TEENSY_LED, LOW);
-
   // SPI
   spi = T3SPI();
   spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
   spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
   spi.enableCS(CS0, CS_ActiveLOW);
 
-  lidar.setup();}
+  lidars.setup();
+  // bt.init();
+
+  role = Role::attack;
+
+  digitalWrite(TEENSY_LED, LOW);
+}
 
 void loop() {
   // Compass
   comp.updateGyro();
   int heading = comp.getHeading();
 
-  // // Camera
-  // camera.update();
-
   // RoleController
   RC.update(camera.getBall());
+
+  // LIDAR
+  lidars.setComp(comp.getHeading());
+  lidars.update();
+
+  // Camera
+  camera.update();
 
   // Light
   lightVector = (int)transaction(((uint8_t)0));
@@ -116,6 +122,7 @@ void loop() {
   orbit.setBallData(camera.getBall());
   orbit.setCompAngle(heading);
   orbit.setLightGate(gate.hasBall());
+  orbit.setCoords(lidars.getCoords());
   orbit.calculateMoveData();
   orbit.calculateRotation();
   orbit.setLightValue(lights.getLineAngle(),lights.danger);
@@ -132,6 +139,13 @@ void loop() {
   // Serial.print(robotPos.i);
   // Serial.print("\t");
   // Serial.println(robotPos.j);
+
+  // orbit.setLightValue(lights.getLineAngle(),lights.danger);
+  // orbit.calculateLine();
+
+  // Bluetooth
+  // double btCMD = bt.receive();
+
 
   // Movement
   move = orbit.getMoveData();
@@ -151,11 +165,6 @@ void loop() {
 
   // motors.moveDirection(move);
   // motors.moveDirection({0,100,0});
-  // if(lights.getLineAngle()!=-1){
-  //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
-  // } else{
-  //   motors.brake();
-  // }
 
   // End Loop
   orbit.resetAllData();

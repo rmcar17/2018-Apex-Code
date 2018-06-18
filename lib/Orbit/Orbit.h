@@ -19,6 +19,7 @@ class Orbit{
     void setBallData(Vector ballData);
     void setGoalData(Vector aGoal, Vector dGoal);
     void setCompAngle(int heading);
+    void setCoords(Vector coords);
     void setLightGate(bool gateVal);
 
     MoveData getMoveData();
@@ -65,8 +66,15 @@ class Orbit{
     MoveData movement = {-1, 0, 0};
 
     int compAngle = -1;
+
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
     PID goalRotation = PID(GOAL_KP,GOAL_KI,GOAL_KD);
+
+    PID horizontalMovement = PID(POS_HOR_KP, POS_HOR_KI, POS_HOR_KD);
+    PID verticalMovement = PID(POS_VER_KP, POS_VER_KI, POS_VER_KD);
+
+    PID goalieHorizontal = PID(GOAL_HOR_KP, GOAL_HOR_KI, GOAL_HOR_KD);
+    PID goalieVertical = PID(GOAL_VER_KP, GOAL_VER_KI, GOAL_VER_KD);
 
     double lineAngle = 0;
     int danger = 0;

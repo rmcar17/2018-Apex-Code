@@ -61,9 +61,7 @@ void setup() {
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
-  // Serial.println("Test1");
   camera.setup();
-  // Serial.println("Test2");
 
   digitalWrite(TEENSY_LED, HIGH);
 
@@ -94,7 +92,6 @@ void setup() {
 }
 
 void loop() {
-
   // Compass
   comp.updateGyro();
   int heading = comp.getHeading();
@@ -116,7 +113,6 @@ void loop() {
   lights.setComp(heading);
   lights.setVector(lightVector);
   lights.updateWithComp();
-  Serial.println(camera.getAttackGoal().arg);
   // Orbit
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());

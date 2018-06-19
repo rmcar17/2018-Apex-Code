@@ -68,7 +68,7 @@ Image Camera::getDefendGoal(){
 
 Role Camera::isBlueAttack(){
   #if ATTACK_GOAL_OVERIDE
-    return OVERIDE_BLUE ? Role::attack : Role::defend;
+    return ATTACK_BLUE ? Role::attack : Role::defend;
   #else
     if((blueGoal.visible && blueGoal.y < CAM_CENTRE_Y) || (yellowGoal.visible && yellowGoal.y > CAM_CENTRE_Y)){
       return Role::attack;

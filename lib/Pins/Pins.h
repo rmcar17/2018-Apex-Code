@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <Defines.h>
 
-#define ROBOT 2
+#define ROBOT 1
 
 // Camera
 
@@ -19,11 +19,12 @@
 #if ROBOT == 1
 	const int brokenPins[] = {6,21};
 	const int lightPins[LS_NUM] = {33,34,35,36,37,38,39,A22,A21,15,16,17,32,31,49,50,18,19,20,21,22,23,A11,A10};
-	const int lightThresh[LS_NUM] = {824,840,868,872,883,833,15,1000,1000,818,758,694,564,657,683,611,547,494,278,800,850,14,733,842};
+	const int lightThresh[LS_NUM] = {840,884,921,924,927,896,13,896,906,894,882,859,821,852,840,823,764,705,615,825,868,14,835,892};
 #else
 	const int brokenPins[] = {23};
 	const int lightPins[LS_NUM] = {33,34,35,36,A21,37,38,A22,39,15,16,17,32,31,49,50,18,19,20,21,22,23,A11,A10};
-	const int lightThresh[LS_NUM] = {910,731,723,923,712,680,632,712,708,726,690,699,894,866,869,841,612,571,880,713,708,840,847,15};
+	const int lightThresh[LS_NUM] = {836,785,795,968,590,813,704,632,573,724,676,732,921,945,951,854,677,536,576,615,695,739,921,100};
+
 #endif
 // MOTORS
 #define MOTORFR_PWM 2

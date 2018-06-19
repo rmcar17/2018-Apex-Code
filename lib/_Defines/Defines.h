@@ -3,6 +3,10 @@
 
 #include <Vector.h>
 
+/* -------------------------------------------------- */
+#define ATTACK_BLUE true
+/* -------------------------------------------------- */
+
 // Compass
 #define IMU_CALIBRATION_COUNT 500
 
@@ -63,7 +67,6 @@
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true
-#define OVERIDE_BLUE false
 
 #define CAM_BUFFER_NUM 6
 

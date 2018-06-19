@@ -125,8 +125,8 @@ void LightSensorController::updateWithComp(){
 			danger = 1;							// We're touching from inside of the field
 			firstContact = true;
 		}
-		a = inRange(vectorAngle,prevAngle,60);	
-		b = inRange(vectorAngle,initAngle,60);	
+		a = inRange(vectorAngle,prevAngle,45);	
+		b = inRange(vectorAngle,initAngle,45);	
 		if(danger == 1){						// If we are touching the line from inside field
 			if(firstContact){					// If in range of previous angle
 				initAngle = vectorAngle;		// Set initial angle to vector angle

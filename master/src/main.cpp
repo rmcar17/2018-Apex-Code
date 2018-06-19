@@ -64,8 +64,7 @@ void setup() {
   // Serial.println("Test1");
   camera.setup();
   // Serial.println("Test2");
-
-  digitalWrite(TEENSY_LED, HIGH);
+  digitalWrite(TEENSY_LED,HIGH);
 
   Wire.begin();
   comp.compassSetup();
@@ -89,8 +88,7 @@ void setup() {
   lidars.setup();
 
   role = Role::attack;
-
-  digitalWrite(TEENSY_LED, LOW);
+  digitalWrite(TEENSY_LED,LOW);
 }
 
 void loop() {
@@ -142,6 +140,12 @@ void loop() {
   // Movement
   move = orbit.getMoveData();
   motors.moveDirection(move);
+
+  // if(lights.getLineAngle()!=-1){
+  //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
+  // } else{
+  //   motors.brake();
+  // }
 
   // End Loop
   orbit.resetAllData();

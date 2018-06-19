@@ -62,13 +62,8 @@ void setup() {
     Serial.begin(38400);
   #endif
   camera.setup();
-<<<<<<< HEAD
-  // Serial.println("Test2");
-  digitalWrite(TEENSY_LED,HIGH);
-=======
 
   digitalWrite(TEENSY_LED, HIGH);
->>>>>>> 23ed823e2312fa343c23b0e57e69fdc176d43fe9
 
   Wire.begin();
   comp.compassSetup();

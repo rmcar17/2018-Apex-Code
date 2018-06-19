@@ -68,10 +68,6 @@
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true
-<<<<<<< HEAD
-=======
-#define OVERIDE_BLUE true
->>>>>>> 23ed823e2312fa343c23b0e57e69fdc176d43fe9
 
 #define CAM_BUFFER_NUM 6
 

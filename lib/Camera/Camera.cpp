@@ -8,7 +8,6 @@ void Camera::setup(){
   cameraSerial.begin(9600);
   update();
   blueAttack = isBlueAttack();
-  Serial.println(blueAttack==Role::attack);
 }
 
 void Camera::update(){

@@ -1,15 +1,15 @@
 import sensor, image, time
 from pyb import UART, LED
-robot = 2
+robot = 1
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 if robot == 1:
-    ball = [(55,72,43,72,1,69)]#[(43,69,33,73,-1,45)]
+    ball = [(52,72,38,72,-7,69)]#[(43,69,33,73,-1,45)]
     blueGoal = [(38,51,7,47,-86,-50)]#[(28,40,0,62,-90,-30)]
-    yellowGoal = [(68,86,-6,38,22,68)]#[(72,86,-24,18,23,67)]
+    yellowGoal = [(47,90,-6,38,22,68)]#[(72,86,-24,18,23,67)]
 else:
-    ball = [(55,70,35,67,1,49)]#[(37,70,45,74,-23,55)]
-    blueGoal = [(32,44,9,45,-83,-40)]#[(43,56,-6,48,-81,-28)]
+    ball = [(55,70,28,67,1,49)]#[(37,70,45,74,-23,55)]
+    blueGoal = [(39,53,-1,31,-66,-25)]#[(43,56,-6,48,-81,-28)]
     yellowGoal = [(67,85,-19,19,1,52)]#[(71,95,-25,24,10,78)]
 
 uart = UART(3, 9600, timeout_char = 1000)
@@ -23,7 +23,7 @@ sensor.set_auto_whitebal(False)
 sensor.set_windowing((40,0,240,240))
 
 LED(1).on()
-#time.sleep(200)
+time.sleep(100)
 LED(1).off()
 sensor.set_saturation(3)
 sensor.set_brightness(0)

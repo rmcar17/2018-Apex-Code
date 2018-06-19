@@ -148,10 +148,10 @@ void Orbit::calculateLine(){
     } else{
       if(ball.between(mod(lineAngle-compAngle,360),mod(lineAngle+180-compAngle,360))){
         movement.angle = mod(lineAngle + 90,360);
-        movement.angle = 150;
+        movement.speed = 150;
       } else{
         movement.angle = mod(lineAngle - 90,360);
-        movement.angle = 150;
+        movement.speed = 150;
       }
     }
   } else if(danger==2){

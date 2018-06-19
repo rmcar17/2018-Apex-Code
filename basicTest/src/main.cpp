@@ -68,9 +68,11 @@ void loop() {
   Serial.print("\t");
   Serial.print(ball.mag);
   Serial.print("\t");
-  Serial.print(lidars.lidarLeft);
+  Serial.print(lidars.lidarValues[0]);
   Serial.print("\t");
-  Serial.print(lidars.lidarBack);
+  Serial.print(lidars.lidarValues[1]);
   Serial.print("\t");
-  Serial.println(lidars.lidarRight);
+  Serial.print(lidars.lidarValues[2]);
+  Serial.print("\t");
+  Serial.println(lidars.lidarValues[3]);
 }

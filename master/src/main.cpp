@@ -108,10 +108,10 @@ void loop() {
   if(lightVector==65535){
     lightVector = -1;
   }
-
   lights.setComp(heading);
   lights.setVector(lightVector);
   lights.updateWithComp();
+
   // Orbit
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());

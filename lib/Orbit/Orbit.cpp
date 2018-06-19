@@ -140,21 +140,7 @@ void Orbit::manageKicker(){
 }
 
 void Orbit::calculateLine(){
-  int moveAngle = movement.angle;
-  int inBallRange = 50;
-  if(danger==1){
-    if(ball.between(mod(lineAngle-inBallRange-compAngle,360),mod(lineAngle+inBallRange-compAngle,360))){
-      movement.speed = 0;
-    } else{
-      if(ball.between(mod(lineAngle-compAngle,360),mod(lineAngle+180-compAngle,360))){
-        movement.angle = mod(lineAngle + 90,360);
-        movement.speed = 150;
-      } else{
-        movement.angle = mod(lineAngle - 90,360);
-        movement.speed = 150;
-      }
-    }
-  } else if(danger==2){
+  if(danger>=1){
     movement.angle = mod(lineAngle+180-compAngle,360);
     movement.speed = 255;
   }

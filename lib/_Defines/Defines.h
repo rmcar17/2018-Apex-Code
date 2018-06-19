@@ -51,6 +51,11 @@
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
 
+
+
+
+/*             ORBIT VALUES                */
+/* ----------------------------------------*/
 #define ORBIT_FORWARD_ANGLE_TIGHTENER 0.4
 
 #define CLOSE_ORBIT Vector(320, 0)
@@ -59,6 +64,10 @@
 #define SMALL_ORBIT 8
 #define BIG_ORBIT 55
 #define SIDEWAYS_ORBIT 70
+/* ----------------------------------------*/
+
+
+
 #define BACK_ORBIT 135
 
 #define DEFEND_SMALL_ANGLE 10

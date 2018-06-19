@@ -94,7 +94,10 @@ void Orbit::calcAttacker(){
       calcSideOrbit();
     }
     else if(ball < FAR_ORBIT){
-      if(ball < CLOSE_ORBIT){
+      if (ball.between(360 - BACK_ORBIT, BACK_ORBIT)){
+        calcStraightOrbit();
+      }
+      else if(ball < CLOSE_ORBIT){
         calcCloseOrbit();
       }
       else{
@@ -188,6 +191,11 @@ void Orbit::calcBigOrbit(){
 void Orbit::calcSideOrbit(){
   movement.speed = NORMAL_SPEED;
   movement.angle = ball.arg < 180 ? 90 : 270;
+}
+
+void Orbit::calcStraightOrbit(){
+  movement.speed = MAX_SPEED;
+  movement.angle = 180;
 }
 
 void Orbit::calcCloseOrbit(){

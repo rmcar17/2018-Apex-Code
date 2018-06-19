@@ -90,15 +90,15 @@ void Orbit::calcAttacker(){
     else if(ball.between(360 - BIG_ORBIT, BIG_ORBIT)){
       calcBigOrbit();
     }
-    else if(ball.between(360 - SIDEWAYS_ORBIT, SIDEWAYS_ORBIT)){
+    else if(ball.between(360 - SIDEWAYS_ORBIT, SIDEWAYS_ORBIT) && ball > SIDE_DISTANCE){
       calcSideOrbit();
     }
     else if(ball < FAR_ORBIT){
-      if (ball.between(360 - BACK_ORBIT, BACK_ORBIT)){
-        calcStraightOrbit();
-      }
-      else if(ball < CLOSE_ORBIT){
+      if(ball < CLOSE_ORBIT){
         calcCloseOrbit();
+      }
+      else if (ball.between(360 - BACK_ORBIT, BACK_ORBIT) && ball > BACK_DISTANCE){
+        calcStraightOrbit();
       }
       else{
         calcMediumOrbit();
@@ -193,7 +193,7 @@ void Orbit::calcSideOrbit(){
 }
 
 void Orbit::calcStraightOrbit(){
-  movement.speed = MAX_SPEED;
+  movement.speed = NORMAL_SPEED;
   movement.angle = 180;
 }
 

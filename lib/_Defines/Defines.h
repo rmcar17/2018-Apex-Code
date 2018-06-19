@@ -56,19 +56,19 @@
 
 /*             ORBIT VALUES                */
 /* ----------------------------------------*/
-#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.4
+#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.75
 
-#define CLOSE_ORBIT Vector(320, 0)
-#define FAR_ORBIT Vector(420, 0)
+#define CLOSE_ORBIT Vector(300, 0)
+#define FAR_ORBIT Vector(380, 0)
+#define SIDE_DISTANCE Vector(360, 0)
+#define BACK_DISTANCE Vector(340,0)
 
-#define SMALL_ORBIT 8
-#define BIG_ORBIT 55
-#define SIDEWAYS_ORBIT 70
+#define SMALL_ORBIT 15
+#define BIG_ORBIT 50
+#define SIDEWAYS_ORBIT 90
+#define BACK_ORBIT 160
 /* ----------------------------------------*/
 
-
-
-#define BACK_ORBIT 135
 
 #define DEFEND_SMALL_ANGLE 10
 

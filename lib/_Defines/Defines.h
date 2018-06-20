@@ -6,7 +6,7 @@
 /* -------------------------------------------------- */
 #define ROBOT 1
 
-#define ATTACK_BLUE true
+#define ATTACK_BLUE false
 /* -------------------------------------------------- */
 
 // Compass

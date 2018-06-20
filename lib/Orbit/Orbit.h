@@ -45,6 +45,7 @@ class Orbit{
     void calcSmallOrbit();
     void calcBigOrbit();
     void calcSideOrbit();
+    void calcBetweenOrbit();
     void calcStraightOrbit();
 
     void calcCloseOrbit();
@@ -83,7 +84,7 @@ class Orbit{
     double lineAngle = 0;
     int danger = 0;
 
-    bool hasBall;
+    bool hasBall, front;
 };
 
 

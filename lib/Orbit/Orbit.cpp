@@ -69,7 +69,7 @@ void Orbit::calculateMoveData(){
 void Orbit::calculateRotation(){
   double rotate = 0;
   #if GOAL_TRACK
-    if(role == Role::attack && attackGoal.exists() && ball.exists()){
+    if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(360-SMALL_ORBIT, SMALL_ORBIT) && ball.mag < 550){
       attackGoal.arg = (360-attackGoal.arg);
       rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
     }
@@ -83,6 +83,7 @@ void Orbit::calculateRotation(){
 }
 
 void Orbit::calcAttacker(){
+  front = ball.between(270, 90);
   if(ball.exists()){
     if(ball.between(360 - SMALL_ORBIT, SMALL_ORBIT)){
       calcSmallOrbit();
@@ -93,11 +94,14 @@ void Orbit::calcAttacker(){
     else if(ball.between(360 - SIDEWAYS_ORBIT, SIDEWAYS_ORBIT) && ball > SIDE_DISTANCE){
       calcSideOrbit();
     }
-    else if(ball < FAR_ORBIT){
-      if(ball < CLOSE_ORBIT){
+    else if(ball < (front ? FAR_ORBIT_FRONT : FAR_ORBIT_BACK)){
+      if(ball < (front ? CLOSE_ORBIT_FRONT : CLOSE_ORBIT_BACK)){
         calcCloseOrbit();
       }
-      else if (ball.between(360 - BACK_ORBIT, BACK_ORBIT) && ball > BACK_DISTANCE){
+      else if (ball.between(360 - BETWEEN_ORBIT, BETWEEN_ORBIT)){
+        calcBetweenOrbit();
+      }
+      else if (ball.between(360 - BACK_ORBIT, BACK_ORBIT) && ball > BACK_DISTANCE && ball < MAX_BACK_DISTANCE){
         calcStraightOrbit();
       }
       else{
@@ -192,8 +196,13 @@ void Orbit::calcSideOrbit(){
   movement.angle = ball.arg < 180 ? 90 : 270;
 }
 
-void Orbit::calcStraightOrbit(){
+void Orbit::calcBetweenOrbit(){
   movement.speed = NORMAL_SPEED;
+  movement.angle = 180 - (ball.arg < 180 ? 90 : -90) * (1-(ball.arg < 180 ? ball.arg : (360-ball.arg) - SIDEWAYS_ORBIT) / (BETWEEN_ORBIT - SIDEWAYS_ORBIT));
+}
+
+void Orbit::calcStraightOrbit(){
+  movement.speed = MAX_SPEED;
   movement.angle = 180;
 }
 
@@ -203,7 +212,7 @@ void Orbit::calcCloseOrbit(){
 }
 
 void Orbit::calcMediumOrbit(){
-  double closeness = (FAR_ORBIT - ball).mag / (FAR_ORBIT - CLOSE_ORBIT).mag;
+  double closeness = ((front ? FAR_ORBIT_FRONT : FAR_ORBIT_BACK) - ball).mag / (front ? (FAR_ORBIT_FRONT - CLOSE_ORBIT_FRONT) : (FAR_ORBIT_BACK - CLOSE_ORBIT_BACK)).mag;
   int angleBuffer = round(closeness * 90);
 
   movement.speed = NORMAL_SPEED;

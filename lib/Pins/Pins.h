@@ -4,8 +4,6 @@
 #include <Arduino.h>
 #include <Defines.h>
 
-#define ROBOT 2
-
 // Camera
 
 #define cameraSerial Serial6

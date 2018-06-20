@@ -4,6 +4,8 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
+#define ROBOT 1
+
 #define ATTACK_BLUE true
 /* -------------------------------------------------- */
 
@@ -56,17 +58,40 @@
 
 /*             ORBIT VALUES                */
 /* ----------------------------------------*/
-#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.75
+#if ROBOT == 1
+	#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.9
 
-#define CLOSE_ORBIT Vector(300, 0)
-#define FAR_ORBIT Vector(380, 0)
-#define SIDE_DISTANCE Vector(360, 0)
-#define BACK_DISTANCE Vector(340,0)
+	#define CLOSE_ORBIT_BACK Vector(390, 0)
+	#define FAR_ORBIT_BACK Vector(480, 0)
+	#define CLOSE_ORBIT_FRONT Vector(300, 0)
+	#define FAR_ORBIT_FRONT Vector(350, 0)
+	#define SIDE_DISTANCE Vector(390, 0)
+	#define BACK_DISTANCE Vector(390,0)
+	#define MAX_BACK_DISTANCE Vector(430,0)
 
-#define SMALL_ORBIT 15
-#define BIG_ORBIT 50
-#define SIDEWAYS_ORBIT 90
-#define BACK_ORBIT 160
+	#define SMALL_ORBIT 18
+	#define BIG_ORBIT 50
+	#define SIDEWAYS_ORBIT 80
+	#define BETWEEN_ORBIT 90
+	#define BACK_ORBIT 105
+#else
+	#define ORBIT_FORWARD_ANGLE_TIGHTENER 0.9
+
+	#define CLOSE_ORBIT_BACK Vector(390, 0)
+	#define FAR_ORBIT_BACK Vector(480, 0)
+	#define CLOSE_ORBIT_FRONT Vector(300, 0)
+	#define FAR_ORBIT_FRONT Vector(350, 0)
+	#define SIDE_DISTANCE Vector(370, 0)
+	#define BACK_DISTANCE Vector(390,0)
+	#define MAX_BACK_DISTANCE Vector(430,0)
+
+	#define SMALL_ORBIT 20
+	#define BIG_ORBIT 50
+	#define SIDEWAYS_ORBIT 80
+	#define BETWEEN_ORBIT 90
+	#define BACK_ORBIT 105
+#endif
+
 /* ----------------------------------------*/
 
 

@@ -56,7 +56,7 @@ void loop() {
 
   // LIDAR
   lidars.setComp(heading);
-  lidars.update(); 
+  lidars.update();
 
   // Motors
   motors.moveDirection({0,150,0});

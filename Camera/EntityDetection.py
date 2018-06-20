@@ -1,6 +1,6 @@
 import sensor, image, time
 from pyb import UART, LED
-robot = 2
+robot = 1
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 if robot == 1:

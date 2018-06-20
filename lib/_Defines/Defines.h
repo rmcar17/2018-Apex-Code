@@ -21,15 +21,29 @@
 #define GOAL_KD 0.05
 
 // Coordinates
-#define FIELD_WIDTH 1820
-#define FIELD_LENGTH 2000
+#define SUPERTEAM true
 
-#define ATTACK_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH-300, false)
-#define DEFEND_GOAL Vector(FIELD_WIDTH / 2, 300, false)
+#if SUPERTEAM
+  #define FIELD_WIDTH 4000
+  #define  FIELD_LENGTH 6000
+
+  #define ATTACK_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH-600, false)
+  #define DEFEND_GOAL Vector(FIELD_WIDTH / 2 - 100, 2000, false)
+
+  #define CENTRE Vector(FIELD_WIDTH / 2 + 250, FIELD_LENGTH / 2, false)
+#else
+  #define FIELD_WIDTH 1820
+  #define FIELD_LENGTH 2000
+
+  #define ATTACK_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH-300, false)
+  #define DEFEND_GOAL Vector(FIELD_WIDTH / 2, 300, false)
+
+  #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
+#endif
+
 
 #define GOALIE_POS DEFEND_GOAL + Vector(0, 150, false)
 
-#define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
 
 // ORBIT
 #define POS_HOR_KP 0.7

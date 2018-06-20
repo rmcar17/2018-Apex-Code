@@ -113,14 +113,21 @@ void Orbit::calcAttacker(){
     }
   }
   else{
-    if(robotPosition.exists()){
-      // moveToPos(CENTRE);
-    }
+    #if SUPERTEAM
+      if(robotPosition.exists()){
+        movement.rotation = 0;
+        #if ROBOT == 1
+          moveToPos(CENTRE);
+        #else
+          moveToPos(DEFEND_GOAL);
+        #endif
+      }
+    #endif
   }
 }
 
 void Orbit::calcDefender(){
-  moveToPos(GOALIE_POS);
+  moveToPos(DEFEND_GOAL);
   // moveToBall();
   // if(ball.exists()){
   //   if(isAngleBetween(ball.arg, 300, 60)){
@@ -229,8 +236,11 @@ void Orbit::moveToPos(Vector position){
 
   double horizontal = horizontalMovement.update(direction.i);
   double vertical = verticalMovement.update(direction.j);
-
+  #if SUPERTEAM
+  movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -230, 230);
+  #else
   movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -MAX_SPEED, MAX_SPEED);
+  #endif
   movement.angle = mod(round(450 - toDegrees(atan2(vertical,horizontal))), 360);
 }
 
@@ -238,7 +248,7 @@ void Orbit::moveToBall(){
   double horizontal = goalieHorizontal.update(ball.arg < 180 ? ball.arg : -(360 - ball.arg));
   // double horizontal = abs(ball.i) < 200 ? ball.i : goalieHorizontal.update(ball.i);
   double vertical = goalieVertical.update((GOALIE_POS - robotPosition).j);
-  Serial.println(vertical);
+
   movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -255, 255);
   movement.angle = mod(450 - toDegrees(atan2(vertical,horizontal)), 360);
 }

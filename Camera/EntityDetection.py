@@ -1,15 +1,15 @@
 import sensor, image, time
 from pyb import UART, LED
-robot = 1
+robot = 2
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 if robot == 1:
     ball = [(52,72,38,72,-7,69)]#[(43,69,33,73,-1,45)]
-    blueGoal = [(38,51,7,47,-86,-50)]#[(28,40,0,62,-90,-30)]
+    blueGoal = [(33,51,7,47,-86,-48)]#[(28,40,0,62,-90,-30)]
     yellowGoal = [(47,90,-6,38,22,68)]#[(72,86,-24,18,23,67)]
 else:
-    ball = [(55,70,28,67,1,49)]#[(37,70,45,74,-23,55)]
-    blueGoal = [(39,53,-1,31,-66,-25)]#[(43,56,-6,48,-81,-28)]
+    ball = [(55, 70, 36, 73, 5, 49)]#[(37,70,45,74,-23,55)]
+    blueGoal = [(31, 50, 11, 52, -89, -50)]#[(43,56,-6,48,-81,-28)]
     yellowGoal = [(67,85,-19,19,1,52)]#[(71,95,-25,24,10,78)]
 
 uart = UART(3, 9600, timeout_char = 1000)
@@ -44,26 +44,26 @@ while(True):
     sendBuffer = [255,0,0,0,0,0,0]
 
     img = sensor.snapshot()
-    img.draw_cross(120,120)
+    #img.draw_cross(120,120)
     ballBlob = largestBlob(img.find_blobs(ball))
     blueBlob = largestBlob(img.find_blobs(blueGoal,x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
     yellowBlob = largestBlob(img.find_blobs(yellowGoal,x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
 
     if ballBlob:
         # Enable the line below upon calibration
-        #img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
+        img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
         #print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5))
         sendBuffer[1] = ballBlob.cx()
         sendBuffer[2] = ballBlob.cy()
 
     if blueBlob:
         #print((((blueBlob.cx()-105)**2+(blueBlob.cy()-105)**2)**0.5))
-        #img.draw_line((120, 120, blueBlob.cx(), blueBlob.cy()))
+        img.draw_line((120, 120, blueBlob.cx(), blueBlob.cy()))
         sendBuffer[3] = blueBlob.cx()
         sendBuffer[4] = blueBlob.cy()
 
     if yellowBlob:
-        #img.draw_line((120, 120, yellowBlob.cx(), yellowBlob.cy()))
+        img.draw_line((120, 120, yellowBlob.cx(), yellowBlob.cy()))
         sendBuffer[5] = yellowBlob.cx()
         sendBuffer[6] = yellowBlob.cy()
 

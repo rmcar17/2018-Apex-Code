@@ -136,7 +136,23 @@ void loop() {
 
   // Movement
   move = orbit.getMoveData();
-  motors.moveDirection(move);
+  // motors.moveDirection(move);
+
+  if(lights.getLineAngle()!=-1){
+    motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
+  } else{
+    motors.brake();
+  }
+
+  Serial.print(lights.initAngle);
+  Serial.print("\t");
+  Serial.print(lightVector);
+  Serial.print("\t");
+  Serial.print(lights.getVectorAngle());
+  Serial.print("\t");
+  Serial.print(lights.getLineAngle());
+  Serial.print("\t");
+  Serial.println(lights.danger);
 
   // if(lights.getLineAngle()!=-1){
   //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});

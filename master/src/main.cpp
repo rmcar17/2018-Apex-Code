@@ -121,12 +121,13 @@ void loop() {
   orbit.setCoords(lidars.getCoords());
   Vector robotPos = lidars.getCoords();
   Vector ballPos = orbit.getBallPos();
+
   // RoleController
   // RC.update(robotPos,ballPos);
 
   // More Orbit
-  orbit.calculateRotation();
   orbit.calculateMoveData();
+  orbit.calculateRotation();
   orbit.setLightValue(lights.getLineAngle(),lights.danger);
   orbit.calculateLine();
 
@@ -152,6 +153,12 @@ void loop() {
   Serial.print(lights.getLineAngle());
   Serial.print("\t");
   Serial.println(lights.danger);
+
+  // if(lights.getLineAngle()!=-1){
+  //   motors.moveDirection({lights.getLineAngle()+180-heading,100,0});
+  // } else{
+  //   motors.brake();
+  // }
 
   // End Loop
   orbit.resetAllData();

@@ -51,7 +51,7 @@ void loop(){
   // Serial.print("\t");
   // Serial.println(ballDistance);
 
-
+  // Serial.println(lights.getVectorAngle());
 
   // for(int i = 0; i < LS_NUM; i++){
   //   Serial.print(lights.lightValues[i]);

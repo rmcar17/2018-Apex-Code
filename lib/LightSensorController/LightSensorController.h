@@ -33,6 +33,7 @@ class LightSensorController {
 		void read();
 		LightSensor lightArray[LS_NUM] = {LightSensor()};
 		bool any;
+		int triggered;
 		double vectorX, vectorY;
 		double initAngle;
 		double prevAngle;

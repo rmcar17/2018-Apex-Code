@@ -76,6 +76,44 @@ void LightSensorController::update(){
 	read();
 	updateOnWhite();
 	calcVectorAngle();
+	if(any){
+		if(danger==0){
+			initAngle = vectorAngle;
+			prevAngle = vectorAngle;
+			lineAngle = vectorAngle;
+			danger = 1;
+		}
+		if(danger == 1){
+			if(inRange(vectorAngle,prevAngle,45)){
+				initAngle = vectorAngle;
+				lineAngle = vectorAngle;
+			} else{
+				danger = 2;
+			}
+		}
+		else if(danger == 2){
+			if(inRange(vectorAngle, initAngle,45)){
+				lineAngle = initAngle;
+				danger = 1;
+			}
+			else{
+				lineAngle = initAngle;
+			}
+		}
+	}
+	else{
+		if(danger<=1){
+			initAngle = -1;
+			vectorAngle = -1;
+			lineAngle = -1;
+			danger = 0;
+		}
+		else{
+			lineAngle = initAngle;
+			vectorAngle = -1;
+		}
+	}
+	prevAngle = vectorAngle;
 }
 
 void LightSensorController::updateWithComp(){
@@ -87,25 +125,25 @@ void LightSensorController::updateWithComp(){
 			danger = 1;							// We're touching from inside of the field
 			firstContact = true;
 		}
-		a = inRange(vectorAngle,prevAngle,90);
-		b = inRange(vectorAngle,initAngle,90);
-		c = inRange(vectorAngle,lineAngle,90);
+		a = inRange(vectorAngle,prevAngle,45);
+		b = inRange(vectorAngle,initAngle,45);
 		if(danger == 1){						// If we are touching the line from inside field
 			if(firstContact){					// If in range of previous angle
 				initAngle = vectorAngle;		// Set initial angle to vector angle
 				lineAngle = vectorAngle;		// Set line angle to vector angle
 			}
-			if(b){
-				lineAngle = vectorAngle;
-			}
-			if(!c){
+			if(!a){
 				danger = 2;						// We're touching the line from outside field
 			}
 			firstContact = false;
 		}
 		else if(danger == 2){					// If we're touching from outside field
-			if(c){								// If in range of initial angle
+			if(b){								// If in range of initial angle
+				lineAngle = initAngle;			// Set line angle to inital angle
 				danger = 1;						// We're touching from the inside field
+			}
+			else{
+				lineAngle = initAngle;			// Set line angle to inital angle
 			}
 		}
 		prevAngle = vectorAngle;				// Set previous angle to vector angle
@@ -143,11 +181,6 @@ void LightSensorController::updateOnWhite(){
 		}else{
 			onWhite[6] = 0;
 		}
-		if(onWhite[11]||onWhite[13]){
-			onWhite[12] = 1;
-		}else{
-			onWhite[12] = 0;
-		}
 		if(onWhite[20]||onWhite[22]){
 			onWhite[21] = 1;
 		}else{
@@ -166,11 +199,9 @@ void LightSensorController::calcVectorAngle(){
 	any = false;
 	vectorX = 0;
 	vectorY = 0;
-	triggered = 0;
 	for(int i = 0; i < LS_NUM; i++){
 		if(onWhite[i]){
 			any = true;
-			triggered++;
 			vectorX += sin((450-i*(360/LS_NUM))*PI/180);
       		vectorY += cos((450-i*(360/LS_NUM))*PI/180);
 		}

@@ -10,7 +10,7 @@ if robot == 1:
 else:
     ball = [(55, 70, 36, 73, 5, 49)]#[(37,70,45,74,-23,55)]
     blueGoal = [(31, 50, 11, 52, -89, -50)]#[(43,56,-6,48,-81,-28)]
-    yellowGoal = [(67,85,-19,19,1,52)]#[(71,95,-25,24,10,78)]
+    yellowGoal = [(63, 85, -21, 15, 14, 63)]#[(71,95,-25,24,10,78)]
 
 uart = UART(3, 9600, timeout_char = 1000)
 
@@ -46,12 +46,12 @@ while(True):
     img = sensor.snapshot()
     #img.draw_cross(120,120)
     ballBlob = largestBlob(img.find_blobs(ball))
-    blueBlob = largestBlob(img.find_blobs(blueGoal,x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
-    yellowBlob = largestBlob(img.find_blobs(yellowGoal,x_stride=8,y_stride=4,merge=True,margin=34,area_threshold=80))
+    blueBlob = largestBlob(img.find_blobs(blueGoal,x_stride=6,y_stride=4,merge=True,margin=34,area_threshold=15))
+    yellowBlob = largestBlob(img.find_blobs(yellowGoal,x_stride=6,y_stride=4,merge=True,margin=34,area_threshold=15))
 
     if ballBlob:
         # Enable the line below upon calibration
-        img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
+        #img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
         #print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5))
         sendBuffer[1] = ballBlob.cx()
         sendBuffer[2] = ballBlob.cy()
@@ -63,7 +63,7 @@ while(True):
         sendBuffer[4] = blueBlob.cy()
 
     if yellowBlob:
-        img.draw_line((120, 120, yellowBlob.cx(), yellowBlob.cy()))
+        #img.draw_line((120, 120, yellowBlob.cx(), yellowBlob.cy()))
         sendBuffer[5] = yellowBlob.cx()
         sendBuffer[6] = yellowBlob.cy()
 

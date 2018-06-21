@@ -4,7 +4,7 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 1
+#define ROBOT 2
 
 #define ATTACK_BLUE true
 /* -------------------------------------------------- */
@@ -28,9 +28,9 @@
   #define  FIELD_LENGTH 6000
 
   #define ATTACK_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH-600, false)
-  #define DEFEND_GOAL Vector(FIELD_WIDTH / 2 - 100, 2000, false)
+  #define DEFEND_GOAL Vector(FIELD_WIDTH / 2 - 100, 1000, false)
 
-  #define CENTRE Vector(FIELD_WIDTH / 2 + 250, FIELD_LENGTH / 2, false)
+  #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2-500, false)
 #else
   #define FIELD_WIDTH 1820
   #define FIELD_LENGTH 2000

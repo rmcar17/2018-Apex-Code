@@ -6,6 +6,7 @@
 #include <PID.h>
 #include <Debug.h>
 #include <Defines.h>
+#include <Pins.h>
 #include <Role.h>
 #include <MoveData.h>
 

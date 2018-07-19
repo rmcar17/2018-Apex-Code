@@ -86,6 +86,7 @@ class Orbit{
     int danger = 0;
 
     bool hasBall, front;
+    int flag = 0;
 };
 
 

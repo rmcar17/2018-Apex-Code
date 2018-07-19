@@ -99,7 +99,7 @@ void LIDAR::read(){
     lidarRight = lidarValues[3];
     lidarLeft = lidarValues[1];
   } else{
-    lidarLeft = lidarValues[0];
+    lidarLeft = lidarValues[1];
     lidarBack = lidarValues[2];
     lidarRight = lidarValues[3];
   }
@@ -108,6 +108,7 @@ void LIDAR::read(){
 void LIDAR::calculateCoords(){
   double i, j;
   i = ((FIELD_WIDTH-lidarRight*cos(toRadians(compAngle))+lidarLeft)*cos(toRadians(compAngle))/2);
+  // i = lidarLeft * cos(toRadians(compAngle));
   j = lidarBack * cos(toRadians(compAngle));
   // Serial.print(lidarLeft);
   // Serial.print("\t");

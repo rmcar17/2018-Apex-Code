@@ -83,52 +83,69 @@ void Orbit::calculateRotation(){
 }
 
 void Orbit::calcAttacker(){
-  front = ball.between(270, 90);
   if(ball.exists()){
-    if(ball.between(360 - SMALL_ORBIT, SMALL_ORBIT)){
-      calcSmallOrbit();
+    if(ball.arg < SMALL_ORBIT || ball.arg > (360-SMALL_ORBIT)){
+      movement.angle = ball.arg;
     }
-    else if(ball.between(360 - BIG_ORBIT, BIG_ORBIT)){
-      calcBigOrbit();
-    }
-    else if(ball.between(360 - SIDEWAYS_ORBIT, SIDEWAYS_ORBIT) && ball > SIDE_DISTANCE){
-      calcSideOrbit();
-    }
-    else if(ball < (front ? FAR_ORBIT_FRONT : FAR_ORBIT_BACK)){
-      if(ball < (front ? CLOSE_ORBIT_FRONT : CLOSE_ORBIT_BACK)){
-        calcCloseOrbit();
-      }
-      else if (ball.between(360 - BETWEEN_ORBIT, BETWEEN_ORBIT)){
-        calcBetweenOrbit();
-      }
-      else if (ball.between(360 - BACK_ORBIT, BACK_ORBIT) && ball > BACK_DISTANCE && ball < MAX_BACK_DISTANCE){
-        calcStraightOrbit();
+    else if(ball.mag < IN_DISTANCE && (ball.arg < BIG_ORBIT || ball.arg > (360-BIG_ORBIT))){
+      if(ball.arg <= 180){
+        double closeness = (ball.arg-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);
+        movement.angle = ball.arg+90*closeness;
       }
       else{
-        calcMediumOrbit();
+        double closeness = ((360-ball.arg)-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);
+        movement.angle = ball.arg-90*closeness;
+      }
+    }
+    else if(ball.mag < ORBIT_DISTANCE){
+      if(ball.arg <= 180){
+        movement.angle = ball.arg+90;
+      }
+      else{
+        movement.angle = ball.arg-90;
       }
     }
     else{
-      calcFarOrbit();
+      int tangentAngle = abs(round(toDegrees(asin(ORBIT_DISTANCE/ball.mag))));
+      movement.speed = NORMAL_SPEED;
+      movement.angle = ball.arg + tangentAngle * (ball.arg < 180 ? 1 : -1);
     }
-  }
-  else{
-    #if SUPERTEAM
-      if(robotPosition.exists()){
-        movement.rotation = 0;
-        #if ROBOT == 1
-          moveToPos(CENTRE);
-        #else
-          moveToPos(DEFEND_GOAL);
-        #endif
-      }
-    #endif
   }
 }
 
 void Orbit::calcDefender(){
-  moveToPos(DEFEND_GOAL);
-  // moveToBall();
+  int errorRange = 30;
+  if(flag==0){
+    if(!(inRange(robotPosition.i,NEUTRAL_BACK_LEFT.i,errorRange)&&inRange(robotPosition.j,NEUTRAL_BACK_LEFT.j,errorRange))){
+      moveToPos(NEUTRAL_BACK_LEFT);
+    } else{
+      flag = 1;
+    }
+  }
+  if(flag==1){
+    if(!(inRange(robotPosition.i,NEUTRAL_FORWARD_LEFT.i,errorRange)&&inRange(robotPosition.j,NEUTRAL_FORWARD_LEFT.j,errorRange))){
+      moveToPos(NEUTRAL_FORWARD_LEFT);
+    } else{
+      flag = 0;
+    }
+  }
+  if(flag==2){
+    if(!(inRange(robotPosition.i,NEUTRAL_FORWARD_RIGHT.i,errorRange)&&inRange(robotPosition.j,NEUTRAL_FORWARD_RIGHT.j,errorRange))){
+      moveToPos(NEUTRAL_FORWARD_RIGHT);
+    } else{
+      flag = 3;
+    }
+  }
+  if(flag==3){
+    if(!(inRange(robotPosition.i,NEUTRAL_BACK_RIGHT.i,errorRange)&&inRange(robotPosition.j,NEUTRAL_BACK_RIGHT.j,errorRange))){
+      moveToPos(NEUTRAL_BACK_RIGHT);
+    } else{
+      flag = 0;
+    }
+  }
+  Serial.println(flag);
+
+
   // if(ball.exists()){
   //   if(isAngleBetween(ball.arg, 300, 60)){
   //     moveToBall();
@@ -174,61 +191,9 @@ bool Orbit::inRange(double value, double target, int range){
   }
 }
 
-void Orbit::calcSmallOrbit(){
-  movement.speed = round((1-(SMALL_ORBIT-(ball.arg < 180 ? ball.arg : 360 - ball.arg))/SMALL_ORBIT)*(MAX_SPEED-NORMAL_SPEED)+NORMAL_SPEED);
-  movement.angle = round(ball.arg < 180 ? ball.arg * ORBIT_FORWARD_ANGLE_TIGHTENER : 360 - (360 - ball.arg) * ORBIT_FORWARD_ANGLE_TIGHTENER);
-}
-
-void Orbit::calcBigOrbit(){
-  double closeness, angleBuffer;
-  int finalAngle;
-
-  if(ball.arg < 180){
-    closeness = (double) (ball.arg - SMALL_ORBIT) / (double) (BIG_ORBIT - SMALL_ORBIT);
-    angleBuffer = closeness * 90;
-    finalAngle = round(ball.arg * ORBIT_FORWARD_ANGLE_TIGHTENER + angleBuffer + ball.arg * (1 - ORBIT_FORWARD_ANGLE_TIGHTENER) * closeness);
-  }
-  else{
-    closeness = (double) ((360 - ball.arg) - SMALL_ORBIT) / (double) (BIG_ORBIT - SMALL_ORBIT);
-    angleBuffer = closeness * 90;
-    finalAngle = mod(round(360 - ((360 - ball.arg) * ORBIT_FORWARD_ANGLE_TIGHTENER + angleBuffer + (360 - ball.arg) * (1 - ORBIT_FORWARD_ANGLE_TIGHTENER) * closeness)), 360);
-  }
-
-  movement.speed = NORMAL_SPEED;
-  movement.angle = finalAngle;
-}
-
-void Orbit::calcSideOrbit(){
-  movement.speed = NORMAL_SPEED;
-  movement.angle = ball.arg < 180 ? 90 : 270;
-}
-
-void Orbit::calcBetweenOrbit(){
-  movement.speed = NORMAL_SPEED;
-  movement.angle = 180 - (ball.arg < 180 ? 90 : -90) * (1-(ball.arg < 180 ? ball.arg : (360-ball.arg) - SIDEWAYS_ORBIT) / (BETWEEN_ORBIT - SIDEWAYS_ORBIT));
-}
-
-void Orbit::calcStraightOrbit(){
-  movement.speed = MAX_SPEED;
-  movement.angle = 180;
-}
-
 void Orbit::calcCloseOrbit(){
   movement.speed = NORMAL_SPEED;
   movement.angle = ball.arg < 180 ? ball.arg + 90 : ball.arg - 90;
-}
-
-void Orbit::calcMediumOrbit(){
-  double closeness = ((front ? FAR_ORBIT_FRONT : FAR_ORBIT_BACK) - ball).mag / (front ? (FAR_ORBIT_FRONT - CLOSE_ORBIT_FRONT) : (FAR_ORBIT_BACK - CLOSE_ORBIT_BACK)).mag;
-  int angleBuffer = round(closeness * 90);
-
-  movement.speed = NORMAL_SPEED;
-  movement.angle = ball.arg + (ball.arg < 180 ? angleBuffer : -angleBuffer);
-}
-
-void Orbit::calcFarOrbit(){
-  movement.speed = NORMAL_SPEED;
-  movement.angle = ball.arg;
 }
 
 void Orbit::moveToPos(Vector position){

@@ -1,6 +1,7 @@
 #ifndef MOTORCONTROLLER_H
 #define MOTORCONTROLLER_H
 
+#include <Arduino.h>
 #include <Motor.h>
 #include <Common.h>
 #include <MoveData.h>

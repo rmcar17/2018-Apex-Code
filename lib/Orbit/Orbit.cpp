@@ -85,30 +85,16 @@ void Orbit::calculateRotation(){
 void Orbit::calcAttacker(){
   if(ball.exists()){
     if(ball.arg < SMALL_ORBIT || ball.arg > (360-SMALL_ORBIT)){
-      movement.angle = ball.arg;
+      calcSmallOrbit();
     }
     else if(ball.mag < IN_DISTANCE && (ball.arg < BIG_ORBIT || ball.arg > (360-BIG_ORBIT))){
-      if(ball.arg <= 180){
-        double closeness = (ball.arg-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);
-        movement.angle = ball.arg+90*closeness;
-      }
-      else{
-        double closeness = ((360-ball.arg)-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);
-        movement.angle = ball.arg-90*closeness;
-      }
+      calcBigOrbit();
     }
     else if(ball.mag < ORBIT_DISTANCE){
-      if(ball.arg <= 180){
-        movement.angle = ball.arg+90;
-      }
-      else{
-        movement.angle = ball.arg-90;
-      }
+      calcCloseOrbit();
     }
     else{
-      int tangentAngle = abs(round(toDegrees(asin(ORBIT_DISTANCE/ball.mag))));
-      movement.speed = NORMAL_SPEED;
-      movement.angle = ball.arg + tangentAngle * (ball.arg < 180 ? 1 : -1);
+      calcTangentOrbit();
     }
   }
 }
@@ -191,9 +177,32 @@ bool Orbit::inRange(double value, double target, int range){
   }
 }
 
+void Orbit::calcSmallOrbit(){
+  movement.speed = NORMAL_SPEED;
+  movement.angle = ball.arg;
+}
+
+void Orbit::calcBigOrbit(){
+  movement.speed = NORMAL_SPEED;
+  if(ball.arg <= 180){
+    double closeness = (ball.arg-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);
+    movement.angle = ball.arg+90*closeness;
+  }
+  else{
+    double closeness = ((360-ball.arg)-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);
+    movement.angle = ball.arg-90*closeness;
+  }
+}
+
 void Orbit::calcCloseOrbit(){
   movement.speed = NORMAL_SPEED;
   movement.angle = ball.arg < 180 ? ball.arg + 90 : ball.arg - 90;
+}
+
+void Orbit::calcTangentOrbit(){
+  int tangentAngle = abs(round(toDegrees(asin(ORBIT_DISTANCE/ball.mag))));
+  movement.speed = NORMAL_SPEED;
+  movement.angle = ball.arg + tangentAngle * (ball.arg < 180 ? 1 : -1);
 }
 
 void Orbit::moveToPos(Vector position){

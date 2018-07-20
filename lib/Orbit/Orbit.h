@@ -45,13 +45,9 @@ class Orbit{
 
     void calcSmallOrbit();
     void calcBigOrbit();
-    void calcSideOrbit();
-    void calcBetweenOrbit();
-    void calcStraightOrbit();
 
     void calcCloseOrbit();
-    void calcMediumOrbit();
-    void calcFarOrbit();
+    void calcTangentOrbit();
 
     void moveToPos(Vector position);
     void moveToBall();

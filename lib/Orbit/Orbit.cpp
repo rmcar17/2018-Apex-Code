@@ -100,38 +100,6 @@ void Orbit::calcAttacker(){
 }
 
 void Orbit::calcDefender(){
-  int errorRange = 30;
-  if(flag==0){
-    if(!(inRange(robotPosition.i,NEUTRAL_BACK_LEFT.i,errorRange)&&inRange(robotPosition.j,NEUTRAL_BACK_LEFT.j,errorRange))){
-      moveToPos(NEUTRAL_BACK_LEFT);
-    } else{
-      flag = 1;
-    }
-  }
-  if(flag==1){
-    if(!(inRange(robotPosition.i,NEUTRAL_FORWARD_LEFT.i,errorRange)&&inRange(robotPosition.j,NEUTRAL_FORWARD_LEFT.j,errorRange))){
-      moveToPos(NEUTRAL_FORWARD_LEFT);
-    } else{
-      flag = 0;
-    }
-  }
-  if(flag==2){
-    if(!(inRange(robotPosition.i,NEUTRAL_FORWARD_RIGHT.i,errorRange)&&inRange(robotPosition.j,NEUTRAL_FORWARD_RIGHT.j,errorRange))){
-      moveToPos(NEUTRAL_FORWARD_RIGHT);
-    } else{
-      flag = 3;
-    }
-  }
-  if(flag==3){
-    if(!(inRange(robotPosition.i,NEUTRAL_BACK_RIGHT.i,errorRange)&&inRange(robotPosition.j,NEUTRAL_BACK_RIGHT.j,errorRange))){
-      moveToPos(NEUTRAL_BACK_RIGHT);
-    } else{
-      flag = 0;
-    }
-  }
-  Serial.println(flag);
-
-
   // if(ball.exists()){
   //   if(isAngleBetween(ball.arg, 300, 60)){
   //     moveToBall();
@@ -150,30 +118,6 @@ void Orbit::calcDefender(){
 void Orbit::manageKicker(){
   if(hasBall){
     kicker.kick();
-  }
-}
-
-void Orbit::calculateLine(){
-  if(danger>=1){
-    movement.angle = mod(lineAngle+180-compAngle,360);
-    movement.speed = 255;
-  }
-}
-
-void Orbit::setLightValue(double angle, int tempDanger){
-  lineAngle = angle;
-  danger = tempDanger;
-}
-
-bool Orbit::inRange(double value, double target, int range){
-  double offset = value;
-  value = 0;
-  target = mod(target-offset, 360);
-  if(target <= range || target >= 360-range){
-    return true;
-  }
-  else{
-    return false;
   }
 }
 

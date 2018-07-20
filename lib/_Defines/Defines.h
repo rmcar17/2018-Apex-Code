@@ -21,40 +21,13 @@
 #define GOAL_KD 0.05
 
 // Coordinates
-#define SUPERTEAM false
+#define FIELD_WIDTH 1820
+#define FIELD_LENGTH 2000
 
-#if SUPERTEAM
-  	#define FIELD_WIDTH 4000
-  	#define  FIELD_LENGTH 6000
+#define ATTACK_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH-300, false)
+#define DEFEND_GOAL Vector(FIELD_WIDTH / 2, 300, false)
 
-  	#define ATTACK_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH-600, false)
-  	#define DEFEND_GOAL Vector(FIELD_WIDTH / 2 - 100, 2000, false)
-
-  	#define CENTRE Vector(FIELD_WIDTH / 2 + 250, FIELD_LENGTH / 2, false)
-#else
-  	#define FIELD_WIDTH 1820
-  	#define FIELD_LENGTH 2000
-
-  	#define ATTACK_GOAL Vector(FIELD_WIDTH / 2, FIELD_LENGTH-300, false)
-  	#define DEFEND_GOAL Vector(FIELD_WIDTH / 2, 300, false)
-
-  	#define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
-
-	#define FIELD_LEFT Vector(300,1140, false)
-	#define FIELD_RIGHT Vector(1250, 1140, false)
-
-	#define FIELD_BACK_LEFT Vector(440, 440, false)
-	#define FIELD_BACK_RIGHT Vector(1300, 460, false)
-	#define FIELD_FORWARD_LEFT Vector(360, 1770, false)
-	#define FIELD_FORWARD_RIGHT Vector(1130, 1780, false)
-	
-	#define NEUTRAL_BACK_LEFT Vector(490, 800, false)
-	#define NEUTRAL_BACK_RIGHT Vector(1200, 630, false)
-	#define NEUTRAL_FORWARD_LEFT Vector(570, 1470, false)
-	#define NEUTRAL_FORWARD_RIGHT Vector(1200, 1400, false)
-
-#endif
-
+#define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2, false)
 
 #define GOALIE_POS DEFEND_GOAL + Vector(0, 150, false)
 
@@ -124,4 +97,5 @@
 //KICKER
 #define KICK_INTERVAL 2000000
 #define KICK_HIGH_TIME 5000
+
 #endif

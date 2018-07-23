@@ -46,10 +46,10 @@
 	#define MOTORBL_REV true
 	#define MOTORFL_REV true
 #else
-	#define MOTORFR_REV true
-	#define MOTORBR_REV false
-	#define MOTORBL_REV false
-	#define MOTORFL_REV true
+	#define MOTORFR_REV false
+	#define MOTORBR_REV true
+	#define MOTORBL_REV true
+	#define MOTORFL_REV false
 #endif
 
 // KICKER

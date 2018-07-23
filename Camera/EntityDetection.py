@@ -8,7 +8,7 @@ if robot == 1:
     blueGoal = [(33,51,7,47,-86,-48)]#[(28,40,0,62,-90,-30)]
     yellowGoal = [(47,90,-6,38,22,68)]#[(72,86,-24,18,23,67)]
 else:
-    ball = [(55, 70, 36, 73, 5, 49)]#[(37,70,45,74,-23,55)]
+    ball = [(43,57,49,79,8,45)]#[(55, 70, 36, 73, 5, 49)]
     blueGoal = [(31, 50, 11, 52, -89, -50)]#[(43,56,-6,48,-81,-28)]
     yellowGoal = [(63, 85, -21, 15, 14, 63)]#[(71,95,-25,24,10,78)]
 
@@ -25,7 +25,7 @@ sensor.set_windowing((40,0,240,240))
 LED(1).on()
 time.sleep(100)
 LED(1).off()
-sensor.set_saturation(3)
+sensor.set_saturation(2)
 sensor.set_brightness(0)
 sensor.set_contrast(0)
 
@@ -51,14 +51,14 @@ while(True):
 
     if ballBlob:
         # Enable the line below upon calibration
-        #img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
+        img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
         #print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5))
         sendBuffer[1] = ballBlob.cx()
         sendBuffer[2] = ballBlob.cy()
 
     if blueBlob:
         #print((((blueBlob.cx()-105)**2+(blueBlob.cy()-105)**2)**0.5))
-        img.draw_line((120, 120, blueBlob.cx(), blueBlob.cy()))
+        #img.draw_line((120, 120, blueBlob.cx(), blueBlob.cy()))
         sendBuffer[3] = blueBlob.cx()
         sendBuffer[4] = blueBlob.cy()
 

@@ -87,7 +87,7 @@ void Orbit::calcAttacker(){
     if(ball.arg < SMALL_ORBIT || ball.arg > (360-SMALL_ORBIT)){
       calcSmallOrbit();
     }
-    else if(ball.mag < IN_DISTANCE && (ball.arg < BIG_ORBIT || ball.arg > (360-BIG_ORBIT))){
+    else if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT || ball.arg > (360-BIG_ORBIT))){
       calcBigOrbit();
     }
     else if(ball.mag < ORBIT_DISTANCE){
@@ -115,14 +115,14 @@ void Orbit::calcSmallOrbit(){
 }
 
 void Orbit::calcBigOrbit(){
-  movement.speed = NORMAL_SPEED;
+  movement.speed = round(NORMAL_SPEED*BIG_SLOWER);
   if(ball.arg <= 180){
     double closeness = (ball.arg-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);
-    movement.angle = ball.arg+90*closeness;
+    movement.angle = ball.arg+(90*closeness)*BIG_SKEWER;
   }
   else{
     double closeness = ((360-ball.arg)-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);
-    movement.angle = ball.arg-90*closeness;
+    movement.angle = ball.arg-(90*closeness)*BIG_SKEWER;
   }
 }
 

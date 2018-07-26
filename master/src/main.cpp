@@ -86,7 +86,7 @@ void setup() {
 
   lidars.setup();
 
-  role = Role::attack;
+  role = Role::defend;
   digitalWrite(TEENSY_LED,LOW);
 }
 
@@ -97,6 +97,9 @@ void loop() {
 
   // Camera
   camera.update();
+  
+  // Lidars
+  lidars.update();
 
   // Orbit
   orbit.setRole(role);
@@ -111,6 +114,9 @@ void loop() {
   // Movement
   move = orbit.getMoveData();
   motors.moveDirection(move);
+
+  float horD = (lidars.lidarLeft + lidars.lidarRight) / 2;
+  float verD = lidars.lidarBack;
 
   // End Loop
   orbit.resetAllData();

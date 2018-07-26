@@ -95,9 +95,9 @@ void LIDAR::read(){
   }
 
   if(ROBOT==1){
+    lidarLeft = lidarValues[0];
     lidarBack = lidarValues[1];
     lidarRight = lidarValues[3];
-    lidarLeft = lidarValues[0];
   } else{
     lidarLeft = lidarValues[1];
     lidarBack = lidarValues[2];

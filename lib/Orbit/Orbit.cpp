@@ -100,19 +100,7 @@ void Orbit::calcAttacker(){
 }
 
 void Orbit::calcDefender(){
-  // if(ball.exists()){
-  //   if(isAngleBetween(ball.arg, 300, 60)){
-  //     moveToBall();
-  //   }
-  //   else{
-  //     calcAttacker();
-  //   }
-  // }
-  // else{
-  //   if(robotPosition.exists()){
-  //     moveToPos(GOALIE_POS);
-  //   }
-  // }
+  moveToPos(DEFEND_GOAL);
 }
 
 void Orbit::manageKicker(){

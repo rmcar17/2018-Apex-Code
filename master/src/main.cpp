@@ -125,10 +125,10 @@ void loop() {
   }
 
   if(inCorner){
-    if(verD>500){
-      Serial.println("We\'re stuck at front!");
-    } else{
+    if(verD<1000 || verD==12000){
       Serial.println("We\'re stuck at back!");
+    } else{
+      Serial.println("We\'re stuck at front!");
     }
   } else{
     Serial.println("we\'re not stuck!");

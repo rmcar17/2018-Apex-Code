@@ -119,9 +119,9 @@ void loop() {
 
   float horD = (lidars.lidarLeft + lidars.lidarRight) / 2;
   float verD = lidars.lidarBack;
-  inCorner = true;
+  inCorner = false;
   if(horD < 500){
-    inCorner  = false;
+    inCorner  = true;
   }
 
   if(inCorner){

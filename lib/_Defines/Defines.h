@@ -62,9 +62,9 @@
 #define ORBIT_DISTANCE 180
 #define IN_DISTANCE 350
 #define SMALL_ORBIT 20
-#define BIG_ORBIT 120
+#define BIG_ORBIT 100
 #define BIG_SLOWER 1
-#define BIG_SKEWER 0.5
+#define BIG_SKEWER 0.7
 
 /* ----------------------------------------*/
 

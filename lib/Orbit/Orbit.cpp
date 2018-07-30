@@ -118,7 +118,7 @@ void Orbit::calcBigOrbit(){
   movement.speed = round(NORMAL_SPEED*BIG_SLOWER);
   if(ball.arg <= 180){
     double closeness = (ball.arg-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);
-    movement.angle = ball.arg+(90*closeness)*BIG_SKEWER;
+    movement.angle = ball.arg+(90*closeness)*(ball.mag > SKEW_DISTANCE ? BIG_SKEWER : 1);
   }
   else{
     double closeness = ((360-ball.arg)-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);

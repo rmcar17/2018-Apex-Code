@@ -102,7 +102,6 @@ void loop() {
 
   // Lidars
   lidars.update();
-  lidars.calculateCoords();
 
   // Orbit
   orbit.setRole(role);
@@ -118,7 +117,7 @@ void loop() {
   // Movement
   move = orbit.getMoveData();
   motors.moveDirection(move);
-  
+
   // End Loop
   orbit.resetAllData();
 }

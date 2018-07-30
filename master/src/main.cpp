@@ -45,6 +45,8 @@ T3SPI spi;
 
 Vector vector = Vector(0,0);
 
+bool inCorner;
+
 int lightVector;
 volatile uint16_t dataOut[1], dataIn[1];
 
@@ -117,6 +119,20 @@ void loop() {
 
   float horD = (lidars.lidarLeft + lidars.lidarRight) / 2;
   float verD = lidars.lidarBack;
+  inCorner = true;
+  if(horD < 500){
+    inCorner  = false;
+  }
+
+  if(inCorner){
+    if(verD>500){
+      Serial.println("We\'re stuck at front!");
+    } else{
+      Serial.println("We\'re stuck at back!");
+    }
+  } else{
+    Serial.println("we\'re not stuck!");
+  }
 
   // End Loop
   orbit.resetAllData();

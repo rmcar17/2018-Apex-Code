@@ -102,12 +102,14 @@ void loop() {
 
   // Lidars
   lidars.update();
+  lidars.calculateCoords();
 
   // Orbit
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
   orbit.setCompAngle(heading);
+  orbit.setCoords(lidars.getCoords());
 
   // More Orbit
   orbit.calculateMoveData();
@@ -116,23 +118,6 @@ void loop() {
   // Movement
   move = orbit.getMoveData();
   motors.moveDirection(move);
-
-  float horD = (lidars.lidarLeft + lidars.lidarRight) / 2;
-  float verD = lidars.lidarBack;
-  inCorner = true;
-  if(horD < 500){
-    inCorner  = false;
-  }
-
-  if(inCorner){
-    if(verD>500){
-      Serial.println("We\'re stuck at front!");
-    } else{
-      Serial.println("We\'re stuck at back!");
-    }
-  } else{
-    Serial.println("we\'re not stuck!");
-  }
 
   // End Loop
   orbit.resetAllData();

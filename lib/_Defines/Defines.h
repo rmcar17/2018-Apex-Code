@@ -29,7 +29,7 @@
 
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2 - 250, false)
 
-#define GOALIE_POS DEFEND_GOAL + Vector(0, 150, false)
+#define GOALIE_POS DEFEND_GOAL + Vector(20, 50, false)
 
 
 // ORBIT

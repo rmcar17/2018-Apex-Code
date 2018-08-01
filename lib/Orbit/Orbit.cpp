@@ -103,7 +103,7 @@ void Orbit::calcAttacker(){
 }
 
 void Orbit::calcDefender(){
-  moveToPos(DEFEND_GOAL);
+  moveToPos(GOALIE_POS);
 }
 
 void Orbit::manageKicker(){

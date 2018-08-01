@@ -102,7 +102,6 @@ void loop() {
 
   // Lidars
   lidars.update();
-  lidars.calculateCoords();
 
   // Orbit
   orbit.setRole(role);

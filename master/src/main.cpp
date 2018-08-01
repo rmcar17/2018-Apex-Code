@@ -102,12 +102,14 @@ void loop() {
 
   // Lidars
   lidars.update();
+  lidars.calculateCoords();
 
   // Orbit
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
   orbit.setCompAngle(heading);
+  orbit.setCoords(lidars.getCoords());
 
   // More Orbit
   orbit.calculateMoveData();

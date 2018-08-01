@@ -83,7 +83,7 @@ void Orbit::calculateRotation(){
 }
 
 void Orbit::calcAttacker(){
-  if(ball.exists() && false){
+  if(ball.exists()){
     if(ball.arg < SMALL_ORBIT || ball.arg > (360-SMALL_ORBIT)){
       calcSmallOrbit();
     }

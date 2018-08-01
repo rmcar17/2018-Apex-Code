@@ -1,10 +1,10 @@
 import sensor, image, time
 from pyb import UART, LED
-robot = 2
+robot = 1
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 if robot == 1:
-    ball = [(52,72,38,72,-7,69)]#[(43,69,33,73,-1,45)]
+    ball = [(41,65,45,73,13,51)]#[(43,69,33,73,-1,45)]
     blueGoal = [(33,51,7,47,-86,-48)]#[(28,40,0,62,-90,-30)]
     yellowGoal = [(47,90,-6,38,22,68)]#[(72,86,-24,18,23,67)]
 else:

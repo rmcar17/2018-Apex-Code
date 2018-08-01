@@ -117,23 +117,6 @@ void loop() {
   move = orbit.getMoveData();
   motors.moveDirection(move);
 
-  float horD = (lidars.lidarLeft + lidars.lidarRight) / 2;
-  float verD = lidars.lidarBack;
-  inCorner = false;
-  if(horD < 500){
-    inCorner  = true;
-  }
-
-  if(inCorner){
-    if(verD<1000 || verD==12000){
-      Serial.println("We\'re stuck at back!");
-    } else{
-      Serial.println("We\'re stuck at front!");
-    }
-  } else{
-    Serial.println("we\'re not stuck!");
-  }
-
   // End Loop
   orbit.resetAllData();
 }

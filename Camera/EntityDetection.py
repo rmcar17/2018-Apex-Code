@@ -4,11 +4,11 @@ robot = 1
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 if robot == 1:
-    ball = [(41,65,45,73,13,51)]#[(43,69,33,73,-1,45)]
+    ball = [(41,66,40,78,12,59)]#[(43,69,33,73,-1,45)]
     blueGoal = [(33,51,7,47,-86,-48)]#[(28,40,0,62,-90,-30)]
     yellowGoal = [(47,90,-6,38,22,68)]#[(72,86,-24,18,23,67)]
 else:
-    ball = [(44,58,43,79,10,55)]#[(55, 70, 36, 73, 5, 49)]
+    ball = [(44,58,59,76,14,54)]#[(55, 70, 36, 73, 5, 49)]
     blueGoal = [(31, 50, 11, 52, -89, -50)]#[(43,56,-6,48,-81,-28)]
     yellowGoal = [(63, 85, -21, 15, 14, 63)]#[(71,95,-25,24,10,78)]
 
@@ -25,7 +25,7 @@ sensor.set_windowing((40,0,240,240))
 LED(1).on()
 time.sleep(100)
 LED(1).off()
-sensor.set_saturation(2)
+sensor.set_saturation(3)
 sensor.set_brightness(0)
 sensor.set_contrast(0)
 

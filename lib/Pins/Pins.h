@@ -24,17 +24,17 @@
 
 #endif
 // MOTORS
-#define MOTORFR_PWM 2
-#define MOTORFR_DIR 56
-#define MOTORFR_BRK 57
+#define MOTORFR_PWM 22
+#define MOTORFR_DIR 21
+#define MOTORFR_BRK 20
 
 #define MOTORBR_PWM 23
 #define MOTORBR_DIR 52
 #define MOTORBR_BRK 51
 
-#define MOTORBL_PWM 22
-#define MOTORBL_DIR 21
-#define MOTORBL_BRK 20
+#define MOTORBL_PWM 2
+#define MOTORBL_DIR 56
+#define MOTORBL_BRK 57
 
 #define MOTORFL_PWM 6
 #define MOTORFL_DIR 49

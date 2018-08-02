@@ -84,6 +84,7 @@ void Orbit::calculateRotation(){
 
 void Orbit::calcAttacker(){
   if(ball.exists()){
+    centreDelay.update();
     if(ball.arg < SMALL_ORBIT || ball.arg > (360-SMALL_ORBIT)){
       calcSmallOrbit();
     }
@@ -98,7 +99,9 @@ void Orbit::calcAttacker(){
     }
   }
   else{
-    moveToPos(CENTRE);
+    if(centreDelay.hasTimePassedNoUpdate()){
+      moveToPos(CENTRE);
+    }
   }
 }
 

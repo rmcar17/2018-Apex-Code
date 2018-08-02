@@ -3,6 +3,7 @@
 
 #include <Common.h>
 #include <Kicker.h>
+#include <Timer.h>
 #include <PID.h>
 #include <Debug.h>
 #include <Defines.h>
@@ -55,6 +56,8 @@ class Orbit{
     bool inRange(double value, double target, int range);
 
     Kicker kicker;
+
+    Timer centreDelay = Timer(3000);
 
     Role role = Role::undecided;
 

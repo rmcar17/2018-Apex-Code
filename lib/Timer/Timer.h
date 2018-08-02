@@ -9,6 +9,7 @@ class Timer {
 
     void update();
     bool hasTimePassed();
+    bool hasTimePassedNoUpdate();
   private:
     unsigned int duration, startTime;
 };

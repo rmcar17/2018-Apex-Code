@@ -16,3 +16,10 @@ bool Timer::hasTimePassed(){
   }
   return false;
 }
+
+bool Timer::hasTimePassedNoUpdate(){
+  if(millis() - startTime > duration){
+    return true;
+  }
+  return false;
+}

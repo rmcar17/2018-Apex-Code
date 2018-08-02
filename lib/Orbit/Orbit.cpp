@@ -121,7 +121,7 @@ void Orbit::calcSmallOrbit(){
 }
 
 void Orbit::calcBigOrbit(){
-  movement.speed = round(NORMAL_SPEED*BIG_SLOWER);
+  movement.speed = NORMAL_SPEED;
   if(ball.arg <= 180){
     double closeness = (ball.arg-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);
     movement.angle = ball.arg+(90*closeness)*(ball.mag > SKEW_DISTANCE ? BIG_SKEWER : 1);
@@ -133,13 +133,13 @@ void Orbit::calcBigOrbit(){
 }
 
 void Orbit::calcCloseOrbit(){
-  movement.speed = NORMAL_SPEED;
+  movement.speed = round(NORMAL_SPEED*(ball.mag < SLOW_DISTANCE ? BIG_SLOWER : 1));
   movement.angle = ball.arg < 180 ? ball.arg + 90 : ball.arg - 90;
 }
 
 void Orbit::calcTangentOrbit(){
   int tangentAngle = abs(round(toDegrees(asin(ORBIT_DISTANCE/ball.mag))));
-  movement.speed = NORMAL_SPEED;
+  movement.speed = round(NORMAL_SPEED*(ball.mag < SLOW_DISTANCE ? BIG_SLOWER : 1));
   movement.angle = ball.arg + tangentAngle * (ball.arg < 180 ? 1 : -1);
 }
 

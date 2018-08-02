@@ -58,9 +58,11 @@ class Orbit{
     Kicker kicker;
 
     Timer centreDelay = Timer(3000);
+    Timer rememberTimer = Timer(200);
 
     Role role = Role::undecided;
 
+    Vector prevBall = Vector(0, 0);
     Vector ball = Vector(0, 0);
     Vector attackGoal = Vector(0, 0);
     Vector defendGoal = Vector(0, 0);

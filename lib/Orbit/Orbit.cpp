@@ -84,6 +84,13 @@ void Orbit::calculateRotation(){
 
 void Orbit::calcAttacker(){
   if(ball.exists()){
+    rememberTimer.update();
+  }
+  else if(!rememberTimer.hasTimePassedNoUpdate()){
+    ball = prevBall;
+  }
+  
+  if(ball.exists()){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT || ball.arg > (360-SMALL_ORBIT)){
       calcSmallOrbit();
@@ -168,6 +175,9 @@ void Orbit::moveToBall(){
 void Orbit::resetAllData(){
   kicker.resetKicker();
 
+  if(ball.exists()){
+    prevBall = ball;
+  }
   role = Role::undecided;
   ball = Vector(0, 0);
   attackGoal = Vector(0, 0);

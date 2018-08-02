@@ -1,16 +1,16 @@
 #include "Timer.h"
 
-Timer::Timer(unsigned long int timeLength){
+Timer::Timer(unsigned int timeLength){
   duration = timeLength;
   update();
 }
 
 void Timer::update(){
-  startTime = micros();
+  startTime = millis();
 }
 
 bool Timer::hasTimePassed(){
-  if(micros() - startTime > duration){
+  if(millis() - startTime > duration){
     update();
     return true;
   }

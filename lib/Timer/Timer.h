@@ -5,11 +5,11 @@
 
 class Timer {
   public:
-    Timer(unsigned long int timeLength);
+    Timer(unsigned int timeLength);
 
     void update();
     bool hasTimePassed();
   private:
-    unsigned long int duration, startTime;
+    unsigned int duration, startTime;
 };
 #endif

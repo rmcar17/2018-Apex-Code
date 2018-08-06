@@ -26,10 +26,10 @@ Vector vector = Vector(0,0);
 
 void setup() {
   pinMode(TEENSY_LED, OUTPUT);
-  digitalWrite(TEENSY_LED, HIGH);
   Serial.begin(38400);
   Serial.println("Setting up camera...");
   camera.setup();
+  digitalWrite(TEENSY_LED, HIGH);
   Serial.println("Done");
 
 

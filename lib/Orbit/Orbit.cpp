@@ -94,21 +94,21 @@ void Orbit::calcAttacker(){
   if(ball.exists()){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT || ball.arg > (360-SMALL_ORBIT)){
-      calcSmallOrbit();
+      calcSmallOrbit(); // Moves directly to the ball
     }
     else if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT || ball.arg > (360-BIG_ORBIT))){
-      calcBigOrbit();
+      calcBigOrbit(); // Transfers between close orbit and small orbit
     }
     else if(ball.mag < ORBIT_DISTANCE){
-      calcCloseOrbit();
+      calcCloseOrbit(); // Moves perpendicular to the ball
     }
     else{
-      calcTangentOrbit();
+      calcTangentOrbit(); // Enters the ball's nearest tangent
     }
   }
   else{
     if(centreDelay.hasTimePassedNoUpdate()){
-      moveToPos(CENTRE);
+      moveToPos(CENTRE); // Haven't seen the ball for too long, move to centre
     }
   }
 

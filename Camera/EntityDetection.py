@@ -1,15 +1,15 @@
 import sensor, image, time
 from pyb import UART, LED
-robot = 1
+robot = 2
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 if robot == 1:
     ball = [(41,66,40,78,12,59)]#[(43,69,33,73,-1,45)]
-    blueGoal = [(33,51,7,47,-86,-48)]#[(28,40,0,62,-90,-30)]
+    blueGoal = [(38,46,-11,6,-39,-24)]#[(28,40,0,62,-90,-30)]
     yellowGoal = [(47,90,-6,38,22,68)]#[(72,86,-24,18,23,67)]
 else:
-    ball = [(44,58,59,76,14,54)]#[(55, 70, 36, 73, 5, 49)]
-    blueGoal = [(31, 50, 11, 52, -89, -50)]#[(43,56,-6,48,-81,-28)]
+    ball = [(39, 65, 22, 77, 19, 61)]#[(55, 70, 36, 73, 5, 49)]
+    blueGoal = [(37, 54, -26, 8, -47, -21)]#[(43,56,-6,48,-81,-28)]
     yellowGoal = [(63, 85, -21, 15, 14, 63)]#[(71,95,-25,24,10,78)]
 
 uart = UART(3, 9600, timeout_char = 1000)
@@ -51,7 +51,7 @@ while(True):
 
     if ballBlob:
         # Enable the line below upon calibration
-        img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
+        #img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
         #print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5))
         sendBuffer[1] = ballBlob.cx()
         sendBuffer[2] = ballBlob.cy()

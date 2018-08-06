@@ -29,7 +29,7 @@
 
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2 - 250, false)
 
-#define GOALIE_POS (DEFEND_GOAL + Vector(20, 50, false))
+#define GOALIE_POS (DEFEND_GOAL + Vector(50, 50, false))
 
 
 // ORBIT
@@ -73,8 +73,8 @@
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define NORMAL_SPEED 200
-#define MAX_SPEED 255
+#define NORMAL_SPEED 100
+#define MAX_SPEED 120
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true

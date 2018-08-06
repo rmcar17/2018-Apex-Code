@@ -35,7 +35,7 @@ void Orbit::setLightGate(bool gateVal){
 void Orbit::setCoords(Vector coords){
   robotPosition = coords;
   ballPosition = coords + ball;
-  robotGoalPosition = Vector(ball.i,defendGoal.j,false);
+  robotGoalPosition = Vector(robotPosition.i,abs(defendGoal.j),false);
  }
 
 Vector Orbit::getBallPos(){
@@ -114,7 +114,26 @@ void Orbit::calcAttacker(){
 }
 
 void Orbit::calcDefender(){
-  moveToGoalPos(Vector(GOALIE_POS.i,-200,false));
+  if(ball.exists()){
+    if(abs(defendGoal.j)>350){
+      if(abs(ball.i-robotPosition.i)<50){
+        moveToGoalPos(Vector(robotPosition.i,200,false));
+      } else{
+        moveToGoalPos(Vector(constrain(robotPosition.i+ball.i,800,1200),200,false));
+      }
+    } else{
+      if(abs(ball.i-robotPosition.i)<50){
+        // Stay where we are
+        moveToGoalPos(Vector(robotPosition.i,robotPosition.j,false));
+      } else{
+        moveToGoalPos(Vector(constrain(robotPosition.i+ball.i,800,1200),robotGoalPosition.j,false));
+      }
+    }
+  } else if(abs(defendGoal.j)>350){
+    moveToGoalPos(Vector(GOALIE_POS.i,200,false));
+  } else{
+    moveToGoalPos(Vector(GOALIE_POS.i,robotGoalPosition.j,false));
+  }
 }
 
 void Orbit::manageKicker(){

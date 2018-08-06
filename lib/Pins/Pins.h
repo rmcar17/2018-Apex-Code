@@ -47,8 +47,8 @@
 	#define MOTORFL_REV false
 #else
 	#define MOTORFR_REV false
-	#define MOTORBR_REV true
-	#define MOTORBL_REV true
+	#define MOTORBR_REV false
+	#define MOTORBL_REV false
 	#define MOTORFL_REV false
 #endif
 

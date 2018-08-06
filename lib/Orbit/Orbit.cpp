@@ -90,7 +90,8 @@ void Orbit::calcAttacker(){
   else if(!rememberTimer.hasTimePassedNoUpdate()){
     ball = prevBall;
   }
-  
+
+
   if(ball.exists()){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT || ball.arg > (360-SMALL_ORBIT)){
@@ -98,12 +99,21 @@ void Orbit::calcAttacker(){
     }
     else if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT || ball.arg > (360-BIG_ORBIT))){
       calcBigOrbit(); // Transfers between close orbit and small orbit
+      if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        movement.speed = round(movement.speed * SLOW_SPEED);
+      }
     }
     else if(ball.mag < ORBIT_DISTANCE){
       calcCloseOrbit(); // Moves perpendicular to the ball
+      if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        movement.speed = round(movement.speed * SLOW_SPEED);
+      }
     }
     else{
       calcTangentOrbit(); // Enters the ball's nearest tangent
+      if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        movement.speed = round(movement.speed * SLOW_SPEED);
+      }
     }
   }
   else{

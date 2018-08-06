@@ -59,21 +59,26 @@
 
 /*             ORBIT VALUES                */
 /* ----------------------------------------*/
-#define ORBIT_DISTANCE 180
+#define ORBIT_DISTANCE 250
 #define IN_DISTANCE 350
 #define SMALL_ORBIT 10
 #define SKEW_DISTANCE 500
-#define BIG_ORBIT 60
+#define BIG_ORBIT 45
 #define BIG_SKEWER 0.6
 #define SLOW_DISTANCE 400
 #define BIG_SLOWER 0.8
 
+#define SLOW_ANGLE 70
+#define SLOW_DISTANCE 400
+#define SLOW_SPEED 0.6
+
+#define CENTRE_TIME 1000
 /* ----------------------------------------*/
 
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define NORMAL_SPEED 100
+#define NORMAL_SPEED 180
 #define MAX_SPEED 120
 
 // Camera

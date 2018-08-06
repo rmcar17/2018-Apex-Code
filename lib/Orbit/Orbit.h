@@ -10,6 +10,9 @@
 #include <Pins.h>
 #include <Role.h>
 #include <MoveData.h>
+#include <Lidar.h>
+
+extern LIDAR lidars;
 
 class Orbit{
   public:

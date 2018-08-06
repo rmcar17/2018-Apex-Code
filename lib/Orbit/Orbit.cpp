@@ -111,6 +111,11 @@ void Orbit::calcAttacker(){
       moveToPos(CENTRE);
     }
   }
+
+  // Boss Logic
+  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
+    moveToPos(CENTRE);
+  }
 }
 
 void Orbit::calcDefender(){

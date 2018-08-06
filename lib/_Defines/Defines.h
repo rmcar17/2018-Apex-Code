@@ -49,7 +49,7 @@
 #define GOAL_VER_KI 0
 #define GOAL_VER_KD 0
 
-#define GOAL_TRACK false
+#define GOAL_TRACK true
 
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
@@ -59,9 +59,11 @@
 
 /*             ORBIT VALUES                */
 /* ----------------------------------------*/
+#define ANGLE_TIGHTENER 0.3
+
 #define ORBIT_DISTANCE 250
 #define IN_DISTANCE 350
-#define SMALL_ORBIT 10
+#define SMALL_ORBIT 20
 #define SKEW_DISTANCE 500
 #define BIG_ORBIT 45
 #define BIG_SKEWER 0.6
@@ -70,7 +72,7 @@
 
 #define SLOW_ANGLE 70
 #define SLOW_DISTANCE 400
-#define SLOW_SPEED 0.6
+#define SLOW_SPEED 0.4
 
 #define CENTRE_TIME 1000
 /* ----------------------------------------*/
@@ -79,7 +81,7 @@
 #define DEFEND_SMALL_ANGLE 10
 
 #define NORMAL_SPEED 180
-#define MAX_SPEED 120
+#define MAX_SPEED 255
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true

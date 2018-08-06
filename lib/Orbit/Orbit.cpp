@@ -70,9 +70,9 @@ void Orbit::calculateMoveData(){
 void Orbit::calculateRotation(){
   double rotate = 0;
   #if GOAL_TRACK
-    if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(360-SMALL_ORBIT, SMALL_ORBIT) && ball.mag < 550){
+    if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(360-SMALL_ORBIT-30, SMALL_ORBIT+30) && ball.mag < 200){
       attackGoal.arg = (360-attackGoal.arg);
-      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
+      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg))*3;
     }
     else{
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
@@ -167,7 +167,7 @@ void Orbit::manageKicker(){
 
 void Orbit::calcSmallOrbit(){
   movement.speed = NORMAL_SPEED;
-  movement.angle = ball.arg;
+  movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER : 360-(360-ball.arg)*ANGLE_TIGHTENER);
 }
 
 void Orbit::calcBigOrbit(){

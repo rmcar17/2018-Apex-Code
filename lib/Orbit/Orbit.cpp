@@ -85,6 +85,13 @@ void Orbit::calculateRotation(){
 
 void Orbit::calcAttacker(){
   if(ball.exists()){
+    rememberTimer.update();
+  }
+  else if(!rememberTimer.hasTimePassedNoUpdate()){
+    ball = prevBall;
+  }
+  
+  if(ball.exists()){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT || ball.arg > (360-SMALL_ORBIT)){
       calcSmallOrbit();
@@ -122,7 +129,7 @@ void Orbit::calcSmallOrbit(){
 }
 
 void Orbit::calcBigOrbit(){
-  movement.speed = round(NORMAL_SPEED*BIG_SLOWER);
+  movement.speed = NORMAL_SPEED;
   if(ball.arg <= 180){
     double closeness = (ball.arg-SMALL_ORBIT)/(BIG_ORBIT-SMALL_ORBIT);
     movement.angle = ball.arg+(90*closeness)*(ball.mag > SKEW_DISTANCE ? BIG_SKEWER : 1);
@@ -134,13 +141,13 @@ void Orbit::calcBigOrbit(){
 }
 
 void Orbit::calcCloseOrbit(){
-  movement.speed = NORMAL_SPEED;
+  movement.speed = round(NORMAL_SPEED*(ball.mag < SLOW_DISTANCE ? BIG_SLOWER : 1));
   movement.angle = ball.arg < 180 ? ball.arg + 90 : ball.arg - 90;
 }
 
 void Orbit::calcTangentOrbit(){
   int tangentAngle = abs(round(toDegrees(asin(ORBIT_DISTANCE/ball.mag))));
-  movement.speed = NORMAL_SPEED;
+  movement.speed = round(NORMAL_SPEED*(ball.mag < SLOW_DISTANCE ? BIG_SLOWER : 1));
   movement.angle = ball.arg + tangentAngle * (ball.arg < 180 ? 1 : -1);
 }
 
@@ -182,6 +189,9 @@ void Orbit::moveToBall(){
 void Orbit::resetAllData(){
   kicker.resetKicker();
 
+  if(ball.exists()){
+    prevBall = ball;
+  }
   role = Role::undecided;
   ball = Vector(0, 0);
   attackGoal = Vector(0, 0);

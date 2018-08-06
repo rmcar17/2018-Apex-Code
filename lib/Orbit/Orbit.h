@@ -51,6 +51,7 @@ class Orbit{
     void calcTangentOrbit();
 
     void moveToPos(Vector position);
+    void moveToGoalPos(Vector position);
     void moveToBall();
 
     bool inRange(double value, double target, int range);
@@ -67,6 +68,7 @@ class Orbit{
 
     Vector robotPosition = Vector(0, 0);
     Vector ballPosition = Vector(0, 0);
+    Vector robotGoalPosition = Vector(0, 0, false);
 
     MoveData movement = {-1, 0, 0};
 

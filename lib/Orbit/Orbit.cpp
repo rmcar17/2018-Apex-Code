@@ -35,6 +35,7 @@ void Orbit::setLightGate(bool gateVal){
 void Orbit::setCoords(Vector coords){
   robotPosition = coords;
   ballPosition = coords + ball;
+  robotGoalPosition = Vector(ball.i,defendGoal.j,false);
  }
 
 Vector Orbit::getBallPos(){
@@ -106,7 +107,7 @@ void Orbit::calcAttacker(){
 }
 
 void Orbit::calcDefender(){
-  moveToPos(GOALIE_POS);
+  moveToGoalPos(Vector(GOALIE_POS.i,-200,false));
 }
 
 void Orbit::manageKicker(){
@@ -145,6 +146,19 @@ void Orbit::calcTangentOrbit(){
 
 void Orbit::moveToPos(Vector position){
   Vector direction = position - robotPosition;
+
+  double horizontal = horizontalMovement.update(direction.i);
+  double vertical = verticalMovement.update(direction.j);
+  #if SUPERTEAM
+  movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -230, 230);
+  #else
+  movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -MAX_SPEED, MAX_SPEED);
+  #endif
+  movement.angle = mod(round(450 - toDegrees(atan2(vertical,horizontal))), 360);
+}
+
+void Orbit::moveToGoalPos(Vector position){
+  Vector direction = position - robotGoalPosition;
 
   double horizontal = horizontalMovement.update(direction.i);
   double vertical = verticalMovement.update(direction.j);

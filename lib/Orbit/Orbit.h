@@ -93,6 +93,7 @@ class Orbit{
 
     bool hasBall, front;
     int flag = 0;
+    bool canCharge = false;
 };
 
 

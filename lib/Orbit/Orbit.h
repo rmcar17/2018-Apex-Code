@@ -61,7 +61,7 @@ class Orbit{
 
     Kicker kicker;
 
-    Timer centreDelay = Timer(3000);
+    Timer centreDelay = Timer(CENTRE_TIME);
     Timer rememberTimer = Timer(200);
 
     Role role = Role::undecided;

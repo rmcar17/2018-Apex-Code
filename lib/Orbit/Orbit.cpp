@@ -70,9 +70,9 @@ void Orbit::calculateMoveData(){
 void Orbit::calculateRotation(){
   double rotate = 0;
   #if GOAL_TRACK
-    if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(360-SMALL_ORBIT, SMALL_ORBIT) && ball.mag < 550){
+    if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(360-SMALL_ORBIT-30, SMALL_ORBIT+30) && ball.mag < 200){
       attackGoal.arg = (360-attackGoal.arg);
-      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
+      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg))*3;
     }
     else{
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
@@ -90,7 +90,8 @@ void Orbit::calcAttacker(){
   else if(!rememberTimer.hasTimePassedNoUpdate()){
     ball = prevBall;
   }
-  
+
+
   if(ball.exists()){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT || ball.arg > (360-SMALL_ORBIT)){
@@ -98,12 +99,21 @@ void Orbit::calcAttacker(){
     }
     else if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT || ball.arg > (360-BIG_ORBIT))){
       calcBigOrbit(); // Transfers between close orbit and small orbit
+      if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        movement.speed = round(movement.speed * SLOW_SPEED);
+      }
     }
     else if(ball.mag < ORBIT_DISTANCE){
       calcCloseOrbit(); // Moves perpendicular to the ball
+      if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        movement.speed = round(movement.speed * SLOW_SPEED);
+      }
     }
     else{
       calcTangentOrbit(); // Enters the ball's nearest tangent
+      if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        movement.speed = round(movement.speed * SLOW_SPEED);
+      }
     }
   }
   else{
@@ -159,7 +169,7 @@ void Orbit::manageKicker(){
 
 void Orbit::calcSmallOrbit(){
   movement.speed = NORMAL_SPEED;
-  movement.angle = ball.arg;
+  movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER : 360-(360-ball.arg)*ANGLE_TIGHTENER);
 }
 
 void Orbit::calcBigOrbit(){

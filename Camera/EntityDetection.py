@@ -10,7 +10,7 @@ if robot == 1:
 else:
     ball = [(50, 65, 49, 95, 10, 74)]#[(55, 70, 36, 73, 5, 49)]
     blueGoal = [(28, 64, -18, 10, -63, -21)]#[(36, 54, -26, 8, -47, -18)]
-    yellowGoal = [(63, 85, -21, 15, 14, 63)]#[(71,95,-25,24,10,78)]
+    yellowGoal = [(64, 75, -23, 29, 19, 73)]#[(71,95,-25,24,10,78)]
 
 uart = UART(3, 9600, timeout_char = 1000)
 
@@ -63,7 +63,7 @@ while(True):
         sendBuffer[4] = blueBlob.cy()
 
     if yellowBlob:
-        #img.draw_line((120, 120, yellowBlob.cx(), yellowBlob.cy()))
+        img.draw_line((120, 120, yellowBlob.cx(), yellowBlob.cy()))
         sendBuffer[5] = yellowBlob.cx()
         sendBuffer[6] = yellowBlob.cy()
 

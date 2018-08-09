@@ -4,7 +4,7 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 1
+#define ROBOT 2
 
 #define ATTACK_BLUE false
 /* -------------------------------------------------- */
@@ -63,7 +63,7 @@
 
 #define ORBIT_DISTANCE 250
 #define IN_DISTANCE 350
-#define SMALL_ORBIT 20
+#define SMALL_ORBIT 15
 #define SKEW_DISTANCE 500
 #define BIG_ORBIT 45
 #define BIG_SKEWER 0.6
@@ -74,6 +74,8 @@
 #define SLOW_DISTANCE 400
 #define SLOW_SPEED 0.4
 
+#define GOAL_TRACK_DIS 250
+
 #define CENTRE_TIME 1000
 /* ----------------------------------------*/
 
@@ -81,7 +83,7 @@
 #define DEFEND_SMALL_ANGLE 10
 
 #define NORMAL_SPEED 200
-#define MAX_SPEED 255
+#define MAX_SPEED 220
 #define RETURN_SPEED 60
 
 

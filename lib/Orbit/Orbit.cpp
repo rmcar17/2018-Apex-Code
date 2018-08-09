@@ -77,7 +77,7 @@ void Orbit::calculateRotation(){
     // Serial.print(ball.between(360-SMALL_ORBIT-30,SMALL_ORBIT+30));
     // Serial.print("\t");
     // Serial.println(ball.mag < GOAL_TRACK_DIS);
-    if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(360-SMALL_ORBIT-7, SMALL_ORBIT+7) && ball.mag < GOAL_TRACK_DIS){
+    if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(340,15/*360-SMALL_ORBIT-15, SMALL_ORBIT+15*/) && ball.mag < GOAL_TRACK_DIS){
       attackGoal.arg = (360-attackGoal.arg);
       rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg))*6;
     }

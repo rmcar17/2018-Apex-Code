@@ -4,7 +4,7 @@ robot = 1
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 if robot == 1:
-    ball = [(37, 62, 36, 86, 33, 60)]#[(43,69,33,73,-1,45)]
+    ball = [(34, 63, 36, 84, 16, 67)]#[(37, 62, 36, 86, 33, 60)]
     blueGoal = [(30, 48, -25, 5, -54, -25)]#[(28,40,0,62,-90,-30)]
     yellowGoal = [(50, 82, -27, 19, 32, 79)]#[(72,86,-24,18,23,67)]
 else:
@@ -63,7 +63,7 @@ while(True):
         sendBuffer[4] = blueBlob.cy()
 
     if yellowBlob:
-        img.draw_line((120, 120, yellowBlob.cx(), yellowBlob.cy()))
+        #img.draw_line((120, 120, yellowBlob.cx(), yellowBlob.cy()))
         sendBuffer[5] = yellowBlob.cx()
         sendBuffer[6] = yellowBlob.cy()
 

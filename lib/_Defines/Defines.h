@@ -61,18 +61,17 @@
 /* ----------------------------------------*/
 #define ANGLE_TIGHTENER 1.4
 
-#define ORBIT_DISTANCE 250
+#define ORBIT_DISTANCE 270
 #define IN_DISTANCE 350
-#define SMALL_ORBIT 8
+#define SMALL_ORBIT 10
 #define SKEW_DISTANCE 500
 #define BIG_ORBIT 45
 #define BIG_SKEWER 0.6
 #define SLOW_DISTANCE 400
 #define BIG_SLOWER 1
 
-#define SLOW_ANGLE 70
-#define SLOW_DISTANCE 400
-#define SLOW_SPEED 0.4
+#define SLOW_ANGLE 120
+#define SLOW_SPEED 0.6
 
 #define GOAL_TRACK_DIS 240
 

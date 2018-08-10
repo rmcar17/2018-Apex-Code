@@ -4,9 +4,9 @@ robot = 1
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 if robot == 1:
-    ball = [(34, 63, 36, 84, 16, 67)]#[(37, 62, 36, 86, 33, 60)]
-    blueGoal = [(30, 48, -25, 5, -54, -25)]#[(28,40,0,62,-90,-30)]
-    yellowGoal = [(50, 82, -27, 19, 32, 79)]#[(72,86,-24,18,23,67)]
+    ball = [(51, 79, 50, 79, -5, 50)]#[(37, 62, 36, 86, 33, 60)]
+    blueGoal = [(52, 64, -23, 1, -54, -28)]#[(28,40,0,62,-90,-30)]
+    yellowGoal = [(74, 87, -2, 36, 20, 74)]#[(72,86,-24,18,23,67)]
 else:
     ball = [(50, 65, 49, 95, 10, 74)]#[(55, 70, 36, 73, 5, 49)]
     blueGoal = [(28, 64, -18, 10, -63, -21)]#[(36, 54, -26, 8, -47, -18)]
@@ -26,7 +26,7 @@ LED(1).on()
 time.sleep(100)
 LED(1).off()
 sensor.set_saturation(3)
-sensor.set_brightness(0)
+sensor.set_brightness(-2)
 sensor.set_contrast(0)
 
 #clock = time.clock()
@@ -50,15 +50,12 @@ while(True):
     yellowBlob = largestBlob(img.find_blobs(yellowGoal,x_stride=6,y_stride=4,merge=True,margin=34,area_threshold=15))
 
     if ballBlob:
-        # Enable the line below upon calibration
         #img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
-        print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5),(255,165,0))
         sendBuffer[1] = ballBlob.cx()
         sendBuffer[2] = ballBlob.cy()
 
     if blueBlob:
-        #print((((blueBlob.cx()-105)**2+(blueBlob.cy()-105)**2)**0.5))
-        #img.draw_rectangle(blueBlob.x(),blueBlob.y(),blueBlob.w(),blueBlob.h())
+        #img.draw_line((120, 120, blueBlob.cx(), blueBlob.cy()))
         sendBuffer[3] = blueBlob.cx()
         sendBuffer[4] = blueBlob.cy()
 

@@ -66,8 +66,9 @@
 
 #define ORBIT_DISTANCE 240 //Radius of circle for tangent orbit
 #define SMALL_ORBIT 15 //Angle small orbit is called
-#define BRAKE_ANGLE_LEFT 30 //The angle which the robot brakes on the left
-#define BRAKE_ANGLE_RIGHT 35 //The angle which the robot brakes on the right
+#define BRAKE_ANGLE_LEFT 8 //The angle which the robot brakes on the left
+#define BRAKE_ANGLE_RIGHT 40 //The angle which the robot brakes on the right
+#define BRAKE_DISTANCE 450
 #define SMALL_ORBIT_LEFT 10 //To increase small orbit range on the left
 #define SMALL_ORBIT_RIGHT 15 //To increase small orbit range on the right
 #define BIG_ORBIT_LEFT 0 //To increase big orbit range on the left

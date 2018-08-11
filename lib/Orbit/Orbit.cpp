@@ -79,7 +79,7 @@ void Orbit::calculateRotation(){
     // Serial.println(ball.mag < GOAL_TRACK_DIS);
     if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(340,20) && ball.mag < GOAL_TRACK_DIS){
       attackGoal.arg = (360-attackGoal.arg);
-      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg*3 : -(360 - attackGoal.arg))*3;
+      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg*3 : -(360 - attackGoal.arg))*1.5;
     }
     else{
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
@@ -106,7 +106,7 @@ void Orbit::calcAttacker(){
       calcSmallOrbit(); // Moves directly to the ball
       // Serial.println("calcSmallOrbit()");
     }
-    else if(ball.arg < BRAKE_ANGLE_RIGHT || ball.arg > (360-BRAKE_ANGLE_LEFT)){
+    else if((ball.arg < BRAKE_ANGLE_RIGHT || ball.arg > (360-BRAKE_ANGLE_LEFT))&&ball.mag<BRAKE_DISTANCE){
       PERM = prevAngle + 180;
       movement.angle = PERM;
       movement.speed = NORMAL_SPEED;
@@ -139,9 +139,14 @@ void Orbit::calcAttacker(){
       }
     }
   } else{
-    movement.angle = PERM;
-    movement.speed = NORMAL_SPEED;
-    yank = false;
+    if(ball.exists()){
+      movement.angle = PERM;
+      movement.speed = NORMAL_SPEED;
+      yank = false;
+    }
+    else{
+      moveToPos(CENTRE);
+    }
   }
   prevAngle = movement.angle;
 }

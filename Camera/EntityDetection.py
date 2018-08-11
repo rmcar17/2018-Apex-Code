@@ -4,13 +4,13 @@ robot = 1
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 if robot == 1:
-    ball = [(36, 70, 37, 91, 31, 77)]#[(37, 62, 36, 86, 33, 60)]
-    blueGoal = [(52, 64, -23, 1, -54, -28)]#[(28,40,0,62,-90,-30)]
-    yellowGoal = [(48, 66, -5, 47, 34, 73)]#[(72,86,-24,18,23,67)]
+    ball = [(57, 76, 35, 68, 8, 41)]#[(43,69,33,73,-1,45)]
+    blueGoal = [(48, 64, -23, 7, -37, -19)]#[(28,40,0,62,-90,-30)]
+    yellowGoal = [(65, 87, -1, 20, 20, 51)]#[(72,86,-24,18,23,67)]
 else:
-    ball = [(53, 69, 52, 81, 25, 57)]#[(55, 70, 36, 73, 5, 49)]
-    blueGoal = [(40,60,-20,4,-49,-23)]#[(36, 54, -26, 8, -47, -18)]
-    yellowGoal = [(70,87,-9,22,25,73)]#[(71,95,-25,24,10,78)]
+    ball = [(60, 72, 38, 61, 5, 39)]#[(43,69,33,73,-1,45)]
+    blueGoal = [(57, 60, -14, -10, -27, -24)]#[(28,40,0,62,-90,-30)]
+    yellowGoal = [(68, 82, 1, 15, 20, 52)]#[(72,86,-24,18,23,67)]
 
 uart = UART(3, 9600, timeout_char = 1000)
 
@@ -25,8 +25,8 @@ sensor.set_windowing((40,0,240,240))
 LED(1).on()
 time.sleep(100)
 LED(1).off()
-sensor.set_saturation(3)
-sensor.set_brightness(-2)
+sensor.set_saturation(1)
+sensor.set_brightness(-1)
 sensor.set_contrast(0)
 
 #clock = time.clock()
@@ -50,17 +50,20 @@ while(True):
     yellowBlob = largestBlob(img.find_blobs(yellowGoal,x_stride=6,y_stride=4,merge=True,margin=34,area_threshold=15))
 
     if ballBlob:
-        #img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
+        # Enable the line below upon calibration
+        img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
+        #print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5),(255,165,0))
         sendBuffer[1] = ballBlob.cx()
         sendBuffer[2] = ballBlob.cy()
 
     if blueBlob:
-        #img.draw_line((120, 120, blueBlob.cx(), blueBlob.cy()))
+        #print((((blueBlob.cx()-105)**2+(blueBlob.cy()-105)**2)**0.5))
+        img.draw_rectangle(blueBlob.x(),blueBlob.y(),blueBlob.w(),blueBlob.h())
         sendBuffer[3] = blueBlob.cx()
         sendBuffer[4] = blueBlob.cy()
 
     if yellowBlob:
-        #img.draw_line((120, 120, yellowBlob.cx(), yellowBlob.cy()))
+        img.draw_rectangle(yellowBlob.x(),yellowBlob.y(),yellowBlob.w(),yellowBlob.h())
         sendBuffer[5] = yellowBlob.cx()
         sendBuffer[6] = yellowBlob.cy()
 

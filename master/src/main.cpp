@@ -74,19 +74,8 @@ void setup() {
   motors.motorSetup();
   motors.brake();
 
-  gate.setup();
-
   orbit.setup();
   orbit.resetAllData();
-
-
-  // SPI
-  spi = T3SPI();
-  spi.begin_MASTER(MASTER_SCK, MASTER_MOSI, MASTER_MISO, MASTER_CS_LIGHT, CS_ActiveLOW);
-  spi.setCTAR(CTAR_0, 16, SPI_MODE0, LSB_FIRST, SPI_CLOCK_DIV16);
-  spi.enableCS(CS0, CS_ActiveLOW);
-
-  lidars.setup();
 
   role = Role::attack;
   digitalWrite(TEENSY_LED,LOW);
@@ -99,9 +88,6 @@ void loop() {
 
   // Camera
   camera.update();
-
-  // Lidars
-  lidars.update();
 
   // Orbit
   orbit.setRole(role);
@@ -117,6 +103,9 @@ void loop() {
   // Movement
   move = orbit.getMoveData();
   motors.moveDirection(move);
+  // Serial.print(move.angle);
+  // Serial.print("\t");
+  // Serial.println(move.speed);
 
   // End Loop
   orbit.resetAllData();

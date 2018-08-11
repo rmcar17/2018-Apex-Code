@@ -59,18 +59,31 @@
 
 /*             ORBIT VALUES                */
 /* ----------------------------------------*/
-#define ANGLE_TIGHTENER 1.4 //Small orbit scalar (multiply the current ball angle then move)
+#define ANGLE_TIGHTENER_LEFT 0.4 //Small orbit left scalar (multiply the current ball angle then move)
+#define ANGLE_TIGHTENER_RIGHT 0.5 //Small orbit right scalar (multiply the current ball angle then move)
+#define SMALL_OFFSET_LEFT 25 //Small orbit left offset
+#define SMALL_OFFSET_RIGHT 45 //Small orbit right offset
 
-#define ORBIT_DISTANCE 270 //Radius of circle for tangent orbit
-#define SMALL_ORBIT 10 //Angle small orbit is called
+#define ORBIT_DISTANCE 240 //Radius of circle for tangent orbit
+#define SMALL_ORBIT 15 //Angle small orbit is called
+#define BRAKE_ANGLE_LEFT 30 //The angle which the robot brakes on the left
+#define BRAKE_ANGLE_RIGHT 35 //The angle which the robot brakes on the right
+#define SMALL_ORBIT_LEFT 10 //To increase small orbit range on the left
+#define SMALL_ORBIT_RIGHT 15 //To increase small orbit range on the right
+#define BIG_ORBIT_LEFT 0 //To increase big orbit range on the left
+#define BIG_ORBIT_RIGHT 0 //To increase big orbit range on the right
 #define SKEW_DISTANCE 500 //Distance where Big orbit skewing takes effect
-#define BIG_ORBIT 45 //Angle Big Orbit is called
-#define BIG_SKEWER 0.6 //Big Orbit Skew Factor
+
+#define BIG_ORBIT 50 //Angle Big Orbit is called
+#define BIG_SKEWER 0.5 //Big Orbit Skew Factor
 #define SLOW_DISTANCE 400 // Maximum distance to the ball where the robot is slowed
 #define BIG_SLOWER 1 // Slower for certain parts of orbit
 
-#define SLOW_ANGLE 120 //Angle where Orbit is slowed
+#define SLOW_ANGLE 150 //Angle where Orbit is slowed
 #define SLOW_SPEED 0.6 //Factor orbit is slowed
+
+#define TANGENT_SLOW_DOWN 100 //The angle where tangent orbit slows down
+#define TANGENT_SLOW_DOWN_MAG 400
 
 #define GOAL_TRACK_DIS 240 //Distance ball must be away from robot to goal track
 
@@ -80,8 +93,8 @@
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define NORMAL_SPEED 180
-#define MAX_SPEED 210
+#define NORMAL_SPEED 200
+#define MAX_SPEED 230
 #define RETURN_SPEED 60
 
 

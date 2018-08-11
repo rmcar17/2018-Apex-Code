@@ -62,7 +62,7 @@ class Orbit{
     Kicker kicker;
 
     Timer centreDelay = Timer(CENTRE_TIME);
-    Timer rememberTimer = Timer(200);
+    Timer rememberTimer = Timer(350);
 
     Role role = Role::undecided;
 
@@ -90,10 +90,13 @@ class Orbit{
 
     double lineAngle = 0;
     int danger = 0;
+    double prevAngle;
 
+    double PERM = 0;
     bool hasBall, front;
     int flag = 0;
     bool canCharge = false;
+    bool yank = false;
 };
 
 

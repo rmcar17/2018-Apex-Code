@@ -4,9 +4,9 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 1
+#define ROBOT 2
 
-#define ATTACK_BLUE true
+#define ATTACK_BLUE false
 /* -------------------------------------------------- */
 
 // Compass
@@ -80,8 +80,8 @@
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define NORMAL_SPEED 160
-#define MAX_SPEED 220
+#define NORMAL_SPEED (69 + 69 + 6 + 9 + 6 + 9 + 7)
+#define MAX_SPEED (69 + 69 + 6 + 9 + 6 + 9 + 6 + 9 + 7)
 #define RETURN_SPEED 60
 
 

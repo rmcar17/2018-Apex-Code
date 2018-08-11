@@ -80,8 +80,8 @@
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define NORMAL_SPEED (69 + 69 + 6 + 9 + 6 + 9 + 7)
-#define MAX_SPEED (69 + 69 + 6 + 9 + 6 + 9 + 6 + 9 + 7)
+#define NORMAL_SPEED 180
+#define MAX_SPEED 210
 #define RETURN_SPEED 60
 
 

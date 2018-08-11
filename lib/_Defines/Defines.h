@@ -4,9 +4,9 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 2
+#define ROBOT 1
 
-#define ATTACK_BLUE false
+#define ATTACK_BLUE true
 /* -------------------------------------------------- */
 
 // Compass

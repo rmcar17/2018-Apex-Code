@@ -154,15 +154,9 @@ void Orbit::calcAttacker(){
   prevAngle = movement.angle;
 
   // BOSS LOGIC
-  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
+  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500 && (lidars.lidarBack > 1900 || lidars.lidarBack < 400)){
     moveToPos(CENTRE);
   }
-  Serial.print(lidars.lidarLeft);
-  Serial.print("\t");
-  Serial.print(lidars.lidarBack);
-  Serial.print("\t");
-  Serial.println(lidars.lidarRight);
-
 }
 
 void Orbit::calcDefender(){

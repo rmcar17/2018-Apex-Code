@@ -4,9 +4,9 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 1
+#define ROBOT 2
 
-#define ATTACK_BLUE true
+#define ATTACK_BLUE false
 /* -------------------------------------------------- */
 
 // Compass
@@ -29,7 +29,7 @@
 
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2 - 250, false)
 
-#define GOALIE_POS (DEFEND_GOAL + Vector(50, 50, false))
+#define GOALIE_POS (DEFEND_GOAL + Vector(0, 50, false))
 
 
 // ORBIT

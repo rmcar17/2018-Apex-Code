@@ -78,6 +78,7 @@ void setup() {
   orbit.resetAllData();
 
   role = Role::attack;
+
   digitalWrite(TEENSY_LED,LOW);
 }
 

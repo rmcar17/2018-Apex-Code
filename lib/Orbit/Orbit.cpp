@@ -152,35 +152,8 @@ void Orbit::calcAttacker(){
 }
 
 void Orbit::calcDefender(){
-  if(ball.exists()){
-    if(abs(defendGoal.j)>600){
-      canCharge = false;
-    }
-    if(abs(defendGoal.j)>350){
-      if(abs(ball.i-robotPosition.i)<50){
-        moveToGoalPos(Vector(robotPosition.i,200,false));
-      } else{
-        moveToGoalPos(Vector(constrain(ball.i > 0 ? FIELD_WIDTH : 0,800,1200),200,false));
-      }
-      movement.speed = RETURN_SPEED;
-    } else{
-      canCharge = true;
-      if(abs(ball.i-robotPosition.i)<50){
-        // Stay where we are
-        moveToGoalPos(Vector(robotPosition.i,robotPosition.j,false));
-      } else{
-        moveToGoalPos(Vector(constrain(ball.i > 0 ? FIELD_WIDTH : 0,800,1200),robotGoalPosition.j,false));
-      }
-    }
-    if((ball.arg < SMALL_ORBIT || ball.arg > (360-SMALL_ORBIT)) && ball.mag < 200 && canCharge){
-      movement.angle = ball.arg;
-      movement.speed = MAX_SPEED;
-    }
-  } else if(abs(defendGoal.j)>350){
-    moveToGoalPos(Vector(GOALIE_POS.i,200,false));
-    movement.speed = RETURN_SPEED;
-  } else{
-    moveToGoalPos(Vector(GOALIE_POS.i,robotGoalPosition.j,false));
+  if(ball.exists() && ballPosition.j < 1000){
+    calcAttacker();
   }
 }
 

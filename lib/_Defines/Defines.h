@@ -6,7 +6,7 @@
 /* -------------------------------------------------- */
 #define ROBOT 1
 
-#define ATTACK_BLUE false
+#define ATTACK_BLUE true
 /* -------------------------------------------------- */
 
 // Compass
@@ -64,7 +64,11 @@
 #define SMALL_OFFSET_LEFT 25 //Small orbit left offset
 #define SMALL_OFFSET_RIGHT 45 //Small orbit right offset
 
-#define ORBIT_DISTANCE 240 //Radius of circle for tangent orbit
+#if ROBOT == 2
+  #define ORBIT_DISTANCE 260
+#else
+  #define ORBIT_DISTANCE 260 //Radius of circle for tangent orbit
+#endif
 #define SMALL_ORBIT 15 //Angle small orbit is called
 #define BRAKE_ANGLE_LEFT 8 //The angle which the robot brakes on the left
 #define BRAKE_ANGLE_RIGHT 40 //The angle which the robot brakes on the right

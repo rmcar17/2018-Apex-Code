@@ -99,7 +99,6 @@ void Orbit::calcAttacker(){
   else if(!rememberTimer.hasTimePassedNoUpdate()){
     ball = prevBall;
   }
-  Serial.println(ball.arg);
   if(ball.exists()&&!yank){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){
@@ -152,9 +151,17 @@ void Orbit::calcAttacker(){
     }
   }
   prevAngle = movement.angle;
+
+  // BOSS LOGIC
   if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
     moveToPos(CENTRE);
   }
+  Serial.print(lidars.lidarLeft);
+  Serial.print("\t");
+  Serial.print(lidars.lidarBack);
+  Serial.print("\t");
+  Serial.println(lidars.lidarRight);
+
 }
 
 void Orbit::calcDefender(){

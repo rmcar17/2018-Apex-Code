@@ -103,38 +103,42 @@ void Orbit::calcAttacker(){
   if(ball.exists()&&!yank){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){
+      yankTimer.update();
       calcSmallOrbit(); // Moves directly to the ball
       // Serial.println("calcSmallOrbit()");
     }
-    else if((ball.arg < BRAKE_ANGLE_RIGHT || ball.arg > (360-BRAKE_ANGLE_LEFT))&&ball.mag<BRAKE_DISTANCE){
+    else if((ball.arg < BRAKE_ANGLE_RIGHT || ball.arg > (360-BRAKE_ANGLE_LEFT)) && ball.mag<BRAKE_DISTANCE && !yankTimer.hasTimePassedNoUpdate()){
       PERM = prevAngle + 180;
       movement.angle = PERM;
       movement.speed = NORMAL_SPEED;
       yank = true;
     }
-    else if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
-      calcBigOrbit(); // Transfers between close orbit and small orbit
-      // Serial.println("calcBigOrbit()");
-      if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-        movement.speed = round(movement.speed * SLOW_SPEED);
-      }
-    }
-    else if(ball.mag < ORBIT_DISTANCE){
-      calcCloseOrbit(); // Moves perpendicular to the ball
-      // Serial.println("calcCloseOrbit()");
-      if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-        movement.speed = round(movement.speed * (SLOW_SPEED+0.2));
-      }
-    }
     else{
-      calcTangentOrbit(); // Enters the ball's nearest tangent
-      // Serial.println("calcTangentOrbit()");
-      if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-        if(ball.between(TANGENT_SLOW_DOWN,360-TANGENT_SLOW_DOWN) && ball.mag<TANGENT_SLOW_DOWN_MAG){
+      yankTimer.update();
+      if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
+        calcBigOrbit(); // Transfers between close orbit and small orbit
+        // Serial.println("calcBigOrbit()");
+        if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
           movement.speed = round(movement.speed * SLOW_SPEED);
-          // movement.speed = round((movement.speed * SLOW_SPEED)-40*(1-constrain(ball.mag/1500,0,1)));
-        }else{
-          movement.speed = round(movement.speed * SLOW_SPEED);
+        }
+      }
+      else if(ball.mag < ORBIT_DISTANCE){
+        calcCloseOrbit(); // Moves perpendicular to the ball
+        // Serial.println("calcCloseOrbit()");
+        if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+          movement.speed = round(movement.speed * (SLOW_SPEED+0.2));
+        }
+      }
+      else{
+        calcTangentOrbit(); // Enters the ball's nearest tangent
+        // Serial.println("calcTangentOrbit()");
+        if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+          if(ball.between(TANGENT_SLOW_DOWN,360-TANGENT_SLOW_DOWN) && ball.mag<TANGENT_SLOW_DOWN_MAG){
+            movement.speed = round(movement.speed * SLOW_SPEED);
+            // movement.speed = round((movement.speed * SLOW_SPEED)-40*(1-constrain(ball.mag/1500,0,1)));
+          }else{
+            movement.speed = round(movement.speed * SLOW_SPEED);
+          }
         }
       }
     }
@@ -147,7 +151,11 @@ void Orbit::calcAttacker(){
     }
     else{
       if(centreDelay.hasTimePassedNoUpdate()){
-        moveToPos(CENTRE);
+        #if ROBOT == 1
+          moveToPos(CENTRE);
+        #else
+          moveToPos(GOALIE_POS);
+        #endif
       }
     }
   }

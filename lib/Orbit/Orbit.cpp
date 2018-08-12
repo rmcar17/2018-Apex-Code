@@ -99,7 +99,7 @@ void Orbit::calcAttacker(){
   else if(!rememberTimer.hasTimePassedNoUpdate()){
     ball = prevBall;
   }
-  Serial.println(ball.arg);
+
   if(ball.exists()&&!yank){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){

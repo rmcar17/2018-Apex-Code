@@ -77,6 +77,8 @@ void setup() {
   orbit.setup();
   orbit.resetAllData();
 
+  lidars.setup();
+
   role = Role::attack;
 
   digitalWrite(TEENSY_LED,LOW);
@@ -89,6 +91,9 @@ void loop() {
 
   // Camera
   camera.update();
+
+  // Lidars
+  lidars.update();
 
   // Orbit
   orbit.setRole(role);

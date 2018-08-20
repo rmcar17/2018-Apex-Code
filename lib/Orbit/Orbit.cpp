@@ -79,7 +79,7 @@ void Orbit::calculateRotation(){
     // Serial.println(ball.mag < GOAL_TRACK_DIS);
     if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(340,20) && ball.mag < GOAL_TRACK_DIS){
       attackGoal.arg = (360-attackGoal.arg);
-      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg*3 : -(360 - attackGoal.arg))*1.5;
+      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg*1.5 : -(360 - attackGoal.arg))*1.5;
     }
     else{
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
@@ -119,7 +119,7 @@ void Orbit::calcAttacker(){
         calcBigOrbit(); // Transfers between close orbit and small orbit
         // Serial.println("calcBigOrbit()");
         if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-          movement.speed = round(movement.speed * SLOW_SPEED);
+          movement.speed = round(movement.speed * SLOW_SPEED-10);
         }
       }
       else if(ball.mag < ORBIT_DISTANCE){
@@ -184,9 +184,8 @@ void Orbit::manageKicker(){
 
 void Orbit::calcSmallOrbit(){
   movement.speed = MAX_SPEED;
-  // movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT-SMALL_OFFSET_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT-SMALL_OFFSET_LEFT);
-  movement.angle = (ball.arg < 180 ? ball.arg : 360-(360-ball.arg));
-  movement.angle += attackGoal.arg;
+  movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT-SMALL_OFFSET_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT-SMALL_OFFSET_LEFT);
+  // movement.angle = (ball.arg < 180 ? ball.arg : 360-(360-ball.arg));
 }
 
 void Orbit::calcBigOrbit(){

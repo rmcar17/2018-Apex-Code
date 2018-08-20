@@ -184,8 +184,7 @@ void Orbit::manageKicker(){
 
 void Orbit::calcSmallOrbit(){
   movement.speed = MAX_SPEED;
-  movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT-SMALL_OFFSET_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT-SMALL_OFFSET_LEFT);
-  // movement.angle = (ball.arg < 180 ? ball.arg : 360-(360-ball.arg));
+  movement.angle = (ball.arg < 180 ? ball.arg : 360-(360-ball.arg));
 }
 
 void Orbit::calcBigOrbit(){

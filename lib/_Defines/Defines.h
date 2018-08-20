@@ -6,7 +6,7 @@
 /* -------------------------------------------------- */
 #define ROBOT 2
 
-#define ATTACK_BLUE false
+#define ATTACK_BLUE true
 /* -------------------------------------------------- */
 
 // Compass
@@ -73,8 +73,8 @@
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define NORMAL_SPEED 100
-#define MAX_SPEED 120
+#define NORMAL_SPEED 180
+#define MAX_SPEED 200
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true

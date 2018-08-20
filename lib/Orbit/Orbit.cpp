@@ -115,23 +115,32 @@ void Orbit::calcAttacker(){
 
 void Orbit::calcDefender(){
   if(ball.exists()){
-    if(abs(defendGoal.j)>350){
-      if(abs(ball.i-robotPosition.i)<50){
+    Serial.print("Can see ball, ");
+    if(abs(defendGoal.j)>300){
+      Serial.print("too far out, ");
+      if(abs(ball.i)<75){
+        Serial.println("ball in range");
         moveToGoalPos(Vector(robotPosition.i,200,false));
       } else{
-        moveToGoalPos(Vector(constrain(robotPosition.i+ball.i,800,1200),200,false));
+        Serial.println("ball not in range");
+        moveToGoalPos(Vector(constrain(robotPosition.i+ball.i,700,1350),200,false));
       }
     } else{
-      if(abs(ball.i-robotPosition.i)<50){
+      Serial.print("we're in goal, ");
+      if(abs(ball.i)<75){
         // Stay where we are
+        Serial.println("ball in range");
         moveToGoalPos(Vector(robotPosition.i,robotPosition.j,false));
       } else{
-        moveToGoalPos(Vector(constrain(robotPosition.i+ball.i,800,1200),robotGoalPosition.j,false));
+        Serial.println("ball not in range");
+        moveToGoalPos(Vector(constrain(robotPosition.i+ball.i,700,1350),robotGoalPosition.j,false));
       }
     }
-  } else if(abs(defendGoal.j)>350){
+  } else if(abs(defendGoal.j)>300){
+    Serial.println("Can't see ball, too far out");
     moveToGoalPos(Vector(GOALIE_POS.i,200,false));
   } else{
+    Serial.println("Can't see ball, we're in goal");
     moveToGoalPos(Vector(GOALIE_POS.i,robotGoalPosition.j,false));
   }
 }

@@ -64,12 +64,13 @@ void setup() {
     Serial.begin(38400);
   #endif
   camera.setup();
-
   digitalWrite(TEENSY_LED, HIGH);
-
   Wire.begin();
   comp.compassSetup();
   comp.calibrate();
+  digitalWrite(TEENSY_LED, LOW);
+  delay(50);
+  digitalWrite(TEENSY_LED, HIGH);
 
   motors.motorSetup();
   motors.brake();

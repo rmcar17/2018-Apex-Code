@@ -8,9 +8,9 @@ if robot == 1:
     blueGoal = [(38,46,-11,6,-39,-24)]#[(28,40,0,62,-90,-30)]
     yellowGoal = [(47,90,-6,38,22,68)]#[(72,86,-24,18,23,67)]
 else:
-    ball = [(39, 65, 22, 77, 19, 61)]#[(55, 70, 36, 73, 5, 49)]
-    blueGoal = [(37, 54, -26, 8, -47, -21)]#[(43,56,-6,48,-81,-28)]
-    yellowGoal = [(63, 85, -21, 15, 14, 63)]#[(71,95,-25,24,10,78)]
+    ball = [(48, 64, 22, 83, 32, 84)]#[(55, 70, 36, 73, 5, 49)]
+    blueGoal = [(27, 66, -33, -1, -58, -18)]#[(43,56,-6,48,-81,-28)]
+    yellowGoal = [(48, 74, -16, 28, 21, 58)]#[(71,95,-25,24,10,78)]
 
 uart = UART(3, 9600, timeout_char = 1000)
 
@@ -51,7 +51,7 @@ while(True):
 
     if ballBlob:
         # Enable the line below upon calibration
-        #img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
+        img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
         #print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5))
         sendBuffer[1] = ballBlob.cx()
         sendBuffer[2] = ballBlob.cy()

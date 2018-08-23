@@ -54,8 +54,6 @@ class Orbit{
     void calcTangentOrbit();
 
     void moveToPos(Vector position);
-    void moveToGoalPos(Vector position);
-    void moveToBall();
 
     bool inRange(double value, double target, int range);
 

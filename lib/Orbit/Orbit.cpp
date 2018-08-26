@@ -174,7 +174,21 @@ void Orbit::calcAttacker(){
 }
 
 void Orbit::calcDefender(){
-
+  if(defendGoal.exists()){
+    // Serial.print(defendGoal.i);
+    // Serial.print("\t");
+    // Serial.print(defendGoal.j);
+    // Serial.print("\t");
+    // Serial.print((defendGoal-Vector(0,-250,false)).i);
+    // Serial.print("\t");
+    // Serial.print((defendGoal-Vector(0,-250,false)).j);
+    // Serial.print("\t");
+    // Serial.println((defendGoal-Vector(0,-250,false)).arg);
+    Vector moveVector = defendGoal-DEFEND_POSITION;
+    movement.angle = moveVector.arg;
+    // Serial.println(movement.angle);
+    movement.speed = constrain(round(goalieSpeed.update(moveVector.mag)),0,MAX_SPEED);
+  }
 }
 
 void Orbit::manageKicker(){

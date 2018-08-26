@@ -41,13 +41,9 @@
 #define POS_VER_KI 0
 #define POS_VER_KD 0
 
-#define GOAL_HOR_KP 7
-#define GOAL_HOR_KI 0
-#define GOAL_HOR_KD 0
-
-#define GOAL_VER_KP 0.5
-#define GOAL_VER_KI 0
-#define GOAL_VER_KD 0
+#define GOALIE_KP 0.5
+#define GOALIE_KD 0.8
+#define GOALIE_KI 0
 
 #define GOAL_TRACK true
 
@@ -63,6 +59,11 @@
 #define ANGLE_TIGHTENER_RIGHT 0.5 //Small orbit right scalar (multiply the current ball angle then move)
 #define SMALL_OFFSET_LEFT 25 //Small orbit left offset
 #define SMALL_OFFSET_RIGHT 45 //Small orbit right offset
+
+
+/*            DEFEND VALUES                */
+#define DEFEND_POSITION Vector(0, -350, false)
+
 
 #if ROBOT == 2
   #define ORBIT_DISTANCE 260
@@ -98,8 +99,8 @@
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define NORMAL_SPEED 100
-#define MAX_SPEED 150
+#define NORMAL_SPEED 180
+#define MAX_SPEED 230
 #define RETURN_SPEED 60
 
 

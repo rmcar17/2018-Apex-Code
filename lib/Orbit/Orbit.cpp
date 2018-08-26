@@ -173,7 +173,7 @@ void Orbit::calcAttacker(){
 
 }
 
-void Orbit::calcDefender(){
+void Orbit::calcDefender(){ //Assuming PID is good
   if(defendGoal.exists()){
     // Serial.print(defendGoal.i);
     // Serial.print("\t");
@@ -185,9 +185,24 @@ void Orbit::calcDefender(){
     // Serial.print("\t");
     // Serial.println((defendGoal-Vector(0,-250,false)).arg);
     Vector moveVector = defendGoal-DEFEND_POSITION;
+    if( ball.exists()){ 
+      Vector lateralDefence.j = 0;
+
+      if(ballPosition.i > 200){     // Restrict movement to goal area
+        lateralDefence.i = 200;
+      }
+      else if(ballPosition.i < 60){ // Restrict movement to goal area
+        lateralDefence.i = 60;
+      }
+      else{                         // Else Follow Ball
+        lateralDefence.i = ballPosition.i;
+      }
+      moveVector += lateralDefence;
+    }
+    
     movement.angle = moveVector.arg;
     // Serial.println(movement.angle);
-    movement.speed = constrain(round(goalieSpeed.update(moveVector.mag)),0,MAX_SPEED);
+    movement.speed = constrain(round(goalieSpeed.update(moveVector.mag)),0,MAX_SPEED); // Use the same PID for ball follow and recentre
   }
 }
 

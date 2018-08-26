@@ -61,10 +61,6 @@
 #define SMALL_OFFSET_RIGHT 45 //Small orbit right offset
 
 
-/*            DEFEND VALUES                */
-#define DEFEND_POSITION Vector(0, -350, false)
-
-
 #if ROBOT == 2
   #define ORBIT_DISTANCE 260
 #else
@@ -97,7 +93,11 @@
 /* ----------------------------------------*/
 
 
-#define DEFEND_SMALL_ANGLE 10
+/*            DEFEND VALUES                */
+#define DEFEND_POSITION Vector(0, -350, false)
+
+#define DEFEND_LEFT_I -200
+#define DEFEND_RIGHT_I 200
 
 #define NORMAL_SPEED 180
 #define MAX_SPEED 230

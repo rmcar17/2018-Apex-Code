@@ -175,34 +175,29 @@ void Orbit::calcAttacker(){
 
 void Orbit::calcDefender(){ //Assuming PID is good
   if(defendGoal.exists()){
-    // Serial.print(defendGoal.i);
-    // Serial.print("\t");
-    // Serial.print(defendGoal.j);
-    // Serial.print("\t");
-    // Serial.print((defendGoal-Vector(0,-250,false)).i);
-    // Serial.print("\t");
-    // Serial.print((defendGoal-Vector(0,-250,false)).j);
-    // Serial.print("\t");
-    // Serial.println((defendGoal-Vector(0,-250,false)).arg);
-    Vector moveVector = defendGoal-DEFEND_POSITION;
-    if( ball.exists()){ 
-      Vector lateralDefence.j = 0;
+    Vector moveVector = defendGoal-DEFEND_POSITION;//Movement required go to centre of goal
 
-      if(ballPosition.i > 200){     // Restrict movement to goal area
-        lateralDefence.i = 200;
+    if(ball.exists()){
+      if(ball.between(290,70)){
+        //Set horizontal movement to ball's i (constraining it by the side of the goals)
+        moveVector.i = constrain(ball.i,moveVector.i+DEFEND_LEFT_I,moveVector.i+DEFEND_RIGHT_I);
       }
-      else if(ballPosition.i < 60){ // Restrict movement to goal area
-        lateralDefence.i = 60;
+      else{
+        //Ball behind robot, use attacker logic as last resort
+        calcAttacker();
+        return;
       }
-      else{                         // Else Follow Ball
-        lateralDefence.i = ballPosition.i;
-      }
-      moveVector += lateralDefence;
     }
-    
     movement.angle = moveVector.arg;
-    // Serial.println(movement.angle);
     movement.speed = constrain(round(goalieSpeed.update(moveVector.mag)),0,MAX_SPEED); // Use the same PID for ball follow and recentre
+  }
+  else{
+    if(ball.exists()){
+      calcAttacker();
+    }
+    else{
+      moveToPos(GOALIE_POS);
+    }
   }
 }
 

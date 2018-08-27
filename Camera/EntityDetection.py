@@ -51,7 +51,7 @@ while(True):
 
     if ballBlob:
         # Enable the line below upon calibration
-        img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
+        #img.draw_line((120, 120, ballBlob.cx(), ballBlob.cy()))
         #print((((ballBlob.cx()-160)**2+(ballBlob.cy()-120)**2)**0.5),(255,165,0))
         sendBuffer[1] = ballBlob.cx()
         sendBuffer[2] = ballBlob.cy()
@@ -63,7 +63,7 @@ while(True):
         sendBuffer[4] = blueBlob.cy()
 
     if yellowBlob:
-        img.draw_rectangle(yellowBlob.x(),yellowBlob.y(),yellowBlob.w(),yellowBlob.h())
+        #img.draw_rectangle(yellowBlob.x(),yellowBlob.y(),yellowBlob.w(),yellowBlob.h())
         sendBuffer[5] = yellowBlob.cx()
         sendBuffer[6] = yellowBlob.cy()
 

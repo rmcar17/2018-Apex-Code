@@ -107,12 +107,12 @@ void Orbit::calcAttacker(){
       calcSmallOrbit(); // Moves directly to the ball
       // Serial.println("calcSmallOrbit()");
     }
-    else if((ball.arg < BRAKE_ANGLE_RIGHT || ball.arg > (360-BRAKE_ANGLE_LEFT)) && ball.mag<BRAKE_DISTANCE && !yankTimer.hasTimePassedNoUpdate()){
-      PERM = prevAngle + 180;
-      movement.angle = PERM;
-      movement.speed = NORMAL_SPEED;
-      yank = true;
-    }
+    // else if((ball.arg < BRAKE_ANGLE_RIGHT || ball.arg > (360-BRAKE_ANGLE_LEFT)) && ball.mag<BRAKE_DISTANCE && !yankTimer.hasTimePassedNoUpdate()){
+    //   PERM = prevAngle + 180;
+    //   movement.angle = PERM;
+    //   movement.speed = NORMAL_SPEED;
+    //   yank = true;
+    // }
     else{
       yankTimer.update();
       if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
@@ -184,7 +184,11 @@ void Orbit::manageKicker(){
 
 void Orbit::calcSmallOrbit(){
   movement.speed = MAX_SPEED;
-  movement.angle = (ball.arg < 180 ? ball.arg : 360-(360-ball.arg));
+  double a = ball.arg < 180 ? ball.arg : -360+ball.arg;
+  movement.angle = mod(round(shootAngle.update((double)a)),360);
+  // Serial.print(a);
+  // Serial.print('\t');
+  // Serial.println(movement.angle);
 }
 
 void Orbit::calcBigOrbit(){

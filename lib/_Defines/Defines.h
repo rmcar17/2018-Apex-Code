@@ -12,6 +12,10 @@
 // Compass
 #define IMU_CALIBRATION_COUNT 500
 
+#define SHOOTANGLE_KP 1.3
+#define SHOOTANGLE_KI 0
+#define SHOOTANGLE_KD 0.5
+
 #define ROTATION_KP 5
 #define ROTATION_KI 0
 #define ROTATION_KD 0.2
@@ -98,8 +102,8 @@
 
 #define DEFEND_SMALL_ANGLE 10
 
-#define NORMAL_SPEED 100  
-#define MAX_SPEED 150
+#define NORMAL_SPEED 200  
+#define MAX_SPEED 220
 #define RETURN_SPEED 60
 
 

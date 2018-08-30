@@ -41,10 +41,6 @@
 #define POS_VER_KI 0
 #define POS_VER_KD 0
 
-#define GOALIE_KP 0.5
-#define GOALIE_KD 0.8
-#define GOALIE_KI 0
-
 #define GOAL_TRACK true
 
 #define CENTRE_ATTACKER_DISTANCE 10
@@ -94,10 +90,22 @@
 
 
 /*            DEFEND VALUES                */
-#define DEFEND_POSITION Vector(0, -350, false)
+#define DEFEND_POSITION Vector(0, -330, false)
 
-#define DEFEND_LEFT_I -200
-#define DEFEND_RIGHT_I 200
+#define DEFEND_LEFT_I -800
+#define DEFEND_RIGHT_I 400
+
+#define H_GOALIE_KP 0
+#define H_GOALIE_KD 0
+#define H_GOALIE_KI 0
+
+#define V_GOALIE_KP 0.25
+#define V_GOALIE_KD 0.05
+#define V_GOALIE_KI 0
+
+#define SP_GOALIE_KP 1.2
+#define SP_GOALIE_KD 0
+#define SP_GOALIE_KI 0
 
 #define NORMAL_SPEED 180
 #define MAX_SPEED 230

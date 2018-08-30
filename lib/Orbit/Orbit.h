@@ -84,7 +84,9 @@ class Orbit{
     PID horizontalMovement = PID(POS_HOR_KP, POS_HOR_KI, POS_HOR_KD);
     PID verticalMovement = PID(POS_VER_KP, POS_VER_KI, POS_VER_KD);
 
-    PID goalieSpeed = PID(GOALIE_KP,GOALIE_KI,GOALIE_KD);
+    PID hGoalie = PID(H_GOALIE_KP,H_GOALIE_KI,H_GOALIE_KD);
+    PID vGoalie = PID(V_GOALIE_KP,V_GOALIE_KI,V_GOALIE_KD);
+    PID goalieSpeed = PID(SP_GOALIE_KP,SP_GOALIE_KI,SP_GOALIE_KD);
 
     double lineAngle = 0;
     int danger = 0;

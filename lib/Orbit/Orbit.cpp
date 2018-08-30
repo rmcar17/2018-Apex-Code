@@ -178,9 +178,9 @@ void Orbit::calcDefender(){ //Assuming PID is good
     Vector moveVector = defendGoal-DEFEND_POSITION;//Movement required go to centre of goal
 
     if(ball.exists()){
-      if(ball.between(290,70)){
+      if(ball.between(290,70)||true){
         //Set horizontal movement to ball's i (constraining it by the side of the goals)
-        moveVector.i = constrain(ball.i,moveVector.i+DEFEND_LEFT_I,moveVector.i+DEFEND_RIGHT_I);
+        moveVector = moveVector + Vector(constrain(ball.i,moveVector.i+DEFEND_LEFT_I,moveVector.i+DEFEND_RIGHT_I),0,false);
       }
       else{
         //Ball behind robot, use attacker logic as last resort
@@ -188,16 +188,18 @@ void Orbit::calcDefender(){ //Assuming PID is good
         return;
       }
     }
-    movement.angle = moveVector.arg;
-    movement.speed = constrain(round(goalieSpeed.update(moveVector.mag)),0,MAX_SPEED); // Use the same PID for ball follow and recentre
+    double hMov = hGoalie.update(moveVector.i);
+    double vMov = vGoalie.update(moveVector.j);
+    movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
+    movement.speed = constrain(round(goalieSpeed.update(sqrt(hMov*hMov+vMov*vMov))),0,MAX_SPEED); // Use the same PID for ball follow and recentre
   }
   else{
-    if(ball.exists()){
-      calcAttacker();
-    }
-    else{
-      moveToPos(GOALIE_POS);
-    }
+    // if(ball.exists()){
+    //   calcAttacker();
+    // }
+    // else{
+    //   moveToPos(GOALIE_POS);
+    // }
   }
 }
 

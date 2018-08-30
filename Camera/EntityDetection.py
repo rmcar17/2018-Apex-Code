@@ -1,6 +1,6 @@
 import sensor, image, time
 from pyb import UART, LED
-robot = 1
+robot = 2
 
 # (L Min, L Max, A Min, A Max, B Min, B Max)
 if robot == 1:
@@ -8,9 +8,9 @@ if robot == 1:
     blueGoal = [(27, 41, -23, 5, -38, -16)]#[(28,40,0,62,-90,-30)]
     yellowGoal = [(48, 67, -4, 11, 27, 85)]#[(72,86,-24,18,23,67)]
 else:
-    ball = [(60, 72, 38, 61, 5, 39)]#[(43,69,33,73,-1,45)]
+    ball = [(39, 60, 35, 79, 15, 56)]#[(43,69,33,73,-1,45)]
     blueGoal = [(57, 60, -14, -10, -27, -24)]#[(28,40,0,62,-90,-30)]
-    yellowGoal = [(68, 82, 1, 15, 20, 52)]#[(72,86,-24,18,23,67)]
+    yellowGoal = [(41, 73, -6, 21, 17, 53)]#[(72,86,-24,18,23,67)]
 
 uart = UART(3, 9600, timeout_char = 1000)
 
@@ -44,7 +44,7 @@ while(True):
     sendBuffer = [255,0,0,0,0,0,0]
 
     img = sensor.snapshot()
-    #img.draw_cross(120,120)
+    img.draw_cross(120,120)
     ballBlob = largestBlob(img.find_blobs(ball))
     blueBlob = largestBlob(img.find_blobs(blueGoal,x_stride=6,y_stride=4,merge=True,margin=34,area_threshold=15))
     yellowBlob = largestBlob(img.find_blobs(yellowGoal,x_stride=6,y_stride=4,merge=True,margin=34,area_threshold=15))

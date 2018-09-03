@@ -85,7 +85,7 @@
 
 #define BIG_ORBIT 50 //Angle Big Orbit is called
 #define BIG_SKEWER 0.5 //Big Orbit Skew Factor
-#define SLOW_DISTANCE 400 // Maximum distance to the ball where the robot is slowed
+#define SLOW_DISTANCE 200 // Maximum distance to the ball where the robot is slowed
 #define BIG_SLOWER 1 // Slower for certain parts of orbit
 
 #define SLOW_ANGLE 150 //Angle where Orbit is slowed

@@ -58,7 +58,7 @@ while(True):
 
     if blueBlob:
         #print((((blueBlob.cx()-105)**2+(blueBlob.cy()-105)**2)**0.5))
-        img.draw_rectangle(blueBlob.x(),blueBlob.y(),blueBlob.w(),blueBlob.h())
+        #img.draw_rectangle(blueBlob.x(),blueBlob.y(),blueBlob.w(),blueBlob.h())
         sendBuffer[3] = blueBlob.cx()
         sendBuffer[4] = blueBlob.cy()
 

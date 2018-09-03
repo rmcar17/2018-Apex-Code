@@ -63,7 +63,6 @@ class Orbit{
 
     Timer centreDelay = Timer(CENTRE_TIME);
     Timer rememberTimer = Timer(100);
-    Timer yankTimer = Timer(100);
 
     Role role = Role::undecided;
 
@@ -99,7 +98,6 @@ class Orbit{
     bool hasBall, front;
     int flag = 0;
     bool canCharge = false;
-    bool yank = false;
 };
 
 

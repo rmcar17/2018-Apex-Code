@@ -100,21 +100,12 @@ void Orbit::calcAttacker(){
     ball = prevBall;
   }
 
-  if(ball.exists()&&!yank){
+  if(ball.exists()){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){
-      yankTimer.update();
-      calcSmallOrbit(); // Moves directly to the ball
-      // Serial.println("calcSmallOrbit()");
+      calcSmallOrbit();
     }
-    // else if((ball.arg < BRAKE_ANGLE_RIGHT || ball.arg > (360-BRAKE_ANGLE_LEFT)) && ball.mag<BRAKE_DISTANCE && !yankTimer.hasTimePassedNoUpdate()){
-    //   PERM = prevAngle + 180;
-    //   movement.angle = PERM;
-    //   movement.speed = NORMAL_SPEED;
-    //   yank = true;
-    // }
     else{
-      yankTimer.update();
       if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
         calcBigOrbit(); // Transfers between close orbit and small orbit
         // Serial.println("calcBigOrbit()");
@@ -147,7 +138,6 @@ void Orbit::calcAttacker(){
       centreDelay.update();
       movement.angle = PERM;
       movement.speed = NORMAL_SPEED;
-      yank = false;
     }
     else{
       if(centreDelay.hasTimePassedNoUpdate()){

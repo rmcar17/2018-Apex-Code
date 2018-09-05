@@ -117,8 +117,8 @@
 
 #define CAM_BUFFER_NUM 6
 
-#define CAM_CENTRE_X 120
-#define CAM_CENTRE_Y 120
+#define CAM_CENTRE_X 100
+#define CAM_CENTRE_Y 100
 
 #define CAM_SWITCH_D 16
 

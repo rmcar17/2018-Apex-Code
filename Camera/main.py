@@ -2,7 +2,7 @@ import sensor, image, time
 from pyb import UART, LED
 
 camDebug = False
-FPSDebug = True
+FPSDebug = False
 
 robot = 2
 
@@ -25,6 +25,7 @@ class Sender:
         self.uart = UART(3, 9600, timeout_char = 1000)
 
     def sendData(self, sendBuffer):
+        self.uart.writechar(255)
         for b in sendBuffer:
             self.uart.writechar(b)
 
@@ -53,7 +54,7 @@ class Reader:
         self.data = (ballBlob[0],ballBlob[1],blueBlob[0],blueBlob[1],yellowBlob[0],yellowBlob[1])
 
     def getXY(self,blob):
-        return (blob.cx(),blob.cy()) if blob else (255,255)
+        return (blob.cx(),blob.cy()) if blob else (254,254)
 
     def getData(self):
         return self.data

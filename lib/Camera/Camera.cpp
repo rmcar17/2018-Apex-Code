@@ -18,15 +18,15 @@ void Camera::update(){
   }
   ball.x = camBuffer[0];
   ball.y = camBuffer[1];
-  ball.visible = !(ball.x == 0 && ball.y == 0);
+  ball.visible = !(ball.x == 254 && ball.y == 254);
 
   blueGoal.x = camBuffer[2];
   blueGoal.y = camBuffer[3];
-  blueGoal.visible = !(blueGoal.x == 0 && blueGoal.y == 0);
+  blueGoal.visible = !(blueGoal.x == 254 && blueGoal.y == 254);
 
   yellowGoal.x = camBuffer[4];
   yellowGoal.y = camBuffer[5];
-  yellowGoal.visible = !(yellowGoal.x == 0 && yellowGoal.y == 0);
+  yellowGoal.visible = !(yellowGoal.x == 254 && yellowGoal.y == 254);
 
   #if DEBUG_CAMERA_RAW
     Serial.print("Ball (");

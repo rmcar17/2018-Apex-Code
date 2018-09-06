@@ -100,7 +100,7 @@
 #define H_GOALIE_KI 0
 
 #define V_GOALIE_KP 0.25
-#define V_GOALIE_KD 0.05
+#define V_GOALIE_KD 0
 #define V_GOALIE_KI 0
 
 #define SP_GOALIE_KP 1.2

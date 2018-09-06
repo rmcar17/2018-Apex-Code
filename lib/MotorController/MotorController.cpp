@@ -45,29 +45,26 @@ void MotorController::moveDirection(MoveData movement){
       a *= -1;
     }
 
-    multiplier = 255 / max(abs(a), abs(b));
+    multiplier = speed / max(abs(a), abs(b));
     a *= multiplier;
     b *= multiplier;
 
-    frontRightSpeed = -a - rotation;
-    backRightSpeed = b - rotation;
-    backLeftSpeed = a - rotation;
-    frontLeftSpeed = -b - rotation;
+    frontRightSpeed = -a-rotation;
+    backRightSpeed = b-rotation;
+    backLeftSpeed = a-rotation;
+    frontLeftSpeed = -b-rotation;
 
-    multiplier = speed / max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed))));
+    if(max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed)))) > MAX_SPEED){
+      multiplier = speed / max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed))));
 
-    frontRightSpeed = round(frontRightSpeed * multiplier);
-    backRightSpeed = round(backRightSpeed * multiplier);
-    backLeftSpeed = round(backLeftSpeed * multiplier);
-    frontLeftSpeed = round(frontLeftSpeed * multiplier);
+      frontRightSpeed = frontRightSpeed * multiplier;
+      backRightSpeed = backRightSpeed * multiplier;
+      backLeftSpeed = backLeftSpeed * multiplier;
+      frontLeftSpeed = frontLeftSpeed * multiplier;
+    }
   }
 
-  move(frontRightSpeed, backRightSpeed, backLeftSpeed, frontLeftSpeed);
-
-  // motorFR.move(constrain(frontRightSpeed, -255, 255));
-  // motorBR.move(constrain(backRightSpeed, -255, 255));
-  // motorBL.move(constrain(backLeftSpeed, -255, 255));
-  // motorFL.move(constrain(frontLeftSpeed, -255, 255));
+  move(round(frontRightSpeed), round(backRightSpeed), round(backLeftSpeed), round(frontLeftSpeed));
 }
 
 void MotorController::rotate(int rotation){

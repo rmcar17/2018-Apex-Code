@@ -95,7 +95,7 @@
 #define DEFEND_LEFT_I -800
 #define DEFEND_RIGHT_I 400
 
-#define H_GOALIE_KP 0
+#define H_GOALIE_KP 0.5
 #define H_GOALIE_KD 0
 #define H_GOALIE_KI 0
 

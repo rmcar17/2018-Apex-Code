@@ -16,9 +16,13 @@
 #define ROTATION_KI 0
 #define ROTATION_KD 0.2
 
-#define GOAL_KP 1.5
-#define GOAL_KI 0
-#define GOAL_KD 0.05
+#define ATTACK_KP 1.5
+#define ATTACK_KI 0
+#define ATTACK_KD 0.05
+
+#define DEFEND_KP 0.7
+#define DEFEND_KI 0
+#define DEFEND_KD 0.035
 
 // Coordinates
 #define FIELD_WIDTH 1820

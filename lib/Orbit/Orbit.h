@@ -79,7 +79,8 @@ class Orbit{
     int compAngle = -1;
 
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
-    PID goalRotation = PID(GOAL_KP,GOAL_KI,GOAL_KD);
+    PID attackRotation = PID(ATTACK_KP,ATTACK_KI,ATTACK_KD);
+    PID defendRotation = PID(DEFEND_KP,DEFEND_KI,DEFEND_KD);
 
     PID horizontalMovement = PID(POS_HOR_KP, POS_HOR_KI, POS_HOR_KD);
     PID verticalMovement = PID(POS_VER_KP, POS_VER_KI, POS_VER_KD);

@@ -55,7 +55,7 @@ void MotorController::moveDirection(MoveData movement){
     frontLeftSpeed = -b-rotation;
 
     if(max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed)))) > MAX_SPEED){
-      multiplier = speed / max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed))));
+      multiplier = MAX_SPEED / max(abs(frontRightSpeed), max(abs(backRightSpeed), max(abs(backLeftSpeed), abs(frontLeftSpeed))));
 
       frontRightSpeed = frontRightSpeed * multiplier;
       backRightSpeed = backRightSpeed * multiplier;

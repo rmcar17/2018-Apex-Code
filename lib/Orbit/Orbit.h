@@ -61,7 +61,6 @@ class Orbit{
 
     Timer centreDelay = Timer(CENTRE_TIME);
     Timer rememberTimer = Timer(100);
-    Timer yankTimer = Timer(100);
 
     Role role = Role::undecided;
 
@@ -77,6 +76,8 @@ class Orbit{
     MoveData movement = {-1, 0, 0};
 
     int compAngle = -1;
+
+    PID shootAngle = PID(SHOOTANGLE_KP, SHOOTANGLE_KI, SHOOTANGLE_KD);
 
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
     PID attackRotation = PID(ATTACK_KP,ATTACK_KI,ATTACK_KD);
@@ -97,7 +98,6 @@ class Orbit{
     bool hasBall, front;
     int flag = 0;
     bool canCharge = false;
-    bool yank = false;
 };
 
 

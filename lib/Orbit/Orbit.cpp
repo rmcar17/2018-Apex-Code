@@ -104,26 +104,17 @@ void Orbit::calcAttacker(){
     ball = prevBall;
   }
 
-  if(ball.exists()&&!yank){
+  if(ball.exists()){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){
-      yankTimer.update();
-      calcSmallOrbit(); // Moves directly to the ball
-      // Serial.println("calcSmallOrbit()");
-    }
-    else if((ball.arg < BRAKE_ANGLE_RIGHT || ball.arg > (360-BRAKE_ANGLE_LEFT)) && ball.mag<BRAKE_DISTANCE && !yankTimer.hasTimePassedNoUpdate()){
-      PERM = prevAngle + 180;
-      movement.angle = PERM;
-      movement.speed = NORMAL_SPEED;
-      yank = true;
+      calcSmallOrbit();
     }
     else{
-      yankTimer.update();
       if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
         calcBigOrbit(); // Transfers between close orbit and small orbit
         // Serial.println("calcBigOrbit()");
         if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-          movement.speed = round(movement.speed * SLOW_SPEED);
+          movement.speed = round(movement.speed * SLOW_SPEED-10);
         }
       }
       else if(ball.mag < ORBIT_DISTANCE){
@@ -151,7 +142,6 @@ void Orbit::calcAttacker(){
       centreDelay.update();
       movement.angle = PERM;
       movement.speed = NORMAL_SPEED;
-      yank = false;
     }
     else{
       if(centreDelay.hasTimePassedNoUpdate()){
@@ -166,15 +156,9 @@ void Orbit::calcAttacker(){
   prevAngle = movement.angle;
 
   // BOSS LOGIC
-  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
+  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500 && (lidars.lidarBack > 1900 || lidars.lidarBack < 400)){
     moveToPos(CENTRE);
   }
-  // Serial.print(lidars.lidarLeft);
-  // Serial.print("\t");
-  // Serial.print(lidars.lidarBack);
-  // Serial.print("\t");
-  // Serial.println(lidars.lidarRight);
-
 }
 
 void Orbit::calcDefender(){ //Assuming PID is good
@@ -215,8 +199,11 @@ void Orbit::manageKicker(){
 
 void Orbit::calcSmallOrbit(){
   movement.speed = MAX_SPEED;
-  // movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT-SMALL_OFFSET_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT-SMALL_OFFSET_LEFT);
-  movement.angle = (ball.arg < 180 ? ball.arg : 360-(360-ball.arg));
+  double a = ball.arg < 180 ? ball.arg : -360+ball.arg;
+  movement.angle = mod(round(shootAngle.update((double)a)),360);
+  // Serial.print(a);
+  // Serial.print('\t');
+  // Serial.println(movement.angle);
 }
 
 void Orbit::calcBigOrbit(){

@@ -4,13 +4,17 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 2
+#define ROBOT 1
 
 #define ATTACK_BLUE true
 /* -------------------------------------------------- */
 
 // Compass
 #define IMU_CALIBRATION_COUNT 500
+
+#define SHOOTANGLE_KP 1.3
+#define SHOOTANGLE_KI 0
+#define SHOOTANGLE_KD 0.5
 
 #define ROTATION_KP 5
 #define ROTATION_KI 0
@@ -55,8 +59,8 @@
 
 /*             ORBIT VALUES                */
 /* ----------------------------------------*/
-#define ANGLE_TIGHTENER_LEFT 0.4 //Small orbit left scalar (multiply the current ball angle then move)
-#define ANGLE_TIGHTENER_RIGHT 0.5 //Small orbit right scalar (multiply the current ball angle then move)
+#define ANGLE_TIGHTENER_LEFT 0.9 //Small orbit left scalar (multiply the current ball angle then move)
+#define ANGLE_TIGHTENER_RIGHT 1 //Small orbit right scalar (multiply the current ball angle then move)
 #define SMALL_OFFSET_LEFT 25 //Small orbit left offset
 #define SMALL_OFFSET_RIGHT 45 //Small orbit right offset
 
@@ -68,17 +72,17 @@
 #endif
 #define SMALL_ORBIT 15 //Angle small orbit is called
 #define BRAKE_ANGLE_LEFT 20 //The angle which the robot brakes on the left
-#define BRAKE_ANGLE_RIGHT 40 //The angle which the robot brakes on the right
-#define BRAKE_DISTANCE 450
-#define SMALL_ORBIT_LEFT 10 //To increase small orbit range on the left
-#define SMALL_ORBIT_RIGHT 15 //To increase small orbit range on the right
+#define BRAKE_ANGLE_RIGHT 25 //The angle which the robot brakes on the right
+#define BRAKE_DISTANCE 500
+#define SMALL_ORBIT_LEFT 0 //To increase small orbit range on the left
+#define SMALL_ORBIT_RIGHT 0 //To increase small orbit range on the right
 #define BIG_ORBIT_LEFT 0 //To increase big orbit range on the left
 #define BIG_ORBIT_RIGHT 0 //To increase big orbit range on the right
 #define SKEW_DISTANCE 500 //Distance where Big orbit skewing takes effect
 
 #define BIG_ORBIT 50 //Angle Big Orbit is called
 #define BIG_SKEWER 0.5 //Big Orbit Skew Factor
-#define SLOW_DISTANCE 400 // Maximum distance to the ball where the robot is slowed
+#define SLOW_DISTANCE 200 // Maximum distance to the ball where the robot is slowed
 #define BIG_SLOWER 1 // Slower for certain parts of orbit
 
 #define SLOW_ANGLE 150 //Angle where Orbit is slowed

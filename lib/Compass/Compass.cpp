@@ -10,31 +10,6 @@ void Compass::compassSetup() {
 
     previousTime = micros();
 };
-
-Vector3D Compass::readAccelerometer() {
-    uint8_t buffer[14];
-    I2Cread(MPU9250_ADDRESS, 0x3B, 14, buffer);
-
-    int16_t ax = -(buffer[0] << 8 | buffer[1]);
-    int16_t ay = -(buffer[2] << 8 | buffer[5]);
-    int16_t az = buffer[4] << 8 | buffer[5];
-
-    Vector3D returnVector = {convertRawAcceleration(ax), convertRawAcceleration(ay), convertRawAcceleration(az)};
-    return returnVector;
-}
-
-void Compass::updateAccelerometer() {
-  double reading = (double) readAccelerometer().z;
-
-  long currentTime = micros();
-  zAcc += (((double)(currentTime - previousTime) / 1000000.0) * (reading - calibration));
-  zAcc = doubleMod(heading, 360.0);
-
-  previousTime = currentTime;
-
-  Serial.println(zAcc);
-}
-
 Vector3D Compass::readGyroscope() {
     uint8_t buffer[14];
     I2Cread(MPU9250_ADDRESS, 0x3B, 14, buffer);

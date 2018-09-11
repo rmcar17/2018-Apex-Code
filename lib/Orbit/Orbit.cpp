@@ -13,7 +13,8 @@ void Orbit::setRole(Role _role){
 }
 
 void Orbit::setBallData(Vector ballData){
-  ball = ballData;
+  // ball = ballData;
+  ball = Vector(10,0);
 }
 
 void Orbit::setGoalData(Vector aGoal, Vector dGoal){
@@ -77,13 +78,10 @@ void Orbit::calculateRotation(){
     // Serial.print(ball.between(360-SMALL_ORBIT-30,SMALL_ORBIT+30));
     // Serial.print("\t");
     // Serial.println(ball.mag < GOAL_TRACK_DIS);
-    if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(340,20) && ball.mag < GOAL_TRACK_DIS){
+    // Serial.println(attackGoal.exists());
+    if(role == Role::attack && attackGoal.exists() && ball.exists()){
       attackGoal.arg = (360-attackGoal.arg);
-      rotate = attackRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
-    }
-    else if(role == Role::defend && defendGoal.exists()){
-      defendGoal.arg = mod(540-defendGoal.arg,360);
-      rotate = defendRotation.update(defendGoal.arg < 180 ? defendGoal.arg : -(360 - defendGoal.arg));
+      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg)) * ROTATION_MULTIPLIER;
     }
     else{
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
@@ -104,17 +102,24 @@ void Orbit::calcAttacker(){
     ball = prevBall;
   }
 
-  if(ball.exists()){
+  if(ball.exists()&&!yank){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){
-      calcSmallOrbit();
+      calcSmallOrbit(); // Moves directly to the ball
+      // Serial.println("calcSmallOrbit()");
+    }
+    else if((ball.arg < BRAKE_ANGLE_RIGHT || ball.arg > (360-BRAKE_ANGLE_LEFT)) && ball.mag<BRAKE_DISTANCE){
+      PERM = ball.arg;
+      movement.angle = PERM;
+      movement.speed = NORMAL_SPEED;
+      yank = true;
     }
     else{
       if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
         calcBigOrbit(); // Transfers between close orbit and small orbit
         // Serial.println("calcBigOrbit()");
         if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-          movement.speed = round(movement.speed * SLOW_SPEED-10);
+          movement.speed = round(movement.speed * SLOW_SPEED);
         }
       }
       else if(ball.mag < ORBIT_DISTANCE){
@@ -140,8 +145,9 @@ void Orbit::calcAttacker(){
   } else{
     if(ball.exists()){
       centreDelay.update();
-      movement.angle = PERM;
+      movement.angle = (ball.arg < 180) ? 90:270;
       movement.speed = NORMAL_SPEED;
+      yank = false;
     }
     else{
       if(centreDelay.hasTimePassedNoUpdate()){
@@ -156,38 +162,23 @@ void Orbit::calcAttacker(){
   prevAngle = movement.angle;
 
   // BOSS LOGIC
-  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500 && (lidars.lidarBack > 1900 || lidars.lidarBack < 400)){
+  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
     moveToPos(CENTRE);
   }
+  // Serial.print(lidars.lidarLeft);
+  // Serial.print("\t");
+  // Serial.print(lidars.lidarBack);
+  // Serial.print("\t");
+  // Serial.println(lidars.lidarRight);
+
 }
 
-void Orbit::calcDefender(){ //Assuming PID is good
-  if(defendGoal.exists()){
-    Vector moveVector = defendGoal-DEFEND_POSITION;//Movement required go to centre of goal
-
-    if(ball.exists()){
-      if(ball.between(290,70)||true){
-        //Set horizontal movement to ball's i (constraining it by the side of the goals)
-        moveVector = moveVector + Vector(constrain(ball.i,moveVector.i+DEFEND_LEFT_I,moveVector.i+DEFEND_RIGHT_I),0,false);
-      }
-      else{
-        //Ball behind robot, use attacker logic as last resort
-        calcAttacker();
-        return;
-      }
-    }
-    double hMov = hGoalie.update(moveVector.i);
-    double vMov = vGoalie.update(moveVector.j);
-    movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
-    movement.speed = constrain(round(goalieSpeed.update(sqrt(hMov*hMov+vMov*vMov))),0,MAX_SPEED); // Use the same PID for ball follow and recentre
+void Orbit::calcDefender(){
+  if(ball.exists() && ballPosition.j < 800){
+    calcAttacker();
   }
   else{
-    // if(ball.exists()){
-    //   calcAttacker();
-    // }
-    // else{
-    //   moveToPos(GOALIE_POS);
-    // }
+    moveToPos(GOALIE_POS);
   }
 }
 
@@ -199,11 +190,8 @@ void Orbit::manageKicker(){
 
 void Orbit::calcSmallOrbit(){
   movement.speed = MAX_SPEED;
-  double a = ball.arg < 180 ? ball.arg : -360+ball.arg;
-  movement.angle = mod(round(shootAngle.update((double)a)),360);
-  // Serial.print(a);
-  // Serial.print('\t');
-  // Serial.println(movement.angle);
+  // movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT-SMALL_OFFSET_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT-SMALL_OFFSET_LEFT);
+  movement.angle = (ball.arg < 180 ? ball.arg : 360-(360-ball.arg));
 }
 
 void Orbit::calcBigOrbit(){
@@ -240,6 +228,28 @@ void Orbit::moveToPos(Vector position){
   movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -MAX_SPEED, MAX_SPEED);
   #endif
   movement.angle = mod(round(450 - toDegrees(atan2(vertical,horizontal))), 360);
+}
+
+void Orbit::moveToGoalPos(Vector position){
+  Vector direction = position - robotGoalPosition;
+
+  double horizontal = horizontalMovement.update(direction.i);
+  double vertical = verticalMovement.update(direction.j);
+  #if SUPERTEAM
+  movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -230, 230);
+  #else
+  movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -MAX_SPEED, MAX_SPEED);
+  #endif
+  movement.angle = mod(round(450 - toDegrees(atan2(vertical,horizontal))), 360);
+}
+
+void Orbit::moveToBall(){
+  double horizontal = goalieHorizontal.update(ball.arg < 180 ? ball.arg : -(360 - ball.arg));
+  // double horizontal = abs(ball.i) < 200 ? ball.i : goalieHorizontal.update(ball.i);
+  double vertical = goalieVertical.update((GOALIE_POS - robotPosition).j);
+
+  movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -255, 255);
+  movement.angle = mod(450 - toDegrees(atan2(vertical,horizontal)), 360);
 }
 
 void Orbit::resetAllData(){

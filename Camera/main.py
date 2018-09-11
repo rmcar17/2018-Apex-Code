@@ -4,14 +4,16 @@ from pyb import UART, LED
 camDebug = False
 FPSDebug = False
 
-robot = 2
+robot = 1
 
 if robot == 1:
-    camThresholds = [((27, 58, 20, 97, 16, 73),), #Ball
+    camThresholds = [
+    ((26, 63, 42, 90, 38, 81),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
-    ((48, 67, -4, 11, 27, 85),)]   #Yellow Goal
+    ((44, 84, -2, 38, 29, 78),)]   #Yellow Goal
 else:
-    camThresholds = [((41, 65, 34, 80, 22, 67),),
+    camThresholds = [
+    ((41, 65, 34, 80, 22, 67),),
     ((39, 50, -15, 8, -41, -14),),
     ((59, 89, -24, 25, 24, 69),)]
 
@@ -40,8 +42,8 @@ class Reader:
         img = sensor.snapshot()
 
         ballBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[0],x_stride=4,y_stride=4,pixels_threshold=20)))
-        blueBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[1],x_stride=15,y_stride=8,merge=True,margin=34,pixels_threshold=100)))
-        yellowBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[2],x_stride=15,y_stride=8,merge=True,margin=34,pixels_threshold=50)))
+        blueBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[1],x_stride=5,y_stride=5,merge=True,margin=34,pixels_threshold=100)))
+        yellowBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[2],x_stride=5,y_stride=5,merge=True,margin=34,pixels_threshold=50)))
 
         if self.debug:
             if ballBlob != (255, 255):

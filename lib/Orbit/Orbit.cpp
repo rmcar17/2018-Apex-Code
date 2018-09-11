@@ -79,7 +79,11 @@ void Orbit::calculateRotation(){
     // Serial.println(ball.mag < GOAL_TRACK_DIS);
     if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(340,20) && ball.mag < GOAL_TRACK_DIS){
       attackGoal.arg = (360-attackGoal.arg);
-      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg*1.5 : -(360 - attackGoal.arg))*1.5;
+      rotate = attackRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
+    }
+    else if(role == Role::defend && defendGoal.exists()){
+      defendGoal.arg = mod(540-defendGoal.arg,360);
+      rotate = defendRotation.update(defendGoal.arg < 180 ? defendGoal.arg : -(360 - defendGoal.arg));
     }
     else{
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
@@ -157,12 +161,33 @@ void Orbit::calcAttacker(){
   }
 }
 
-void Orbit::calcDefender(){
-  if(ball.exists() && ballPosition.j < 800){
-    calcAttacker();
+void Orbit::calcDefender(){ //Assuming PID is good
+  if(defendGoal.exists()){
+    Vector moveVector = defendGoal-DEFEND_POSITION;//Movement required go to centre of goal
+
+    if(ball.exists()){
+      if(ball.between(290,70)||true){
+        //Set horizontal movement to ball's i (constraining it by the side of the goals)
+        moveVector = moveVector + Vector(constrain(ball.i,moveVector.i+DEFEND_LEFT_I,moveVector.i+DEFEND_RIGHT_I),0,false);
+      }
+      else{
+        //Ball behind robot, use attacker logic as last resort
+        calcAttacker();
+        return;
+      }
+    }
+    double hMov = hGoalie.update(moveVector.i);
+    double vMov = vGoalie.update(moveVector.j);
+    movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
+    movement.speed = constrain(round(goalieSpeed.update(sqrt(hMov*hMov+vMov*vMov))),0,MAX_SPEED); // Use the same PID for ball follow and recentre
   }
   else{
-    moveToPos(GOALIE_POS);
+    // if(ball.exists()){
+    //   calcAttacker();
+    // }
+    // else{
+    //   moveToPos(GOALIE_POS);
+    // }
   }
 }
 
@@ -215,28 +240,6 @@ void Orbit::moveToPos(Vector position){
   movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -MAX_SPEED, MAX_SPEED);
   #endif
   movement.angle = mod(round(450 - toDegrees(atan2(vertical,horizontal))), 360);
-}
-
-void Orbit::moveToGoalPos(Vector position){
-  Vector direction = position - robotGoalPosition;
-
-  double horizontal = horizontalMovement.update(direction.i);
-  double vertical = verticalMovement.update(direction.j);
-  #if SUPERTEAM
-  movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -230, 230);
-  #else
-  movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -MAX_SPEED, MAX_SPEED);
-  #endif
-  movement.angle = mod(round(450 - toDegrees(atan2(vertical,horizontal))), 360);
-}
-
-void Orbit::moveToBall(){
-  double horizontal = goalieHorizontal.update(ball.arg < 180 ? ball.arg : -(360 - ball.arg));
-  // double horizontal = abs(ball.i) < 200 ? ball.i : goalieHorizontal.update(ball.i);
-  double vertical = goalieVertical.update((GOALIE_POS - robotPosition).j);
-
-  movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -255, 255);
-  movement.angle = mod(450 - toDegrees(atan2(vertical,horizontal)), 360);
 }
 
 void Orbit::resetAllData(){

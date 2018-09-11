@@ -54,8 +54,6 @@ class Orbit{
     void calcTangentOrbit();
 
     void moveToPos(Vector position);
-    void moveToGoalPos(Vector position);
-    void moveToBall();
 
     bool inRange(double value, double target, int range);
 
@@ -82,13 +80,15 @@ class Orbit{
     PID shootAngle = PID(SHOOTANGLE_KP, SHOOTANGLE_KI, SHOOTANGLE_KD);
 
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
-    PID goalRotation = PID(GOAL_KP,GOAL_KI,GOAL_KD);
+    PID attackRotation = PID(ATTACK_KP,ATTACK_KI,ATTACK_KD);
+    PID defendRotation = PID(DEFEND_KP,DEFEND_KI,DEFEND_KD);
 
     PID horizontalMovement = PID(POS_HOR_KP, POS_HOR_KI, POS_HOR_KD);
     PID verticalMovement = PID(POS_VER_KP, POS_VER_KI, POS_VER_KD);
 
-    PID goalieHorizontal = PID(GOAL_HOR_KP, GOAL_HOR_KI, GOAL_HOR_KD);
-    PID goalieVertical = PID(GOAL_VER_KP, GOAL_VER_KI, GOAL_VER_KD);
+    PID hGoalie = PID(H_GOALIE_KP,H_GOALIE_KI,H_GOALIE_KD);
+    PID vGoalie = PID(V_GOALIE_KP,V_GOALIE_KI,V_GOALIE_KD);
+    PID goalieSpeed = PID(SP_GOALIE_KP,SP_GOALIE_KI,SP_GOALIE_KD);
 
     double lineAngle = 0;
     int danger = 0;

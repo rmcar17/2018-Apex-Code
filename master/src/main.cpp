@@ -79,7 +79,7 @@ void setup() {
 
   lidars.setup();
 
-  role = Role::attack;
+  role = Role::defend;
 
   digitalWrite(TEENSY_LED,LOW);
 }

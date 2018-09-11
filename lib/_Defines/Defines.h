@@ -6,7 +6,7 @@
 /* -------------------------------------------------- */
 #define ROBOT 1
 
-#define ATTACK_BLUE false
+#define ATTACK_BLUE true
 /* -------------------------------------------------- */
 
 // Compass
@@ -20,9 +20,13 @@
 #define ROTATION_KI 0
 #define ROTATION_KD 0.2
 
-#define GOAL_KP 1.5
-#define GOAL_KI 0
-#define GOAL_KD 0.05
+#define ATTACK_KP 1.5
+#define ATTACK_KI 0
+#define ATTACK_KD 0.05
+
+#define DEFEND_KP 0.7
+#define DEFEND_KI 0
+#define DEFEND_KD 0.035
 
 // Coordinates
 #define FIELD_WIDTH 1820
@@ -45,14 +49,6 @@
 #define POS_VER_KI 0
 #define POS_VER_KD 0
 
-#define GOAL_HOR_KP 7
-#define GOAL_HOR_KI 0
-#define GOAL_HOR_KD 0
-
-#define GOAL_VER_KP 0.5
-#define GOAL_VER_KI 0
-#define GOAL_VER_KD 0
-
 #define GOAL_TRACK true
 
 #define CENTRE_ATTACKER_DISTANCE 10
@@ -67,6 +63,7 @@
 #define ANGLE_TIGHTENER_RIGHT 1 //Small orbit right scalar (multiply the current ball angle then move)
 #define SMALL_OFFSET_LEFT 25 //Small orbit left offset
 #define SMALL_OFFSET_RIGHT 45 //Small orbit right offset
+
 
 #if ROBOT == 2
   #define ORBIT_DISTANCE 260
@@ -100,10 +97,26 @@
 /* ----------------------------------------*/
 
 
-#define DEFEND_SMALL_ANGLE 10
+/*            DEFEND VALUES                */
+#define DEFEND_POSITION Vector(0, -330, false)
 
-#define NORMAL_SPEED 200  
-#define MAX_SPEED 220
+#define DEFEND_LEFT_I -800
+#define DEFEND_RIGHT_I 400
+
+#define H_GOALIE_KP 0.5
+#define H_GOALIE_KD 0
+#define H_GOALIE_KI 0
+
+#define V_GOALIE_KP 0.25
+#define V_GOALIE_KD 0
+#define V_GOALIE_KI 0
+
+#define SP_GOALIE_KP 1.2
+#define SP_GOALIE_KD 0
+#define SP_GOALIE_KI 0
+
+#define NORMAL_SPEED 180
+#define MAX_SPEED 230
 #define RETURN_SPEED 60
 
 
@@ -112,8 +125,8 @@
 
 #define CAM_BUFFER_NUM 6
 
-#define CAM_CENTRE_X 120
-#define CAM_CENTRE_Y 120
+#define CAM_CENTRE_X 100
+#define CAM_CENTRE_Y 100
 
 #define CAM_SWITCH_D 16
 

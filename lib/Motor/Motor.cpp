@@ -12,7 +12,7 @@ void Motor::motorSetup()
   pinMode(pwmPin, OUTPUT);
   pinMode(dirPin, OUTPUT);
   pinMode(brkPin, OUTPUT);
-  analogWriteFrequency(pwmPin, 19000);
+  analogWriteFrequency(pwmPin, 93750);
 }
 
 void Motor::move(int speed){

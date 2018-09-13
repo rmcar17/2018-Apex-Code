@@ -20,9 +20,9 @@
 #define ROTATION_KI 0
 #define ROTATION_KD 0.2
 
-#define GOAL_KP 0.9
+#define GOAL_KP 0.25
 #define GOAL_KI 0
-#define GOAL_KD 0.04
+#define GOAL_KD 0.03
 
 // Coordinates
 #define FIELD_WIDTH 1820
@@ -55,7 +55,7 @@
 
 #define GOAL_TRACK true
 
-#define ROTATION_MULTIPLIER 4
+#define ROTATION_MULTIPLIER 4.2
 
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4
@@ -79,8 +79,8 @@
 #define BRAKE_ANGLE_LEFT 20 //The angle which the robot brakes on the left
 #define BRAKE_ANGLE_RIGHT 40 //The angle which the robot brakes on the right
 #define BRAKE_DISTANCE 450
-#define SMALL_ORBIT_LEFT 10 //To increase small orbit range on the left
-#define SMALL_ORBIT_RIGHT 15 //To increase small orbit range on the right
+#define SMALL_ORBIT_LEFT 0 //To increase small orbit range on the left
+#define SMALL_ORBIT_RIGHT 30 //To increase small orbit range on the right
 #define BIG_ORBIT_LEFT 0 //To increase big orbit range on the left
 #define BIG_ORBIT_RIGHT 0 //To increase big orbit range on the right
 #define SKEW_DISTANCE 500 //Distance where Big orbit skewing takes effect
@@ -113,7 +113,7 @@
 #define CAM_BUFFER_NUM 6
 
 #define CAM_CENTRE_X 100
-#define CAM_CENTRE_Y 100
+#define CAM_CENTRE_Y 115
 
 #define CAM_SWITCH_D 16
 
@@ -134,7 +134,7 @@
 #define KICK_HIGH_TIME 5000
 
 // MOVEMENT
-#define MOVEMENT_ANGLE_OFFSET -10
-#define MOVEMENT_ROTATION_OFFSET 15
+#define MOVEMENT_ANGLE_OFFSET 0
+#define MOVEMENT_ROTATION_OFFSET 0
 
 #endif

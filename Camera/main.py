@@ -11,9 +11,9 @@ if robot == 1:
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
     ((48, 67, -4, 11, 27, 85),)]   #Yellow Goal
 else:
-    camThresholds = [((41, 65, 34, 80, 22, 67),),
+    camThresholds = [((44, 71, 40, 78, -5, 59),),
     ((39, 50, -15, 8, -41, -14),),
-    ((59, 89, -24, 25, 24, 69),)]
+    ((57, 89, -11, 25, 26, 77),)]
 
 def largestBlob(lBlob):
     if not lBlob:
@@ -39,7 +39,7 @@ class Reader:
     def update(self):
         img = sensor.snapshot()
 
-        ballBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[0],x_stride=4,y_stride=4,pixels_threshold=20)))
+        ballBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[0],x_stride=2,y_stride=2,pixels_threshold=20)))
         blueBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[1],x_stride=15,y_stride=8,merge=True,margin=34,pixels_threshold=100)))
         yellowBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[2],x_stride=15,y_stride=8,merge=True,margin=34,pixels_threshold=50)))
 
@@ -81,11 +81,9 @@ send = Sender()
 cam = Reader(camThresholds,debugCam=camDebug)
 
 clock = time.clock()
-
 while True:
     cam.update()
     send.sendData(cam.getData())
-
     if FPSDebug:
         print(clock.fps())
         clock.tick()

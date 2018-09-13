@@ -16,9 +16,9 @@
 #define SHOOTANGLE_KI 0
 #define SHOOTANGLE_KD 0.5
 
-#define ROTATION_KP 5
+#define ROTATION_KP 4.5
 #define ROTATION_KI 0
-#define ROTATION_KD 0.2
+#define ROTATION_KD 0.1
 
 #define ATTACK_KP 1.5
 #define ATTACK_KI 0
@@ -100,8 +100,8 @@
 /*            DEFEND VALUES                */
 #define DEFEND_POSITION Vector(0, -330, false)
 
-#define DEFEND_LEFT_I -800
-#define DEFEND_RIGHT_I 400
+#define DEFEND_LEFT_I -200
+#define DEFEND_RIGHT_I 350
 
 #define ANG_GOALIE_KP 3
 #define ANG_GOALIE_KI 0

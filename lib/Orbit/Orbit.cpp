@@ -51,6 +51,12 @@ void Orbit::setBall(Vector tempBall){
 }
 
 void Orbit::calculateMoveData(){
+  if(ball.exists()){
+    rememberTimer.update();
+  }
+  else if(!rememberTimer.hasTimePassedNoUpdate()){
+    ball = prevBall;
+  }
   if(role == Role::attack){
     calcAttacker();
   }
@@ -93,13 +99,6 @@ void Orbit::calculateRotation(){
 }
 
 void Orbit::calcAttacker(){
-  if(ball.exists()){
-    rememberTimer.update();
-  }
-  else if(!rememberTimer.hasTimePassedNoUpdate()){
-    ball = prevBall;
-  }
-
   if(ball.exists()){
     centreDelay.update();
     if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){
@@ -161,14 +160,27 @@ void Orbit::calcDefender(){ //Assuming PID is good
   if(defendGoal.exists()){
     double hMov;
     Vector moveVector = defendGoal-DEFEND_POSITION;//Movement required go to centre of goal
+    double vMov = vGoalie.update(moveVector.j)*1.5;
     if(ball.exists()){
-      hMov = angGoalie.update(ball.arg < 180 ? ball.arg : -(360-ball.arg));
+      if(ball.between(340,20)){
+        calcAttacker();
+        return;
+      }
+      else{
+        hMov = angGoalie.update(ball.arg < 180 ? ball.arg : -(360-ball.arg));
+        // if(defendGoal.i > DEFEND_RIGHT_I || defendGoal.i < DEFEND_LEFT_I){
+        //   hMov = hGoalie.update(defendGoal.i > 0 ? moveVector.i+DEFEND_LEFT_I : moveVector.i+DEFEND_RIGHT_I);
+        // }
+        // else{
+          movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
+        // }
+        movement.angle = movement.angle + (movement.angle < 180 ? 20 : -20);
+      }
     }
     else{
       hMov = hGoalie.update(moveVector.i);
+      movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
     }
-    double vMov = vGoalie.update(moveVector.j);
-    movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
     movement.speed = constrain(round(goalieSpeed.update(sqrt(hMov*hMov+vMov*vMov))),0,MAX_SPEED); // Use the same PID for ball follow and recentre
   }
   else{
@@ -176,7 +188,7 @@ void Orbit::calcDefender(){ //Assuming PID is good
     //   calcAttacker();
     // }
     // else{
-    //   moveToPos(GOALIE_POS);
+      moveToPos(CENTRE);
     // }
   }
 }

@@ -13,8 +13,7 @@ void Orbit::setRole(Role _role){
 }
 
 void Orbit::setBallData(Vector ballData){
-  // ball = ballData;
-  ball = Vector(10,0);
+  ball = ballData;
 }
 
 void Orbit::setGoalData(Vector aGoal, Vector dGoal){
@@ -104,7 +103,7 @@ void Orbit::calcAttacker(){
 
   if(ball.exists()&&!yank){
     centreDelay.update();
-    if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){
+    if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){ // *
       calcSmallOrbit(); // Moves directly to the ball
       // Serial.println("calcSmallOrbit()");
     }
@@ -115,7 +114,7 @@ void Orbit::calcAttacker(){
       yank = true;
     }
     else{
-      if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
+      if((ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
         calcBigOrbit(); // Transfers between close orbit and small orbit
         // Serial.println("calcBigOrbit()");
         if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){

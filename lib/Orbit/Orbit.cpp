@@ -190,7 +190,16 @@ void Orbit::manageKicker(){
 void Orbit::calcSmallOrbit(){
   movement.speed = MAX_SPEED;
   // movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT-SMALL_OFFSET_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT-SMALL_OFFSET_LEFT);
-  movement.angle = (ball.arg < 180 ? ball.arg : 360-(360-ball.arg));
+  
+  attackGoal.arg = (attackGoal.arg < 180 ? attackGoal.arg : -(360-attackGoal.arg));
+  ball.arg = (ball.arg < 180 ? ball.arg : -(360-ball.arg));
+  double middleAngle = (attackGoal.arg+ball.arg)/2;
+  movement.angle = middleAngle;
+  // Serial.print(attackGoal.arg);
+  // Serial.print("\t");
+  // Serial.print(ball.arg);
+  // Serial.print("\t");
+  // Serial.println(movement.angle); 
 }
 
 void Orbit::calcBigOrbit(){

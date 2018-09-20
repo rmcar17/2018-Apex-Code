@@ -4,7 +4,7 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 2
+#define ROBOT 1
 
 #define ATTACK_BLUE false
 
@@ -20,9 +20,9 @@
 #define ROTATION_KI 0
 #define ROTATION_KD 0.2
 
-#define GOAL_KP 0.25
+#define GOAL_KP 0.5 // 0.25
 #define GOAL_KI 0
-#define GOAL_KD 0.03
+#define GOAL_KD 0.04 // 0.03
 
 // Coordinates
 #define FIELD_WIDTH 1820
@@ -55,7 +55,7 @@
 
 #define GOAL_TRACK true
 
-#define ROTATION_MULTIPLIER 5
+#define ROTATION_MULTIPLIER 10
 
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4.5
@@ -76,8 +76,8 @@
   #define ORBIT_DISTANCE 260 //Radius of circle for tangent orbit
 #endif
 #define SMALL_ORBIT 15 //Angle small orbit is called
-#define SMALL_ORBIT_LEFT 20 //To increase small orbit range on the left
-#define SMALL_ORBIT_RIGHT 10 //To increase small orbit range on the right
+#define SMALL_ORBIT_LEFT 0 //To increase small orbit range on the left
+#define SMALL_ORBIT_RIGHT 20 //To increase small orbit range on the right
 #define BRAKE_ANGLE_LEFT 20 //The angle which the robot brakes on the left
 #define BRAKE_ANGLE_RIGHT 25 //The angle which the robot brakes on the right
 #define BRAKE_DISTANCE 450

@@ -1,10 +1,10 @@
 import sensor, image, time
 from pyb import UART, LED
 
-camDebug = False
-FPSDebug = False
+camDebug = 1
+FPSDebug = 0
 
-robot = 2
+robot = 1
 
 if robot == 1:
     camThresholds = [

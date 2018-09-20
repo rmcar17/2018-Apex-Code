@@ -57,6 +57,8 @@ class Orbit{
     void moveToGoalPos(Vector position);
     void moveToBall();
 
+    double modelDistance(double distance);
+
     bool inRange(double value, double target, int range);
 
     Kicker kicker;

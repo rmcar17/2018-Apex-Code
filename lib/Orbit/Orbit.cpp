@@ -78,9 +78,10 @@ void Orbit::calculateRotation(){
     // Serial.print("\t");
     // Serial.println(ball.mag < GOAL_TRACK_DIS);
     // Serial.println(attackGoal.exists());
-    if(role == Role::attack && attackGoal.exists() && ball.exists()){
+    if(role == Role::attack && attackGoal.exists()){
       attackGoal.arg = (360-attackGoal.arg);
-      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg)) * ROTATION_MULTIPLIER;
+      double temp = modelDistance(attackGoal.mag) * ROTATION_MULTIPLIER;
+      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg + temp : -(360 - attackGoal.arg + temp));
     }
     else{
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
@@ -258,6 +259,11 @@ void Orbit::moveToBall(){
 
   movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -255, 255);
   movement.angle = mod(450 - toDegrees(atan2(vertical,horizontal)), 360);
+}
+
+double Orbit::modelDistance(double distance){
+  double val = 1/(1+exp((distance-1250)/250));
+  return val;
 }
 
 void Orbit::resetAllData(){

@@ -162,19 +162,19 @@ void Orbit::calcDefender(){ //Assuming PID is good
     Vector moveVector = defendGoal-DEFEND_POSITION;//Movement required go to centre of goal
     double vMov = vGoalie.update(moveVector.j)*1.5;
     if(ball.exists()){
-      if(ball.between(340,20)){
+      if(ball.between(340,20) && ball.mag < 500 && defendGoal.j > SURGE_DISTANCE){
         calcAttacker();
         return;
       }
       else{
-        hMov = angGoalie.update(ball.arg < 180 ? ball.arg : -(360-ball.arg));
-        // if(defendGoal.i > DEFEND_RIGHT_I || defendGoal.i < DEFEND_LEFT_I){
-        //   hMov = hGoalie.update(defendGoal.i > 0 ? moveVector.i+DEFEND_LEFT_I : moveVector.i+DEFEND_RIGHT_I);
-        // }
-        // else{
-          movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
-        // }
-        movement.angle = movement.angle + (movement.angle < 180 ? 20 : -20);
+        if((defendGoal.i > DEFEND_LEFT_I && ball.arg > 180) || (defendGoal.i < DEFEND_RIGHT_I && ball.arg < 180)){
+          hMov = hGoalie.update(ball.arg > 180 ? defendGoal.i-DEFEND_LEFT_I : defendGoal.i-DEFEND_RIGHT_I);
+        }
+        else{
+          hMov = angGoalie.update(ball.arg < 180 ? ball.arg : -(360-ball.arg));
+        }
+        movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
+        movement.angle = movement.angle + (movement.angle < 180 ? 15 : -15);
       }
     }
     else{

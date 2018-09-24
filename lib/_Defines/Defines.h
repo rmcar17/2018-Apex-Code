@@ -94,16 +94,18 @@
 #define GOAL_TRACK_DIS 240 //Distance ball must be away from robot to goal track
 
 #define CENTRE_TIME 1000
-/* ----------------------------------------*/
+/*-----------------------------------------*/
 
 
 /*            DEFEND VALUES                */
-#define DEFEND_POSITION Vector(0, -330, false)
+#define DEFEND_POSITION Vector(-50, -230, false)
 
-#define DEFEND_LEFT_I -200
-#define DEFEND_RIGHT_I 350
+#define DEFEND_LEFT_I 150
+#define DEFEND_RIGHT_I -220
 
-#define ANG_GOALIE_KP 3
+#define SURGE_DISTANCE -500
+
+#define ANG_GOALIE_KP 2.5
 #define ANG_GOALIE_KI 0
 #define ANG_GOALIE_KD 0
 
@@ -119,6 +121,8 @@
 #define SP_GOALIE_KI 0
 #define SP_GOALIE_KD 0
 
+/*=----------------------------------------*/
+
 #define NORMAL_SPEED 180
 #define MAX_SPEED 230
 #define RETURN_SPEED 60
@@ -130,7 +134,7 @@
 #define CAM_BUFFER_NUM 6
 
 #define CAM_CENTRE_X 100
-#define CAM_CENTRE_Y 100
+#define CAM_CENTRE_Y 115
 
 #define CAM_SWITCH_D 16
 

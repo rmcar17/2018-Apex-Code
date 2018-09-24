@@ -7,10 +7,9 @@ FPSDebug = 0
 robot = 1
 
 if robot == 1:
-    camThresholds = [
-    ((31, 66, 45, 86, 27, 72),), #Ball
+    camThresholds = [((47, 64, 26, 68, 15, 54),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
-    ((55, 88, -17, 56, 32, 87),)]   #Yellow Goal
+    ((46, 84, -9, 21, 26, 66),)]   #Yellow Goal
 else:
     camThresholds = [
     ((25, 72, 31, 83, 26, 76),),
@@ -46,11 +45,11 @@ class Reader:
         yellowBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[2],x_stride=15,y_stride=8,merge=True,margin=34,pixels_threshold=50)))
 
         if self.debug:
-            if ballBlob != (255, 255):
+            if ballBlob != (254, 254):
                 img.draw_line((100, 115, ballBlob[0], ballBlob[1]),color=(255,92,0),thickness=2)
-            if blueBlob != (255, 255):
+            if blueBlob != (254, 254):
                 img.draw_line((100, 115, blueBlob[0], blueBlob[1]),color=(0,75,255),thickness=2)
-            if yellowBlob != (255, 255):
+            if yellowBlob != (254, 254):
                 img.draw_line((100, 115, yellowBlob[0], yellowBlob[1]),color=(255,255,0),thickness=2)
 
         self.data = (ballBlob[0],ballBlob[1],blueBlob[0],blueBlob[1],yellowBlob[0],yellowBlob[1])

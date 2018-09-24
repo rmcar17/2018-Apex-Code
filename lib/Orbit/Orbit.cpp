@@ -104,17 +104,31 @@ void Orbit::calcAttacker(){
 
   if(ball.exists()&&!yank){
     centreDelay.update();
+    if(iCanShoot){
+      if(!iCanShootTimer.hasTimePassedNoUpdate()){
+          movement.brake = true;
+      } else{
+        movement.angle = ball.arg; 
+        movement.speed = MAX_SPEED;
+      }
+    }
     if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){ // *
+      iCanShoot = true;
       calcSmallOrbit(); // Moves directly to the ball
       // Serial.println("calcSmallOrbit()");
     }
     else if((ball.arg < BRAKE_ANGLE_RIGHT || ball.arg > (360-BRAKE_ANGLE_LEFT)) && ball.mag<BRAKE_DISTANCE){
+      iCanShoot = false;
+      iCanShootTimer.update();
       PERM = ball.arg;
       movement.angle = PERM;
       movement.speed = NORMAL_SPEED;
       yank = true;
+
     }
     else{
+      iCanShoot = false;
+      iCanShootTimer.update();
       if((ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
         calcBigOrbit(); // Transfers between close orbit and small orbit
         // Serial.println("calcBigOrbit()");
@@ -190,12 +204,13 @@ void Orbit::manageKicker(){
 
 void Orbit::calcSmallOrbit(){
   movement.speed = MAX_SPEED;
+  movement.angle = ball.arg < 180 ? ball.arg : -(360-ball.arg);
   // movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT-SMALL_OFFSET_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT-SMALL_OFFSET_LEFT);
   
-  attackGoal.arg = (attackGoal.arg < 180 ? attackGoal.arg : -(360-attackGoal.arg));
-  ball.arg = (ball.arg < 180 ? ball.arg : -(360-ball.arg));
-  double middleAngle = (attackGoal.arg+ball.arg)/2;
-  movement.angle = middleAngle;
+  // attackGoal.arg = (attackGoal.arg < 180 ? attackGoal.arg : -(360-attackGoal.arg));
+  // ball.arg = (ball.arg < 180 ? ball.arg : -(360-ball.arg));
+  // double middleAngle = (attackGoal.arg+ball.arg)/2;
+  // movement.angle = middleAngle;
   // Serial.print(attackGoal.arg);
   // Serial.print("\t");
   // Serial.print(ball.arg);
@@ -279,5 +294,5 @@ void Orbit::resetAllData(){
   robotPosition = Vector(0, 0);
   ballPosition = Vector(0, 0);
   compAngle = -1;
-  movement = {-1, 0, 0};
+  movement = {-1, 0, 0, false};
 }

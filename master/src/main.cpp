@@ -108,7 +108,11 @@ void loop() {
 
   // Movement
   move = orbit.getMoveData();
-  motors.moveDirection(move);
+  if(move.brake){
+    motors.brake();
+  }else{
+    motors.moveDirection(move);
+  }
   // Serial.print(move.angle);
   // Serial.print("\t");
   // Serial.println(move.speed);

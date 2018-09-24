@@ -77,7 +77,7 @@ class Orbit{
     Vector ballPosition = Vector(0, 0);
     Vector robotGoalPosition = Vector(0, 0, false);
 
-    MoveData movement = {-1, 0, 0};
+    MoveData movement = {-1, 0, 0, false};
 
     int compAngle = -1;
 
@@ -99,6 +99,9 @@ class Orbit{
     int flag = 0;
     bool canCharge = false;
     bool yank = false;
+
+    bool iCanShoot = false;
+    Timer iCanShootTimer = Timer(TOTAL_BRAKE_TIME);
 };
 
 

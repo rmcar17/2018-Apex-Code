@@ -59,7 +59,7 @@ void loop() {
   lidars.update();
 
   // Motors
-  motors.moveDirection({0,200,0});
+  motors.moveDirection({0,150,0});
 
   // Print
   Serial.print(heading);

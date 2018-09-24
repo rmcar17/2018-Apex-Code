@@ -34,3 +34,8 @@ void Motor::move(int speed){
       digitalWrite(brkPin, LOW);
     }
 }
+
+void Motor::brake(){
+  analogWrite(pwmPin, 255);
+  digitalWrite(brkPin, HIGH);
+}

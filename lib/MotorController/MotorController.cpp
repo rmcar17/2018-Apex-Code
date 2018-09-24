@@ -79,8 +79,8 @@ void MotorController::move(int FR, int BR, int BL, int FL){
 }
 
 void MotorController::brake(){
-  motorFR.move(0);
-  motorBR.move(0);
-  motorBL.move(0);
-  motorFL.move(0);
+  motorFR.brake();
+  motorBR.brake();
+  motorBL.brake();
+  motorFL.brake();
 }

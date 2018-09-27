@@ -1,20 +1,19 @@
 import sensor, image, time
 from pyb import UART, LED
 
-camDebug = 1
-FPSDebug = 0
+camDebug = True
+FPSDebug = False
 
 robot = 1
 
-if robot == 1:
+if robot == 2:
     camThresholds = [((47, 64, 26, 68, 15, 54),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
     ((46, 84, -9, 21, 26, 66),)]   #Yellow Goal
 else:
-    camThresholds = [
-    ((25, 72, 31, 83, 26, 76),),
+    camThresholds = [((44, 71, 40, 78, -5, 59),),
     ((39, 50, -15, 8, -41, -14),),
-    ((59, 89, -24, 25, 24, 69),)]
+    ((57, 89, -11, 25, 26, 77),)]
 
 def largestBlob(lBlob):
     if not lBlob:
@@ -82,11 +81,9 @@ send = Sender()
 cam = Reader(camThresholds,debugCam=camDebug)
 
 clock = time.clock()
-
 while True:
     cam.update()
     send.sendData(cam.getData())
-
     if FPSDebug:
         print(clock.fps())
         clock.tick()

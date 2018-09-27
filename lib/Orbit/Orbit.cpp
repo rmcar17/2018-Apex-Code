@@ -51,6 +51,12 @@ void Orbit::setBall(Vector tempBall){
 }
 
 void Orbit::calculateMoveData(){
+  if(ball.exists()){
+    rememberTimer.update();
+  }
+  else if(!rememberTimer.hasTimePassedNoUpdate()){
+    ball = prevBall;
+  }
   if(role == Role::attack){
     calcAttacker();
   }
@@ -108,7 +114,7 @@ void Orbit::calcAttacker(){
       if(!iCanShootTimer.hasTimePassedNoUpdate()){
           movement.brake = true;
       } else{
-        movement.angle = ball.arg; 
+        movement.angle = ball.arg;
         movement.speed = MAX_SPEED;
       }
     }
@@ -184,15 +190,42 @@ void Orbit::calcAttacker(){
   // Serial.print(lidars.lidarBack);
   // Serial.print("\t");
   // Serial.println(lidars.lidarRight);
-
 }
 
-void Orbit::calcDefender(){
-  if(ball.exists() && ballPosition.j < 800){
-    calcAttacker();
+void Orbit::calcDefender(){ //Assuming PID is good
+  if(defendGoal.exists()){
+    double hMov;
+    Vector moveVector = defendGoal-DEFEND_POSITION;//Movement required go to centre of goal
+    double vMov = vGoalie.update(moveVector.j)*1.5;
+    if(ball.exists()){
+      if(ball.between(340,20) && ball.mag < 500 && defendGoal.j > SURGE_DISTANCE){
+        calcAttacker();
+        return;
+      }
+      else{
+        if((defendGoal.i > DEFEND_LEFT_I && ball.arg > 180) || (defendGoal.i < DEFEND_RIGHT_I && ball.arg < 180)){
+          hMov = hGoalie.update(ball.arg > 180 ? defendGoal.i-DEFEND_LEFT_I : defendGoal.i-DEFEND_RIGHT_I);
+        }
+        else{
+          hMov = angGoalie.update(ball.arg < 180 ? ball.arg : -(360-ball.arg));
+        }
+        movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
+        movement.angle = movement.angle + (movement.angle < 180 ? 15 : -15);
+      }
+    }
+    else{
+      hMov = hGoalie.update(moveVector.i);
+      movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
+    }
+    movement.speed = constrain(round(goalieSpeed.update(sqrt(hMov*hMov+vMov*vMov))),0,MAX_SPEED); // Use the same PID for ball follow and recentre
   }
   else{
-    moveToPos(GOALIE_POS);
+    // if(ball.exists()){
+    //   calcAttacker();
+    // }
+    // else{
+      moveToPos(CENTRE);
+    // }
   }
 }
 
@@ -206,7 +239,7 @@ void Orbit::calcSmallOrbit(){
   movement.speed = MAX_SPEED;
   movement.angle = ball.arg < 180 ? ball.arg : -(360-ball.arg);
   // movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT-SMALL_OFFSET_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT-SMALL_OFFSET_LEFT);
-  
+
   // attackGoal.arg = (attackGoal.arg < 180 ? attackGoal.arg : -(360-attackGoal.arg));
   // ball.arg = (ball.arg < 180 ? ball.arg : -(360-ball.arg));
   // double middleAngle = (attackGoal.arg+ball.arg)/2;
@@ -215,7 +248,7 @@ void Orbit::calcSmallOrbit(){
   // Serial.print("\t");
   // Serial.print(ball.arg);
   // Serial.print("\t");
-  // Serial.println(movement.angle); 
+  // Serial.println(movement.angle);
 }
 
 void Orbit::calcBigOrbit(){

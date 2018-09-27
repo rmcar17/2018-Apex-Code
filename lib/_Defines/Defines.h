@@ -4,7 +4,7 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 1
+#define ROBOT 2
 
 #define ATTACK_BLUE false
 
@@ -20,7 +20,7 @@
 
 #define ROTATION_KP 5
 #define ROTATION_KI 0
-#define ROTATION_KD 0.2
+#define ROTATION_KD 0.1
 
 #define GOAL_KP 0.5 // 0.25
 #define GOAL_KI 0
@@ -99,11 +99,37 @@
 #define GOAL_TRACK_DIS 240 //Distance ball must be away from robot to goal track
 
 #define CENTRE_TIME 1000
-/* ----------------------------------------*/
+/*-----------------------------------------*/
 
 
-#define DEFEND_SMALL_ANGLE 10
+/*            DEFEND VALUES                */
+#define DEFEND_POSITION Vector(-50, -230, false)
 
+#define DEFEND_LEFT_I 150
+#define DEFEND_RIGHT_I -220
+
+#define SURGE_DISTANCE -500
+
+#define ANG_GOALIE_KP 2.5
+#define ANG_GOALIE_KI 0
+#define ANG_GOALIE_KD 0
+
+#define H_GOALIE_KP 0.4
+#define H_GOALIE_KI 0
+#define H_GOALIE_KD 0
+
+#define V_GOALIE_KP 0.15
+#define V_GOALIE_KI 0
+#define V_GOALIE_KD 0
+
+#define SP_GOALIE_KP 1.2
+#define SP_GOALIE_KI 0
+#define SP_GOALIE_KD 0
+
+/*=----------------------------------------*/
+
+#define NORMAL_SPEED 180
+#define MAX_SPEED 230
 #define RETURN_SPEED 60
 
 
@@ -127,11 +153,11 @@
 #define LS_CALIBRATION_NUM 50
 
 //LIGHT GATE
-#define LIGHT_GATE_THRESH 660
+#define LIGHT_GATE_THRESH 970
 
 //KICKER
-#define KICK_INTERVAL 2000000
-#define KICK_HIGH_TIME 5000
+#define KICK_INTERVAL 1000
+#define KICK_HIGH_TIME 65
 
 // MOVEMENT
 #define MOVEMENT_ANGLE_OFFSET 0

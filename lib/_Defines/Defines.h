@@ -151,7 +151,7 @@
 #define LIGHT_GATE_THRESH 660
 
 //KICKER
-#define KICK_INTERVAL 5000
+#define KICK_INTERVAL 1000
 #define KICK_HIGH_TIME 65
 
 #endif

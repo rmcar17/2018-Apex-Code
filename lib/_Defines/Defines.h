@@ -127,11 +127,7 @@
 #define SP_GOALIE_KD 0
 
 /*=----------------------------------------*/
-
-#define NORMAL_SPEED 180
-#define MAX_SPEED 230
 #define RETURN_SPEED 60
-
 
 // Camera
 #define ATTACK_GOAL_OVERIDE true

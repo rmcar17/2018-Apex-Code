@@ -54,8 +54,6 @@ class Orbit{
     void calcTangentOrbit();
 
     void moveToPos(Vector position);
-    void moveToGoalPos(Vector position);
-    void moveToBall();
 
     double modelDistance(double distance);
 

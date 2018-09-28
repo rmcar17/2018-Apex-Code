@@ -172,9 +172,9 @@ void Orbit::calcAttacker(){
     else{
       if(centreDelay.hasTimePassedNoUpdate()){
         #if ROBOT == 1
-          moveToPos(CENTRE);
+          // moveToPos(CENTRE);
         #else
-          moveToPos(GOALIE_POS);
+          // moveToPos(GOALIE_POS);
         #endif
       }
     }

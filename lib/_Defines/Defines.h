@@ -61,8 +61,6 @@
 #define CENTRE_DEFENDER_DISTANCE 4.5
 
 
-
-
 /*             ORBIT VALUES                */
 /* ----------------------------------------*/
 #define ANGLE_TIGHTENER_LEFT 0.4 //Small orbit left scalar (multiply the current ball angle then move)

@@ -171,6 +171,7 @@ void Orbit::calcAttacker(){
     }
     else{
       if(centreDelay.hasTimePassedNoUpdate()){
+        movement.speed = 0;
         #if ROBOT == 1
           // moveToPos(CENTRE);
         #else
@@ -182,9 +183,9 @@ void Orbit::calcAttacker(){
   prevAngle = movement.angle;
 
   // BOSS LOGIC
-  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
-    moveToPos(CENTRE);
-  }
+  // if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
+  //   moveToPos(CENTRE);
+  // }
   // Serial.print(lidars.lidarLeft);
   // Serial.print("\t");
   // Serial.print(lidars.lidarBack);
@@ -230,7 +231,7 @@ void Orbit::calcDefender(){ //Assuming PID is good
 }
 
 void Orbit::manageKicker(){
-  if(hasBall){
+  if(attackGoal.exists() && attackGoal.between(340,20) && hasBall){
     kicker.kick();
   }
 }

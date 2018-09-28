@@ -4,10 +4,10 @@ from pyb import UART, LED
 camDebug = False
 FPSDebug = False
 
-robot = 2
+robot = 1
 
 if robot == 1:
-    camThresholds = [((47, 64, 26, 68, 15, 54),), #Ball
+    camThresholds = [((30, 97, 30, 120, 25, 120),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
     ((46, 84, -9, 21, 26, 66),)]   #Yellow Goal
 else:

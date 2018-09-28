@@ -4,13 +4,13 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 2
+#define ROBOT 1
 
 #define ATTACK_BLUE false
 
-#define NORMAL_SPEED 180
+#define NORMAL_SPEED 150
 
-#define MAX_SPEED 200
+#define MAX_SPEED 150
 
 #define GOAL_TRACK true
 /* -------------------------------------------------- */
@@ -75,7 +75,7 @@
 #endif
 #define SMALL_ORBIT 10 //Angle small orbit is called
 #define SMALL_ORBIT_LEFT 5 //To increase small orbit range on the left
-#define SMALL_ORBIT_RIGHT 25 //To increase small orbit range on the right
+#define SMALL_ORBIT_RIGHT 15 //To increase small orbit range on the right
 #define BRAKE_ANGLE_LEFT 20 //The angle which the robot brakes on the left
 #define BRAKE_ANGLE_RIGHT 25 //The angle which the robot brakes on the right
 #define BRAKE_DISTANCE 450
@@ -147,7 +147,7 @@
 #define LS_CALIBRATION_NUM 50
 
 //LIGHT GATE
-#define LIGHT_GATE_THRESH 970
+#define LIGHT_GATE_THRESH 995
 
 //KICKER
 #define KICK_INTERVAL 1000
@@ -156,6 +156,6 @@
 // MOVEMENT
 #define MOVEMENT_ANGLE_OFFSET 0
 #define MOVEMENT_ROTATION_OFFSET 0
-#define TOTAL_BRAKE_TIME 75
+#define TOTAL_BRAKE_TIME 125
 
 #endif

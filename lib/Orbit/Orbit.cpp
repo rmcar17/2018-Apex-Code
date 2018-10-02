@@ -108,89 +108,58 @@ void Orbit::calcAttacker(){
     ball = prevBall;
   }
 
-  if(ball.exists()&&!yank){
+  if(ball.exists()){
     centreDelay.update();
     if(iCanShoot){
       if(!iCanShootTimer.hasTimePassedNoUpdate()){
           movement.brake = true;
       } else{
-        movement.angle = ball.arg;
-        movement.speed = MAX_SPEED;
+        calcSmallOrbit(); // Moves directly to the ball
       }
     }
     if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){ // *
       iCanShoot = true;
-      calcSmallOrbit(); // Moves directly to the ball
-      // Serial.println("calcSmallOrbit()");
-    }
-    else if((ball.arg < BRAKE_ANGLE_RIGHT || ball.arg > (360-BRAKE_ANGLE_LEFT)) && ball.mag<BRAKE_DISTANCE){
-      iCanShoot = false;
-      iCanShootTimer.update();
-      PERM = ball.arg;
-      movement.angle = PERM;
-      movement.speed = NORMAL_SPEED;
-      yank = true;
-
+      if((MAX_SPEED+incrementSpeed)<255){
+        incrementSpeed += 0.5;
+      }      
     }
     else{
       iCanShoot = false;
       iCanShootTimer.update();
+      incrementSpeed = 0;
       if((ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
         calcBigOrbit(); // Transfers between close orbit and small orbit
-        // Serial.println("calcBigOrbit()");
         if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
           movement.speed = round(movement.speed * SLOW_SPEED);
         }
       }
       else if(ball.mag < ORBIT_DISTANCE){
         calcCloseOrbit(); // Moves perpendicular to the ball
-        // Serial.println("calcCloseOrbit()");
-        if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-          movement.speed = round(movement.speed * (SLOW_SPEED+0.2));
-        }
+        // if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        //   movement.speed = round(movement.speed * (SLOW_SPEED+0.2));
+        // }
       }
       else{
         calcTangentOrbit(); // Enters the ball's nearest tangent
-        // Serial.println("calcTangentOrbit()");
         if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-          if(ball.between(TANGENT_SLOW_DOWN,360-TANGENT_SLOW_DOWN) && ball.mag<TANGENT_SLOW_DOWN_MAG){
             movement.speed = round(movement.speed * SLOW_SPEED);
-            // movement.speed = round((movement.speed * SLOW_SPEED)-40*(1-constrain(ball.mag/1500,0,1)));
-          }else{
-            movement.speed = round(movement.speed * SLOW_SPEED);
-          }
         }
       }
     }
   } else{
-    if(ball.exists()){
-      centreDelay.update();
-      movement.angle = (ball.arg < 180) ? 90:270;
-      movement.speed = NORMAL_SPEED;
-      yank = false;
-    }
-    else{
-      if(centreDelay.hasTimePassedNoUpdate()){
-        movement.speed = 0;
-        #if ROBOT == 1
-          // moveToPos(CENTRE);
-        #else
-          // moveToPos(GOALIE_POS);
-        #endif
-      }
+    iCanShoot = false;
+    iCanShootTimer.update();
+    incrementSpeed = 0;
+    if(centreDelay.hasTimePassedNoUpdate()){
+      moveToPos(CENTRE);
     }
   }
   prevAngle = movement.angle;
 
   // BOSS LOGIC
-  // if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
-  //   moveToPos(CENTRE);
-  // }
-  // Serial.print(lidars.lidarLeft);
-  // Serial.print("\t");
-  // Serial.print(lidars.lidarBack);
-  // Serial.print("\t");
-  // Serial.println(lidars.lidarRight);
+  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
+    moveToPos(CENTRE);
+  }
 }
 
 void Orbit::calcDefender(){ //Assuming PID is good
@@ -231,13 +200,13 @@ void Orbit::calcDefender(){ //Assuming PID is good
 }
 
 void Orbit::manageKicker(){
-  if(attackGoal.exists() && attackGoal.between(340,20) && hasBall){
+  if(attackGoal.exists() && attackGoal.between(340,20) && attackGoal.mag < 1300 && hasBall){
     kicker.kick();
   }
 }
 
 void Orbit::calcSmallOrbit(){
-  movement.speed = MAX_SPEED;
+  movement.speed = MAX_SPEED + incrementSpeed;
   movement.angle = ball.arg < 180 ? ball.arg : -(360-ball.arg);
   // movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT-SMALL_OFFSET_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT-SMALL_OFFSET_LEFT);
 
@@ -272,7 +241,7 @@ void Orbit::calcCloseOrbit(){
 void Orbit::calcTangentOrbit(){
   int tangentAngle = abs(round(toDegrees(asin(ORBIT_DISTANCE/ball.mag))));
   movement.speed = round(NORMAL_SPEED*(ball.mag < SLOW_DISTANCE ? BIG_SLOWER : 1));
-  movement.angle = ball.arg + tangentAngle * (ball.arg < 180 ? 1 : -1);
+  movement.angle = ball.arg + (tangentAngle+10) * (ball.arg < 180 ? 1 : -1);
 }
 
 void Orbit::moveToPos(Vector position){

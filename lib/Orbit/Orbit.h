@@ -98,10 +98,11 @@ class Orbit{
     bool hasBall, front;
     int flag = 0;
     bool canCharge = false;
-    bool yank = false;
 
     bool iCanShoot = false;
     Timer iCanShootTimer = Timer(TOTAL_BRAKE_TIME);
+
+    double incrementSpeed = 0;
 };
 
 

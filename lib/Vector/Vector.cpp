@@ -62,7 +62,7 @@ bool Vector::operator>=(Vector vector2){
 }
 
 bool Vector::exists(){
-  return Vector(mag, arg) != Vector(0, 0);
+  return mag != 0;
 }
 
 bool Vector::exists(Vector ball){

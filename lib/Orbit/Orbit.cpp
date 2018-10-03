@@ -102,13 +102,6 @@ void Orbit::calculateRotation(){
 
 void Orbit::calcAttacker(){
   if(ball.exists()){
-    rememberTimer.update();
-  }
-  else if(!rememberTimer.hasTimePassedNoUpdate()){
-    ball = prevBall;
-  }
-
-  if(ball.exists()){
     centreDelay.update();
     if(iCanShoot){
       if(!iCanShootTimer.hasTimePassedNoUpdate()){

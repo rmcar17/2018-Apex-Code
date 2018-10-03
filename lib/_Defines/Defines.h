@@ -18,9 +18,17 @@
 // Compass
 #define IMU_CALIBRATION_COUNT 500
 
-#define ROTATION_KP 5
+#define SHOOTANGLE_KP 1.3
+#define SHOOTANGLE_KI 0
+#define SHOOTANGLE_KD 0.5
+
+#define ROTATION_KP 4.5
 #define ROTATION_KI 0
 #define ROTATION_KD 0.1
+
+#define ATTACK_KP 1.5
+#define ATTACK_KI 0
+#define ATTACK_KD 0.05
 
 #define GOAL_KP 0.5 // 0.25
 #define GOAL_KI 0
@@ -122,6 +130,7 @@
 #define SP_GOALIE_KD 0
 
 /*=----------------------------------------*/
+
 #define RETURN_SPEED 60
 
 // Camera

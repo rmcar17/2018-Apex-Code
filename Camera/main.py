@@ -6,14 +6,15 @@ FPSDebug = 0
 
 robot = 2
 
-if robot == 1:
+if robot == 2:
+    camThresholds = [((38,59,31,71,11,58),), #Ball
+    ((27, 41, -23, 5, -38, -16),), #Blue Goal
+    ((53, 79, -6, 16, 35, 64),)]   #Yellow Goal
+else:
     camThresholds = [((47, 66, 41, 84, 16, 78),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
     ((46, 84, -9, 21, 26, 66),)]   #Yellow Goal
-else:
-    camThresholds = [((29, 70, 55, 84, 4, 85),), #Ball
-    ((27, 41, -23, 5, -38, -16),), #Blue Goal
-    ((49, 77, -21, 18, 33, 60),)]   #Yellow Goal
+
 
 def largestBlob(lBlob):
     if not lBlob:

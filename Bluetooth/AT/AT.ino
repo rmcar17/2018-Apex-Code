@@ -4,19 +4,19 @@
 void setup()
 {
   Serial.begin(9600);
-  Serial5.begin(38400);
+  Serial3.begin(38400);
   pinMode(9, OUTPUT);
   digitalWrite(9, HIGH);
 }
 
 void loop()
 {
-  if (Serial5.available())
+  if (Serial3.available())
   {
-    Serial.write(Serial5.read());
+    Serial.write(Serial3.read());
   }
   if (Serial.available())
   {
-    Serial5.write(Serial.read());
+    Serial3.write(Serial.read());
   }
 }

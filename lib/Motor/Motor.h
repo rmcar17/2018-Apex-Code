@@ -10,6 +10,7 @@ class Motor {
     Motor(int pwm, int dir, int brk, bool rev);
     void motorSetup();
     void move(int speed);
+    void brake();
   private:
     int pwmPin, dirPin, brkPin;
     bool reversed;

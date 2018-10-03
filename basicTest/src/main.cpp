@@ -59,7 +59,7 @@ void loop() {
   lidars.update();
 
   // Motors
-  motors.moveDirection({0,100,0});
+  motors.moveDirection({0,150,0});
 
   // Print
   Serial.print(heading);
@@ -69,8 +69,6 @@ void loop() {
   Serial.print(ball.mag);
   Serial.print("\t");
   Serial.print(lidars.lidarValues[0]);
-  Serial.print("\t");
-  Serial.print(lidars.lidarValues[1]);
   Serial.print("\t");
   Serial.print(lidars.lidarValues[2]);
   Serial.print("\t");

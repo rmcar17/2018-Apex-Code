@@ -141,9 +141,9 @@ void Orbit::calcAttacker(){
       }
       else{
         calcTangentOrbit(); // Enters the ball's nearest tangent
-        if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-            movement.speed = round(movement.speed * SLOW_SPEED);
-        }
+        // if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        //     movement.speed = round(movement.speed * SLOW_SPEED);
+        // }
       }
     }
   } else{

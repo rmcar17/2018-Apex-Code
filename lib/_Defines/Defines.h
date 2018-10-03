@@ -8,7 +8,7 @@
 
 #define ATTACK_BLUE false
 
-#define NORMAL_SPEED 180
+#define NORMAL_SPEED 220
 
 #define MAX_SPEED 150
 
@@ -69,7 +69,7 @@
 #define SMALL_OFFSET_RIGHT 45 //Small orbit right offset
 
 #if ROBOT == 2
-  #define ORBIT_DISTANCE 260
+  #define ORBIT_DISTANCE 230
 #else
   #define ORBIT_DISTANCE 260 //Radius of circle for tangent orbit
 #endif
@@ -81,12 +81,12 @@
 #define SKEW_DISTANCE 500 //Distance where Big orbit skewing takes effect
 
 #define BIG_ORBIT 50 //Angle Big Orbit is called
-#define BIG_SKEWER 0.55 //Big Orbit Skew Factor
+#define BIG_SKEWER 0.6 //Big Orbit Skew Factor
 #define SLOW_DISTANCE 400 // Maximum distance to the ball where the robot is slowed
 #define BIG_SLOWER 1 // Slower for certain parts of orbit
 
 #define SLOW_ANGLE 150 //Angle where Orbit is slowed
-#define SLOW_SPEED 0.6 //Factor orbit is slowed
+#define SLOW_SPEED 0.7 //Factor orbit is slowed
 
 #define TANGENT_SLOW_DOWN 100 //The angle where tangent orbit slows down
 #define TANGENT_SLOW_DOWN_MAG 400

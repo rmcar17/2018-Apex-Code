@@ -59,6 +59,8 @@ class Orbit{
 
     void moveToPos(Vector position);
 
+    double modelDistance(double distance);
+
     bool inRange(double value, double target, int range);
 
     Bluetooth bt;
@@ -66,7 +68,7 @@ class Orbit{
     Kicker kicker;
 
     Timer centreDelay = Timer(CENTRE_TIME);
-    Timer rememberTimer = Timer(100);
+    Timer rememberTimer = Timer(300);
 
     Role role = Role::undecided;
 
@@ -79,19 +81,17 @@ class Orbit{
     Vector ballPosition = Vector(0, 0);
     Vector robotGoalPosition = Vector(0, 0, false);
 
-    MoveData movement = {-1, 0, 0};
+    MoveData movement = {-1, 0, 0, false};
 
     int compAngle = -1;
 
-    PID shootAngle = PID(SHOOTANGLE_KP, SHOOTANGLE_KI, SHOOTANGLE_KD);
-
     PID rotation = PID(ROTATION_KP, ROTATION_KI, ROTATION_KD);
-    PID attackRotation = PID(ATTACK_KP,ATTACK_KI,ATTACK_KD);
-    PID defendRotation = PID(DEFEND_KP,DEFEND_KI,DEFEND_KD);
+    PID goalRotation = PID(GOAL_KP,GOAL_KI,GOAL_KD);
 
     PID horizontalMovement = PID(POS_HOR_KP, POS_HOR_KI, POS_HOR_KD);
     PID verticalMovement = PID(POS_VER_KP, POS_VER_KI, POS_VER_KD);
 
+    PID angGoalie = PID(ANG_GOALIE_KP,ANG_GOALIE_KI,ANG_GOALIE_KD);
     PID hGoalie = PID(H_GOALIE_KP,H_GOALIE_KI,H_GOALIE_KD);
     PID vGoalie = PID(V_GOALIE_KP,V_GOALIE_KI,V_GOALIE_KD);
     PID goalieSpeed = PID(SP_GOALIE_KP,SP_GOALIE_KI,SP_GOALIE_KD);
@@ -104,6 +104,11 @@ class Orbit{
     bool hasBall, front;
     int flag = 0;
     bool canCharge = false;
+
+    bool iCanShoot = false;
+    Timer iCanShootTimer = Timer(TOTAL_BRAKE_TIME);
+
+    double incrementSpeed = 0;
 };
 
 

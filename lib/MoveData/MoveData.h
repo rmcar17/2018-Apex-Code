@@ -5,6 +5,7 @@ struct MoveData {
   int angle;
   int speed;
   int rotation;
+  bool brake;
 };
 
 #endif

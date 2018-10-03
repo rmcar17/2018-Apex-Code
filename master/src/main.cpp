@@ -34,7 +34,8 @@ CameraController camera;
 MotorController motors;
 
 LightSensorController lights;
-LightGate gate;
+
+LightGate lg;
 
 Orbit orbit;
 
@@ -67,6 +68,10 @@ void setup() {
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
+
+  motors.motorSetup();
+  motors.brake();
+
   camera.setup();
 
   digitalWrite(TEENSY_LED, HIGH);
@@ -75,15 +80,14 @@ void setup() {
   comp.compassSetup();
   comp.calibrate();
 
-  motors.motorSetup();
-  motors.brake();
-
   orbit.setup();
   orbit.resetAllData();
 
   lidars.setup();
 
-  role = Role::defend;
+  lg.setup();
+
+  role = Role::attack;
 
   digitalWrite(TEENSY_LED,LOW);
 }
@@ -103,6 +107,7 @@ void loop() {
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
+  orbit.setLightGate(lg.hasBall());
   orbit.setCompAngle(heading);
   orbit.setCoords(lidars.getCoords());
 
@@ -112,13 +117,16 @@ void loop() {
   orbit.calculateMoveData();
   orbit.calculateRotation();
 
+  orbit.manageKicker();
+
   // Movement
   move = orbit.getMoveData();
-  motors.moveDirection(move);
-  // Serial.print(move.angle);
-  // Serial.print("\t");
-  // Serial.println(move.speed);
+  if(move.brake){
+    motors.brake();
+  }else{
+    motors.moveDirection(move);
+  }
 
-  // End Loop
   orbit.resetAllData();
+  // End Loop
 }

@@ -12,7 +12,7 @@ class Bluetooth {
 
 		void setup();
 
-		void send(int *pData);
+		void send(char *t);
 		void receive();
 
 		Vector getOtherBallPos();

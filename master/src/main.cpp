@@ -10,6 +10,7 @@
 #include <LightGate.h>
 #include <RoleController.h>
 #include <Orbit.h>
+#include <Bluetooth.h>
 #include <Timer.h>
 #include <PID.h>
 #include <Common.h>

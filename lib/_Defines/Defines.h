@@ -146,4 +146,11 @@
 #define KICK_INTERVAL 2000000
 #define KICK_HIGH_TIME 5000
 
+//BLUETOOTH
+
+#define BT_START 2147483647
+#define BT_DATA_SIZE 4
+
+#define BT_TIMEOUT 2000
+
 #endif

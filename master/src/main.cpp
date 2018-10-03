@@ -10,6 +10,7 @@
 #include <LightGate.h>
 #include <RoleController.h>
 #include <Orbit.h>
+#include <Bluetooth.h>
 #include <Timer.h>
 #include <PID.h>
 #include <Common.h>
@@ -23,6 +24,8 @@
 #include <Lidar.h>
 
 LIDAR lidars;
+
+Bluetooth bt;
 
 Compass comp;
 
@@ -60,6 +63,7 @@ uint16_t transaction(uint8_t command, uint16_t data = 0){
 }
 
 void setup() {
+  bt.setup();
   pinMode(TEENSY_LED, OUTPUT);
   #if DEBUG_ANY
     Serial.begin(38400);
@@ -106,6 +110,8 @@ void loop() {
   orbit.setLightGate(lg.hasBall());
   orbit.setCompAngle(heading);
   orbit.setCoords(lidars.getCoords());
+
+  orbit.manageBluetooth();
 
   // More Orbit
   orbit.calculateMoveData();

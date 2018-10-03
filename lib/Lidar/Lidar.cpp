@@ -72,7 +72,6 @@ void LIDAR::read(){
       lidarValues[3] = (sensorData[1] << 8 | sensorData[0]) * 10;
     }
   }
-
   lidarLeft = lidarValues[0] == 12000 ? 300 : lidarValues[0];
   lidarBack = lidarValues[2] == 12000 ? 300 : lidarValues[2];
   lidarRight = lidarValues[3] == 12000 ? 300 : lidarValues[3];

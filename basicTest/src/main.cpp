@@ -70,8 +70,6 @@ void loop() {
   Serial.print("\t");
   Serial.print(lidars.lidarValues[0]);
   Serial.print("\t");
-  Serial.print(lidars.lidarValues[1]);
-  Serial.print("\t");
   Serial.print(lidars.lidarValues[2]);
   Serial.print("\t");
   Serial.println(lidars.lidarValues[3]);

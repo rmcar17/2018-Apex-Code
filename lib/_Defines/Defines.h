@@ -55,7 +55,7 @@
 #define GOAL_VER_KI 0
 #define GOAL_VER_KD 0
 
-#define ROTATION_MULTIPLIER 30
+#define ROTATION_MULTIPLIER 35
 
 #define CENTRE_ATTACKER_DISTANCE 10
 #define CENTRE_DEFENDER_DISTANCE 4.5
@@ -63,8 +63,8 @@
 
 /*             ORBIT VALUES                */
 /* ----------------------------------------*/
-#define ANGLE_TIGHTENER_LEFT 0.4 //Small orbit left scalar (multiply the current ball angle then move)
-#define ANGLE_TIGHTENER_RIGHT 0.5 //Small orbit right scalar (multiply the current ball angle then move)
+#define ANGLE_TIGHTENER_LEFT 0.6 //Small orbit left scalar (multiply the current ball angle then move)
+#define ANGLE_TIGHTENER_RIGHT 0.7 //Small orbit right scalar (multiply the current ball angle then move)
 #define SMALL_OFFSET_LEFT 25 //Small orbit left offset
 #define SMALL_OFFSET_RIGHT 45 //Small orbit right offset
 
@@ -73,18 +73,15 @@
 #else
   #define ORBIT_DISTANCE 260 //Radius of circle for tangent orbit
 #endif
-#define SMALL_ORBIT 18 //Angle small orbit is called
+#define SMALL_ORBIT 15 //Angle small orbit is called
 #define SMALL_ORBIT_LEFT 0 //To increase small orbit range on the left
 #define SMALL_ORBIT_RIGHT 0 //To increase small orbit range on the right
-#define BRAKE_ANGLE_LEFT 20 //The angle which the robot brakes on the left
-#define BRAKE_ANGLE_RIGHT 20 //The angle which the robot brakes on the right
-#define BRAKE_DISTANCE 450
 #define BIG_ORBIT_LEFT 0 //To increase big orbit range on the left
 #define BIG_ORBIT_RIGHT 0 //To increase big orbit range on the right
 #define SKEW_DISTANCE 500 //Distance where Big orbit skewing takes effect
 
 #define BIG_ORBIT 50 //Angle Big Orbit is called
-#define BIG_SKEWER 0.5 //Big Orbit Skew Factor
+#define BIG_SKEWER 0.55 //Big Orbit Skew Factor
 #define SLOW_DISTANCE 400 // Maximum distance to the ball where the robot is slowed
 #define BIG_SLOWER 1 // Slower for certain parts of orbit
 

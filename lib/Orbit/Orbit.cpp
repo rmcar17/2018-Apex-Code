@@ -200,15 +200,15 @@ void Orbit::calcDefender(){ //Assuming PID is good
 }
 
 void Orbit::manageKicker(){
-  if(attackGoal.exists() && attackGoal.between(340,20) && attackGoal.mag < 1300 && hasBall){
+  if(attackGoal.exists() && attackGoal.between(345,15) && attackGoal.mag < 1450 && hasBall && role == attack){
     kicker.kick();
   }
 }
 
 void Orbit::calcSmallOrbit(){
   movement.speed = MAX_SPEED + incrementSpeed;
-  movement.angle = ball.arg < 180 ? ball.arg : -(360-ball.arg);
-  // movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT-SMALL_OFFSET_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT-SMALL_OFFSET_LEFT);
+  // movement.angle = ball.arg < 180 ? ball.arg : -(360-ball.arg);
+  movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT);
 
   // attackGoal.arg = (attackGoal.arg < 180 ? attackGoal.arg : -(360-attackGoal.arg));
   // ball.arg = (ball.arg < 180 ? ball.arg : -(360-ball.arg));
@@ -258,7 +258,7 @@ void Orbit::moveToPos(Vector position){
 }
 
 double Orbit::modelDistance(double distance){
-  double val = 1/(1+exp((distance-1250)/250));
+  double val = 1/(1+exp((distance-2900)/650));
   return val;
 }
 

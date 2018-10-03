@@ -6,6 +6,7 @@ Orbit::Orbit(){
 
 void Orbit::setup(){
   kicker.setup();
+  bt.setup();
 }
 
 void Orbit::setRole(Role _role){
@@ -191,12 +192,6 @@ void Orbit::calcDefender(){ //Assuming PID is good
   }
 }
 
-void Orbit::manageKicker(){
-  if(hasBall){
-    kicker.kick();
-  }
-}
-
 void Orbit::calcSmallOrbit(){
   movement.speed = MAX_SPEED;
   double a = ball.arg < 180 ? ball.arg : -360+ball.arg;
@@ -240,6 +235,23 @@ void Orbit::moveToPos(Vector position){
   movement.speed = constrain(round(sqrt(horizontal * horizontal + vertical * vertical)), -MAX_SPEED, MAX_SPEED);
   #endif
   movement.angle = mod(round(450 - toDegrees(atan2(vertical,horizontal))), 360);
+}
+
+void Orbit::manageKicker(){
+  if(hasBall){
+    kicker.kick();
+  }
+}
+
+void Orbit::manageBluetooth(){
+  bt.receive();
+
+  int btSendData[BT_DATA_SIZE] = {round(ballPosition.i), round(ballPosition.j), round(robotPosition.i), round(robotPosition.j)};
+  bt.send(&btSendData[0]);
+
+  if(!ball.exists()){
+    ball = bt.getOtherBallPos() - robotPosition;
+  }
 }
 
 void Orbit::resetAllData(){

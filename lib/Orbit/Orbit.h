@@ -2,6 +2,7 @@
 #define ORBIT_H
 
 #include <Common.h>
+#include <Bluetooth.h>
 #include <Kicker.h>
 #include <Timer.h>
 #include <PID.h>
@@ -27,6 +28,9 @@ class Orbit{
     void setCoords(Vector coords);
     void setLightGate(bool gateVal);
 
+    void manageKicker();
+    void manageBluetooth();
+
     MoveData getMoveData();
     Vector getBallPos();
 
@@ -34,7 +38,7 @@ class Orbit{
 
     void calculateMoveData();
     void calculateRotation();
-    void manageKicker();
+
     void calculateLine();
     void avoidLine();
 
@@ -57,6 +61,8 @@ class Orbit{
 
     bool inRange(double value, double target, int range);
 
+    Bluetooth bt;
+    
     Kicker kicker;
 
     Timer centreDelay = Timer(CENTRE_TIME);

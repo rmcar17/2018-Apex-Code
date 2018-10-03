@@ -66,7 +66,7 @@ bool Vector::exists(){
 }
 
 bool Vector::exists(Vector ball){
-  return ball != Vector(0, 0);
+  return ball.mag != 0;
 }
 
 bool Vector::between(double leftAngle, double rightAngle){

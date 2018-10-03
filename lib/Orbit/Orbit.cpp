@@ -249,8 +249,9 @@ void Orbit::manageBluetooth(){
   int btSendData[BT_DATA_SIZE] = {round(ballPosition.i), round(ballPosition.j), round(robotPosition.i), round(robotPosition.j)};
   bt.send(&btSendData[0]);
 
-  if(!ball.exists()){
+  if(true || !ball.exists()){
     ball = bt.getOtherBallPos() - robotPosition;
+    Serial.println((bt.getOtherBallPos() - bt.getOtherRobotPos()).arg);
   }
 }
 

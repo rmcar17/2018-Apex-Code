@@ -244,15 +244,14 @@ void Orbit::manageKicker(){
 }
 
 void Orbit::manageBluetooth(){
-  // bt.receive();
-  //
-  // int btSendData[BT_DATA_SIZE] = {round(ballPosition.i), round(ballPosition.j), round(robotPosition.i), round(robotPosition.j)};
-  // bt.send(&btSendData[0]);
-  //
-  // if(true || !ball.exists()){
-  //   ball = bt.getOtherBallPos() - robotPosition;
-  //   // Serial.println((bt.getOtherBallPos() - bt.getOtherRobotPos()).arg);
-  // }
+  bt.receive();
+
+  int btSendData[BT_DATA_SIZE] = {round(ballPosition.i), round(ballPosition.j), round(robotPosition.i), round(robotPosition.j)};
+  bt.send(&btSendData[0]);
+
+  if(!ball.exists()){
+    ball = bt.getOtherBallPos() - robotPosition;
+  }
 }
 
 void Orbit::resetAllData(){

@@ -63,66 +63,62 @@ uint16_t transaction(uint8_t command, uint16_t data = 0){
 
 void setup() {
   bt.setup();
-  // pinMode(TEENSY_LED, OUTPUT);
-  // #if DEBUG_ANY
-  //   Serial.begin(38400);
-  // #endif
-  // camera.setup();
-  //
-  // digitalWrite(TEENSY_LED, HIGH);
-  //
-  // Wire.begin();
-  // comp.compassSetup();
-  // comp.calibrate();
-  //
-  // motors.motorSetup();
-  // motors.brake();
-  //
-  // orbit.setup();
-  // orbit.resetAllData();
-  //
-  // lidars.setup();
-  //
-  // role = Role::defend;
-  //
-  // digitalWrite(TEENSY_LED,LOW);
+  pinMode(TEENSY_LED, OUTPUT);
+  #if DEBUG_ANY
+    Serial.begin(38400);
+  #endif
+  camera.setup();
+
+  digitalWrite(TEENSY_LED, HIGH);
+
+  Wire.begin();
+  comp.compassSetup();
+  comp.calibrate();
+
+  motors.motorSetup();
+  motors.brake();
+
+  orbit.setup();
+  orbit.resetAllData();
+
+  lidars.setup();
+
+  role = Role::defend;
+
+  digitalWrite(TEENSY_LED,LOW);
 }
 
 void loop() {
-  char *test = "t";
-  // uint8_t *sendData = &test;
-  bt.send(test);
-  bt.receive();
-  // // Compass
-  // comp.updateGyro();
-  // int heading = comp.getHeading();
-  //
-  // // Camera
-  // camera.update();
-  //
-  // // Lidars
-  // lidars.update();
-  //
-  // // Orbit
-  // orbit.setRole(role);
-  // orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
-  // orbit.setBallData(camera.getBall());
-  // orbit.setCompAngle(heading);
-  // orbit.setCoords(lidars.getCoords());
-  //
-  // // orbit.manageBluetooth();
-  //
-  // // More Orbit
-  // orbit.calculateMoveData();
-  // orbit.calculateRotation();
-  //
-  // // Movement
-  // move = orbit.getMoveData();
-  // motors.moveDirection(move);
-  // // Serial.print(move.angle);
-  // // Serial.print("\t");
-  // // Serial.println(move.speed);
-  //
-  // // End Loop
-  // orbit.resetAllData();
+  // Compass
+  comp.updateGyro();
+  int heading = comp.getHeading();
+
+  // Camera
+  camera.update();
+
+  // Lidars
+  lidars.update();
+
+  // Orbit
+  orbit.setRole(role);
+  orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
+  orbit.setBallData(camera.getBall());
+  orbit.setCompAngle(heading);
+  orbit.setCoords(lidars.getCoords());
+
+  orbit.manageBluetooth();
+
+  // More Orbit
+  orbit.calculateMoveData();
+  orbit.calculateRotation();
+
+  // Movement
+  move = orbit.getMoveData();
+  motors.moveDirection(move);
+  // Serial.print(move.angle);
+  // Serial.print("\t");
+  // Serial.println(move.speed);
+
+  // End Loop
+  orbit.resetAllData();
 }

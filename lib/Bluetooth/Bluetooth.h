@@ -12,7 +12,7 @@ class Bluetooth {
 
 		void setup();
 
-		void send(char *t);
+		void send(int *pData);
 		void receive();
 
 		Vector getOtherBallPos();
@@ -20,6 +20,7 @@ class Bluetooth {
 
 	private:
 		int receiveData[BT_DATA_SIZE] = {0};
+		Timer sendTime = Timer(BT_SEND_TIME);
 		Timer timeout = Timer(BT_TIMEOUT);
 };
 

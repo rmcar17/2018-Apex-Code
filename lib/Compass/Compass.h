@@ -20,29 +20,17 @@ class Compass {
     Compass() {};
     void compassSetup();
 
-    Vector3D readAccelerometer();
     Vector3D readGyroscope();
 
-    void updateAccelerometer();
     void updateGyro();
     void calibrate();
 
     double getHeading();
   private:
     double heading;
-    double zAcc;
     long double calibration = COMPASS_CALIBRATION;
 
     long previousTime;
-
-    double convertRawAcceleration(int raw) {
-        // Since we are using 2G range
-        // -2g maps to a raw value of -32768
-        // +2g maps to a raw value of 32767
-
-        double a = (raw * 2.0) / 32768.0;
-        return a;
-    }
 
     double convertRawGyro(int raw) {
         double g = (raw * 500.0) / 32768.0;

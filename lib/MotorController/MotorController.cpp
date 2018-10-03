@@ -16,9 +16,9 @@ void MotorController::motorSetup(){
 }
 
 void MotorController::moveDirection(MoveData movement){
-  int angle = movement.angle;
+  int angle = movement.angle + MOVEMENT_ANGLE_OFFSET;
   int speed = movement.speed;
-  int rotation = movement.rotation;
+  int rotation = movement.rotation + MOVEMENT_ROTATION_OFFSET;
 
   double frontRightSpeed;
   double backRightSpeed;
@@ -79,8 +79,8 @@ void MotorController::move(int FR, int BR, int BL, int FL){
 }
 
 void MotorController::brake(){
-  motorFR.move(0);
-  motorBR.move(0);
-  motorBL.move(0);
-  motorFL.move(0);
+  motorFR.brake();
+  motorBR.brake();
+  motorBL.brake();
+  motorFL.brake();
 }

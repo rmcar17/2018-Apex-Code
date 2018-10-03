@@ -83,9 +83,11 @@ void Orbit::calculateRotation(){
     // Serial.print(ball.between(360-SMALL_ORBIT-30,SMALL_ORBIT+30));
     // Serial.print("\t");
     // Serial.println(ball.mag < GOAL_TRACK_DIS);
-    if(role == Role::attack && attackGoal.exists() && ball.exists() && ball.between(340,20) && ball.mag < GOAL_TRACK_DIS){
+    // Serial.println(attackGoal.exists());
+    if(role == Role::attack && attackGoal.exists()){
       attackGoal.arg = (360-attackGoal.arg);
-      rotate = attackRotation.update(attackGoal.arg < 180 ? attackGoal.arg : -(360 - attackGoal.arg));
+      double temp = modelDistance(attackGoal.mag) * ROTATION_MULTIPLIER;
+      rotate = goalRotation.update(attackGoal.arg < 180 ? attackGoal.arg + temp : -(360 - attackGoal.arg + temp));
     }
     else{
       rotate = rotation.update(compAngle < 180 ? compAngle : -(360 - compAngle));
@@ -101,57 +103,54 @@ void Orbit::calculateRotation(){
 void Orbit::calcAttacker(){
   if(ball.exists()){
     centreDelay.update();
-    if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){
-      calcSmallOrbit();
+    if(iCanShoot){
+      if(!iCanShootTimer.hasTimePassedNoUpdate()){
+          movement.brake = true;
+      } else{
+        calcSmallOrbit(); // Moves directly to the ball
+      }
+    }
+    if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){ // *
+      iCanShoot = true;
+      if((MAX_SPEED+incrementSpeed)<255){
+        incrementSpeed += 0.5;
+      }      
     }
     else{
-      if(/*ball.mag < IN_DISTANCE &&*/ (ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
+      iCanShoot = false;
+      iCanShootTimer.update();
+      incrementSpeed = 0;
+      if((ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
         calcBigOrbit(); // Transfers between close orbit and small orbit
-        // Serial.println("calcBigOrbit()");
         if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-          movement.speed = round(movement.speed * SLOW_SPEED-10);
+          movement.speed = round(movement.speed * SLOW_SPEED);
         }
       }
       else if(ball.mag < ORBIT_DISTANCE){
         calcCloseOrbit(); // Moves perpendicular to the ball
-        // Serial.println("calcCloseOrbit()");
-        if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-          movement.speed = round(movement.speed * (SLOW_SPEED+0.2));
-        }
+        // if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        //   movement.speed = round(movement.speed * (SLOW_SPEED+0.2));
+        // }
       }
       else{
         calcTangentOrbit(); // Enters the ball's nearest tangent
-        // Serial.println("calcTangentOrbit()");
-        if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-          if(ball.between(TANGENT_SLOW_DOWN,360-TANGENT_SLOW_DOWN) && ball.mag<TANGENT_SLOW_DOWN_MAG){
-            movement.speed = round(movement.speed * SLOW_SPEED);
-            // movement.speed = round((movement.speed * SLOW_SPEED)-40*(1-constrain(ball.mag/1500,0,1)));
-          }else{
-            movement.speed = round(movement.speed * SLOW_SPEED);
-          }
-        }
+        // if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        //     movement.speed = round(movement.speed * SLOW_SPEED);
+        // }
       }
     }
   } else{
-    if(ball.exists()){
-      centreDelay.update();
-      movement.angle = PERM;
-      movement.speed = NORMAL_SPEED;
-    }
-    else{
-      if(centreDelay.hasTimePassedNoUpdate()){
-        #if ROBOT == 1
-          moveToPos(CENTRE);
-        #else
-          moveToPos(GOALIE_POS);
-        #endif
-      }
+    iCanShoot = false;
+    iCanShootTimer.update();
+    incrementSpeed = 0;
+    if(centreDelay.hasTimePassedNoUpdate()){
+      moveToPos(CENTRE);
     }
   }
   prevAngle = movement.angle;
 
   // BOSS LOGIC
-  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500 && (lidars.lidarBack > 1900 || lidars.lidarBack < 400)){
+  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
     moveToPos(CENTRE);
   }
 }
@@ -194,17 +193,24 @@ void Orbit::calcDefender(){ //Assuming PID is good
 }
 
 void Orbit::manageKicker(){
-  if(hasBall){
+  if(attackGoal.exists() && attackGoal.between(345,15) && attackGoal.mag < 1450 && hasBall && role == attack){
     kicker.kick();
   }
 }
 
 void Orbit::calcSmallOrbit(){
-  movement.speed = MAX_SPEED;
-  double a = ball.arg < 180 ? ball.arg : -360+ball.arg;
-  movement.angle = mod(round(shootAngle.update((double)a)),360);
-  // Serial.print(a);
-  // Serial.print('\t');
+  movement.speed = MAX_SPEED + incrementSpeed;
+  movement.angle = ball.arg < 180 ? ball.arg : -(360-ball.arg);
+  // movement.angle = (ball.arg < 180 ? ball.arg*ANGLE_TIGHTENER_RIGHT : 360-(360-ball.arg)*ANGLE_TIGHTENER_LEFT);
+
+  // attackGoal.arg = (attackGoal.arg < 180 ? attackGoal.arg : -(360-attackGoal.arg));
+  // ball.arg = (ball.arg < 180 ? ball.arg : -(360-ball.arg));
+  // double middleAngle = (attackGoal.arg+ball.arg)/2;
+  // movement.angle = middleAngle;
+  // Serial.print(attackGoal.arg);
+  // Serial.print("\t");
+  // Serial.print(ball.arg);
+  // Serial.print("\t");
   // Serial.println(movement.angle);
 }
 
@@ -228,7 +234,7 @@ void Orbit::calcCloseOrbit(){
 void Orbit::calcTangentOrbit(){
   int tangentAngle = abs(round(toDegrees(asin(ORBIT_DISTANCE/ball.mag))));
   movement.speed = round(NORMAL_SPEED*(ball.mag < SLOW_DISTANCE ? BIG_SLOWER : 1));
-  movement.angle = ball.arg + tangentAngle * (ball.arg < 180 ? 1 : -1);
+  movement.angle = ball.arg + (tangentAngle+10) * (ball.arg < 180 ? 1 : -1);
 }
 
 void Orbit::moveToPos(Vector position){
@@ -244,6 +250,11 @@ void Orbit::moveToPos(Vector position){
   movement.angle = mod(round(450 - toDegrees(atan2(vertical,horizontal))), 360);
 }
 
+double Orbit::modelDistance(double distance){
+  double val = 1/(1+exp((distance-2900)/650));
+  return val;
+}
+
 void Orbit::resetAllData(){
   kicker.resetKicker();
 
@@ -257,5 +268,5 @@ void Orbit::resetAllData(){
   robotPosition = Vector(0, 0);
   ballPosition = Vector(0, 0);
   compAngle = -1;
-  movement = {-1, 0, 0};
+  movement = {-1, 0, 0, false};
 }

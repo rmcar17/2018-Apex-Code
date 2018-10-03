@@ -86,5 +86,5 @@ double Vector::calcMag(double _i, double _j){
 }
 
 double Vector::calcArg(double _i, double _j){
-  return mod(450 - toDegrees(atan2(_j, _i)),360);
+  return mod(360 + toDegrees(atan2(_j, _i)),360);
 }

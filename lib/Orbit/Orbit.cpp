@@ -251,7 +251,7 @@ void Orbit::manageBluetooth(){
 
   if(true || !ball.exists()){
     ball = bt.getOtherBallPos() - robotPosition;
-    Serial.println((bt.getOtherBallPos() - bt.getOtherRobotPos()).arg);
+    // Serial.println((bt.getOtherBallPos() - bt.getOtherRobotPos()).arg);
   }
 }
 

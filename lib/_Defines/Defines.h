@@ -148,7 +148,7 @@
 
 //BLUETOOTH
 
-#define BT_START 2147483647
+#define BT_START 1
 #define BT_DATA_SIZE 4
 
 #define BT_TIMEOUT 2000

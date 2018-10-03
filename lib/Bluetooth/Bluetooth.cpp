@@ -16,6 +16,7 @@ void Bluetooth::send(int *pData){
 }
 
 void Bluetooth::receive(){
+	Serial.println(Serial3.available());
 	if(Serial3.available() > 2 * BT_DATA_SIZE){
 		while(Serial3.read() != BT_START && Serial3.available());
 

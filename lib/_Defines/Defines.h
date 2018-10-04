@@ -173,6 +173,6 @@
 #define BT_DATA_SIZE 4
 
 #define BT_SEND_TIME 40
-#define BT_TIMEOUT 2000
+#define BT_TIMEOUT 250
 
 #endif

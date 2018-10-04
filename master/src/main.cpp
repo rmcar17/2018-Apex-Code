@@ -53,8 +53,14 @@ bool inCorner;
 
 int lightVector;
 
+bool hasSurged = false;
+Timer surgeTimer = Timer(500);
+
 void setup() {
   pinMode(TEENSY_LED, OUTPUT);
+
+  pinMode(17, INPUT);
+
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
@@ -67,7 +73,7 @@ void setup() {
   digitalWrite(TEENSY_LED, HIGH);
 
   bt.setup();
-  
+
   Wire.begin();
   comp.compassSetup();
   comp.calibrate();
@@ -79,7 +85,7 @@ void setup() {
 
   lg.setup();
 
-  role = Role::defend;
+  role = Role::attack;
 
   digitalWrite(TEENSY_LED,LOW);
 }
@@ -113,10 +119,19 @@ void loop() {
 
   // Movement
   move = orbit.getMoveData();
-  if(move.brake){
-    motors.brake();
-  }else{
-    motors.moveDirection(move);
+  if(role == Role::attack && (!hasSurged || !surgeTimer.hasTimePassedNoUpdate()) && analogRead(17) > 0){
+    if(!hasSurged){
+      surgeTimer.update();
+      hasSurged = true;
+    }
+    motors.moveDirection({0,MAX_SPEED,move.rotation});
+  }
+  else{
+    if(move.brake){
+      motors.brake();
+    }else{
+      motors.moveDirection(move);
+    }
   }
 
   orbit.resetAllData();

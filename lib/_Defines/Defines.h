@@ -4,15 +4,15 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 1
+#define ROBOT 2
 
-#define ATTACK_BLUE true
+#define ATTACK_BLUE false
 
 #define NORMAL_SPEED 150
 
 #define GOALIE_SPEED 230
 
-#define MAX_SPEED 180
+#define MAX_SPEED 230
 
 #define GOAL_TRACK true
 /* -------------------------------------------------- */

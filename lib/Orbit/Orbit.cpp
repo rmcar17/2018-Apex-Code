@@ -156,7 +156,6 @@ void Orbit::calcAttacker(){
     movement.angle = orbit(ball.arg,ball.mag);
   } else if(centreDelay.hasTimePassedNoUpdate()){
       moveToPos(CENTRE);
-    }
   }
   
   // BOSS LOGIC

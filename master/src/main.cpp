@@ -54,7 +54,6 @@ bool inCorner;
 int lightVector;
 
 void setup() {
-  bt.setup();
   pinMode(TEENSY_LED, OUTPUT);
   #if DEBUG_ANY
     Serial.begin(38400);
@@ -67,6 +66,8 @@ void setup() {
 
   digitalWrite(TEENSY_LED, HIGH);
 
+  bt.setup();
+  
   Wire.begin();
   comp.compassSetup();
   comp.calibrate();

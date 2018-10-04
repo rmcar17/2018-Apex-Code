@@ -8,9 +8,9 @@
 
 #define ATTACK_BLUE false
 
-#define NORMAL_SPEED 150
+#define NORMAL_SPEED 120
 
-#define MAX_SPEED 180
+#define MAX_SPEED 140
 
 #define GOAL_TRACK true
 /* -------------------------------------------------- */

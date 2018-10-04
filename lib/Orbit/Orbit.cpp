@@ -52,12 +52,6 @@ void Orbit::setBall(Vector tempBall){
 }
 
 void Orbit::calculateMoveData(){
-  if(ball.exists()){
-    rememberTimer.update();
-  }
-  else if(!rememberTimer.hasTimePassedNoUpdate()){
-    ball = prevBall;
-  }
   if(role == Role::attack){
     calcAttacker();
   }
@@ -102,63 +96,72 @@ void Orbit::calculateRotation(){
 }
 
 double Orbit::orbitSimple(int angle, double ratio){
-    if(angle == -1 || angle == 65506){
-        return 65506;
-    }
-    /* Simple orbit from last year for testing */
-    if(ratio < 0.00 || ratio > 1.00){
-        ratio = 1.00;
-    }
-    if(angle == -1){
-        return -1.00;
-    }else if(angle < 30 || angle > 330){
-        movement.speed = MAX_SPEED;
-        return angle < 180 ? (angle + (angle * 1.1 * ratio)) : (angle - ((360 - angle) * 1.1 * ratio));
-    }else{
-        return angle < 180 ? (angle + (90 * ratio)) : (angle - (90 * ratio));
-    }
+  if(angle == -1 || angle == 65506){
+      return 65506;
+  }
+  /* Simple orbit from last year for testing */
+  if(ratio < 0.00 || ratio > 1.00){
+      ratio = 1.00;
+  }
+  if(angle == -1){
+      return -1.00;
+  }else if(angle < 30 || angle > 360-300){
+      movement.speed = MAX_SPEED;
+      return angle < 180 ? (angle + (angle * 1.1 * ratio)) : (angle - ((360 - angle) * 1.1 * ratio));
+  }else{
+      return angle < 180 ? (angle + (90 * ratio)) : (angle - (90 * ratio));
+  }
 }
 
 double Orbit::orbit(int angle, int distance){
-    /* Ensure that we actually have a distance */
-    if(angle == -1 || angle == 65506){
-        return 65506;
-    }
-    if(distance != 0){
-        if(distance > 600){
-            /* Move ball direction */
-            return angle;
-        }else if(distance > 400 && distance <= 600){
-            /* A lil bit closer */
-            return orbitSimple(angle, 0.2);
-        }else if(distance > 230 && distance <= 400){
-            /* Almost Normal Orbit orbit */
-            return orbitSimple(angle, 0.23);
-        }else if(distance <= 230){
-            /* More Aggressive than Normal Orbit */
-            return orbitSimple(angle, 0.4);
-        }
-    }else{ /* Do Normal Orbit */
-        return orbitSimple(angle, 0.6);
-    }
+  /* Ensure that we actually have a distance */
+  if(angle == -1 || angle == 65506){
+      return 65506;
+  }
+  if(distance != 0){
+      if(distance > 550){
+          /* Move ball direction */
+          return angle;
+      }else if(distance > 450 && distance <= 600){
+          /* A lil bit closer */
+          return orbitSimple(angle, 0.3);
+      }else if(distance > 300 && distance <= 450){
+          /* Almost Normal Orbit orbit */
+          return orbitSimple(angle, 0.5);
+      }else if(distance <= 300){
+          /* More Aggressive than Normal Orbit */
+          return orbitSimple(angle, 0.8);
+      }
+  }else{ /* Do Normal Orbit */
+      return orbitSimple(angle, 0.6);
+  }
 }
 
 void Orbit::calcAttacker(){
+  // Serial.print(ball.exists());
+  // Serial.print("\t");
+  // Serial.print(ball.arg);
+  // Serial.print("\t");
+  // Serial.println(ball.mag);
+
   if(ball.exists()){
     rememberTimer.update();
+    centreDelay.update();
   }
   else if(!rememberTimer.hasTimePassedNoUpdate()){
     ball = prevBall;
   }
 
   if(ball.exists()){
-    centreDelay.update();
     movement.speed = NORMAL_SPEED;
     movement.angle = orbit(ball.arg,ball.mag);
   } else if(centreDelay.hasTimePassedNoUpdate()){
       moveToPos(CENTRE);
   }
   
+  if(!ball.exists()){
+  }
+
   // BOSS LOGIC
   if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
     moveToPos(CENTRE);
@@ -303,7 +306,7 @@ void Orbit::moveToPos(Vector position){
 }
 
 void Orbit::manageKicker(){
-  if(hasBall){
+  if(attackGoal.exists() && attackGoal.between(340,20) && attackGoal.mag < 1100 && hasBall){
     kicker.kick();
   }
 }

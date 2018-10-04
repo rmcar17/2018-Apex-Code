@@ -1,17 +1,17 @@
 import sensor, image, time
 from pyb import UART, LED
 
-camDebug = 0
+camDebug = True
 FPSDebug = 0
 
-robot = 1
+robot = 2
 
 if robot == 2:
-    camThresholds = [((40, 63, 41, 83, 4, 69),), #Ball
+    camThresholds = [((38, 58, 22, 88, 32, 77),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
     ((53, 79, -6, 16, 35, 64),)]   #Yellow Goal
 else:
-    camThresholds = [((27, 65, 41, 86, 30, 72),), #Ball
+    camThresholds = [((29, 61, 54, 77, 8, 72),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
     ((37, 80, -19, 24, 27, 89),)]   #Yellow Goal
 

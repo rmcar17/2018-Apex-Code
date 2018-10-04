@@ -144,14 +144,25 @@ double Orbit::orbit(int angle, int distance){
 }
 
 void Orbit::calcAttacker(){
-  movement.speed = NORMAL_SPEED;
-  movement.angle = orbit(ball.arg,ball.mag);
-  // if(ball.exists()){
-  //   rememberTimer.update();
-  // }
-  // else if(!rememberTimer.hasTimePassedNoUpdate()){
-  //   ball = prevBall;
-  // }
+  if(ball.exists()){
+    rememberTimer.update();
+  }
+  else if(!rememberTimer.hasTimePassedNoUpdate()){
+    ball = prevBall;
+  }
+
+  if(ball.exists()){
+    movement.speed = NORMAL_SPEED;
+    movement.angle = orbit(ball.arg,ball.mag);
+  } else if(centreDelay.hasTimePassedNoUpdate()){
+      moveToPos(CENTRE);
+    }
+  }
+  
+  // BOSS LOGIC
+  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
+    moveToPos(CENTRE);
+  }
 
   // if(ball.exists()){
   //   centreDelay.update();
@@ -200,11 +211,6 @@ void Orbit::calcAttacker(){
   //   }
   // }
   // prevAngle = movement.angle;
-
-  // // BOSS LOGIC
-  // if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
-  //   moveToPos(CENTRE);
-  // }
 }
 
 void Orbit::calcDefender(){ //Assuming PID is good

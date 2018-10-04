@@ -309,15 +309,10 @@ void Orbit::manageKicker(){
   }
 }
 
-void Orbit::manageBluetooth(){
-  bt.receive();
-
-  int btSendData[BT_DATA_SIZE] = {round(ballPosition.i), round(ballPosition.j), round(robotPosition.i), round(robotPosition.j)};
-  bt.send(&btSendData[0]);
-
+void Orbit::setBTData(Vector otherBallPos){
   if(!ball.exists()){
-    if(bt.getOtherBallPos().exists()){
-      ball = bt.getOtherBallPos() - robotPosition;
+    if(otherBallPos.exists()){
+      ball = otherBallPos - robotPosition;
     }
   }
 }

@@ -59,3 +59,12 @@ Vector Bluetooth::getOtherRobotPos(){
 		return Vector(0,0);
 	}
 }
+
+int Bluetooth::getOtherRole(){
+	if(isConnected()){
+		return receiveData[4];
+	}
+	else{
+		return Role::undecided;
+	}
+}

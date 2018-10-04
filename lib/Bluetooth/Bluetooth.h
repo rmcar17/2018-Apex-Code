@@ -5,6 +5,7 @@
 #include <Defines.h>
 #include <Timer.h>
 #include <Vector.h>
+#include <Role.h>
 
 class Bluetooth {
 	public:
@@ -19,6 +20,7 @@ class Bluetooth {
 
 		Vector getOtherBallPos();
 		Vector getOtherRobotPos();
+		int getOtherRole();
 
 	private:
 		int receiveData[BT_DATA_SIZE] = {0};

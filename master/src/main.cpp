@@ -101,6 +101,18 @@ void loop() {
   // Lidars
   lidars.update();
 
+  //Bluetooth
+  bt.receive();
+
+  //MUST DECIDE ROLES HERE
+
+  Vector ball = camera.getBall();
+  Vector robotPosition = lidars.getCoords();
+  Vector ballPosition = robotPosition + ball;
+
+  int btSendData[BT_DATA_SIZE] = {round(ballPosition.i), round(ballPosition.j), round(robotPosition.i), round(robotPosition.j), role};
+  bt.send(&btSendData[0]);
+
   // Orbit
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
@@ -108,8 +120,7 @@ void loop() {
   orbit.setLightGate(lg.hasBall());
   orbit.setCompAngle(heading);
   orbit.setCoords(lidars.getCoords());
-
-  orbit.manageBluetooth();
+  orbit.setBTData(bt.getOtherBallPos());
 
   // More Orbit
   orbit.calculateMoveData();

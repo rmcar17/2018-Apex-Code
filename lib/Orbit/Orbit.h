@@ -27,9 +27,9 @@ class Orbit{
     void setCompAngle(int heading);
     void setCoords(Vector coords);
     void setLightGate(bool gateVal);
+    void setBTData(Vector otherBallPos);
 
     void manageKicker();
-    void manageBluetooth();
 
     MoveData getMoveData();
     Vector getBallPos();

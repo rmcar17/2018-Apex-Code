@@ -38,6 +38,10 @@ void Bluetooth::receive(){
 	}
 }
 
+bool Bluetooth::isConnected(){
+	return timeout.hasTimePassedNoUpdate();
+}
+
 Vector Bluetooth::getOtherBallPos(){
 	if(timeout.hasTimePassedNoUpdate()){
 		return Vector(0,0);

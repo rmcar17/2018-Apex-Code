@@ -15,13 +15,16 @@ class Bluetooth {
 		void send(int *pData);
 		void receive();
 
+		bool isConnected();
+
 		Vector getOtherBallPos();
 		Vector getOtherRobotPos();
 
-		Timer timeout = Timer(BT_TIMEOUT);
 	private:
 		int receiveData[BT_DATA_SIZE] = {0};
+
 		Timer sendTime = Timer(BT_SEND_TIME);
+		Timer timeout = Timer(BT_TIMEOUT);
 };
 
 #endif

@@ -102,7 +102,7 @@ void loop() {
   orbit.setCompAngle(heading);
   orbit.setCoords(lidars.getCoords());
 
-  // orbit.manageBluetooth();
+  orbit.manageBluetooth();
 
   // More Orbit
   orbit.calculateMoveData();

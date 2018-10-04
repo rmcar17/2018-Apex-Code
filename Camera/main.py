@@ -1,19 +1,19 @@
 import sensor, image, time
 from pyb import UART, LED
 
-camDebug = 1
-FPSDebug = 0
+camDebug = True
+FPSDebug = False
 
 robot = 2
 
 if robot == 2:
-    camThresholds = [((38,59,31,71,11,58),), #Ball
+    camThresholds = [((35,60,33,73,20,63),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
     ((53, 79, -6, 16, 35, 64),)]   #Yellow Goal
 else:
-    camThresholds = [((47, 66, 41, 84, 16, 78),), #Ball
+    camThresholds = [((43, 57, 33, 78, 15, 64),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
-    ((46, 84, -9, 21, 26, 66),)]   #Yellow Goal
+    ((39, 81, -13, 27, 16, 67),)]   #Yellow Goal
 
 
 def largestBlob(lBlob):
@@ -40,11 +40,12 @@ class Reader:
     def update(self):
         img = sensor.snapshot()
 
-        ballBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[0],x_stride=2,y_stride=2,pixels_threshold=20)))
+        ballBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[0],x_stride=2,y_stride=2)))
         blueBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[1],x_stride=15,y_stride=8,merge=True,margin=34,pixels_threshold=100)))
         yellowBlob = self.getXY(largestBlob(img.find_blobs(self.thresholds[2],x_stride=15,y_stride=8,merge=True,margin=34,pixels_threshold=50)))
 
         if self.debug:
+            img.draw_cross(100,115)
             if ballBlob != (254, 254):
                 img.draw_line((100, 115, ballBlob[0], ballBlob[1]),color=(255,92,0),thickness=2)
             if blueBlob != (254, 254):

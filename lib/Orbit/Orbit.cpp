@@ -115,7 +115,7 @@ void Orbit::calcAttacker(){
       iCanShoot = true;
       if((MAX_SPEED+incrementSpeed)<255){
         incrementSpeed += 0.5;
-      }      
+      }
     }
     else{
       iCanShoot = false;
@@ -162,33 +162,34 @@ void Orbit::calcDefender(){ //Assuming PID is good
     Vector moveVector = defendGoal-DEFEND_POSITION;//Movement required go to centre of goal
     double vMov = vGoalie.update(moveVector.j)*1.5;
     if(ball.exists()){
-      if(ball.between(340,20) && ball.mag < 500 && defendGoal.j > SURGE_DISTANCE){
+      if(ball.between(345,15) && ball.mag < 550 && defendGoal.j > SURGE_DISTANCE){
         calcAttacker();
         return;
       }
       else{
         if((defendGoal.i > DEFEND_LEFT_I && ball.arg > 180) || (defendGoal.i < DEFEND_RIGHT_I && ball.arg < 180)){
-          hMov = hGoalie.update(ball.arg > 180 ? defendGoal.i-DEFEND_LEFT_I : defendGoal.i-DEFEND_RIGHT_I);
+          hMov = hGoalie.update(ball.arg > 180 ? defendGoal.i-DEFEND_LEFT_I : defendGoal.i-DEFEND_RIGHT_I)*0.3;
+          vMov = vGoalie.update(moveVector.j-80)*1.5;
         }
         else{
           hMov = angGoalie.update(ball.arg < 180 ? ball.arg : -(360-ball.arg));
         }
         movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
-        movement.angle = movement.angle + (movement.angle < 180 ? 15 : -15);
+        movement.angle = movement.angle + (movement.angle < 180 ? 17 : -17);
       }
     }
     else{
       hMov = hGoalie.update(moveVector.i);
       movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
     }
-    movement.speed = constrain(round(goalieSpeed.update(sqrt(hMov*hMov+vMov*vMov))),0,MAX_SPEED); // Use the same PID for ball follow and recentre
+    movement.speed = constrain(round(goalieSpeed.update(sqrt(hMov*hMov+vMov*vMov))),0,GOALIE_SPEED); // Use the same PID for ball follow and recentre
   }
   else{
     // if(ball.exists()){
-    //   calcAttacker();
+      // calcAttacker();
     // }
     // else{
-      moveToPos(CENTRE);
+      moveToPos(GOALIE_POS);
     // }
   }
 }
@@ -258,7 +259,9 @@ void Orbit::manageBluetooth(){
   bt.send(&btSendData[0]);
 
   if(!ball.exists()){
-    ball = bt.getOtherBallPos() - robotPosition;
+    if(bt.getOtherBallPos().exists()){
+      ball = bt.getOtherBallPos() - robotPosition;
+    }
   }
 }
 

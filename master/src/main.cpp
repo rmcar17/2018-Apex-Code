@@ -87,7 +87,7 @@ void setup() {
 
   lg.setup();
 
-  role = Role::attack;
+  role = Role::defend;
 
   digitalWrite(TEENSY_LED,LOW);
 }
@@ -111,7 +111,7 @@ void loop() {
   orbit.setCompAngle(heading);
   orbit.setCoords(lidars.getCoords());
 
-  orbit.manageBluetooth();
+  // orbit.manageBluetooth();
 
   // More Orbit
   orbit.calculateMoveData();

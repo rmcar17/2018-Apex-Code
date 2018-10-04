@@ -52,15 +52,6 @@ Vector vector = Vector(0,0);
 bool inCorner;
 
 int lightVector;
-volatile uint16_t dataOut[1], dataIn[1];
-
-uint16_t transaction(uint8_t command, uint16_t data = 0){
-  dataOut[0] = (command << 14) | (data & 0x3FFF);
-
-  spi.txrx16(dataOut, dataIn, 1, CTAR_0, MASTER_CS_LIGHT);
-
-  return dataIn[0];
-}
 
 void setup() {
   bt.setup();

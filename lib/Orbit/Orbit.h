@@ -63,8 +63,10 @@ class Orbit{
 
     bool inRange(double value, double target, int range);
 
+    double orbitSimple(int angle, double ratio);
+    double orbit(int angle, int distance);
+
     Bluetooth bt;
-    
     Kicker kicker;
 
     Timer centreDelay = Timer(CENTRE_TIME);

@@ -101,59 +101,116 @@ void Orbit::calculateRotation(){
   movement.rotation = round(rotate);
 }
 
+double Orbit::orbitSimple(int angle, double ratio){
+    if(angle == -1 || angle == 65506){
+        return 65506;
+    }
+    /* Simple orbit from last year for testing */
+    if(ratio < 0.00 || ratio > 1.00){
+        ratio = 1.00;
+    }
+    if(angle == -1){
+        return -1.00;
+    }else if(angle < 30 || angle > 330){
+        movement.speed = MAX_SPEED;
+        return angle < 180 ? (angle + (angle * 1.1 * ratio)) : (angle - ((360 - angle) * 1.1 * ratio));
+    }else{
+        return angle < 180 ? (angle + (90 * ratio)) : (angle - (90 * ratio));
+    }
+}
+
+double Orbit::orbit(int angle, int distance){
+    /* Ensure that we actually have a distance */
+    if(angle == -1 || angle == 65506){
+        return 65506;
+    }
+    if(distance != 0){
+        if(distance > 600){
+            /* Move ball direction */
+            return angle;
+        }else if(distance > 400 && distance <= 600){
+            /* A lil bit closer */
+            return orbitSimple(angle, 0.2);
+        }else if(distance > 230 && distance <= 400){
+            /* Almost Normal Orbit orbit */
+            return orbitSimple(angle, 0.23);
+        }else if(distance <= 230){
+            /* More Aggressive than Normal Orbit */
+            return orbitSimple(angle, 0.4);
+        }
+    }else{ /* Do Normal Orbit */
+        return orbitSimple(angle, 0.6);
+    }
+}
+
 void Orbit::calcAttacker(){
   if(ball.exists()){
-    centreDelay.update();
-    if(iCanShoot){
-      if(!iCanShootTimer.hasTimePassedNoUpdate()){
-          movement.brake = true;
-      } else{
-        calcSmallOrbit(); // Moves directly to the ball
-      }
-    }
-    if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){ // *
-      iCanShoot = true;
-      if((MAX_SPEED+incrementSpeed)<255){
-        incrementSpeed += 0.5;
-      }
-    }
-    else{
-      iCanShoot = false;
-      iCanShootTimer.update();
-      incrementSpeed = 0;
-      if((ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
-        calcBigOrbit(); // Transfers between close orbit and small orbit
-        if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-          movement.speed = round(movement.speed * SLOW_SPEED);
-        }
-      }
-      else if(ball.mag < ORBIT_DISTANCE){
-        calcCloseOrbit(); // Moves perpendicular to the ball
-        // if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-        //   movement.speed = round(movement.speed * (SLOW_SPEED+0.2));
-        // }
-      }
-      else{
-        calcTangentOrbit(); // Enters the ball's nearest tangent
-        // if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
-        //     movement.speed = round(movement.speed * SLOW_SPEED);
-        // }
-      }
-    }
-  } else{
-    iCanShoot = false;
-    iCanShootTimer.update();
-    incrementSpeed = 0;
-    if(centreDelay.hasTimePassedNoUpdate()){
-      moveToPos(CENTRE);
-    }
+    rememberTimer.update();
   }
-  prevAngle = movement.angle;
+  else if(!rememberTimer.hasTimePassedNoUpdate()){
+    ball = prevBall;
+  }
+
+  if(ball.exists()){
+    centreDelay.update();
+    movement.speed = NORMAL_SPEED;
+    movement.angle = orbit(ball.arg,ball.mag);
+  } else if(centreDelay.hasTimePassedNoUpdate()){
+      moveToPos(CENTRE);
+  }
 
   // BOSS LOGIC
   if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
     moveToPos(CENTRE);
   }
+
+  // if(ball.exists()){
+  //   centreDelay.update();
+  //   if(iCanShoot){
+  //     if(!iCanShootTimer.hasTimePassedNoUpdate()){
+  //         movement.brake = true;
+  //     } else{
+  //       calcSmallOrbit(); // Moves directly to the ball
+  //     }
+  //   }
+  //   if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){ // *
+  //     iCanShoot = true;
+  //     if((MAX_SPEED+incrementSpeed)<255){
+  //       incrementSpeed += 0.5;
+  //     }
+  //   }
+  //   else{
+  //     iCanShoot = false;
+  //     iCanShootTimer.update();
+  //     incrementSpeed = 0;
+  //     if((ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
+  //       calcBigOrbit(); // Transfers between close orbit and small orbit
+  //       if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+  //         movement.speed = round(movement.speed * SLOW_SPEED);
+  //       }
+  //     }
+  //     else if(ball.mag < ORBIT_DISTANCE){
+  //       calcCloseOrbit(); // Moves perpendicular to the ball
+  //       if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+  //         movement.speed = round(movement.speed * (SLOW_SPEED+0.2));
+  //       }
+  //     }
+  //     else{
+  //       calcTangentOrbit(); // Enters the ball's nearest tangent
+  //       if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+  //           movement.speed = round(movement.speed * SLOW_SPEED);
+  //       }
+  //     }
+  //   }
+  // } else{
+  //   iCanShoot = false;
+  //   iCanShootTimer.update();
+  //   incrementSpeed = 0;
+  //   if(centreDelay.hasTimePassedNoUpdate()){
+  //     moveToPos(CENTRE);
+  //   }
+  // }
+  // prevAngle = movement.angle;
 }
 
 void Orbit::calcDefender(){ //Assuming PID is good
@@ -266,7 +323,7 @@ void Orbit::manageBluetooth(){
 }
 
 double Orbit::modelDistance(double distance){
-  double val = 1/(1+exp((distance-2900)/650));
+  double val = 1/(1+exp((distance-1250)/250));
   return val;
 }
 

@@ -152,6 +152,7 @@ void Orbit::calcAttacker(){
   }
 
   if(ball.exists()){
+    centreDelay.update();
     movement.speed = NORMAL_SPEED;
     movement.angle = orbit(ball.arg,ball.mag);
   } else if(centreDelay.hasTimePassedNoUpdate()){

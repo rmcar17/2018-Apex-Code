@@ -5,6 +5,7 @@
 #include <Defines.h>
 #include <Timer.h>
 #include <Vector.h>
+#include <Role.h>
 
 class Bluetooth {
 	public:
@@ -15,11 +16,15 @@ class Bluetooth {
 		void send(int *pData);
 		void receive();
 
+		bool isConnected();
+
 		Vector getOtherBallPos();
 		Vector getOtherRobotPos();
+		int getOtherRole();
 
 	private:
 		int receiveData[BT_DATA_SIZE] = {0};
+
 		Timer sendTime = Timer(BT_SEND_TIME);
 		Timer timeout = Timer(BT_TIMEOUT);
 };

@@ -4,13 +4,17 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 1
+#define ROBOT 2
 
 #define ATTACK_BLUE false
 
 #define NORMAL_SPEED 120
 
-#define MAX_SPEED 140
+#define SHOOTING_SPEED 140
+
+#define GOALIE_SPEED 230
+
+#define MAX_SPEED 230
 
 #define GOAL_TRACK true
 /* -------------------------------------------------- */
@@ -43,7 +47,7 @@
 
 #define CENTRE Vector(FIELD_WIDTH / 2, FIELD_LENGTH / 2 - 250, false)
 
-#define GOALIE_POS (DEFEND_GOAL + Vector(0, 60, false))
+#define GOALIE_POS (DEFEND_GOAL + Vector(0, 250, false))
 
 
 // ORBIT
@@ -106,14 +110,14 @@
 
 
 /*            DEFEND VALUES                */
-#define DEFEND_POSITION Vector(-50, -230, false)
+#define DEFEND_POSITION Vector(-50, -350, false)
 
-#define DEFEND_LEFT_I 150
-#define DEFEND_RIGHT_I -220
+#define DEFEND_LEFT_I 100
+#define DEFEND_RIGHT_I -180
 
 #define SURGE_DISTANCE -500
 
-#define ANG_GOALIE_KP 2.5
+#define ANG_GOALIE_KP 4.6
 #define ANG_GOALIE_KI 0
 #define ANG_GOALIE_KD 0
 
@@ -168,9 +172,9 @@
 
 #define BT_START_1 250
 #define BT_START_2 254
-#define BT_DATA_SIZE 4
+#define BT_DATA_SIZE 5
 
 #define BT_SEND_TIME 40
-#define BT_TIMEOUT 2000
+#define BT_TIMEOUT 250
 
 #endif

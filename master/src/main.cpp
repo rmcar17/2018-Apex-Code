@@ -53,9 +53,14 @@ bool inCorner;
 
 int lightVector;
 
+bool hasSurged = false;
+Timer surgeTimer = Timer(500);
+
 void setup() {
-  bt.setup();
   pinMode(TEENSY_LED, OUTPUT);
+
+  pinMode(17, INPUT);
+
   #if DEBUG_ANY
     Serial.begin(38400);
   #endif
@@ -66,6 +71,8 @@ void setup() {
   camera.setup();
 
   digitalWrite(TEENSY_LED, HIGH);
+
+  bt.setup();
 
   Wire.begin();
   comp.compassSetup();
@@ -94,6 +101,18 @@ void loop() {
   // Lidars
   lidars.update();
 
+  //Bluetooth
+  bt.receive();
+
+  //MUST DECIDE ROLES HERE
+
+  Vector ball = camera.getBall();
+  Vector robotPosition = lidars.getCoords();
+  Vector ballPosition = robotPosition + ball;
+
+  int btSendData[BT_DATA_SIZE] = {round(ballPosition.i), round(ballPosition.j), round(robotPosition.i), round(robotPosition.j), role};
+  bt.send(&btSendData[0]);
+
   // Orbit
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
@@ -101,8 +120,7 @@ void loop() {
   orbit.setLightGate(lg.hasBall());
   orbit.setCompAngle(heading);
   orbit.setCoords(lidars.getCoords());
-
-  orbit.manageBluetooth();
+  orbit.setBTData(bt.getOtherBallPos());
 
   // More Orbit
   orbit.calculateMoveData();
@@ -112,10 +130,19 @@ void loop() {
 
   // Movement
   move = orbit.getMoveData();
-  if(move.brake){
-    motors.brake();
-  }else{
-    motors.moveDirection(move);
+  if(role == Role::attack && (!hasSurged || !surgeTimer.hasTimePassedNoUpdate()) && analogRead(17) > 0){
+    if(!hasSurged){
+      surgeTimer.update();
+      hasSurged = true;
+    }
+    motors.moveDirection({0,MAX_SPEED,move.rotation});
+  }
+  else{
+    if(move.brake){
+      motors.brake();
+    }else{
+      motors.moveDirection(move);
+    }
   }
 
   orbit.resetAllData();

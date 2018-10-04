@@ -38,20 +38,33 @@ void Bluetooth::receive(){
 	}
 }
 
+bool Bluetooth::isConnected(){
+	return !timeout.hasTimePassedNoUpdate();
+}
+
 Vector Bluetooth::getOtherBallPos(){
-	if(timeout.hasTimePassedNoUpdate()){
-		return Vector(0,0);
+	if(isConnected()){
+		return Vector(receiveData[0],receiveData[1],false);
 	}
 	else{
-		return Vector(receiveData[0],receiveData[1],false);
+		return Vector(0,0);
 	}
 }
 
 Vector Bluetooth::getOtherRobotPos(){
-	if(timeout.hasTimePassedNoUpdate()){
-		return Vector(0,0);
+	if(isConnected()){
+		return Vector(receiveData[2],receiveData[3],false);
 	}
 	else{
-		return Vector(receiveData[2],receiveData[3],false);
+		return Vector(0,0);
+	}
+}
+
+int Bluetooth::getOtherRole(){
+	if(isConnected()){
+		return receiveData[4];
+	}
+	else{
+		return Role::undecided;
 	}
 }

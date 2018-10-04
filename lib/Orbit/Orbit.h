@@ -59,6 +59,9 @@ class Orbit{
 
     bool inRange(double value, double target, int range);
 
+    double orbitSimple(int angle, double ratio);
+    double orbit(int angle, int distance);
+
     Kicker kicker;
 
     Timer centreDelay = Timer(CENTRE_TIME);

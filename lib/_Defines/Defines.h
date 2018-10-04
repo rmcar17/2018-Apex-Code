@@ -4,13 +4,13 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 2
+#define ROBOT 1
 
-#define ATTACK_BLUE false
+#define ATTACK_BLUE true
 
-#define NORMAL_SPEED 120
+#define NORMAL_SPEED 150
 
-#define SHOOTING_SPEED 140
+#define SHOOTING_SPEED 120
 
 #define GOALIE_SPEED 230
 
@@ -85,7 +85,7 @@
 #else
   #define ORBIT_DISTANCE 260 //Radius of circle for tangent orbit
 #endif
-#define SMALL_ORBIT 15 //Angle small orbit is called
+#define SMALL_ORBIT 30 //Angle small orbit is called
 #define SMALL_ORBIT_LEFT 0 //To increase small orbit range on the left
 #define SMALL_ORBIT_RIGHT 0 //To increase small orbit range on the right
 #define BIG_ORBIT_LEFT 0 //To increase big orbit range on the left
@@ -166,7 +166,7 @@
 // MOVEMENT
 #define MOVEMENT_ANGLE_OFFSET 0
 #define MOVEMENT_ROTATION_OFFSET 0
-#define TOTAL_BRAKE_TIME 125
+#define TOTAL_BRAKE_TIME 100
 
 //BLUETOOTH
 

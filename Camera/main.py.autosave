@@ -1,7 +1,7 @@
 import sensor, image, time
 from pyb import UART, LED
 
-camDebug = 0
+camDebug = 0n
 FPSDebug = 0
 
 robot = 1

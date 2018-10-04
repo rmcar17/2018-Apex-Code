@@ -1,19 +1,19 @@
 import sensor, image, time
 from pyb import UART, LED
 
-camDebug = 1
+camDebug = 0
 FPSDebug = 0
 
-robot = 2
+robot = 1
 
 if robot == 2:
-    camThresholds = [((38,59,31,71,11,58),), #Ball
+    camThresholds = [((40, 63, 41, 83, 4, 69),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
     ((53, 79, -6, 16, 35, 64),)]   #Yellow Goal
 else:
-    camThresholds = [((47, 66, 41, 84, 16, 78),), #Ball
+    camThresholds = [((27, 65, 41, 86, 30, 72),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
-    ((46, 84, -9, 21, 26, 66),)]   #Yellow Goal
+    ((37, 80, -19, 24, 27, 89),)]   #Yellow Goal
 
 
 def largestBlob(lBlob):

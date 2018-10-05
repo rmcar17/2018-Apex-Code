@@ -36,7 +36,9 @@ void Orbit::setLightGate(bool gateVal){
 
 void Orbit::setCoords(Vector coords){
   robotPosition = coords;
-  ballPosition = coords + ball;
+  if(ball.exists()){
+    ballPosition = coords + ball;
+  }
   robotGoalPosition = Vector(robotPosition.i,abs(defendGoal.j),false);
  }
 

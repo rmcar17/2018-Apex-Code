@@ -56,6 +56,10 @@ int lightVector;
 bool hasSurged = false;
 Timer surgeTimer = Timer(500);
 
+Vector ball = Vector(0,0);
+Vector robotPosition = Vector(0,0);
+Vector ballPosition = Vector(0,0);
+
 void setup() {
   pinMode(TEENSY_LED, OUTPUT);
 
@@ -106,9 +110,14 @@ void loop() {
 
   //MUST DECIDE ROLES HERE
 
-  Vector ball = camera.getBall();
-  Vector robotPosition = lidars.getCoords();
-  Vector ballPosition = robotPosition + ball;
+  ball = camera.getBall();
+  robotPosition = lidars.getCoords();
+  if(ball.exists()){
+    ballPosition = robotPosition + ball;
+  }
+  else{
+    ballPosition = Vector(0,0);
+  }
 
   int btSendData[BT_DATA_SIZE] = {round(ballPosition.i), round(ballPosition.j), round(robotPosition.i), round(robotPosition.j), role};
   bt.send(&btSendData[0]);

@@ -3,20 +3,16 @@
 
 #include <Vector.h>
 
-/* -------------------------------------------------- */
-#define ROBOT 1
-
-#define ATTACK_BLUE true
-
-#define NORMAL_SPEED 150
-
+/* ---------------------General---------------------- */
+#define ROBOT 2
+#define ATTACK_BLUE false
+#define NORMAL_SPEED 180
+/* ---------------------Attack----------------------- */
 #define SHOOTING_SPEED 120
-
-#define GOALIE_SPEED 230
-
-#define MAX_SPEED 230
-
 #define GOAL_TRACK true
+/* ---------------------Defend----------------------- */
+#define GOALIE_SPEED 230
+#define MAX_SPEED 230
 /* -------------------------------------------------- */
 
 // Compass

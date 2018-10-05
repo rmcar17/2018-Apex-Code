@@ -53,7 +53,7 @@ bool inCorner;
 
 int lightVector;
 
-bool hasSurged = false;
+bool hasSurged = true;
 Timer surgeTimer = Timer(500);
 
 void setup() {
@@ -85,7 +85,7 @@ void setup() {
 
   lg.setup();
 
-  role = Role::defend;
+  role = Role::attack; /* PLEASE CHECK BATTERY VOLTAGE */
 
   digitalWrite(TEENSY_LED,LOW);
 }

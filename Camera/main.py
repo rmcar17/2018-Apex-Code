@@ -4,16 +4,16 @@ from pyb import UART, LED
 camDebug = 0
 FPSDebug = 0
 
-robot = 1
+robot = 2
 
 if robot == 2:
-    camThresholds = [((38, 58, 22, 88, 32, 77),), #Ball
-    ((27, 41, -23, 5, -38, -16),), #Blue Goal
-    ((53, 79, -6, 16, 35, 64),)]   #Yellow Goal
+    camThresholds = [((51, 68, 41, 75, 23, 62),), #Ball
+    ((20, 41, -15, 20, -56, -25),), #Blue Goal
+    ((84, 98, -23, 9, 25, 72),)]   #Yellow Goal
 else:
-    camThresholds = [((34, 67, 57, 89, 4, 62),), #Ball
-    ((27, 41, -23, 5, -38, -16),), #Blue Goal
-    ((39, 81, -13, 27, 16, 67),)]   #Yellow Goal
+    camThresholds = [((39, 67, 46, 76, -1, 61),), #Ball
+    ((24, 30, -21, 11, -34, 10),), #Blue Goal
+    ((54, 84, -56, -39, 3, 31),)]   #Yellow Goal
 
 
 def largestBlob(lBlob):

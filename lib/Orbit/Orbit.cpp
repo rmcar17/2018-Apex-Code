@@ -15,7 +15,6 @@ void Orbit::setRole(Role _role){
 
 void Orbit::setBallData(Vector ballData){
   ball = ballData;
-  ball.arg += 10;
 }
 
 void Orbit::setGoalData(Vector aGoal, Vector dGoal){
@@ -157,18 +156,19 @@ void Orbit::calcDefender(){ //Assuming PID is good
     if(ball.exists()){
       if(ball.between(345,15) && ball.mag < 550 && defendGoal.j > SURGE_DISTANCE){
         calcAttacker();
+        movement.speed = GOALIE_SPEED;
         return;
       }
       else{
         if((defendGoal.i > DEFEND_LEFT_I && ball.arg > 180) || (defendGoal.i < DEFEND_RIGHT_I && ball.arg < 180)){
           hMov = hGoalie.update(ball.arg > 180 ? defendGoal.i-DEFEND_LEFT_I : defendGoal.i-DEFEND_RIGHT_I)*0.3;
-          vMov = vGoalie.update(moveVector.j-80)*1.5;
+          vMov = vGoalie.update(moveVector.j-150)*1.5;
         }
         else{
           hMov = angGoalie.update(ball.arg < 180 ? ball.arg : -(360-ball.arg));
         }
         movement.angle = mod(450-round(toDegrees(atan2(vMov,hMov))),360);
-        movement.angle = movement.angle + (movement.angle < 180 ? 17 : -17);
+        movement.angle = movement.angle + (movement.angle < 180 ? 25 : -25);
       }
     }
     else{
@@ -178,12 +178,15 @@ void Orbit::calcDefender(){ //Assuming PID is good
     movement.speed = constrain(round(goalieSpeed.update(sqrt(hMov*hMov+vMov*vMov))),0,GOALIE_SPEED); // Use the same PID for ball follow and recentre
   }
   else{
-    // if(ball.exists()){
-      // calcAttacker();
-    // }
-    // else{
+    if(ball.exists()){
+      calcAttacker();
+    }
+    else{
       moveToPos(GOALIE_POS);
-    // }
+    }
+  }
+  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
+    moveToPos(GOALIE_POS);
   }
 }
 
@@ -240,9 +243,10 @@ void Orbit::moveToPos(Vector position){
 }
 
 void Orbit::manageKicker(){
-  if(attackGoal.exists() && attackGoal.between(340,20) && attackGoal.mag < 1100 && hasBall){
+  if(((role == Role::attack && attackGoal.exists() && attackGoal.between(340,20) && attackGoal.mag < 1100) || role == Role::defend) && hasBall){
     kicker.kick();
   }
+
 }
 
 void Orbit::setBTData(Vector otherBallPos){

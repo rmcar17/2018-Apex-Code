@@ -4,7 +4,7 @@
 #include <Vector.h>
 
 /* -------------------------------------------------- */
-#define ROBOT 1
+#define ROBOT 2
 
 #define ATTACK_BLUE true
 
@@ -12,9 +12,9 @@
 
 #define SHOOTING_SPEED 120
 
-#define GOALIE_SPEED 230
+#define GOALIE_SPEED 255
 
-#define MAX_SPEED 230
+#define MAX_SPEED 255
 
 #define GOAL_TRACK true
 /* -------------------------------------------------- */
@@ -110,14 +110,14 @@
 
 
 /*            DEFEND VALUES                */
-#define DEFEND_POSITION Vector(-50, -350, false)
+#define DEFEND_POSITION Vector(-50, -390, false)
 
-#define DEFEND_LEFT_I 100
-#define DEFEND_RIGHT_I -180
+#define DEFEND_LEFT_I 60
+#define DEFEND_RIGHT_I -80
 
 #define SURGE_DISTANCE -500
 
-#define ANG_GOALIE_KP 4.6
+#define ANG_GOALIE_KP 5.8
 #define ANG_GOALIE_KI 0
 #define ANG_GOALIE_KD 0
 

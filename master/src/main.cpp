@@ -129,7 +129,7 @@ void loop() {
   orbit.setLightGate(lg.hasBall());
   orbit.setCompAngle(heading);
   orbit.setCoords(lidars.getCoords());
-  orbit.setBTData(bt.getOtherBallPos());
+  // orbit.setBTData(bt.getOtherBallPos());
 
   // More Orbit
   orbit.calculateMoveData();

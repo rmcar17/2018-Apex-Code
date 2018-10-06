@@ -108,9 +108,20 @@ double Orbit::orbitSimple(int angle, double ratio){
   if(ratio < 0.00 || ratio > 1.00){
       ratio = 1.00;
   }
-  if(angle < 30 || angle > 360-40){
+  if(angle < SHOOTING_LEFT_ANGLE || angle > 360-SHOOTING_RIGHT_ANGLE){
       movement.speed = SHOOTING_SPEED;
-      return angle < 180 ? (angle + (angle * 0.5 * ratio)) : (angle + ((360 - angle) * 0.5 * ratio));
+
+      double goingAngle = angle < 180 ? (angle + (angle * SHOOTING_RIGHT_RATIO * ratio)) : (angle + ((360 - angle) * SHOOTING_LEFT_RATIO * ratio));
+      Serial.print(angle);
+      Serial.print("\t");
+      Serial.print(goingAngle);
+      Serial.print("\t");
+      if(angle < 180){
+        Serial.println("RIGHT SIDE");
+      } else{
+        Serial.println("LEFT SIDE");
+      }
+      return goingAngle;
   }else{
       return angle < 180 ? (angle + (90 * ratio)) : (angle - (90 * ratio));
   }

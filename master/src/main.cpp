@@ -59,7 +59,7 @@ Timer surgeTimer = Timer(500);
 void setup() {
   pinMode(TEENSY_LED, OUTPUT);
 
-  pinMode(17, INPUT);
+  pinMode(16, INPUT);
 
   #if DEBUG_ANY
     Serial.begin(38400);
@@ -127,15 +127,14 @@ void loop() {
   orbit.calculateRotation();
 
   orbit.manageKicker();
-
   // Movement
   move = orbit.getMoveData();
-  if(role == Role::attack && (!hasSurged || !surgeTimer.hasTimePassedNoUpdate()) && analogRead(17) > 0){
+  if(role == Role::attack && (!hasSurged || !surgeTimer.hasTimePassedNoUpdate()) && analogRead(16) > 1){
     if(!hasSurged){
       surgeTimer.update();
       hasSurged = true;
     }
-    motors.moveDirection({0,MAX_SPEED,move.rotation});
+    motors.moveDirection({0,170,move.rotation});
   }
   else{
     if(move.brake){

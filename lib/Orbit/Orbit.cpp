@@ -14,9 +14,7 @@ void Orbit::setRole(Role _role){
 }
 
 void Orbit::setBallData(Vector ballData){
-  ball = ballData;
-  ball.arg += 10;
-}
+  ball = ballData;}
 
 void Orbit::setGoalData(Vector aGoal, Vector dGoal){
   attackGoal = aGoal;
@@ -110,9 +108,9 @@ double Orbit::orbitSimple(int angle, double ratio){
   if(ratio < 0.00 || ratio > 1.00){
       ratio = 1.00;
   }
-  if(angle < 60 || angle > 360-60){
+  if(angle < 40 || angle > 360-40){
       movement.speed = SHOOTING_SPEED;
-      return angle < 180 ? (angle - (angle * 0.5 * ratio)) : (angle - ((360 - angle) * 0.5 * ratio));
+      return angle < 180 ? (angle + (angle * 0.5 * ratio)) : (angle + ((360 - angle) * 0.5 * ratio));
   }else{
       return angle < 180 ? (angle + (90 * ratio)) : (angle - (90 * ratio));
   }
@@ -127,7 +125,7 @@ double Orbit::orbit(int angle, int distance){
       return orbitSimple(angle, 0.4);
   }else if(distance > 250 && distance <= 450){
       /* Almost Normal Orbit orbit */
-      return orbitSimple(angle, 0.55);
+      return orbitSimple(angle, 0.6);
   }else if(distance <= 250){
       /* More Aggressive than Normal Orbit */
       return orbitSimple(angle, 0.8);
@@ -304,7 +302,7 @@ void Orbit::moveToPos(Vector position){
 }
 
 void Orbit::manageKicker(){
-  if(attackGoal.exists() && attackGoal.between(340,20) && attackGoal.mag < 1100 && hasBall){
+  if(attackGoal.exists() && attackGoal.between(340,20) && attackGoal.mag < 1000 && hasBall){
     kicker.kick();
   }
 }

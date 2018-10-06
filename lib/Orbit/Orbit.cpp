@@ -110,7 +110,18 @@ double Orbit::orbitSimple(int angle, double ratio){
   }
   if(angle < SHOOTING_LEFT_ANGLE || angle > 360-SHOOTING_RIGHT_ANGLE){
       movement.speed = SHOOTING_SPEED;
-      return angle < 180 ? (angle + (angle * SHOOTING_RIGHT_RATIO * ratio)) : (angle + ((360 - angle) * SHOOTING_LEFT_RATIO * ratio));
+
+      double goingAngle = angle < 180 ? (angle + (angle * SHOOTING_RIGHT_RATIO * ratio)) : (angle + ((360 - angle) * SHOOTING_LEFT_RATIO * ratio));
+      Serial.print(angle);
+      Serial.print("\t");
+      Serial.print(goingAngle);
+      Serial.print("\t");
+      if(angle < 180){
+        Serial.println("RIGHT SIDE");
+      } else{
+        Serial.println("LEFT SIDE");
+      }
+      return goingAngle;
   }else{
       return angle < 180 ? (angle + (90 * ratio)) : (angle - (90 * ratio));
   }
@@ -147,9 +158,6 @@ void Orbit::calcSimpleAttacker(){
   } else if(centreDelay.hasTimePassedNoUpdate()){
     moveToPos(CENTRE);
   }
-  Serial.print(ball.arg);
-  Serial.print("\t");
-  Serial.println(movement.angle);
 
   // BOSS LOGIC
   if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){

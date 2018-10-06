@@ -118,7 +118,7 @@
 
 // Negative ratio = tighter
 // Positive ratio = wider
-#define SHOOTING_RIGHT_RATIO 0.1
+#define SHOOTING_RIGHT_RATIO -0.1
 /*-----------------------------------------*/
 
 /*            DEFEND VALUES                */

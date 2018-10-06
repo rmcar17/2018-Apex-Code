@@ -117,7 +117,7 @@ void loop() {
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
-  orbit.setLightGate(lg.hasBall());
+  // orbit.setLightGate(lg.hasBall());
   orbit.setCompAngle(heading);
   orbit.setCoords(lidars.getCoords());
   orbit.setBTData(bt.getOtherBallPos());

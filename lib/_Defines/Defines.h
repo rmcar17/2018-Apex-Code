@@ -6,10 +6,10 @@
 /* ---------------------General---------------------- */
 #define ROBOT 1
 #define ATTACK_BLUE false
-#define NORMAL_SPEED 120
+#define NORMAL_SPEED 170
 /* ---------------------Attack----------------------- */
-#define SHOOTING_SPEED 140
-#define GOAL_TRACK true
+#define SHOOTING_SPEED 210
+#define GOAL_TRACK false
 /* ---------------------Defend----------------------- */
 #define GOALIE_SPEED 230
 #define MAX_SPEED 230
@@ -105,6 +105,22 @@
 /*-----------------------------------------*/
 
 
+/*            NEW ORBIT VALUES             */
+/*-----------------------------------------*/
+// Smaller angle = overshoot
+// Larger angle = undershoot
+#define SHOOTING_LEFT_ANGLE 40
+#define SHOOTING_RIGHT_ANGLE 45
+
+// Negative ratio = wider
+// Positive ratio = tighter
+#define SHOOTING_LEFT_RATIO 1.2
+
+// Negative ratio = tighter
+// Positive ratio = wider
+#define SHOOTING_RIGHT_RATIO 0.1
+/*-----------------------------------------*/
+
 /*            DEFEND VALUES                */
 #define DEFEND_POSITION Vector(-50, -350, false)
 
@@ -153,7 +169,11 @@
 #define LS_CALIBRATION_NUM 50
 
 //LIGHT GATE
-#define LIGHT_GATE_THRESH 900
+#if ROBOT == 1
+	#define LIGHT_GATE_THRESH 300
+#else
+	#define LIGHT_GATE_THRESH 900
+#endif
 
 //KICKER
 #define KICK_INTERVAL 1000

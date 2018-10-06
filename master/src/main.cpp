@@ -127,6 +127,7 @@ void loop() {
   orbit.calculateRotation();
 
   orbit.manageKicker();
+
   // Movement
   move = orbit.getMoveData();
   if(role == Role::attack && (!hasSurged || !surgeTimer.hasTimePassedNoUpdate()) && analogRead(16) > 1){

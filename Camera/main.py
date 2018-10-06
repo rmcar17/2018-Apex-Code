@@ -11,15 +11,15 @@ if robot == 2:
     ((42, 67, -23, 5, -38, -16),), #Blue Goal
     ((60, 87, -88, -30, -44, 71),)]   #Yellow Goal
 else:
-    camThresholds = [((59, 88, 24, 77, 28, 75),), #Ball
-    ((37, 65, -21, 11, -58, -25),), #Blue Goal
-    ((79, 100, -41, 11, 27, 97),)]   #Yellow Goal
+    camThresholds = [((46, 72, 23, 89, 16, 87),), #Ball
+    ((24, 64, -32, 19, -73, -32),), #Blue Goal
+    ((76, 100, -44, 15, 29, 89),)]   #Yellow Goal
 
 
 def largestBlob(lBlob):
     if not lBlob:
         return None
-    return sorted(lBlob,key=lambda blob: blob.area())[0]
+    return sorted(lBlob,key=lambda blob: -blob.area())[0]
 
 class Sender:
     def __init__(self):

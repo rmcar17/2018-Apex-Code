@@ -27,9 +27,9 @@ void Orbit::setCompAngle(int heading){
 
 void Orbit::setLightGate(bool gateVal){
   hasBall = gateVal;
-  if(hasBall){
-    ball = Vector(10,0);
-  }
+  // if(hasBall){
+  //   ball = Vector(10,0);
+  // }
 }
 
 void Orbit::setCoords(Vector coords){
@@ -108,9 +108,9 @@ double Orbit::orbitSimple(int angle, double ratio){
   if(ratio < 0.00 || ratio > 1.00){
       ratio = 1.00;
   }
-  if(angle < 40 || angle > 360-40){
+  if(angle < SHOOTING_LEFT_ANGLE || angle > 360-SHOOTING_RIGHT_ANGLE){
       movement.speed = SHOOTING_SPEED;
-      return angle < 180 ? (angle + (angle * 0.5 * ratio)) : (angle + ((360 - angle) * 0.5 * ratio));
+      return angle < 180 ? (angle + (angle * SHOOTING_RIGHT_RATIO * ratio)) : (angle + ((360 - angle) * SHOOTING_LEFT_RATIO * ratio));
   }else{
       return angle < 180 ? (angle + (90 * ratio)) : (angle - (90 * ratio));
   }
@@ -147,6 +147,9 @@ void Orbit::calcSimpleAttacker(){
   } else if(centreDelay.hasTimePassedNoUpdate()){
     moveToPos(CENTRE);
   }
+  Serial.print(ball.arg);
+  Serial.print("\t");
+  Serial.println(movement.angle);
 
   // BOSS LOGIC
   if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){

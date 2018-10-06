@@ -19,7 +19,7 @@ else:
 def largestBlob(lBlob):
     if not lBlob:
         return None
-    return sorted(lBlob,key=lambda blob: blob.area())[0]
+    return sorted(lBlob,key=lambda blob: -blob.area())[0]
 
 class Sender:
     def __init__(self):

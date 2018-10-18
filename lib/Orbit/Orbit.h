@@ -48,7 +48,9 @@ class Orbit{
 
     void resetAllData();
   private:
-    void calcAttacker();
+    void decideOrbit();
+    void calcSimpleAttacker();
+    void calcBreakingAttaker();
     void calcDefender();
 
     void calcSmallOrbit();

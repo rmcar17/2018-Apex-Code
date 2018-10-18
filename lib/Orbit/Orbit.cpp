@@ -55,7 +55,7 @@ void Orbit::setBall(Vector tempBall){
 
 void Orbit::calculateMoveData(){
   if(role == Role::attack){
-    calcAttacker();
+    decideOrbit();
   }
   else{
     calcDefender();
@@ -97,6 +97,15 @@ void Orbit::calculateRotation(){
   movement.rotation = round(rotate);
 }
 
+void Orbit::decideOrbit(){
+  int orbitNumber = 1;
+  switch(orbitNumber){
+    case 1: calcSimpleAttacker();break;
+    case 2: calcBreakingAttaker();break;
+    default: calcSimpleAttacker();break;
+  }
+}
+
 double Orbit::orbitSimple(int angle, double ratio){
   /* Simple orbit from last year for testing */
   if(ratio < 0.00 || ratio > 1.00){
@@ -126,7 +135,7 @@ double Orbit::orbit(int angle, int distance){
   }
 }
 
-void Orbit::calcAttacker(){
+void Orbit::calcSimpleAttacker(){
   if(ball.exists()){
     rememberTimer.update();
     centreDelay.update();
@@ -148,6 +157,68 @@ void Orbit::calcAttacker(){
   }
 }
 
+void Orbit::calcBreakingAttaker(){
+  if(ball.exists()){
+    rememberTimer.update();
+  }
+  else if(!rememberTimer.hasTimePassedNoUpdate()){
+    ball = prevBall;
+  }
+
+  if(ball.exists()){
+    centreDelay.update();
+    if(iCanShoot){
+      if(!iCanShootTimer.hasTimePassedNoUpdate()){
+          movement.brake = true;
+      } else{
+        calcSmallOrbit(); // Moves directly to the ball
+      }
+    }
+    if(ball.arg < SMALL_ORBIT+SMALL_ORBIT_RIGHT || ball.arg > (360-SMALL_ORBIT-SMALL_ORBIT_LEFT)){ // *
+      iCanShoot = true;
+      if((MAX_SPEED+incrementSpeed)<255){
+        incrementSpeed += 0.5;
+      }
+    }
+    else{
+      iCanShoot = false;
+      iCanShootTimer.update();
+      incrementSpeed = 0;
+      if((ball.arg < BIG_ORBIT+BIG_ORBIT_RIGHT || ball.arg > (360-BIG_ORBIT-BIG_ORBIT_LEFT))){
+        calcBigOrbit(); // Transfers between close orbit and small orbit
+        if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+          movement.speed = round(movement.speed * SLOW_SPEED);
+        }
+      }
+      else if(ball.mag < ORBIT_DISTANCE){
+        calcCloseOrbit(); // Moves perpendicular to the ball
+        // if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        //   movement.speed = round(movement.speed * (SLOW_SPEED+0.2));
+        // }
+      }
+      else{
+        calcTangentOrbit(); // Enters the ball's nearest tangent
+        // if((ball.arg < SLOW_ANGLE || ball.arg > (360-SLOW_ANGLE))&&ball.mag < SLOW_DISTANCE){
+        //     movement.speed = round(movement.speed * SLOW_SPEED);
+        // }
+      }
+    }
+  } else{
+    iCanShoot = false;
+    iCanShootTimer.update();
+    incrementSpeed = 0;
+    if(centreDelay.hasTimePassedNoUpdate()){
+      moveToPos(CENTRE);
+    }
+  }
+  prevAngle = movement.angle;
+
+  // BOSS LOGIC
+  if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
+    moveToPos(CENTRE);
+  }
+}
+
 void Orbit::calcDefender(){ //Assuming PID is good
   if(defendGoal.exists()){
     double hMov;
@@ -155,7 +226,7 @@ void Orbit::calcDefender(){ //Assuming PID is good
     double vMov = vGoalie.update(moveVector.j)*1.5;
     if(ball.exists()){
       if(ball.between(345,15) && ball.mag < 550 && defendGoal.j > SURGE_DISTANCE){
-        calcAttacker();
+        decideOrbit();
         movement.speed = GOALIE_SPEED;
         return;
       }

@@ -71,7 +71,7 @@ class Reader:
         sensor.set_windowing((60,5,200,230))
 
         sensor.set_saturation(3)
-        sensor.set_brightness(-2)
+        sensor.set_brightness(2)
         sensor.set_contrast(3)
 
         LED(1).on()

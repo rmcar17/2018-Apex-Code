@@ -27,10 +27,10 @@ void Orbit::setCompAngle(int heading){
 }
 
 void Orbit::setLightGate(bool gateVal){
-  hasBall = gateVal;
-  if(hasBall){
-    ball = Vector(10,0);
-  }
+  // hasBall = gateVal;
+  // if(hasBall){
+  //   ball = Vector(10,0);
+  // }
 }
 
 void Orbit::setCoords(Vector coords){
@@ -111,7 +111,7 @@ double Orbit::orbitSimple(int angle, double ratio){
   if(ratio < 0.00 || ratio > 1.00){
       ratio = 1.00;
   }
-  if(angle < 60 || angle > 360-60){
+  if(angle < 40 || angle > 360-40){
       movement.speed = SHOOTING_SPEED;
       return angle < 180 ? (angle - (angle * 0.5 * ratio)) : (angle - ((360 - angle) * 0.5 * ratio));
   }else{
@@ -250,7 +250,7 @@ void Orbit::calcDefender(){ //Assuming PID is good
   }
   else{
     if(ball.exists()){
-      calcAttacker();
+      decideOrbit();
     }
     else{
       moveToPos(GOALIE_POS);

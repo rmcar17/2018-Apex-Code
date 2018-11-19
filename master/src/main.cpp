@@ -89,7 +89,7 @@ void setup() {
 
   lg.setup();
 
-  role = Role::attack; /* PLEASE CHECK BATTERY VOLTAGE */
+  role = Role::defend; /* PLEASE CHECK BATTERY VOLTAGE */
 
   digitalWrite(TEENSY_LED,LOW);
 }

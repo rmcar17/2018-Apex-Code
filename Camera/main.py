@@ -7,13 +7,13 @@ FPSDebug = 0
 robot = 2
 
 if robot == 2:
-    camThresholds = [((51, 68, 41, 75, 23, 62),), #Ball
-    ((20, 41, -15, 20, -56, -25),), #Blue Goal
-    ((84, 98, -23, 9, 25, 72),)]   #Yellow Goal
-else:
-    camThresholds = [((39, 67, 46, 76, -1, 61),), #Ball
+    camThresholds = [((50, 62, 47, 77, 24, 61),), #Ball
     ((24, 30, -21, 11, -34, 10),), #Blue Goal
-    ((54, 84, -56, -39, 3, 31),)]   #Yellow Goal
+    ((51, 84, -12, 21, 23, 62),)]   #Yellow Goal
+else:
+    camThresholds = [((56, 73, 35, 67, 7, 60),), #Ball
+    ((24, 30, -21, 11, -34, 10),), #Blue Goal
+    ((51, 84, -12, 21, 23, 62),)]   #Yellow Goal
 
 
 def largestBlob(lBlob):
@@ -71,7 +71,7 @@ class Reader:
         sensor.set_windowing((60,5,200,230))
 
         sensor.set_saturation(3)
-        sensor.set_brightness(2)
+        sensor.set_brightness(-2)
         sensor.set_contrast(3)
 
         LED(1).on()

@@ -4,8 +4,8 @@
 #include <Vector.h>
 
 /* ---------------------General---------------------- */
-#define ROBOT 1
-#define ATTACK_BLUE false
+#define ROBOT 2
+#define ATTACK_BLUE true
 #define NORMAL_SPEED 180
 /* ---------------------Attack----------------------- */
 #define SHOOTING_SPEED 120

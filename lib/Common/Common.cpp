@@ -1,6 +1,4 @@
 #include "Common.h"
-#include <math.h>
-
 
 double toDegrees(double rad){
   return rad*TO_DEGREES;

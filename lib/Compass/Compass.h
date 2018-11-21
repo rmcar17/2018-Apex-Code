@@ -1,6 +1,7 @@
 #ifndef COMPASS_H
 #define COMPASS_H
 
+#include <Arduino.h>
 #include <I2C.h>
 #include <Common.h>
 #include <Debug.h>

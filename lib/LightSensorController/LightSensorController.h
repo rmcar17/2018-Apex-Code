@@ -6,8 +6,6 @@
 #include <Common.h>
 #include <Pins.h>
 #include <Defines.h>
-#include <algorithm> // for std::find
-#include <iterator> // for std::begin, std::end
 
 class LightSensorController {
 	public:

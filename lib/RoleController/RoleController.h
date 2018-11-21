@@ -1,6 +1,7 @@
 #ifndef ROLECONTROLLER_H
 #define ROLECONTROLLER_H
 
+#include <Arduino.h>
 #include <Vector.h>
 #include <Pins.h>
 #include <Timer.h>

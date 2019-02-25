@@ -6,10 +6,10 @@
 /* ---------------------General---------------------- */
 #define ROBOT 1
 #define ATTACK_BLUE false
-#define NORMAL_SPEED 120
+#define NORMAL_SPEED 100
 /* ---------------------Attack----------------------- */
-#define SHOOTING_SPEED 150
-#define GOAL_TRACK true
+#define SHOOTING_SPEED 140
+#define GOAL_TRACK false
 /* ---------------------Defend----------------------- */
 #define GOALIE_SPEED 230
 #define MAX_SPEED 230
@@ -22,9 +22,9 @@
 #define SHOOTANGLE_KI 0
 #define SHOOTANGLE_KD 0.5
 
-#define ROTATION_KP 4.5
+#define ROTATION_KP 1.2
 #define ROTATION_KI 0
-#define ROTATION_KD 0.1
+#define ROTATION_KD 0.14
 
 #define ATTACK_KP 1.5
 #define ATTACK_KI 0
@@ -109,16 +109,16 @@
 /*-----------------------------------------*/
 // Smaller angle = overshoot
 // Larger angle = undershoot
-#define SHOOTING_LEFT_ANGLE 45
+#define SHOOTING_LEFT_ANGLE 60
 #define SHOOTING_RIGHT_ANGLE 45
 
 // Negative ratio = wider
 // Positive ratio = tighter
-#define SHOOTING_LEFT_RATIO 2.2
+#define SHOOTING_LEFT_RATIO 0.8
 
 // Negative ratio = tighter
 // Positive ratio = wider
-#define SHOOTING_RIGHT_RATIO -0.2
+#define SHOOTING_RIGHT_RATIO 0.3
 /*-----------------------------------------*/
 
 /*            DEFEND VALUES                */

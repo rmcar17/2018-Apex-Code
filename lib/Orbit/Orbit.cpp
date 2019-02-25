@@ -14,7 +14,11 @@ void Orbit::setRole(Role _role){
 }
 
 void Orbit::setBallData(Vector ballData){
-  ball = ballData;}
+  ball = ballData;
+  // Serial.println("0"+String(ball.arg));
+  // Serial.println("1"+String(ball.mag));
+  delay(100);
+}
 
 void Orbit::setGoalData(Vector aGoal, Vector dGoal){
   attackGoal = aGoal;
@@ -108,9 +112,12 @@ double Orbit::orbitSimple(int angle, double ratio){
   if(ratio < 0.00 || ratio > 1.00){
       ratio = 1.00;
   }
-  if(angle < 30 || angle > 360-40){
+  if(angle < SHOOTING_LEFT_ANGLE || angle > 360-SHOOTING_RIGHT_ANGLE){
       movement.speed = SHOOTING_SPEED;
-      return angle < 180 ? (angle + (angle * 0.5 * ratio)) : (angle + ((360 - angle) * 0.5 * ratio));
+
+      double goingAngle = angle < 180 ? (angle + (angle * SHOOTING_RIGHT_RATIO * ratio)) : (angle + ((360 - angle) * SHOOTING_LEFT_RATIO * ratio));
+      
+      return goingAngle;
   }else{
       return angle < 180 ? (angle + (90 * ratio)) : (angle - (90 * ratio));
   }
@@ -122,10 +129,10 @@ double Orbit::orbit(int angle, int distance){
       return orbitSimple(angle, 0.3);
   }else if(distance > 450 && distance <= 550){
       /* A lil bit closer */
-      return orbitSimple(angle, 0.4);
+      return orbitSimple(angle, 0.5);
   }else if(distance > 250 && distance <= 450){
       /* Almost Normal Orbit orbit */
-      return orbitSimple(angle, 0.6);
+      return orbitSimple(angle, 0.7);
   }else if(distance <= 250){
       /* More Aggressive than Normal Orbit */
       return orbitSimple(angle, 0.8);
@@ -142,8 +149,15 @@ void Orbit::calcSimpleAttacker(){
   }
 
   if(ball.exists()){
-    movement.speed = NORMAL_SPEED;
+    // #define yeetAngle 50
+    // #define yeetDistance 800
+    // if(attackGoal.between(yeetAngle,360-yeetAngle) && attackGoal.j < yeetDistance && ball.between(270,90)){
+    //   movement.angle = ball.arg;
+    // }else{
+    //   movement.angle = orbit(ball.arg,ball.mag);
+    // }
     movement.angle = orbit(ball.arg,ball.mag);
+    movement.speed = NORMAL_SPEED;
   } else if(centreDelay.hasTimePassedNoUpdate()){
     moveToPos(CENTRE);
   }

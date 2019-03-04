@@ -3,16 +3,28 @@
 
 #include <Vector.h>
 
+<<<<<<< HEAD
 /* ---------------------General---------------------- */
 #define ROBOT 2
 #define ATTACK_BLUE true
 #define NORMAL_SPEED 180
 /* ---------------------Attack----------------------- */
+=======
+/* -------------------------------------------------- */
+#define ROBOT 1
+
+#define ATTACK_BLUE true
+
+#define NORMAL_SPEED 150
+
+>>>>>>> parent of c2af799... National Orbit
 #define SHOOTING_SPEED 120
-#define GOAL_TRACK true
-/* ---------------------Defend----------------------- */
+
 #define GOALIE_SPEED 230
+
 #define MAX_SPEED 230
+
+#define GOAL_TRACK true
 /* -------------------------------------------------- */
 
 // Compass

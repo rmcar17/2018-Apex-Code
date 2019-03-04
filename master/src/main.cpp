@@ -53,7 +53,7 @@ bool inCorner;
 
 int lightVector;
 
-bool hasSurged = true;
+bool hasSurged = false;
 Timer surgeTimer = Timer(500);
 
 Vector ball = Vector(0,0);
@@ -89,7 +89,11 @@ void setup() {
 
   lg.setup();
 
+<<<<<<< HEAD
   role = Role::defend; /* PLEASE CHECK BATTERY VOLTAGE */
+=======
+  role = Role::defend;
+>>>>>>> parent of c2af799... National Orbit
 
   digitalWrite(TEENSY_LED,LOW);
 }

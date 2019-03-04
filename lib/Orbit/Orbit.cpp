@@ -55,7 +55,7 @@ void Orbit::setBall(Vector tempBall){
 
 void Orbit::calculateMoveData(){
   if(role == Role::attack){
-    decideOrbit();
+    calcAttacker();
   }
   else{
     calcDefender();
@@ -97,15 +97,6 @@ void Orbit::calculateRotation(){
   movement.rotation = round(rotate);
 }
 
-void Orbit::decideOrbit(){
-  int orbitNumber = 1;
-  switch(orbitNumber){
-    case 1: calcSimpleAttacker();break;
-    case 2: calcBreakingAttaker();break;
-    default: calcSimpleAttacker();break;
-  }
-}
-
 double Orbit::orbitSimple(int angle, double ratio){
   /* Simple orbit from last year for testing */
   if(ratio < 0.00 || ratio > 1.00){
@@ -135,7 +126,7 @@ double Orbit::orbit(int angle, int distance){
   }
 }
 
-void Orbit::calcSimpleAttacker(){
+void Orbit::calcAttacker(){
   if(ball.exists()){
     rememberTimer.update();
     centreDelay.update();
@@ -157,6 +148,7 @@ void Orbit::calcSimpleAttacker(){
   }
 }
 
+<<<<<<< HEAD
 void Orbit::calcBreakingAttaker(){
   if(ball.exists()){
     rememberTimer.update();
@@ -219,6 +211,8 @@ void Orbit::calcBreakingAttaker(){
   }
 }
 
+=======
+>>>>>>> parent of c2af799... National Orbit
 void Orbit::calcDefender(){ //Assuming PID is good
   if(defendGoal.exists()){
     double hMov;
@@ -226,8 +220,12 @@ void Orbit::calcDefender(){ //Assuming PID is good
     double vMov = vGoalie.update(moveVector.j)*1.5;
     if(ball.exists()){
       if(ball.between(345,15) && ball.mag < 550 && defendGoal.j > SURGE_DISTANCE){
+<<<<<<< HEAD
         decideOrbit();
         movement.speed = GOALIE_SPEED;
+=======
+        calcAttacker();
+>>>>>>> parent of c2af799... National Orbit
         return;
       }
       else{
@@ -249,6 +247,7 @@ void Orbit::calcDefender(){ //Assuming PID is good
     movement.speed = constrain(round(goalieSpeed.update(sqrt(hMov*hMov+vMov*vMov))),0,GOALIE_SPEED); // Use the same PID for ball follow and recentre
   }
   else{
+<<<<<<< HEAD
     if(ball.exists()){
       decideOrbit();
     }
@@ -258,6 +257,14 @@ void Orbit::calcDefender(){ //Assuming PID is good
   }
   if((lidars.lidarLeft+lidars.lidarRight)/2 < 500){
     moveToPos(GOALIE_POS);
+=======
+    // if(ball.exists()){
+      // calcAttacker();
+    // }
+    // else{
+      moveToPos(GOALIE_POS);
+    // }
+>>>>>>> parent of c2af799... National Orbit
   }
 }
 

@@ -1,31 +1,25 @@
 import sensor, image, time
 from pyb import UART, LED
 
-camDebug = 0
+camDebug = 0n
 FPSDebug = 0
 
 robot = 1
 
 if robot == 2:
-<<<<<<< HEAD
-    camThresholds = [((50, 62, 47, 77, 24, 61),), #Ball
-    ((24, 30, -21, 11, -34, 10),), #Blue Goal
-    ((51, 84, -12, 21, 23, 62),)]   #Yellow Goal
-=======
     camThresholds = [((38, 58, 22, 88, 32, 77),), #Ball
     ((27, 41, -23, 5, -38, -16),), #Blue Goal
     ((53, 79, -6, 16, 35, 64),)]   #Yellow Goal
->>>>>>> parent of c2af799... National Orbit
 else:
-    camThresholds = [((56, 73, 35, 67, 7, 60),), #Ball
-    ((24, 30, -21, 11, -34, 10),), #Blue Goal
-    ((51, 84, -12, 21, 23, 62),)]   #Yellow Goal
+    camThresholds = [((34, 67, 57, 89, 4, 62),), #Ball
+    ((27, 41, -23, 5, -38, -16),), #Blue Goal
+    ((39, 81, -13, 27, 16, 67),)]   #Yellow Goal
 
 
 def largestBlob(lBlob):
     if not lBlob:
         return None
-    return sorted(lBlob,key=lambda blob: -blob.area())[0]
+    return sorted(lBlob,key=lambda blob: blob.area())[0]
 
 class Sender:
     def __init__(self):

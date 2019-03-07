@@ -1,25 +1,25 @@
 import sensor, image, time
 from pyb import UART, LED
 
-camDebug = 1
+camDebug = 0
 FPSDebug = 0
 
-robot = 1
+robot = 2
 
 if robot == 2:
     camThresholds = [((28, 78, 44, 90, 28, 69),), #Ball
-    ((42, 67, -23, 5, -38, -16),), #Blue Goal
+    ((27, 41, -23, 5, -38, -16),), #Blue Goal
     ((60, 87, -88, -30, -44, 71),)]   #Yellow Goal
 else:
-    camThresholds = [((46, 68, 26, 79, 25, 80),), #Ball
-    ((39, 63, -22, 10, -60, -24),), #Blue Goal
-    ((43, 78, -28, 56, 31, 74),)]   #Yellow Goal
+    camThresholds = [((34, 67, 57, 89, 4, 62),), #Ball
+    ((27, 41, -23, 5, -38, -16),), #Blue Goal
+    ((39, 81, -13, 27, 16, 67),)]   #Yellow Goal
 
 
 def largestBlob(lBlob):
     if not lBlob:
         return None
-    return sorted(lBlob,key=lambda blob: -blob.area())[0]
+    return sorted(lBlob,key=lambda blob: blob.area())[0]
 
 class Sender:
     def __init__(self):
@@ -71,7 +71,7 @@ class Reader:
         sensor.set_windowing((60,5,200,230))
 
         sensor.set_saturation(3)
-        sensor.set_brightness(-3)
+        sensor.set_brightness(2)
         sensor.set_contrast(3)
 
         LED(1).on()

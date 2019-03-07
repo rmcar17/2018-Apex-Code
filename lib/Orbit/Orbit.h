@@ -113,7 +113,6 @@ class Orbit{
     Timer iCanShootTimer = Timer(TOTAL_BRAKE_TIME);
 
     double incrementSpeed = 0;
-    int enterSide = -1; // -1 = not entered      0 = left       1 = right
 };
 
 

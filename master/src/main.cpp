@@ -59,7 +59,7 @@ Timer surgeTimer = Timer(500);
 void setup() {
   pinMode(TEENSY_LED, OUTPUT);
 
-  pinMode(16, INPUT);
+  pinMode(17, INPUT);
 
   #if DEBUG_ANY
     Serial.begin(38400);
@@ -117,25 +117,25 @@ void loop() {
   orbit.setRole(role);
   orbit.setGoalData(camera.getAttackGoal(), camera.getDefendGoal());
   orbit.setBallData(camera.getBall());
-  orbit.setLightGate(lg.hasBall());
+  // orbit.setLightGate(lg.hasBall());
   orbit.setCompAngle(heading);
   orbit.setCoords(lidars.getCoords());
   orbit.setBTData(bt.getOtherBallPos());
 
   // More Orbit
-  // orbit.calculateMoveData();
+  orbit.calculateMoveData();
   orbit.calculateRotation();
 
   orbit.manageKicker();
 
   // Movement
   move = orbit.getMoveData();
-  if(role == Role::attack && (!hasSurged || !surgeTimer.hasTimePassedNoUpdate()) && analogRead(16) > 1){
+  if(role == Role::attack && (!hasSurged || !surgeTimer.hasTimePassedNoUpdate()) && analogRead(17) > 0){
     if(!hasSurged){
       surgeTimer.update();
       hasSurged = true;
     }
-    motors.moveDirection({0,255,move.rotation});
+    motors.moveDirection({0,MAX_SPEED,move.rotation});
   }
   else{
     if(move.brake){

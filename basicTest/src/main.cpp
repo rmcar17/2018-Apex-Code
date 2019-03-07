@@ -59,10 +59,7 @@ void loop() {
   lidars.update();
 
   // Motors
-  if(heading>180){
-    heading = -(180-(heading-180));
-  }
-  motors.moveDirection({0,0,heading*1.5});
+  motors.moveDirection({0,150,0});
 
   // Print
   Serial.print(heading);

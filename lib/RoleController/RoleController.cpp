@@ -21,15 +21,15 @@ void RoleController::update(Vector robot, Vector ball){
   // Serial.print("\t");
   // Serial.println(otherBallj);
 
-  // Serial.print("My: ");
-  // Serial.print(balli);
-  // Serial.print("\t");
-  // Serial.print(ballj);
-  // Serial.print("\tOther: ");
+  Serial.print("My: ");
+  Serial.print(balli);
+  Serial.print("\t");
+  Serial.print(ballj);
+  Serial.print("\tOther: ");
 
-  // Serial.print(otherBalli);
-  // Serial.print("\t");
-  // Serial.println(otherBallj);
+  Serial.print(otherBalli);
+  Serial.print("\t");
+  Serial.println(otherBallj);
 
   decideRoles();
 }
